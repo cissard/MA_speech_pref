@@ -1,0 +1,228 @@
+---
+title: "MA_AGL_sounds: compose database"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r }
+source("MA_AGL_ES_formulas.R")
+
+# Comment out next set of lines for RECALCULATION
+# require(RCurl)
+# u <- "https://docs.google.com/spreadsheets/d/1JQtqJZud_8g5RFXCP5CZd61X5AblT_luUR41g_acg8M/pub?gid=0&single=true&output=csv"
+# tc <- getURL(u, ssl.verifypeer=FALSE)
+# db_sounds <- read.csv(textConnection(tc))
+# write.table(db_sounds,"../output/db_sounds_raw.Rdata")
+# Uncomment next line for OFFLINE MODE
+ read.table("../output/db_sounds_raw.Rdata")->db_sounds
+
+#Impute missing correlations using a randomly selected value (with replacement) x 1000 times, then take the average for subsequent analyses
+#repeated nreps times to make sure that results are robust to correlation imputation
+
+# uncomment this section TO RECALCULATE IMPUTATION
+# nreps=1000
+# db_sounds_corr_imp<-matrix(NA,dim(db_sounds)[1], nreps)
+# for(i in 1: nreps){
+# 	db_sounds_corr_imp[,i]=db_sounds$corr
+# 	db_sounds_corr_imp[is.na(db_sounds$corr) & db_sounds$corrgroup=="fam",i]<-sample(db_sounds$corr[!is.na(db_sounds$corr & db_sounds$corrgroup=="hab")],sum(is.na(db_sounds$corr & db_sounds$corrgroup=="fam")),replace=T)  #ALL FAMILIARIZATION STUDIES
+# 	db_sounds_corr_imp[is.na(db_sounds$corr) & db_sounds$corrgroup=="hab",i]<-sample(db_sounds$corr[!is.na(db_sounds$corr & db_sounds$corrgroup=="hab")],sum(is.na(db_sounds$corr & db_sounds$corrgroup=="hab")),replace=T)  #ALL HABITUATION STUDIES
+# }
+# write.table(db_sounds_corr_imp,"../output/sounds_corr_imp.txt",row.names=F, quote=T,sep="\t")
+
+read.table("../output/sounds_corr_imp.txt",header=T)->db_sounds_corr_imp
+db_sounds$corr.imp<- apply(db_sounds_corr_imp,1,median, na.rm=T) #use the row's median
+
+#******###W Initialize the relevant columns ###*******#
+
+db_sounds$EffectSize <- NA
+db_sounds$Formulas.used <-NA
+db_sounds$ES.SE<-NA #Standard error of the effect size
+db_sounds$ES.w<-NA #weight of the effect size
+db_sounds$ES.type<-NA #"quality" of the effect size: 1=means and SD originally available; 2=mean and SD used, but at least one of these had to be calculated from other data; 3= t or f used; 4=if many steps were necessary to calculate the effect size, and some error has probably seeped in at each step.
+
+
+#****** The following is for effect sizes within each experiment, which are all Within-subject designs
+#TWO OPTIONS, which change only how sdpooled and ES are calculated; the rest is exactly the same and thus for both types together
+
+#** begin divergence
+
+# OPTION ONE: We have the means and SD
+
+selected <-ifelse(db_sounds$participant_design == "within_two",T,F)
+
+db_sounds$Formulas.used[selected] <- "L&W text below 3.16 for pooled SD; L&W 3.14 (left hand side) for ES, L&W formula 3.22 to unbias USING N (and not 2*N BECAUSE NOT INDEPENDENT), L&W 3.15 for SE, L&W 3.16 for weight"
+
+#Pooled SD estimation
+db_sounds$SDpooled[selected] <- f3.16_text(db_sounds$SD_1[selected],db_sounds$SD_2[selected])
+
+#ES calculation
+db_sounds$EffectSize[selected] <- f3.14_left(db_sounds$x_2[selected],db_sounds$x_1[selected],db_sounds$SDpooled[selected])
+
+paste("We were considering", sum(db_sounds$participant_design == "within_two"),"ES candidates") #37
+paste("We could calculate", sum(!is.na(db_sounds$EffectSize[selected])),"ES's") #37
+
+
+# OPTION TWO: We have the gains and SD of gain
+
+#select applicable studies
+selected <-ifelse(db_sounds$participant_design == "within_one",T,F)
+
+#Pooled SD - no estimation necessary
+db_sounds$SDpooled[selected] <- db_sounds$SD_1[selected]
+
+#reference to formula in Lipsey & Wilson (2001)
+db_sounds$Formulas.used[selected] <- "L&W 3.14 (right hand side) for ES, then unbiased ES from 3.22, 3.15 for SE, 3.16 for weight"
+
+#ES calculation
+db_sounds$EffectSize[selected]<-f3.14_right(db_sounds$x_1_NA_hab[selected],db_sounds$SD_1[selected], db_sounds$corr.imp[selected])
+
+
+paste("We were considering", sum(db_sounds$participant_design == "within_one"),"ES candidates") #6
+paste("We could calculate", sum(!is.na(db_sounds$EffectSize[selected])),"ES's") #6
+
+#** end divergence
+
+#Unbias this ES
+db_sounds$EffectSize<-f3.22(db_sounds$EffectSize,db_sounds$n_1) 
+
+#SE of ES  
+db_sounds$ES.SE<- f3.15(db_sounds$corr.imp,db_sounds$n_1,db_sounds$EffectSize)	
+
+#weight of ES
+db_sounds$ES.w <- f3.16(db_sounds$ES.SE)
+
+#note the quality of ES
+db_sounds$ES.type<-1 
+
+dim(db_sounds)#43, 71
+
+
+###################################
+#### Add further information  ####
+###################################
+
+db_sounds $out<-ifelse(db_sounds $EffectSize>mean(db_sounds $EffectSize,na.rm=T)+3*sd(db_sounds $EffectSize,na.rm=T) | db_sounds $EffectSize<mean(db_sounds $EffectSize,na.rm=T)-3*sd(db_sounds $EffectSize,na.rm=T)  ,1,0)
+table(db_sounds$out) #one outlier
+
+db_sounds $age_c= db_sounds $mean_age_1-mean(db_sounds $mean_age_1)
+db_sounds $year_c= db_sounds $Year-mean(db_sounds $Year)
+
+db_sounds $ABS_EffectSize =abs(db_sounds $EffectSize) #create absolute ES column
+
+#clean up columns with textual comments
+db_sounds$t =as.numeric(as.character(db_sounds$t)) 
+db_sounds$F =as.numeric(as.character(db_sounds$F)) 
+db_sounds$pval_cond =as.numeric(as.character(db_sounds$pval_cond)) 
+db_sounds$pval_cond_check=2*(1-pt(abs(db_sounds$t),df=db_sounds$n_1)) 
+
+db_sounds $t_expo =as.numeric(as.character(db_sounds$t_expo)) 
+db_sounds$F_expo =as.numeric(as.character(db_sounds$F_expo)) 
+db_sounds$pval_expo =as.numeric(as.character(db_sounds$pval_expo)) 
+db_sounds$pval_expo_check=2*(1-pt(abs(db_sounds$t_expo),df=db_sounds$n_1)) 
+
+# recalculate t and p-values
+db_sounds$t_rec_cond=db_sounds$EffectSize/db_sounds$ES.SE
+db_sounds$p_rec_cond=2*(1-pt(abs(db_sounds$t_rec_cond),df=db_sounds$n_1)) 
+#NOTE: we cannot recalculate t and p vals for expo because that needs to be done on the paired observations later on
+
+db_sounds$exposure<-ifelse(db_sounds$expt_condition=="bimodal" | db_sounds$expt_condition=="bimodal+generalization","bim","ctrl")
+
+write.table(db_sounds,"../output/sounds_all_perExp.txt",row.names=F, quote=T,sep="\t")
+
+
+###########################
+####Exclusions & RM #### 
+###########################
+read.table("../output/sounds_all_perExp.txt",header=T,sep="\t")->db_sounds
+
+
+db_sounds[db_sounds$out==1,]
+db_sounds[db_sounds$out==0,]->db_sounds.noOut #one outlier removed
+
+#Plug in all info for studies having only independent samples
+db_sounds.noOut.noRM<-db_sounds.noOut[is.na(db_sounds.noOut$same_infant),]
+
+#Average ES for non-independent samples
+for(eachunique in levels(factor(db_sounds.noOut $same_infant))){
+  subset(db_sounds.noOut, same_infant == eachunique)->nowdoing
+    
+    for(i in 1:dim(db_sounds)[2]) if(length(levels(factor(nowdoing[,i])))>1 & is.numeric(nowdoing[,i])) nowdoing[,i]<-median(nowdoing[,i], na.rm=T) else if(length(levels(factor(nowdoing[,i])))>1) nowdoing[,i]<-NA
+    db_sounds.noOut.noRM <-rbind(db_sounds.noOut.noRM,nowdoing[1,])
+  }
+
+write.table(db_sounds.noOut.noRM,"../output/sounds_final_perExp.txt",row.names=F, quote=T,sep="\t") 
+
+
+###########################
+#### paired comparisons ###  USING ALL EXPERIMENTS
+###########################
+read.table("../output/sounds_all_perExp.txt",header=T,sep="\t")->db_sounds
+
+
+comparisontab=NULL
+
+for(thispair in levels(db_sounds$pair)){
+	subset(db_sounds, pair== thispair) -> bimodal
+	subset(db_sounds,unique_exp== thispair) -> control
+	comparison=bimodal
+		comparison $Formulas.used <-"L&W function in table B formula 10.1 for pooled SD; L&W 3.21 for ES, L&W formula 3.22 to unbias (with N1 + N2), L&W 3.23 for SE, L&W 3.24 for weight"
+		comparison$SDpooled <-fB10.1SD(bimodal$n_1, control $n_1, bimodal$SDpooled, control $SDpooled)
+
+		if(comparison$participant_design == "within_one") comparison $EffectSize <- f3.21(bimodal$x_1, control $x_1, comparison$SDpooled) else comparison $EffectSize <- f3.21(bimodal$x_2 - bimodal $x_1, control $x_2 - control $x_1, comparison$SDpooled)
+		comparison $EffectSize <- f3.22(comparison $EffectSize, bimodal$n_1 + control $n_1)
+
+		comparison $ES.SE <- f3.23(comparison$EffectSize, bimodal$n_1 , control $n_1)
+
+		comparison $ES.w <- f3.24(comparison$ES.SE)
+	comparisontab=rbind(comparisontab,comparison)
+}
+#dim(comparisontab)
+comparisontab[!is.na(comparisontab$unique_exp),]-> comparisontab
+
+#remove outliers
+comparisontab $out<-ifelse(comparisontab $EffectSize>mean(comparisontab $EffectSize,na.rm=T)+3*sd(comparisontab $EffectSize,na.rm=T) | comparisontab $EffectSize<mean(comparisontab $EffectSize,na.rm=T)-3*sd(comparisontab $EffectSize,na.rm=T)  ,1,0)
+table(comparisontab $out) #NO outlier
+
+write.table(comparisontab,"../output/sounds_all_paired.txt",row.names=F, quote=T,sep="\t")
+
+
+###########################
+#### paired comparisons ###  USING independent, no outlier EXPERIMENTS
+###########################
+read.table("../output/sounds_final_perExp.txt",header=T,sep="\t")->db_sounds
+
+comparisontab=NULL
+
+for(thispair in levels(db_sounds$pair_noRM)){
+	subset(db_sounds, pair_noRM == thispair) -> bimodal
+	subset(db_sounds,unique_exp_noRM== thispair) -> control
+	comparison=bimodal
+		comparison $Formulas.used <-"L&W function in table B formula 10.1 for pooled SD; L&W 3.21 for ES, L&W formula 3.22 to unbias (with N1 + N2), L&W 3.23 for SE, L&W 3.24 for weight"
+		comparison$SDpooled <-fB10.1SD(bimodal$n_1, control $n_1, bimodal$SDpooled, control $SDpooled)
+
+		if(comparison$participant_design == "within_one") comparison $EffectSize <- f3.21(bimodal$x_1, control $x_1, comparison$SDpooled) else comparison $EffectSize <- f3.21(bimodal$x_2 - bimodal $x_1, control $x_2 - control $x_1, comparison$SDpooled)
+		comparison $EffectSize <- f3.22(comparison $EffectSize, bimodal$n_1 + control $n_1)
+
+		comparison $ES.SE <- f3.23(comparison$EffectSize, bimodal$n_1 , control $n_1)
+
+		comparison $ES.w <- f3.24(comparison$ES.SE)
+	comparisontab=rbind(comparisontab,comparison)
+}
+dim(comparisontab)
+comparisontab[!is.na(comparisontab$unique_exp_noRM),]-> comparisontab
+
+comparisontab $out<-ifelse(comparisontab $EffectSize>mean(comparisontab $EffectSize,na.rm=T)+3*sd(comparisontab $EffectSize,na.rm=T) | comparisontab $EffectSize<mean(comparisontab $EffectSize,na.rm=T)-3*sd(comparisontab $EffectSize,na.rm=T)  ,1,0)
+
+# recalculate t and p-values
+comparisontab $t_rec_cond= comparisontab $EffectSize/comparisontab $ES.SE
+comparisontab $p_rec_cond=2*(1-pt(abs(comparisontab $t_rec_cond),df= comparisontab $n_1)) 
+
+
+table(comparisontab $out) #NO outlier
+
+write.table(comparisontab,"../output/sounds_final_paired.txt",row.names=F, quote=T,sep="\t")
+
+
+```
