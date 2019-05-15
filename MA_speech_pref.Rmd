@@ -1,7 +1,7 @@
 ---
-title: "MA_speech_pref"
+title: "How does the human auditory system become expert in speech processing? Insights from development."
 author: "Cécile Issard and Alejandrina Cristia"
-date: "9/5/2019"
+date: "15/5/2019"
 output: pdf_document
 #bibliography: bibliography.bib
 ---
@@ -22,7 +22,7 @@ The auditory literature suggests that natural sounds are processed differently b
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE) #option for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
-source("/Users/Cecile/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
+source("/Users/etudiantmac06/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
 library(metafor)
 library(dplyr)
@@ -60,18 +60,24 @@ summary(DB$mean_age_1)
 for (i in 1:nrow(DB)){
     db = DB[i,]
        if (db$participant_design == "within_two") {
-          if (is.na(db$corr) & complete(db$x_1, db$x_2, db$SD_1, db$SD_2, db$t)) {
         # Use raw means, SD, and t-values to calculate correlations
-        corr = (db$SD_1^2 + db$SD_2^2 - (db$n_1 * (db$x_1 - db$x_2)^2 / db$t^2)) / (2 * db$SD_1 * db$SD_2)
+          if (is.na(db$corr) & complete(db$x_1, db$x_2, db$SD_1, db$SD_2, db$t)) {
+        db$corr = (db$SD_1^2 + db$SD_2^2 - (db$n_1 * (db$x_1 - db$x_2)^2 / db$t^2)) / (2 * db$SD_1 * db$SD_2)
           }
-          if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
-        #if all of these measures are not reported, use an imputed correlation value
-        #we also account for the observation that some re-calculated values are impossible and replace those
-        corr = runif(1)
-          }
-       db$corr = corr
+        DB[i,] = db
        }
-    DB[i,] = db
+}
+
+#if all of these measures are not reported, use an imputed correlation value
+#we also account for the observation that some re-calculated values are impossible and replace those
+for (i in 1:nrow(DB)){
+    db = DB[i,]
+       if (db$participant_design == "within_two") {
+         if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
+          db$corr = runif(1, min = 0.01, max = 0.99)
+         }
+       DB[i,] = db
+       }
 }
 ```
 
@@ -107,9 +113,9 @@ DB$es_method = NA
       d_calc <- db$t * sqrt((db$n_1 + db$n_2) / (db$n_1 * db$n_2)) # Lipsey & Wilson, (2001)
     } else if (complete(db$F)) {
       d_calc <- sqrt(db$F * (db$n_1 + db$n_2) / (db$n_1 * db$n_2)) # Lipsey & Wilson, (2001)
-    }
+    } else {d_calc = NA}
+    #now that effect size are calculated, effect size variance is calculated
     if (complete(db$n_1, db$n_2, d_calc)) {
-      #now that effect size are calculated, effect size variance is calculated
       d_var_calc <- ((db$n_1 + db$n_2) / (db$n_1 * db$n_2)) + (d_calc ^ 2 / (2 * (db$n_1 + db$n_2)))
     } else if (complete(db$d, db$d_var)) {
       #if d and d_var were already reported, use those values
@@ -132,12 +138,11 @@ DB$es_method = NA
       wc <- sqrt(2 * (1 - db$corr))
       d_calc <- sqrt(db$F / db$n_1) * wc
       es_method  <- "f_two"
-    }
+    } else {d_calc = NA}
+    #now that effect size are calculated, effect size variance is calculated
     if (complete(db$n_1, d_calc)) {
-      #now that effect size are calculated, effect size variance is calculated
       #d_var_calc <- ((1 / n_1) + (d_calc ^ 2 / (2 * n_1))) * 2 * (1 - corr) #we used this until 4/7/17
       d_var_calc <- (2 * (1 - db$corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
-    } else  if (complete(db$r)) {
     } else if (complete(db$d, db$d_var)) {
       #if d and d_var were already reported, use those values
       d_calc <- db$d
@@ -154,7 +159,7 @@ DB$es_method = NA
     } else if (complete(db$F)) {
       d_calc <- sqrt(db$F / db$n_1)
       es_method  <- "f_one"
-    }
+    } else {d_calc = NA}
   }
   
   df <- if (db$participant_design == "between") {
@@ -194,7 +199,32 @@ DB$es_method = NA
   db$es_method = es_method
   
   DB[i,] = db
+  }
+
+#Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
+DB$outlier <- NA
+for (i in 1:nrow(DB)){
+   db = DB[i,]
+   if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
+                         || db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE))
+   {db$outlier = T}
+   else if (db$d_calc < mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
+                         && db$d_calc > mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE))
+   {db$outlier = F}
+   DB[i,] = db
 }
+
+# save the complete data base
+write.csv(DB,'speech_pref_full_DB.csv')
+
+#info 
+paste("We were considering", nrow(DB),"ES candidates")
+paste("We could calculate", sum(!is.na(DB$d_calc)),"ES's")
+
+#summarize the data
+mean(DB$d_calc,na.rm=T)
+sd(DB$d_calc,na.rm=T)
+hist(DB$d_calc, main = )
 ```
 
 Sho: We assess significance of predictor variables by model comparison.
@@ -216,14 +246,13 @@ contrasts(db1$species)<-contr.sum(2)
 contrasts(db1$social)<-contr.sum(2)
 
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
+
 db1$agec<-scale(db1$mean_age_1,scale=F)
 ```
 
 ## Including Plots
 
-
 ```{r Figure Template}
-
 
 apatheme=theme_bw()+
   theme(#panel.grid.major=element_blank(),
