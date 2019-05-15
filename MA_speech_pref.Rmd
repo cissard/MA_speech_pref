@@ -205,11 +205,11 @@ DB$es_method = NA
 DB$outlier <- NA
 for (i in 1:nrow(DB)){
    db = DB[i,]
-   if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
-                         || db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE))
+   if (db$d_calc > (mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE)) 
+                         | db$d_calc < (mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE) ))
    {db$outlier = T}
-   else if (db$d_calc < mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
-                         && db$d_calc > mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE))
+   else if (db$d_calc < (mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
+                         & db$d_calc > mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE) ))
    {db$outlier = F}
    DB[i,] = db
 }
