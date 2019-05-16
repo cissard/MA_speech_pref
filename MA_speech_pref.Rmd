@@ -81,7 +81,7 @@ for (i in 1:nrow(DB)){
 }
 ```
 
-```{r individual_es, include=FALSE}
+```{r data_completion, include=FALSE}
 #We create variables for effect sizes (ES)
 DB$d_calc = NA
 DB$d_var_calc = NA
@@ -96,12 +96,12 @@ DB$log_odds_var_calc = NA
 DB$es_method = NA
   
 #we introduce variables calles d_calc and d_var_calc to distiguish them from the fields d and d_var, which are fields where effect sizes were already available from the source of the data
-  d_calc <- NA
-  d_var_calc <- NA
-  es_method <- "missing"
-
+d_calc <- NA
+d_var_calc <- NA
+es_method <- "missing"
+  
 #start of decision tree where effect sizes are calculated differently based on participant design depending on which data is available, effect sizes are calculated differently
-  for (i in 1:nrow(DB)){
+for (i in 1:nrow(DB)){
     db = DB[i,]
        if (db$participant_design == "between") {
     es_method  <- "between"
@@ -121,7 +121,7 @@ DB$es_method = NA
       #if d and d_var were already reported, use those values
       d_calc <- d
       d_var_calc <- d_var
-    }
+    } else {d_var_calc = NA}
 
   } else if (db$participant_design == "within_two") {
       
@@ -148,7 +148,8 @@ DB$es_method = NA
       d_calc <- db$d
       d_var_calc <- db$d_var
       es_method  <- "d_two"
-    }
+    } else {d_var_calc = NA}
+    
   } else if (db$participant_design == "within_one") {
     if (complete(db$x_1, db$x_2, db$SD_1)) {
       d_calc <- (db$x_1 - db$x_2) / db$SD_1
@@ -199,18 +200,17 @@ DB$es_method = NA
   db$es_method = es_method
   
   DB[i,] = db
-  }
+}
 
 #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
-DB$outlier <- NA
+DB$outlier <- F #create the variable, and sets as no by default (majority of cases hopefully!)
 for (i in 1:nrow(DB)){
    db = DB[i,]
-   if (db$d_calc > (mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE)) 
-                         | db$d_calc < (mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE) ))
-   {db$outlier = T}
-   else if (db$d_calc < (mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) 
-                         & db$d_calc > mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE) ))
-   {db$outlier = F}
+   if (!is.na(db$d_calc)){ #select the lines for which there is an ES available (bug next line if d_calc = NA)
+     if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)) {
+     db$outlier=T #if more than 3 SDs away from the mean, we consider this ES as an outlier.
+     }
+   }
    DB[i,] = db
 }
 
@@ -224,7 +224,9 @@ paste("We could calculate", sum(!is.na(DB$d_calc)),"ES's")
 #summarize the data
 mean(DB$d_calc,na.rm=T)
 sd(DB$d_calc,na.rm=T)
-hist(DB$d_calc, main = )
+stripchart(DB$d_calc, main = 'Distribution of ES')
+boxplot.stats(c(mean(DB$d_calc,na.rm=T),sd(DB$d_calc,na.rm=T)))
+boxplot(DB$d_calc)
 ```
 
 Sho: We assess significance of predictor variables by model comparison.
@@ -235,19 +237,19 @@ We use method="ML", which is appropriate for model comparison
 ```{r predictors}
 
 #setting up of predictors
-db$test_lang<-factor(db$naturalness)
-db$species<-factor(db$species)
-db$social<-factor(db$social)
+DB$test_lang<-factor(DB$naturalness)
+DB$species<-factor(DB$species)
+DB$social<-factor(DB$social)
 #contrast coding for naturalness: each level is compared to the overall mean of the dependent variable, intercept corresponds to the mean of cell means
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
-contrasts(db1$naturalness)=contr.sum(2) 
+contrasts(DB$naturalness)=contr.sum(2) 
 #contrast coding for species and social as well
-contrasts(db1$species)<-contr.sum(2)
-contrasts(db1$social)<-contr.sum(2)
+contrasts(DB$species)<-contr.sum(2)
+contrasts(DB$social)<-contr.sum(2)
 
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
 
-db1$agec<-scale(db1$mean_age_1,scale=F)
+DB$agec<-scale(DB$mean_age_1,scale=F)
 ```
 
 ## Including Plots
@@ -268,9 +270,7 @@ In our first analysis on the influence of spectral/temporal distance, we base ou
 ```{r full model}
 
 #Since studies differ in whether they report spectral and/or temporal difference, we created separate base models including the respective subset of data points.
-base.spec.full<-rma.mv(g_calc, g_var_calc, mods=~ test_lang*agec + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1[!is.na(db1$specdif),], weighted=TRUE, method = "ML")
-
-base.length.full<-rma.mv(g_calc, g_var_calc, mods=~ test_lang*agec + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1[!is.na(db1$tdif),], weighted=TRUE, method = "ML")
+base.spec.full<-rma.mv(g_calc, g_var_calc, mods=~ agec, random = ~ 1 | short_cite/same_infant, data=db1[!is.na(db1$specdif),], weighted=TRUE, method = "ML")
 
 
 #full models
