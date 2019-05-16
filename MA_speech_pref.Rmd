@@ -16,7 +16,6 @@ A long line of research shows that infants process speech preferentially over ot
 The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
 
 	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds. We looked for studies  through reference lists inspection, google scholar alerts for the words “ "infant-directed speech" acoustics ”, google scholar searches (“("speech preference" OR "own-species vocalization" ) AND infant”, and “("speech preference" OR "own-species vocalization" ) AND infant”). We included studies that tested human infants for birth to 1 year (0-365 days) of age, and contrasted speech sounds with any other type of sound, measuring either behavioral (e.g. looking times) or neurophysiological responses to the sounds. We excluded studies that contrasted foreign to native language, or didn’t present natural speech sounds. A PRISMA flowchart summarizing the literature review and selection process is available here. We documented all the studies that we inspected in this decision spreadsheet.
-	We coded the familiarity with the language used (native/foreign), the naturalness of the contrastive sound (natural/artificial) as moderators, and when it was natural whether the contrastive sound was social or not, and whether it was from another species.
 
 ```{r, setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE) #option for all the code chunks of the document.
@@ -229,11 +228,8 @@ boxplot.stats(c(mean(DB$d_calc,na.rm=T),sd(DB$d_calc,na.rm=T)))
 boxplot(DB$d_calc)
 ```
 
-Sho: We assess significance of predictor variables by model comparison.
-To this end, we first create a base model, including moderators that influence ES apart from target moderators. This base model includes
-- infant age
-We include random effects of paper (short_cite), and random effects for independent infants within paper (same_infant).
-We use method="ML", which is appropriate for model comparison
+
+	We coded the familiarity with the language used (native/foreign), the naturalness of the contrastive sound (natural/artificial) as moderators, and when it was natural whether the contrastive sound was social or not, and whether it was from another species.
 ```{r predictors}
 
 #setting up of predictors
@@ -265,78 +261,69 @@ apatheme=theme_bw()+
         legend.position='none')
 ```
 
-# Spectral and temporal analysis, full model
-In our first analysis on the influence of spectral/temporal distance, we base our analysis on all datapoints that have associated spectral or temporal distance reported, respectively.  Only spectral distance shows significant differences compared to the base model.
-```{r full model}
+Sho: We assess significance of predictor variables by model comparison.
+To this end, we first create a base model, including moderators that influence ES apart from target moderators. This base model includes
+- infant age
+We include random effects of paper (study_ID), and random effects for independent infants within paper (same_infant).
+We use method="ML", which is appropriate for model comparison
+```{r models}
+#descriptives for results write-up
+tapply(DB$g_calc,DB$mean_age_1,mean)#ES by age
+table(DB$naturalness)#no. of natural and non-natural data points
+table(DB$social)#no. of social and non-social data points
+table(DB$species)#no. of homo- and heterospecific data points
 
-#Since studies differ in whether they report spectral and/or temporal difference, we created separate base models including the respective subset of data points.
-base.spec.full<-rma.mv(g_calc, g_var_calc, mods=~ agec, random = ~ 1 | short_cite/same_infant, data=db1[!is.na(db1$specdif),], weighted=TRUE, method = "ML")
+#base model 
+base_model <-rma.mv(g_calc, g_var_calc, mods=agec ,random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML",subset=!DB$outlier)
+
+plot(unique(DB$mean_age_1)[1:33],tapply(DB$g_calc,DB$mean_age_1,mean), main = 'ES as a function of age', xlab = 'age (days)', ylab = 'g_calc')
+
+#subset selection
+DB$periph<-ifelse(!is.na(DB$peripherality),T,F)
+
+#full model
+full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness*species*agec + social, random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML")
+anova(base_model,full_model)
+summary(full_model)
 
 
-#full models
-specdif.full<-rma.mv(g_calc, g_var_calc, mods=~ specdif*test_lang*agec + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1, weighted=TRUE, method = "ML")
+#Is there publication bias?
+#funnel plot based on NRV-difference scores: for studies that report both directions: calculate an NRV score as "yes" minus "no" (and average SD of the SD-yes and SD-no) to see if there may indeed be selective reporting of asymmetries
 
-lengthdif.full<-rma.mv(g_calc, g_var_calc, mods=~ tdif*test_lang*agec + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1, weighted=TRUE, method = "ML")
+#select studies that report both directions 
+#(filter out study that are unidirectional manually)
+DB.periph<-DB[DB$periph==T & DB$study_ID!="Liu2016" & DB$study_ID!="Sundara2011" & DB$study_ID!="Tsao2004" & DB$study_ID!="Polka1996",]
 
-#model comparison
-anova(base.spec.full, specdif.full)
-anova(base.length.full,lengthdif.full)
+#match the two directions in one datafile by merge
+DB.periph$mean_age_months_rd <-round(DB.periph$mean_age_months,0)#needed for match
+DB.toperiph<-DB.periph[DB.periph$peripherality==1,]
+DB.fromperiph<-DB.periph[DB.periph$peripherality==0,]
+DB.periph<-merge(DB.toperiph[,c("study_ID","expt_num","native_lang","test_lang","contrast_sampa","g_calc","g_var_calc","mean_age_months_rd","exposure_phase")],DB.fromperiph[,c("study_ID","expt_num","native_lang","test_lang","contrast_sampa","g_calc","g_var_calc","mean_age_months_rd","exposure_phase")],by=c("study_ID","expt_num","native_lang","test_lang","mean_age_months_rd","exposure_phase"))
 
-#model summaries
-summary(specdif.full)
-summary(lengthdif.full)
+#calculate difference scores
+DB.periph$ToMinFrom.g<-DB.periph$g_calc.x-DB.periph$g_calc.y
+DB.periph$ToMinFrom.g_var<-sqrt((DB.periph$g_var_calc.x^2+DB.periph$g_var_calc.y^2)/2)
 
+#can't do rma.mv for regtest, therefore rma.uni
+periph.asym <- rma(ToMinFrom.g, ToMinFrom.g_var, mods=~ test_lang*mean_age_months_rd + exposure_phase,data=DB.periph, weighted=TRUE, method = "ML")
 
-#Figures
-sp.full<-ggplot(db1[!is.na(db1$specdif),], aes(x=specdif,y=g_calc)) + ggtitle("Spectral distance")+ theme_bw() +
-  geom_point(col="turquoise", aes(size = 1/g_var_calc))+
-  xlab("Spectral difference in bark")+
-  ylab("Hedge's g")+
-  geom_abline(intercept = specdif.full$b[1], slope = specdif.full$b[2],size=1.5, col="grey")+
-  apatheme +
-  theme(text = element_text(size=16)) 
+regtest(periph.asym)
+fun.fig<-funnel(periph.asym,cex=1.5,ylab="Standard Error of Effect Size g",digits=2,main="Funnel plot speech preference")
 
-tp.full<-ggplot(db1[!is.na(db1$tdif),], aes(x=tdif,y=g_calc)) + ggtitle("Temporal distance")+ theme_bw() +
-  geom_point(col="indianred1", aes(size = 1/g_var_calc))+
-  xlab("Temporal difference ratio")+
-  ylab("Hedge's g")+
-  geom_abline(intercept = lengthdif.full$b[1], slope = lengthdif.full$b[2],size=1.5,col="grey")+
-  apatheme +
-  theme(text = element_text(size=16)) 
-
-pdf("Fig2.pdf",width=10,height=6)
-grid.arrange(sp.full, tp.full,ncol=2)
+#Figure
+pdf("Fig1.pdf",height=5,width=7)
+par(mfrow=c(1,2))
+boxplot(DB$g_calc~DB$peripherality1,col="grey",xlab = "Peripherality",ylab="Hedge's g",
+        main="Effect sizes by testing direction",cex=1.5)
+funnel(periph.asym,cex=1.5,ylab="Standard Error of Effect Size g",digits=2,main="Funnel plot peripherality analysis")
 dev.off()
 
-# 
-# specdif.full.age<-rma.mv(g_calc, g_var_calc, mods=~ specdif*test_lang*mean_age_1 + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1, weighted=TRUE, method = "ML")
-# lengthdif.full.age<-rma.mv(g_calc, g_var_calc, mods=~ tdif*test_lang*mean_age_1 + exposure_phase,random = ~ 1 | short_cite/same_infant, data=db1, weighted=TRUE, method = "ML")
-# 
-# sp.age<-ggplot(db1[!is.na(db1$specdif),], aes(x=mean_age_1,y=g_calc)) + ggtitle("Age (spectral set)")+ theme_bw() +
-#   geom_point(col="turquoise", aes(size = 1/g_var_calc))+
-#   xlab("Age in days")+
-#   ylab("Hedge's g")+
-#   geom_abline(intercept = specdif.full.age$b[1], slope = specdif.full.age$b[4],size=1.5,col="grey")+
-#   apatheme +
-#   theme(text = element_text(size=16))
-# 
-# tp.age<-ggplot(db1[!is.na(db1$tdif),], aes(x=mean_age_1,y=g_calc)) + ggtitle("Age (temporal set)")+ theme_bw() +
-#   geom_point(col="indianred1", aes(size = 1/g_var_calc))+
-#   xlab("Age in days")+
-#   ylab("Hedge's g")+
-#   geom_abline(intercept = lengthdif.full.age$b[1], slope = lengthdif.full.age$b[4],size=1.5,col="grey")+
-#   apatheme +
-#   theme(text = element_text(size=16))
-
-# pdf("Fig2_alt.pdf")
-# grid.arrange(sp.full, tp.full,sp.age,tp.age,ncol=2)
-# dev.off()
-
-#base.feat.full1<-rma.mv(g_calc, g_var_calc, mods=~ test_lang*agec + exposure_phase,random = ~ 1 | short_cite/same_infant,data=db1[!is.na(db1$featdif),], weighted=TRUE, method = "ML")
-#featdif.full<-rma.mv(g_calc, g_var_calc, mods=~ featdif*test_lang*agec + exposure_phase ,random = ~ 1 | /same_infant, data=db1, weighted=TRUE, method = "ML")
-# ggplot(db1[!is.na(db1$featdif),], aes(x=factor(featdif),y=g_calc,fill=factor(featdif))) + ggtitle("Feature difference")+ theme_bw() +
-#   geom_boxplot() + 
-#   geom_jitter(position=position_jitterdodge(dodge.width=0.9), stat = "identity",  aes(factor(featdif),g_calc,size = 1/g_var_calc))
-
+#calculate regression weight of studies that awere conducted by supporters of NRV model
+DB.periph<-DB[DB$periph==T,]
+DB.periph$weight<-1/sqrt(DB.periph$g_var_calc^2)
+DB.periph$forNRV<-0
+DB.periph$forNRV[DB.periph$study_ID=="Polka1996"|DB.periph$study_ID=="Polka2011"]<-1
+forNRV.weight<-sum(DB.periph$weight[DB.periph$forNRV==1])/sum(DB.periph$weight)
+forNRV.weight
 
 ```
