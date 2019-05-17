@@ -219,16 +219,26 @@ write.csv(DB,'speech_pref_full_DB.csv')
 #info 
 paste("We were considering", nrow(DB),"ES candidates")
 paste("We could calculate", sum(!is.na(DB$d_calc)),"ES's")
-
+table(DB$response_mode)
 #summarize the data
 mean(DB$g_calc,na.rm=T)
 sd(DB$g_calc,na.rm=T)
 stripchart(DB$g_calc, main = 'Distribution of ES')
 boxplot(DB$g_calc)
 
+#distribution of moderators
+#centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
+DB$agec<-scale(DB$mean_age_1,scale=F)
+g_age <- tapply(DB$g_calc,DB$mean_age_1,mean)#ES by age
+table(DB$naturalness)#no. of natural and non-natural data points
+table(DB$social)#no. of social and non-social data points
+table(DB$species)#no. of homo- and heterospecific data points
+table(DB$species,DB$social)
+table(DB$naturalness,DB$social)
+
 #plot ES as a function of moderators
 #age
-plot(unique(DB$mean_age_1)[1:33],tapply(DB$g_calc,DB$mean_age_1,mean), main = 'ES as a function of age', xlab = 'age (days)', ylab = 'g_calc')
+plot(unique(DB$mean_age_1)[1:33],g_age, main = 'ES as a function of age', xlab = 'age (days)', ylab = 'g_calc')
 #naturalness
 boxplot(DB$g_calc~DB$naturalness)
 
@@ -241,23 +251,6 @@ boxplot(DB$g_calc~DB$species)
 
 
 	We coded the familiarity with the language used (native/foreign), the naturalness of the contrastive sound (natural/artificial) as moderators, and when it was natural whether the contrastive sound was social or not, and whether it was from another species.
-```{r predictors}
-
-#setting up of predictors
-DB$test_lang<-factor(DB$naturalness)
-DB$species<-factor(DB$species)
-DB$social<-factor(DB$social)
-#contrast coding for naturalness: each level is compared to the overall mean of the dependent variable, intercept corresponds to the mean of cell means
-#http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
-contrasts(DB$naturalness)=contr.sum(2) 
-#contrast coding for species and social as well
-contrasts(DB$species)<-contr.sum(2)
-contrasts(DB$social)<-contr.sum(2)
-
-#centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
-
-DB$agec<-scale(DB$mean_age_1,scale=F)
-```
 
 ## Including Plots
 
@@ -278,22 +271,28 @@ To this end, we first create a base model, including moderators that influence E
 We include random effects of paper (study_ID), and random effects for independent infants within paper (same_infant).
 We use method="ML", which is appropriate for model comparison
 ```{r models}
-#descriptives for results write-up
-tapply(DB$g_calc,DB$mean_age_1,mean)#ES by age
-table(DB$naturalness)#no. of natural and non-natural data points
-table(DB$social)#no. of social and non-social data points
-table(DB$species)#no. of homo- and heterospecific data points
+#setting up of predictors
+DB$test_lang<-factor(DB$naturalness)
+DB$species<-factor(DB$species)
+DB$social<-factor(DB$social)
+#contrast coding for naturalness: each level is compared to the overall mean of the dependent variable, intercept corresponds to the mean of cell means
+#http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
+contrasts(DB$naturalness)=contr.sum(2) 
+#contrast coding for species and social as well
+contrasts(DB$species)<-contr.sum(2)
+contrasts(DB$social)<-contr.sum(2)
 
 #base model 
 base_model <-rma.mv(g_calc, g_var_calc, mods=agec ,random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML",subset=!DB$outlier)
 
 #subset selection
-DB$periph<-ifelse(!is.na(DB$peripherality),T,F)
+#DB$periph<-ifelse(!is.na(DB$peripherality),T,F)
 
 #full model
-full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness*species*agec + social, random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML")
-anova(base_model,full_model)
-summary(full_model)
+full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness*agec, random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML")
+
+#anova(base_model,full_model)
+#summary(full_model)
 
 ```
 
