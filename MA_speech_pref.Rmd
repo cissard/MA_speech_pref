@@ -21,7 +21,7 @@ The auditory literature suggests that natural sounds are processed differently b
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE) #option for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
-source("/Users/etudiantmac06/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
+source("/Users/Cecile/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
 library(metafor)
 library(dplyr)
@@ -48,7 +48,7 @@ levels(factor(DB$short_cite))
 #number of unique infants
 DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
 temp<-aggregate(n~same_infant,DB,mean)
-sum(temp$n)
+paste('A total of', round(sum(temp$n)), 'infants contributed to the analysis')
 
 summary(DB$mean_age_1)
 
@@ -221,11 +221,22 @@ paste("We were considering", nrow(DB),"ES candidates")
 paste("We could calculate", sum(!is.na(DB$d_calc)),"ES's")
 
 #summarize the data
-mean(DB$d_calc,na.rm=T)
-sd(DB$d_calc,na.rm=T)
-stripchart(DB$d_calc, main = 'Distribution of ES')
-boxplot.stats(c(mean(DB$d_calc,na.rm=T),sd(DB$d_calc,na.rm=T)))
-boxplot(DB$d_calc)
+mean(DB$g_calc,na.rm=T)
+sd(DB$g_calc,na.rm=T)
+stripchart(DB$g_calc, main = 'Distribution of ES')
+boxplot(DB$g_calc)
+
+#plot ES as a function of moderators
+#age
+plot(unique(DB$mean_age_1)[1:33],tapply(DB$g_calc,DB$mean_age_1,mean), main = 'ES as a function of age', xlab = 'age (days)', ylab = 'g_calc')
+#naturalness
+boxplot(DB$g_calc~DB$naturalness)
+
+#social
+boxplot(DB$g_calc~DB$social)
+
+#species
+boxplot(DB$g_calc~DB$species)
 ```
 
 
@@ -276,8 +287,6 @@ table(DB$species)#no. of homo- and heterospecific data points
 #base model 
 base_model <-rma.mv(g_calc, g_var_calc, mods=agec ,random = ~ 1 | study_ID/same_infant,data=DB, weighted=TRUE, method = "ML",subset=!DB$outlier)
 
-plot(unique(DB$mean_age_1)[1:33],tapply(DB$g_calc,DB$mean_age_1,mean), main = 'ES as a function of age', xlab = 'age (days)', ylab = 'g_calc')
-
 #subset selection
 DB$periph<-ifelse(!is.na(DB$peripherality),T,F)
 
@@ -286,7 +295,9 @@ full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness*species*agec + social
 anova(base_model,full_model)
 summary(full_model)
 
+```
 
+```{r publication bias}
 #Is there publication bias?
 #funnel plot based on NRV-difference scores: for studies that report both directions: calculate an NRV score as "yes" minus "no" (and average SD of the SD-yes and SD-no) to see if there may indeed be selective reporting of asymmetries
 
