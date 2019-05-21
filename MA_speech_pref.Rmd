@@ -274,7 +274,7 @@ We use method="ML", which is appropriate for model comparison
 ```{r models}
 #setting up of predictors
 DB$response_mode<-factor(DB$response_mode) #check that the experimental method doesn't make a difference
-DB$test_lang<-factor(DB$test_lang)
+DB$test_lang<-factor(DB$test_lang) #check that the language doesn't make a difference (true speech preference and not pref for native language)
 DB$species<-factor(DB$species)
 DB$social<-factor(DB$social)
 #contrast coding for naturalness: each level is compared to the overall mean of the dependent variable, intercept corresponds to the mean of cell means
@@ -283,14 +283,17 @@ contrasts(DB$naturalness)<-contr.sum(2)
 #contrast coding for species and social as well
 contrasts(DB$species)<-contr.sum(2)
 contrasts(DB$social)<-contr.sum(2)
+contrasts(DB$test_lang)<-contr.sum(2)
 #dummy coding for method: each level is compared to the reference level (eye-tracking, 2nd group), the intercept corresponds to the cell mean of the reference group (eye-tracking).
 contrasts(DB$response_mode)=contr.treatment(3, base=2)
 
-#base model 
-base_model <-rma.mv(g_calc, g_var_calc, mods = response_mode, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
+#check that the method used doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior, coded in the response_mode variable)
+base_model <-rma.mv(g_calc, g_var_calc, mods = response_mode, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode))
+#check also for test_lang (nativeness)
+base_model2 <-rma.mv(g_calc, g_var_calc, mods = test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$g_calc))
 
 #full model
-full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness*agec*test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
+full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
 
 #subset to natural sounds, as naturalness doesn't make a difference. This allows to test species and social.
 natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$naturalness) & DB$naturalness=='natural')
@@ -301,16 +304,23 @@ tapply(DB$g_calc,DB$test_lang, mean,na.rm=T)
 tapply(DB$g_calc,DB$test_lang, sd,na.rm=T)
 
 ```
+```{r plots}
+forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedge\'s g', slab = DB$short_cite[!is.na(DB$g_calc)])
 
+```
 ```{r publication bias}
 fun.fig <- funnel(base_model, cex=1.5, xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 
 #Figure
-pdf("Fig1.pdf",height=5,width=7)
+pdf("Fig1.pdf")
 par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by rows (mfrow), respectively.
 
 funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g",digits=2,main="Funnel plot speech preference")
 dev.off()
+
+# testing for asymetry (indicates a publication bias)
+regtest(DB$g_calc,DB$g_var_calc)
+ranktest(DB$g_calc,DB$g_var_calc)
 
 #calculate regression weight of studies that were conducted by supporters of NRV model
 DB.periph<-DB[DB$periph==T,]
