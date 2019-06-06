@@ -94,7 +94,7 @@ DB$log_odds_calc = NA
 DB$log_odds_var_calc = NA
 DB$es_method = NA
   
-#we introduce variables calles d_calc and d_var_calc to distiguish them from the fields d and d_var, which are fields where effect sizes were already available from the source of the data
+#we introduce variables d_calc and d_var_calc to distiguish them from the fields d and d_var, which are fields where effect sizes were already available from the source of the data
 d_calc <- NA
 d_var_calc <- NA
 es_method <- "missing"
@@ -202,7 +202,7 @@ for (i in 1:nrow(DB)){
 }
 
 #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
-DB$outlier <- F #create the variable, and sets as no by default (majority of cases hopefully!)
+DB$outlier <- F #create the variable, and set as no by default (majority of cases hopefully!)
 for (i in 1:nrow(DB)){
    db = DB[i,]
    if (!is.na(db$d_calc)){ #select the lines for which there is an ES available (bug next line if d_calc = NA)
@@ -272,38 +272,53 @@ To this end, we first create a base model, including moderators that influence E
 We include random effects of paper (study_ID), and random effects for independent infants within paper (same_infant).
 We use method="ML", which is appropriate for model comparison
 ```{r models}
-#setting up of predictors
-DB$response_mode<-factor(DB$response_mode) #check that the experimental method doesn't make a difference
-DB$test_lang<-factor(DB$test_lang) #check that the language doesn't make a difference (true speech preference and not pref for native language)
-DB$species<-factor(DB$species)
-DB$social<-factor(DB$social)
-#contrast coding for naturalness: each level is compared to the overall mean of the dependent variable, intercept corresponds to the mean of cell means
+#setting up of predictors 
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
-contrasts(DB$naturalness)<-contr.sum(2) 
-#contrast coding for species and social as well
-contrasts(DB$species)<-contr.sum(2)
-contrasts(DB$social)<-contr.sum(2)
-contrasts(DB$test_lang)<-contr.sum(2)
-#dummy coding for method: each level is compared to the reference level (eye-tracking, 2nd group), the intercept corresponds to the cell mean of the reference group (eye-tracking).
-contrasts(DB$response_mode)=contr.treatment(3, base=2)
 
-#check that the method used doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior, coded in the response_mode variable)
-base_model <-rma.mv(g_calc, g_var_calc, mods = response_mode, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode))
-#check also for test_lang (nativeness)
-base_model2 <-rma.mv(g_calc, g_var_calc, mods = test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$g_calc))
+ #check that the experimental method doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior)
+DB$response_mode<-factor(DB$response_mode)
+#deviation coding: each level is compared to the overall mean of the dependent variable, intercept corresponds to the last level.
+contrasts(DB$response_mode) = contr.sum(3)
+ #check that the language doesn't make a difference (true speech preference and not pref for native language)
+DB$test_lang<-factor(DB$test_lang)
+#dummy coding: each level is compared to the reference level (native), the intercept corresponds to the cell mean of the reference group.
+contrasts(DB$test_lang) <- contr.treatment(2)
 
-#full model
-full_model <-rma.mv(g_calc, g_var_calc, mods=~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
+ #moderators of interest
+contrasts(DB$naturalness) <- contr.sum(2)
 
-#subset to natural sounds, as naturalness doesn't make a difference. This allows to test species and social.
-natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$naturalness) & DB$naturalness=='natural')
+DB$species<-factor(DB$species)
+contrasts(DB$species) <- contr.sum(2)
 
-#The language used for the speech trials doesn't make a difference
+DB$social<-factor(DB$social)
+contrasts(DB$social) <- contr.sum(2)
+
+#fit models
+ #check that the method used doesn't make a difference
+boxplot(DB$g_calc~DB$response_mode)
+tapply(DB$g_calc,DB$response_mode, mean,na.rm=T)
+tapply(DB$g_calc,DB$response_mode, sd,na.rm=T)
+base_model <-rma.mv(g_calc, g_var_calc, mods = ~response_mode, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode))
+
+ #age varies with method (nirs<behavior<eye tracking)
+tapply(DB$mean_age_1,DB$response_mode,mean,na.rm=T)
+
+ #check also for test_lang (nativeness)
+ #The language used for the speech trials doesn't make a difference
 boxplot(DB$g_calc~DB$test_lang)
 tapply(DB$g_calc,DB$test_lang, mean,na.rm=T)
 tapply(DB$g_calc,DB$test_lang, sd,na.rm=T)
 
+base_model2 <-rma.mv(g_calc, g_var_calc, mods = ~ test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$g_calc))
+
+ #full model (with moderators of interest). As species and social are not orthogonal to naturalness, we only test for naturalness.
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
+
+#subset to natural sounds, as naturalness doesn't make a difference. This allows to test species and social.
+natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$naturalness) & DB$naturalness=='natural')
+
 ```
+
 ```{r plots}
 forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedge\'s g', slab = DB$short_cite[!is.na(DB$g_calc)])
 
@@ -315,7 +330,7 @@ fun.fig <- funnel(base_model, cex=1.5, xlab='Hedge\'s g', ylab="Standard Error o
 pdf("Fig1.pdf")
 par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by rows (mfrow), respectively.
 
-funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g",digits=2,main="Funnel plot speech preference")
+funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 dev.off()
 
 # testing for asymetry (indicates a publication bias)
