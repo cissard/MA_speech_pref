@@ -1,7 +1,7 @@
 ---
 title: "How does the human auditory system become expert in speech processing? Insights from development."
 author: "Cécile Issard and Alejandrina Cristia"
-date: "20/5/2019"
+#date: "/6/2019"
 output: pdf_document
 #bibliography: bibliography.bib
 ---
@@ -21,7 +21,7 @@ The auditory literature suggests that natural sounds are processed differently b
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE) #option for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
-source("/Users/etudiantmac06/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
+source("/Users/Cecile/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
 library(metafor)
 library(dplyr)
@@ -43,7 +43,8 @@ DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = ""
 dim(DB)
 
 #unique studies
-levels(factor(DB$short_cite))
+papers <- levels(factor(DB$short_cite))
+paste('A total of', length(papers), 'papers were included.')
 
 #number of unique infants
 DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
@@ -212,6 +213,13 @@ for (i in 1:nrow(DB)){
    }
    DB[i,] = db
 }
+#Visualize the outliers
+outliers<-filter(DB,outlier==T)
+outliers
+
+#Not considered as outliers but still high
+highES<-filter(DB,g_calc>2)
+highES
 
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
 DB$agec<-scale(DB$mean_age_1,scale=F)
@@ -276,11 +284,9 @@ We use method="ML", which is appropriate for model comparison
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
  #check that the experimental method doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior)
-DB$response_mode<-factor(DB$response_mode)
 #deviation coding: each level is compared to the overall mean of the dependent variable, intercept corresponds to the last level.
 contrasts(DB$response_mode) = contr.sum(3)
  #check that the language doesn't make a difference (true speech preference and not pref for native language)
-DB$test_lang<-factor(DB$test_lang)
 #dummy coding: each level is compared to the reference level (native), the intercept corresponds to the cell mean of the reference group.
 contrasts(DB$test_lang) <- contr.treatment(2)
 
@@ -295,17 +301,24 @@ contrasts(DB$social) <- contr.sum(2)
 
 #fit models
  #check that the method used doesn't make a difference
-boxplot(DB$g_calc~DB$response_mode)
+plot(DB$g_calc~DB$response_mode)
 tapply(DB$g_calc,DB$response_mode, mean,na.rm=T)
 tapply(DB$g_calc,DB$response_mode, sd,na.rm=T)
-base_model <-rma.mv(g_calc, g_var_calc, mods = ~response_mode, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode))
+base_model <-rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode))
 
  #age varies with method (nirs<behavior<eye tracking)
 tapply(DB$mean_age_1,DB$response_mode,mean,na.rm=T)
+#Maybe response_mode is not the right variable for this.
+table(DB$method,DB$response_mode)
+#plot g as a function of method
+mycols=c("black","blue","red","green")
+names(mycols)<-levels(DB$method)
+mycols
+plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7)
 
  #check also for test_lang (nativeness)
  #The language used for the speech trials doesn't make a difference
-boxplot(DB$g_calc~DB$test_lang)
+plot(DB$g_calc~DB$mean_age_1,col=DB$test_lang)
 tapply(DB$g_calc,DB$test_lang, mean,na.rm=T)
 tapply(DB$g_calc,DB$test_lang, sd,na.rm=T)
 
@@ -320,7 +333,7 @@ natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random =
 ```
 
 ```{r plots}
-forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedge\'s g', slab = DB$short_cite[!is.na(DB$g_calc)])
+forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedge\'s g', slab = DB$short_cite[!is.na(DB$g_calc)&DB$outlier==F]) 
 
 ```
 ```{r publication bias}
@@ -332,6 +345,7 @@ par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequ
 
 funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 dev.off()
+#add symmetrize
 
 # testing for asymetry (indicates a publication bias)
 regtest(DB$g_calc,DB$g_var_calc)
