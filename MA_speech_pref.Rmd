@@ -55,7 +55,7 @@ dim(DB)
 
 ## FIX, DOUBLE CHECK ALEX & CECILE !! REPLACE ALL EMPTY WITH NA
 for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
-for(mycol in c("naturalness","social","species","test_lang")) DB[,mycol]<-factor(DB[,mycol])
+for(mycol in c("naturalness","social2","species2","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
 summary(DB)
 
 #unique studies
