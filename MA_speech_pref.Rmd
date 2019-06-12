@@ -7,21 +7,10 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Introduction
-A long line of research shows that infants process speech preferentially over other types of sounds. As the main signal for vocal communication, speech must be special for humans. Readily from birth, humans would be equipped with an auditory module dedicated to speech sounds, to process them with dedicated auditory and cognitive mechanisms. This preference has been investigated by numerous studies, contrasting speech to a variety of sounds, from white noise to backward speech, and at different ages. Getting a precise overview of this capacity is therefore difficult. 
-“broader template that initially encompasses vocalizations of human and nonhuman primates and is rapidly tuned specifically to human vocalizations.” “Is this link sufficiently broad to include naturalistic vocalizations beyond those of our closest genealogical cousins, or is it restricted to primates, whose vocalizations may be perceptually just close enough to our own to serve as early candidates for the platform on which human language is launched?” (Ferry et al., 2013) 
-The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
-
-	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds. We looked for studies  through reference lists inspection, google scholar alerts for the words “ "infant-directed speech" acoustics ”, google scholar searches (“("speech preference" OR "own-species vocalization" ) AND infant”, and “("speech preference" OR "own-species vocalization" ) AND infant”). We included studies that tested human infants for birth to 1 year (0-365 days) of age, and contrasted speech sounds with any other type of sound, measuring either behavioral (e.g. looking times) or neurophysiological responses to the sounds. We excluded studies that contrasted foreign to native language, or didn’t present natural speech sounds. A PRISMA flowchart summarizing the literature review and selection process is available here. We documented all the studies that we inspected in this decision spreadsheet.
-
-```{r, setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE) #option for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
-source("/Users/Cecile/Documents/MA_speech_pref/compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
+source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
 library(metafor)
 library(dplyr)
@@ -32,15 +21,42 @@ library(purrr)
 library(langcog)
 library(grid)
 library(gridExtra)
-
 ```
+
+# Introduction
+A long line of research shows that infants process speech preferentially over other types of sounds. As the main signal for vocal communication, speech must be special for humans. Readily from birth, humans would be equipped with an auditory module dedicated to speech sounds, to process them with dedicated auditory and cognitive mechanisms. This preference has been investigated by numerous studies, contrasting speech to a variety of sounds, from white noise to backward speech, and at different ages. Getting a precise overview of this capacity is therefore difficult. 
+“broader template that initially encompasses vocalizations of human and nonhuman primates and is rapidly tuned specifically to human vocalizations.” “Is this link sufficiently broad to include naturalistic vocalizations beyond those of our closest genealogical cousins, or is it restricted to primates, whose vocalizations may be perceptually just close enough to our own to serve as early candidates for the platform on which human language is launched?” (Ferry et al., 2013) 
+The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
+
+	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds. We looked for studies  through reference lists inspection, google scholar alerts for the words “ "infant-directed speech" acoustics ”, google scholar searches (“("speech preference" OR "own-species vocalization" ) AND infant”, and “("speech preference" OR "own-species vocalization" ) AND infant”). We included studies that tested human infants for birth to 1 year (0-365 days) of age, and contrasted speech sounds with any other type of sound, measuring either behavioral (e.g. looking times) or neurophysiological responses to the sounds. We excluded studies that contrasted foreign to native language, or didn’t present natural speech sounds. A PRISMA flowchart summarizing the literature review and selection process is available here. We documented all the studies that we inspected in this decision spreadsheet.
+
+
 
 ```{r db general}
 
-DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
+# Comment out next set of lines for RECALCULATION
+ require(RCurl)
+ u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
+ tc <- getURL(u, ssl.verifypeer=FALSE)
+ DB <- read.csv(textConnection(tc))
+ write.csv(DB,"MA_speech_pref_data.csv")
+# Uncomment next line for OFFLINE MODE
+#DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
 
-#no of datapoints and variables coded
+## of datapoints and variables coded
 dim(DB)
+
+## FIX, remove empty columns
+rmcol=NULL
+for(mycol in 1:dim(DB)[2]) if(sum(is.na(DB[,mycol]))==length(DB[,mycol])) rmcol=c(rmcol,colnames(DB)[mycol])
+rmcol[!(rmcol %in% "corr")]->rmcol
+DB[,!(colnames(DB) %in% rmcol)]->DB
+dim(DB)
+
+## FIX, DOUBLE CHECK ALEX & CECILE !! REPLACE ALL EMPTY WITH NA
+for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
+for(mycol in c("naturalness","social","species","test_lang")) DB[,mycol]<-factor(DB[,mycol])
+summary(DB)
 
 #unique studies
 papers <- levels(factor(DB$short_cite))
@@ -214,11 +230,11 @@ for (i in 1:nrow(DB)){
    DB[i,] = db
 }
 #Visualize the outliers
-outliers<-filter(DB,outlier==T)
+outliers<-subset(DB,outlier==T)
 outliers
 
 #Not considered as outliers but still high
-highES<-filter(DB,g_calc>2)
+highES<-subset(DB,g_calc>(mean(DB$g_calc,na.rm=T)+2*sd(DB$g_calc,na.rm=T)))
 highES
 
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
@@ -226,6 +242,8 @@ DB$agec<-scale(DB$mean_age_1,scale=F)
 
 # save the complete data base
 write.csv(DB,'speech_pref_full_DB.csv')
+
+summary(DB)
 
 #info 
 paste("We were considering", nrow(DB),"ES candidates")
@@ -285,19 +303,19 @@ We use method="ML", which is appropriate for model comparison
 
  #check that the experimental method doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior)
 #deviation coding: each level is compared to the overall mean of the dependent variable, intercept corresponds to the last level.
-contrasts(DB$response_mode) = contr.sum(3)
+contrasts(DB$response_mode) = contr.sum(length(levels(DB$response_mode)))
  #check that the language doesn't make a difference (true speech preference and not pref for native language)
 #dummy coding: each level is compared to the reference level (native), the intercept corresponds to the cell mean of the reference group.
-contrasts(DB$test_lang) <- contr.treatment(2)
+contrasts(DB$test_lang) <- contr.treatment(length(levels(DB$test_lang)))
 
  #moderators of interest
-contrasts(DB$naturalness) <- contr.sum(2)
+contrasts(DB$naturalness) <- contr.sum(length(levels(DB$naturalness)))
 
 DB$species<-factor(DB$species)
-contrasts(DB$species) <- contr.sum(2)
+contrasts(DB$species) <- contr.sum(length(levels(DB$species)))
 
 DB$social<-factor(DB$social)
-contrasts(DB$social) <- contr.sum(2)
+contrasts(DB$social) <- contr.sum(length(levels(DB$social)))
 
 #fit models
  #check that the method used doesn't make a difference
@@ -325,19 +343,25 @@ tapply(DB$g_calc,DB$test_lang, sd,na.rm=T)
 base_model2 <-rma.mv(g_calc, g_var_calc, mods = ~ test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$g_calc))
 
  #full model (with moderators of interest). As species and social are not orthogonal to naturalness, we only test for naturalness.
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier)
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier,slab =DB$short_cite)
+
+summary(full_model)
 
 #subset to natural sounds, as naturalness doesn't make a difference. This allows to test species and social.
 natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$naturalness) & DB$naturalness=='natural')
 
+
+summary(natural_only)
 ```
 
 ```{r plots}
-forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedge\'s g', slab = DB$short_cite[!is.na(DB$g_calc)&DB$outlier==F]) 
+forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedges\' g') 
 
 ```
+
+
 ```{r publication bias}
-fun.fig <- funnel(base_model, cex=1.5, xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
+fun.fig <- funnel(base_model, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 
 #Figure
 pdf("Fig1.pdf")
@@ -351,12 +375,12 @@ dev.off()
 regtest(DB$g_calc,DB$g_var_calc)
 ranktest(DB$g_calc,DB$g_var_calc)
 
-#calculate regression weight of studies that were conducted by supporters of NRV model
-DB.periph<-DB[DB$periph==T,]
-DB.periph$weight<-1/sqrt(DB.periph$g_var_calc^2)
-DB.periph$forNRV<-0
-DB.periph$forNRV[DB.periph$study_ID=="Polka1996"|DB.periph$study_ID=="Polka2011"]<-1
-forNRV.weight<-sum(DB.periph$weight[DB.periph$forNRV==1])/sum(DB.periph$weight)
-forNRV.weight
+#calculate regression weight of studies that were conducted by supporters of NRV model #ALEX commented this out, I don't think this code belongs here
+# DB.periph<-DB[DB$periph==T,]
+# DB.periph$weight<-1/sqrt(DB.periph$g_var_calc^2)
+# DB.periph$forNRV<-0
+# DB.periph$forNRV[DB.periph$study_ID=="Polka1996"|DB.periph$study_ID=="Polka2011"]<-1
+# forNRV.weight<-sum(DB.periph$weight[DB.periph$forNRV==1])/sum(DB.periph$weight)
+# forNRV.weight
 
 ```
