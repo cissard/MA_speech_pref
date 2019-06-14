@@ -1,7 +1,7 @@
 ---
 title: "How does the human auditory system become expert in speech processing? Insights from development."
 author: "Cécile Issard and Alejandrina Cristia"
-#date: "/6/2019"
+date: "`r format(Sys.time(), '%d %m, %Y')`"
 output: pdf_document
 #bibliography: bibliography.bib
 ---
@@ -22,6 +22,8 @@ library(langcog)
 library(grid)
 library(gridExtra)
 library(RCurl)
+
+sessionInfo()
 ```
 - Target journal: Developmental science
 - Article type: short report
@@ -35,12 +37,13 @@ library(RCurl)
 - Abstract: 250 words
 
 Main text file:
-1. Title; 
-2. Research highlights;
-3. Abstract and key words; 
+
+1. Title 
+2. Research highlights
+3. Abstract and key words
 4. Main 
-5. References; 
-6. Figures and tables (each clearly identified, labelled and on a separate page); 
+5. References
+6. Figures and tables (each clearly identified, labelled and on a separate page)
 7. Appendices (if relevant).
 
 # Introduction
@@ -322,20 +325,19 @@ We use method="ML", which is appropriate for model comparison
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
  #check that the experimental method doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior)
-#deviation coding: each level is compared to the overall mean of the dependent variable, intercept corresponds to the last level.
-contrasts(DB$response_mode) = contr.sum(length(levels(DB$response_mode)))
- #check that the language doesn't make a difference (true speech preference and not pref for native language)
-#dummy coding: each level is compared to the reference level (native), the intercept corresponds to the cell mean of the reference group.
+#dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
+contrasts(DB$response_mode) = contr.treatment(length(levels(DB$response_mode)))
+ #check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
 contrasts(DB$test_lang) <- contr.treatment(length(levels(DB$test_lang)))
 
  #moderators of interest
-contrasts(DB$naturalness) <- contr.sum(length(levels(DB$naturalness)))
+contrasts(DB$naturalness) <- contr.treatment(length(levels(DB$naturalness)),base=2)
 
 DB$species<-factor(DB$species)
-contrasts(DB$species) <- contr.sum(length(levels(DB$species)))
+contrasts(DB$species) <- contr.treatment(length(levels(DB$species)))
 
 DB$social<-factor(DB$social)
-contrasts(DB$social) <- contr.sum(length(levels(DB$social)))
+contrasts(DB$social) <- contr.treatment(length(levels(DB$social)),base=2)
 
 #fit models
  #check that the method used doesn't make a difference
@@ -381,7 +383,8 @@ forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedges\' g'
 
 
 ```{r publication bias}
-fun.fig <- funnel(base_model, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
+tf <- trimfill(full_model)
+fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 
 #Figure
 pdf("Fig1.pdf")
