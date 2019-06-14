@@ -21,7 +21,27 @@ library(purrr)
 library(langcog)
 library(grid)
 library(gridExtra)
+library(RCurl)
 ```
+- Target journal: Developmental science
+- Article type: short report
+- 4000 words
+- 6 keywords
+- Running title: 40 characters
+- Submit one normal and one blinded version
+- Separate files for title page, main text, and figures
+- No identifiying info in the main text.
+- up to 4 research highlights; each 25 words
+- Abstract: 250 words
+
+Main text file:
+1. Title; 
+2. Research highlights;
+3. Abstract and key words; 
+4. Main 
+5. References; 
+6. Figures and tables (each clearly identified, labelled and on a separate page); 
+7. Appendices (if relevant).
 
 # Introduction
 A long line of research shows that infants process speech preferentially over other types of sounds. As the main signal for vocal communication, speech must be special for humans. Readily from birth, humans would be equipped with an auditory module dedicated to speech sounds, to process them with dedicated auditory and cognitive mechanisms. This preference has been investigated by numerous studies, contrasting speech to a variety of sounds, from white noise to backward speech, and at different ages. Getting a precise overview of this capacity is therefore difficult. 
