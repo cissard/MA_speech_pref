@@ -46,6 +46,9 @@ Main text file:
 6. Figures and tables (each clearly identified, labelled and on a separate page)
 7. Appendices (if relevant).
 
+# Abstract
+The human auditory system is amazingly efficient at processing speech sounds. This capacity would be present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, a large variety of sounds have been contrasted to speech, drawing a global picture is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a strong effect size, infants preffering to listen to speech over any other type of sound. However, contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference over the course of the first year of life. 
+
 ```{r db general}
 
 # Comment out next set of lines for RECALCULATION
@@ -90,26 +93,26 @@ A long line of research shows that infants process speech preferentially over ot
 “broader template that initially encompasses vocalizations of human and nonhuman primates and is rapidly tuned specifically to human vocalizations.” “Is this link sufficiently broad to include naturalistic vocalizations beyond those of our closest genealogical cousins, or is it restricted to primates, whose vocalizations may be perceptually just close enough to our own to serve as early candidates for the platform on which human language is launched?” (Ferry et al., 2013) 
 The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
 
-	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds. 
-
 
 1. Para/subsection 1: general para about preferences being useful for info filtering in all species; 
 previous work shows these are partially innate, partially based on experience (in chicks: what can be used for imprinting or not; in humans: faces, voices, etc); 
 End saying “here we synthesize empirical data on infants’ preferences for natural sounds, human sounds, social sounds, and/or speech”
 
 2. Para/subsection 2: (age)
+This general capacity is thought to be modulated by age. Infants younger than 3 months have been shown to discriminate speech and sine-wave speech, but not speech and monkey calls, whereas infants from 3 months of age do (Vouloumanos et al., 2004). Similarly, the activity of the temporal cortex in response to biological non-speech sounds increased with age between 1 and 4 month-old. The response to speech didn't increase during the same developmental window (Shultz et al. 2014), suggesting that the capacity to discriminate speech from other sounds comes from a narrowing of the perceptual category to speech rather than a more in-depth processing.
 elaborate on developmental & experiential aspects (explain how they are correlated, and when they are separable)
 →  age is a crucial factor; 
 mention controversies in additional para if they exist
 
 3. Para/subsection 3: (types)
 types of attractors: natural sounds, human sounds, social sounds, and/or speech; 
-explain that to a certain extent these are inside a hierarchy (show in a figure?); Nat0ural > human > social > vocal > speech Vent diagram.
+explain that to a certain extent these are inside a hierarchy (show in a figure?); Natural > human > social > vocal > speech Vent diagram.
 also explain similarities and differences; 
 explain the relevance of the contrast/control sound; 
 if there are controversies, mention them as well (break down into several para if needed)
 
 4. Para/subsection 4: MA
+	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds.
 infant studies are difficult, so few of them and each with few participants
 trying to address Qs like dev changes & differences across types would require large power
 MA is a way of achieving power without running new studies
@@ -451,8 +454,8 @@ forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedges\' g'
 We assessed the presence of a potantial publication bias in the literature by plotting funnel plot. We tested the asymmetry of the funnel plot by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
 
 ```{r publication bias}
-tf <- trimfill(full_model)
-fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
+#tf <- trimfill(full_model)
+#fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 
 #Figure
 pdf("Fig1.pdf")
