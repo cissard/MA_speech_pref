@@ -1,0 +1,13 @@
+base
+dplyr
+purrr
+assertthat
+Matrix
+metafor
+tidyr
+ggplot2
+stringr
+langcog
+gridExtra
+bitops
+RCurl

@@ -47,7 +47,8 @@ Main text file:
 7. Appendices (if relevant).
 
 # Abstract
-The human auditory system is amazingly efficient at processing speech sounds. This capacity would be present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, a large variety of sounds have been contrasted to speech, drawing a global picture is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a strong effect size, infants preffering to listen to speech over any other type of sound. However, contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference over the course of the first year of life. 
+
+The human auditory system is amazingly efficient at processing speech. This capacity would be present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, a large variety of sounds have been contrasted to speech, with infants of very different ages. Drawing a global picture of how this capacity emerges is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a strong effect size, infants prefering speech over any other type of sound. However, contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference from birth to one year of age. Preference was stronger when speech was contrasted to artificial sounds, and when the speech stimuli were in the infants' native language. This suggests that the representation of speech as a distinct auditory object emerges from a broader category of natural sounds, modulated by the degree of familiarity with the sound.
 
 ```{r db general}
 
@@ -72,12 +73,11 @@ dim(DB)
 
 ## FIX, DOUBLE CHECK ALEX & CECILE !! REPLACE ALL EMPTY WITH NA
 for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
-for(mycol in c("naturalness","social2","species2","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
+for(mycol in c("natural","vocal","conspecific","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
 summary(DB)
 
 #unique studies
 papers <- levels(factor(DB$short_cite))
-paste('A total of', length(papers), 'papers were included.')
 
 #number of unique infants
 DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
@@ -89,13 +89,12 @@ summary(DB$mean_age_1)
 ```
 
 # Introduction
-A long line of research shows that infants process speech preferentially over other types of sounds. As the main signal for vocal communication, speech must be special for humans. Readily from birth, humans would be equipped with an auditory module dedicated to speech sounds, to process them with dedicated auditory and cognitive mechanisms. This preference has been investigated by numerous studies, contrasting speech to a variety of sounds, from white noise to backward speech, and at different ages. Getting a precise overview of this capacity is therefore difficult. 
-“broader template that initially encompasses vocalizations of human and nonhuman primates and is rapidly tuned specifically to human vocalizations.” “Is this link sufficiently broad to include naturalistic vocalizations beyond those of our closest genealogical cousins, or is it restricted to primates, whose vocalizations may be perceptually just close enough to our own to serve as early candidates for the platform on which human language is launched?” (Ferry et al., 2013) 
-The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
-
 
 1. Para/subsection 1: general para about preferences being useful for info filtering in all species; 
 previous work shows these are partially innate, partially based on experience (in chicks: what can be used for imprinting or not; in humans: faces, voices, etc); 
+A long line of research shows that infants process speech preferentially over other types of sounds. As the main signal for vocal communication, speech must be special for humans. Readily from birth, humans would be equipped with an auditory module dedicated to speech sounds, to process them with dedicated auditory and cognitive mechanisms. This preference has been investigated by numerous studies, contrasting speech to a variety of sounds, from white noise to backward speech, and at different ages. Getting a precise overview of this capacity is therefore difficult. 
+“broader template that initially encompasses vocalizations of human and nonhuman primates and is rapidly tuned specifically to human vocalizations.” “Is this link sufficiently broad to include naturalistic vocalizations beyond those of our closest genealogical cousins, or is it restricted to primates, whose vocalizations may be perceptually just close enough to our own to serve as early candidates for the platform on which human language is launched?” (Ferry et al., 2013) 
+The auditory literature suggests that natural sounds are processed differently by the auditory system (e.g. Mezhrahi & Nelken, 2014). Extending to language acquisition, naturalness is a key factor for word segmentation (Black and Bergman, 2016). Speech might therefore not be prefered per se, but because it belongs to a broader category of natural, own-species, or communicative sounds.
 End saying “here we synthesize empirical data on infants’ preferences for natural sounds, human sounds, social sounds, and/or speech”
 
 2. Para/subsection 2: (age)
@@ -112,16 +111,11 @@ explain the relevance of the contrast/control sound;
 if there are controversies, mention them as well (break down into several para if needed)
 
 4. Para/subsection 4: MA
-	To answer this question, we conducted a meta-analysis investigating infants’ preference for speech sounds over other types of sounds.
-infant studies are difficult, so few of them and each with few participants
-trying to address Qs like dev changes & differences across types would require large power
-MA is a way of achieving power without running new studies
+	All of these results have been observed on small groups of infants, with a large variety of age and stimuli across groups. Individual studies can only test a few infants on very specific stimuli due to experimental constraints. On the opposite, meta-analysis are a way of achieving power without running new studies. Meta-analysis have the disadvantage of mixing studies with different experimental designs together, therefore having less control on the effect measured. They merge results from different studies with common factors, so subtle differences in experimental paradigms are overklooked, potentially missing subtle effects. But meta-analysis have important advantages: they gather data from significantly more infants than individual studies, which significantly increases statistical power. They also offer tools to detect publication bias in the literature. Finally they allow to draw a developmental time-line across the age range covered by the literature, and test how the different factors discussed by different individual studies interact. 
+	We conducted a meta-analysis to test if infants’ reliably have a preference for speech sounds over other types of sounds, and if yes if different types of sound modulated this preference, and how it developped over the first year of life. 
 
-- a disadvantage is mixing together so less control & thus can miss subtle effects
-- but several advantages: 
-
-  -   reproducibility checks are built in (i.e., if we do find an effect, it’s more likely to be an effect different labs can find)
-  -   can detect bias
+  - trying to address Qs like differences across types would require large power
+  - reproducibility checks are built in (i.e., if we do find an effect, it’s more likely to be an effect different labs can find) MA is based on data from multiple labs.
 
 # Methods
 ## Literature search
@@ -135,7 +129,7 @@ We included studies that tested human infants for birth to 1 year (0-365 days) o
 
 Data were coded by the first author. 20% of the papers were selected to be coded by the second author independently, with disagreements resolved by discussion. There were **XX** disagreements out of a total of **YY** fields filled in, so that the total agreement rate was **ZZ**%. The full list of the variables coded is available in the supplementary material.
 
-**Risk assessment at the level of papers was done by ... Risk assessment for the whole body of literature ...**
+**Risk assessment at the level of papers was done by ... Risk assessment for the whole body of literature ...** See PRISMA CHECKLIST.
 
 ## Statistical analysis
 
@@ -345,8 +339,6 @@ We investigated the effect of familiarity with the sound by running a meta-analy
 
 We then investigated whether speech preference was embedded in a preference for natural sounds, and whether this potential effect evolved over the course of the first year of life, by fitting a meta-analytic model with naturalness and age as moderators. To facilitate result interpretaion, we centered age.
 
-Try a single model with age*test_lang*naturalness
-
 Sho: We assess significance of predictor variables by model comparison.
 
 Finally, we subsetted the dataset to contrasts between speech and natural sounds, and fitted a meta-analytic regression on this subset with socialness (social/non-social), vocalness (vocal/non-vocal), and species (homospecific/heterospecific) as moderators.
@@ -354,23 +346,23 @@ Finally, we subsetted the dataset to contrasts between speech and natural sounds
 ```{r moderators}
 #distribution of moderators
 g_age <- tapply(DB$g_calc,DB$mean_age_1,mean)#ES by age
-table(DB$naturalness)#no. of natural and non-natural data points
-table(DB$social)#no. of social and non-social data points
-table(DB$species)#no. of homo- and heterospecific data points
-table(DB$species,DB$social)
-table(DB$naturalness,DB$social)
+table(DB$natural)#no. of natural and non-natural data points
+table(DB$vocal)#no. of vocal and non-vocal data points
+table(DB$conspecific)#no. of homo- and heterospecific data points
+table(DB$conspecific,DB$vocal)
+table(DB$natural,DB$vocal)
 
 #plot ES as a function of moderators
 #age
-plot(unique(DB$mean_age_1)[1:33],g_age, main = 'ES as a function of age', xlab = 'age centered (days)', ylab = 'g_calc')
+plot(unique(DB$mean_age_1),g_age, main = 'ES as a function of age', xlab = 'age centered (days)', ylab = 'g_calc')
 #naturalness
-boxplot(DB$g_calc~DB$naturalness)
+boxplot(DB$g_calc~DB$natural, main = 'ES as a function of naturalness')
 
-#social
-boxplot(DB$g_calc~DB$social)
+#vocal
+boxplot(DB$g_calc~DB$vocal, main = 'ES as a function of vocalness')
 
 #species
-boxplot(DB$g_calc~DB$species)
+boxplot(DB$g_calc~DB$conspecific, main = 'ES as a function of species')
 ```
 
 
@@ -392,32 +384,28 @@ apatheme=theme_bw()+
 #setting up of predictors 
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
- #check that the experimental method doesn't make a difference (i.e. eye-tracking vs NIRS vs behavior)
+ #check that the experimental method doesn't make a difference
 #dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
-contrasts(DB$response_mode) = contr.treatment(length(levels(DB$response_mode)))
+contrasts(DB$method) = contr.treatment(length(levels(DB$method)))
  #check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
 contrasts(DB$test_lang) <- contr.treatment(length(levels(DB$test_lang)))
 
  #moderators of interest
-contrasts(DB$naturalness) <- contr.treatment(length(levels(DB$naturalness)),base=2)
+contrasts(DB$natural) <- contr.treatment(length(levels(DB$natural)),base=2)
 
-DB$species<-factor(DB$species)
-contrasts(DB$species) <- contr.treatment(length(levels(DB$species)))
+DB$conspecific<-factor(DB$conspecific)
+contrasts(DB$conspecific) <- contr.treatment(length(levels(DB$conspecific)))
 
-DB$social<-factor(DB$social)
-contrasts(DB$social) <- contr.treatment(length(levels(DB$social)),base=2)
+DB$vocal<-factor(DB$vocal)
+contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 #fit models
- #check that the method used doesn't make a difference
-plot(DB$g_calc~DB$response_mode)
-tapply(DB$g_calc,DB$response_mode, mean,na.rm=T)
-tapply(DB$g_calc,DB$response_mode, sd,na.rm=T)
-base_model <-rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$response_mode)) # We use method="ML", which is appropriate for model comparison
 
- #age varies with method (nirs<behavior<eye tracking)
-tapply(DB$mean_age_1,DB$response_mode,mean,na.rm=T)
-#Maybe response_mode is not the right variable for this.
-table(DB$method,DB$response_mode)
+base_model <-rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier)
+
+method_model <-rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier & !is.na(DB$method)) 
+
+ #age varies with method
 #plot g as a function of method
 mycols=c("black","blue","red","green")
 names(mycols)<-levels(DB$method)
@@ -426,36 +414,33 @@ plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7)
 
  #check also for test_lang (nativeness)
  #The language used for the speech trials doesn't make a difference
-plot(DB$g_calc~DB$mean_age_1,col=DB$test_lang)
+plot(DB$g_calc~DB$mean_age_1,col=DB$test_lang, main='effect of nativeness')
 tapply(DB$g_calc,DB$test_lang, mean,na.rm=T)
 tapply(DB$g_calc,DB$test_lang, sd,na.rm=T)
 
-base_model2 <-rma.mv(g_calc, g_var_calc, mods = ~ test_lang, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$g_calc))
+DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
+table(DB2$test_lang,DB2$natural)
 
- #full model (with moderators of interest). As species and social are not orthogonal to naturalness, we only test for naturalness.
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ naturalness, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier,slab =DB$short_cite)
+ #full model (with moderators of interest). 
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier,slab =DB$short_cite)
 
 summary(full_model)
 
-#subset to natural sounds, as naturalness doesn't make a difference. This allows to test species and social.
-natural_only <-rma.mv(g_calc, g_var_calc, mods=~ species2*social2*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$naturalness) & DB$naturalness=='natural')
-
+#subset to natural sounds, as naturalness doesn't make a difference. This allows to test species (conspecific) that is not orthogonal to naturalness.
+natural_only <-rma.mv(g_calc, g_var_calc, mods=~ conspecific*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "ML", subset=!DB$outlier & !is.na(DB$natural) & DB$natural=='yes')
 
 summary(natural_only)
 ```
 
-```{r plots}
-forest.rma(full_model, main = 'forest plot of effect sizes', xlab = 'Hedges\' g') 
-
-```
 
 ### Publication bias
 
 We assessed the presence of a potantial publication bias in the literature by plotting funnel plot. We tested the asymmetry of the funnel plot by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
 
 ```{r publication bias}
-#tf <- trimfill(full_model)
-#fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
+tf <- trimfill(full_model) #run on the model w/out mods
+fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
+
 
 #Figure
 pdf("Fig1.pdf")
@@ -482,9 +467,14 @@ ranktest(DB$g_calc,DB$g_var_calc)
 
 # Results
 
+We found a mean weighted effect size g=0.78 (CI[,])
+```{r plots}
+forest.rma(full_model, main = 'Forest plot of effect sizes', xlab = 'Hedges\' g') 
+
+```
 ## Database description
-We found a total of XX papers reporting XX (not mutually independent) effect sizes, see Table 1. XX effect sizes from XX papers have been submitted to or published in peer-reviewed journals (citations). The remaining xx effect sizes from xx papers are reported in preprints (cite), theses  (cite), conference presentations (proceedings, posters, or talks; cite).
-Studies tended to have small sample sizes, with a median N of XX children (Range = XX, M = XX, Total: XX). A majority (N = XX) focused on North American English (NAE); for the other XX, children were learning FILL IN LANGUAGE. ADD OTHER DESCRIPTIVE INFORMATION ABOUT THE DEMOGRAPHICS OF THE SAMPLE, DISTRIBUTIONS IN TERMS OF N OF STUDIES OF EACH TYPE, ETC.
+We found a total of ```{r} length(papers)``` papers reporting ```{r} length(DB$g_calc)``` (not mutually independent) effect sizes, see Table 1. ```{r} length(DB$peer_reviewed[!is.na(DB$g_calc)]=='yes')``` effect sizes from XX papers have been submitted to or published in peer-reviewed journals (citations). The remaining xx effect sizes from xx papers are reported in preprints (cite), theses  (cite), conference presentations (proceedings, posters, or talks; cite).
+Studies tended to have small sample sizes, with a median N of ```{r} median(DB$n)``` children (Range = XX, M = XX, Total: XX). A majority (N = XX) focused on North American English (NAE); for the other XX, children were learning FILL IN LANGUAGE. ADD OTHER DESCRIPTIVE INFORMATION ABOUT THE DEMOGRAPHICS OF THE SAMPLE, DISTRIBUTIONS IN TERMS OF N OF STUDIES OF EACH TYPE, ETC.
 How many labs are represented?
 
 ## Publication bias
