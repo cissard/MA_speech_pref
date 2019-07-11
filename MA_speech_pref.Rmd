@@ -82,7 +82,6 @@ papers <- levels(factor(DB$short_cite))
 #number of unique infants
 DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
 temp<-aggregate(n~same_infant,DB,mean)
-paste('A total of', round(sum(temp$n)), 'infants contributed to the analysis')
 
 summary(DB$mean_age_1)
 
@@ -123,10 +122,11 @@ We followed PRISMA (Moher et al., 2009).
 
 The information sources used to compose the initial list included suggestions by experts (authors of this work); two google scholar searches (“ ("speech preference" OR "own-species vocalization" ) AND infant”, and “("speech preference" OR "own-species vocalization" ) AND infant”) complemented with the same searches in PubMed and PsycInfo; and a google alert, as well as reference lists of the full papers inspected.
 
-We included studies that tested human infants for birth to 1 year (0-365 days) of age, and contrasted speech sounds with any other type of sound, measuring either behavioral (e.g. looking times) or neurophysiological responses to the sounds. We excluded studies that contrasted foreign to native language, or didn’t present natural speech sounds. A PRISMA flowchart summarizes the literature review and selection process (Figure 1). We documented all the studies that we inspected in this decision spreadsheet.
+We included studies that tested human infants for birth to 1 year (0-365 days) of age, and contrasted speech sounds with any other type of sound, measuring either behavioral (e.g. looking times) or neurophysiological responses to the sounds. We excluded studies that contrasted foreign to native language, or didn’t present natural speech sounds. We also excluded studies that used the mother's voice to produce the speech stimuli, as this might raise a confound between speech processing and emotional response to the mother. A PRISMA flowchart summarizes the literature review and selection process (Figure 1). We documented all the studies that we inspected in this decision spreadsheet.
 
 [Insert Figure 1 here]
 
+For fMRI and NIRS studies, the contrast between the response to speech and to the other sound wad coded only if the same voxel, channel, or region of interest was reported for both types of sounds. As different brain regions are sensitive to different stimuli, preferential processing of a specific sound only holds if a larger response is observed for this sound within regions. Therefore, if different voxels, channels, or regions of interest were reported for the two sound conditions, the corresponding contrast was not reported. This ensured comparibility of the two responses. 
 Data were coded by the first author. 20% of the papers were selected to be coded by the second author independently, with disagreements resolved by discussion. There were **XX** disagreements out of a total of **YY** fields filled in, so that the total agreement rate was **ZZ**%. The full list of the variables coded is available in the supplementary material.
 
 **Risk assessment at the level of papers was done by ... Risk assessment for the whole body of literature ...** See PRISMA CHECKLIST.
@@ -438,7 +438,7 @@ summary(natural_only)
 We assessed the presence of a potantial publication bias in the literature by plotting funnel plot. We tested the asymmetry of the funnel plot by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
 
 ```{r publication bias}
-tf <- trimfill(full_model) #run on the model w/out mods
+tf <- trimfill(base_model)
 fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference")
 
 
@@ -467,21 +467,22 @@ ranktest(DB$g_calc,DB$g_var_calc)
 
 # Results
 
-We found a mean weighted effect size g=0.78 (CI[,])
-```{r plots}
-forest.rma(full_model, main = 'Forest plot of effect sizes', xlab = 'Hedges\' g') 
-
-```
 ## Database description
-We found a total of ```{r} length(papers)``` papers reporting ```{r} length(DB$g_calc)``` (not mutually independent) effect sizes, see Table 1. ```{r} length(DB$peer_reviewed[!is.na(DB$g_calc)]=='yes')``` effect sizes from XX papers have been submitted to or published in peer-reviewed journals (citations). The remaining xx effect sizes from xx papers are reported in preprints (cite), theses  (cite), conference presentations (proceedings, posters, or talks; cite).
-Studies tended to have small sample sizes, with a median N of ```{r} median(DB$n)``` children (Range = XX, M = XX, Total: XX). A majority (N = XX) focused on North American English (NAE); for the other XX, children were learning FILL IN LANGUAGE. ADD OTHER DESCRIPTIVE INFORMATION ABOUT THE DEMOGRAPHICS OF THE SAMPLE, DISTRIBUTIONS IN TERMS OF N OF STUDIES OF EACH TYPE, ETC.
-How many labs are represented?
+We found a total of ```{r} length(papers)``` papers reporting ```{r} length(DB$g_calc)``` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
+Studies tended to have small sample sizes, with a median N of ```{r} median(DB$n)``` children (Range = ```{r} max(DB$n)-min(DB$n)```, M = ```{r} mean(DB$n)```, Total: ```{r} round(sum(temp$n))```.
+Infants ranged from ```{r} round(min(DB$mean_age_1)/30.44)``` to ```{r} round(max(DB$mean_age_1)/30.44)``` (```{r} min(DB$mean_age_1)``` to ```{r} max(DB$mean_age_1)``` days). Individual samples comprised ```{r} round(min(DB$gender_1)*100``` % of female participants on average. Infants were native of XX different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). ```{r} length(unique(DB$method))``` experimental methods were used: 12 studies used Central Fixation (CF), 3 used High-Amplitude Sucking (HAS), 1 used Head-turn Preference Procedure (HPP), and 9 used Passive Listening (PL). 
 
 ## Publication bias
 Evidence of bias at level of papers
 Evidence of bias at level of literature
 
 ## Main effects
+We found a mean weighted effect size g=0.78 (CI[,])
+```{r plots}
+forest.rma(full_model, main = 'Forest plot of effect sizes', xlab = 'Hedges\' g') 
+
+```
 Heterogeneity
 Moderators
 age, type & interaction
@@ -490,8 +491,12 @@ age, type & interaction
 # Discussion
 
 - Age
-- Type
+- Type of sounds contrasted
 - Interactions
-- Another
 - power
 - heterogeneity
+
+Naturalness doesn't significantly moderate infants' preference for speech sounds: they still prefer speech, and the amount of preference doesn't change, whether the sound is natural or artificial. This means that infants prefer natural speech in itself. 
+This preference might explain why naturalness makes a difference for higher-level linguistic, a priori abstract tasks such as word segmentation (Black & Bergmann, 2016): speech triggers different cognitive mechanisms than other sounds. Not incompatible as in this meta-analysis natural speech stimuli when contrasted to only synthetic speech. We don't know if infants would have been able to find "words" with natural sounds other than syllables (i.e. frequent sequences of several natural sounds).
+
+Experimental method significantly modulates speech preference: some methods are more appropriate than other to test infants on this type of task. This phenomenon has been repeatedly observed in developmental meta-analysis (see Bergmann et al., 2018, for a synthesis across meta-analysis in developmental psychology).
