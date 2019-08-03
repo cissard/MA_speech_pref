@@ -80,13 +80,13 @@ For all of these reasons, we conducted a meta-analysis to test if infants’ rel
 ```{r db general, include=FALSE}
 
 # Comment out next set of lines for RECALCULATION
- require(RCurl)
- u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
- tc <- getURL(u, ssl.verifypeer=FALSE)
- DB <- read.csv(textConnection(tc))
- write.csv(DB,"MA_speech_pref_data.csv")
+# require(RCurl)
+# u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
+# tc <- getURL(u, ssl.verifypeer=FALSE)
+# DB <- read.csv(textConnection(tc))
+# write.csv(DB,"MA_speech_pref_data.csv")
 # Uncomment next line for OFFLINE MODE
-#DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
+DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
 
 ## of datapoints and variables coded
 dim(DB)
@@ -153,10 +153,11 @@ for (i in 1:nrow(DB)){
 
 #if all of these measures are not reported, use an imputed correlation value
 #we also account for the observation that some re-calculated values are impossible and replace those
+DB$corr=as.numeric(as.character(DB$corr)) #ac introduced to avoid error below -- see ^^*^^
 for (i in 1:nrow(DB)){
     db = DB[i,]
        if (db$participant_design == "within_two") {
-         if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
+         if (is.na(db$corr) | db$corr > .99 | db$corr < .01){ #ac ^^*^^ In Ops.factor(db$corr, 0.99) : ‘>’ not meaningful for factors error because the NAs were taken as factor
           db$corr = runif(1, min = 0.01, max = 0.99)
          }
        DB[i,] = db
@@ -282,18 +283,21 @@ for (i in 1:nrow(DB)){
   
   DB[i,] = db
 }
+#ac: lots of errors in the loop above - is that ok?
+
 
 #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
 DB$outlier <- F #create the variable, and set as no by default (majority of cases hopefully!)
-for (i in 1:nrow(DB)){
-   db = DB[i,]
-   if (!is.na(db$d_calc)){ #select the lines for which there is an ES available (bug next line if d_calc = NA)
-     if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)) {
-     db$outlier=T #if more than 3 SDs away from the mean, we consider this ES as an outlier.
-     }
-   }
-   DB[i,] = db
-}
+DB$outlier[DB$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | DB$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)]<-T #ac this code does exactly the same as the code below but faster
+# for (i in 1:nrow(DB)){
+#    db = DB[i,]
+#    if (!is.na(db$d_calc)){ #select the lines for which there is an ES available (bug next line if d_calc = NA)
+#      if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)) {
+#      db$outlier=T #if more than 3 SDs away from the mean, we consider this ES as an outlier.
+#      }
+#    }
+#    DB[i,] = db
+# }
 #Visualize the outliers
 outliers<-subset(DB,outlier==T)
 outliers
@@ -306,7 +310,8 @@ highES
 DB$agec<-scale(DB$mean_age_1,scale=F)
 
 # save the complete data base
-write.csv(DB,'speech_pref_full_DB.csv')
+write.csv(DB,'speech_pref_full_DB.csv') #ac I recommend moving all of the above to another file, which generates the DB. And in this manuscript just read it in
+read.csv('speech_pref_full_DB.csv')->DB
 
 summary(DB)
 
@@ -353,11 +358,18 @@ table(DB$natural,DB$vocal)
 #age
 ESage <- plot(unique(DB$mean_age_1),g_age, main = 'ES as a function of age', xlab = 'age centered (days)', ylab = 'g_calc')
 
+#method
+method <- boxplot(DB$g_calc~DB$method, main = 'ES as a function of method') #what is the difference between preferential listening and central fixation?
+points(DB$g_calc~jitter(as.numeric(DB$method)))
+
+
 #naturalness
 ESnatural <- boxplot(DB$g_calc~DB$natural, main = 'ES as a function of naturalness')
+points(DB$g_calc~jitter(as.numeric(DB$natural)))
 
 #vocal
 ESvocal <- boxplot(DB$g_calc~DB$vocal, main = 'ES as a function of vocalness')
+points(DB$g_calc~jitter(as.numeric(DB$vocal)))
 
 #species
 ESspecies <- boxplot(DB$g_calc~DB$homospecific, main = 'ES as a function of species')
@@ -384,7 +396,7 @@ Evidence of bias at level of papers
 Evidence of bias at level of literature
 ```{r publication bias}
 #add symmetrize
-tf <- trimfill(simple_model)
+tf <- trimfill(simple_model) #ac this model is fit in line 445; I think you can still knit it perhaps because you have the model in your global environment, but this document is not reproducible as is... You should fit the model before you do trimfill
 fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
 
 
@@ -395,7 +407,7 @@ par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequ
 funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
 dev.off()
 
-# testing for asymetry (indicates a publication bias)
+# testing for asymetry (indicates a publication bias) #ac this is highly significant
 regtest(DB$g_calc,DB$g_var_calc)
 ranktest(DB$g_calc,DB$g_var_calc)
 
@@ -437,11 +449,11 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 #fit models
 
-simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier)
+simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier) 
 
-base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier)
+base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier) #ac weighted is not a functional parameter (ie it's just ignored in rma.mv) -- I suspect you don't need it because you are entering vi (which is not weights)
 
-method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier & !is.na(DB$method)) 
+method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier & !is.na(DB$method)) #ac weighted is not a parameter
 
 
  #age varies with method
@@ -449,7 +461,7 @@ method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_
 mycols=c("black","blue","red","green")
 names(mycols)<-levels(DB$method)
 mycols
-plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7, legend=TRUE)
+plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7, legend=TRUE) #"legend" is not a graphical parameter
 
  #check also for test_lang (nativeness)
  #The language used for the speech trials doesn't make a difference
@@ -461,7 +473,7 @@ DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
 table(DB2$test_lang,DB2$natural)
 
  #full model (with moderators of interest). 
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite) #ac weighted is not a parameter
 
 summary(full_model)
 
