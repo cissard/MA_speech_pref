@@ -7,7 +7,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE, echo = FALSE) #option for all the code chunks of the document.
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = FALSE) #option for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
@@ -383,6 +383,9 @@ Studies were performed in 13 different laboratories from 6 different countries (
 Evidence of bias at level of papers
 Evidence of bias at level of literature
 ```{r publication bias}
+
+simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier)
+
 #add symmetrize
 tf <- trimfill(simple_model)
 fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
@@ -436,8 +439,6 @@ DB$vocal<-factor(DB$vocal)
 contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 #fit models
-
-simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier)
 
 base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier)
 
