@@ -1,5 +1,5 @@
 ---
-title: "How does the human auditory system become expert in speech processing? Insights from development."
+title: "Infants prefer to listen to speech: A meta-analysis."
 author: "Cécile Issard and Alejandrina Cristia"
 date: "`r format(Sys.time(), '%d %m, %Y')`"
 output: pdf_document
@@ -7,7 +7,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE, echo = FALSE) #option for all the code chunks of the document.
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE, echo = FALSE) #options for all the code chunks of the document.
 ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
@@ -80,16 +80,13 @@ For all of these reasons, we conducted a meta-analysis to test if infants’ rel
 ```{r db general, include=FALSE}
 
 # Comment out next set of lines for RECALCULATION
-# require(RCurl)
-# u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
-# tc <- getURL(u, ssl.verifypeer=FALSE)
-# DB <- read.csv(textConnection(tc))
-# write.csv(DB,"MA_speech_pref_data.csv")
+ require(RCurl)
+ u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
+ tc <- getURL(u, ssl.verifypeer=FALSE)
+ DB <- read.csv(textConnection(tc))
+ write.csv(DB,"MA_speech_pref_data.csv")
 # Uncomment next line for OFFLINE MODE
-DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
-
-## of datapoints and variables coded
-dim(DB)
+#DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
 
 ## FIX, remove empty columns
 rmcol=NULL
@@ -283,28 +280,16 @@ for (i in 1:nrow(DB)){
   
   DB[i,] = db
 }
-#ac: lots of errors in the loop above - is that ok?
+#ac: lots of errors in the loop above - is that ok? Cécile: Hmm weird, I cleaned my environment and reran the code but I didn't get any error... 
 
 
 #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
 DB$outlier <- F #create the variable, and set as no by default (majority of cases hopefully!)
-DB$outlier[DB$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | DB$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)]<-T #ac this code does exactly the same as the code below but faster
-# for (i in 1:nrow(DB)){
-#    db = DB[i,]
-#    if (!is.na(db$d_calc)){ #select the lines for which there is an ES available (bug next line if d_calc = NA)
-#      if (db$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | db$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)) {
-#      db$outlier=T #if more than 3 SDs away from the mean, we consider this ES as an outlier.
-#      }
-#    }
-#    DB[i,] = db
-# }
+DB$outlier[DB$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = TRUE) | DB$d_calc < mean(DB$d_calc, na.rm = TRUE) - 3*sd(DB$d_calc, na.rm = TRUE)]<-T 
+
 #Visualize the outliers
 outliers<-subset(DB,outlier==T)
 outliers
-
-#Not considered as outliers but still high
-highES<-subset(DB,g_calc>(mean(DB$g_calc,na.rm=T)+2*sd(DB$g_calc,na.rm=T)))
-highES
 
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
 DB$agec<-scale(DB$mean_age_1,scale=F)
@@ -322,8 +307,8 @@ table(DB$response_mode)
 #summarize the data
 mean(DB$g_calc,na.rm=T)
 sd(DB$g_calc,na.rm=T)
-stripchart(DB$g_calc, main = 'Distribution of ES')
 boxplot(DB$g_calc)
+points(DB$g_calc)
 ```
 
 ### Meta-analytic models
@@ -359,9 +344,8 @@ table(DB$natural,DB$vocal)
 ESage <- plot(unique(DB$mean_age_1),g_age, main = 'ES as a function of age', xlab = 'age centered (days)', ylab = 'g_calc')
 
 #method
-method <- boxplot(DB$g_calc~DB$method, main = 'ES as a function of method') #what is the difference between preferential listening and central fixation?
+method <- boxplot(DB$g_calc~DB$method, main = 'ES as a function of method') #what is the difference between preferential listening and central fixation? PL is passive listening (in neuroimaging studies).
 points(DB$g_calc~jitter(as.numeric(DB$method)))
-
 
 #naturalness
 ESnatural <- boxplot(DB$g_calc~DB$natural, main = 'ES as a function of naturalness')
@@ -371,64 +355,11 @@ points(DB$g_calc~jitter(as.numeric(DB$natural)))
 ESvocal <- boxplot(DB$g_calc~DB$vocal, main = 'ES as a function of vocalness')
 points(DB$g_calc~jitter(as.numeric(DB$vocal)))
 
-#species
-ESspecies <- boxplot(DB$g_calc~DB$homospecific, main = 'ES as a function of species')
 ```
 
 
 
-
-
-### Publication bias
-
-We assessed the presence of a potential publication bias in the literature by plotting N funnel plots. The first one was based on the simple model without hierarchical structure nor moderators. We symmetrized this funnel plot using the “trim and fill” method (ADD REF). The second funnel plot was based on the mixed model with hierarchical random structure and moderators. We tested the asymmetry of the funnel plots by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
-
-# Results
-
-## Database description
-We found a total of `r length(papers)` papers reporting `r length(DB$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
-Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`.
-Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(min(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
-Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB$method))` experimental methods were used: 12 studies used Central Fixation (CF), 3 used High-Amplitude Sucking (HAS), 1 used Head-turn Preference Procedure (HPP), and 9 used Passive Listening (PL). 
-
-## Publication bias
-Evidence of bias at level of papers
-Evidence of bias at level of literature
-```{r publication bias}
-#add symmetrize
-tf <- trimfill(simple_model) #ac this model is fit in line 445; I think you can still knit it perhaps because you have the model in your global environment, but this document is not reproducible as is... You should fit the model before you do trimfill
-fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
-
-
-#Figure
-pdf("Fig1.pdf")
-par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by rows (mfrow), respectively.
-
-funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
-dev.off()
-
-# testing for asymetry (indicates a publication bias) #ac this is highly significant
-regtest(DB$g_calc,DB$g_var_calc)
-ranktest(DB$g_calc,DB$g_var_calc)
-
-```
-
-## Main effects
-## Including Plots
-
-```{r Figure Template, include=FALSE}
-
-apatheme=theme_bw()+
-  theme(#panel.grid.major=element_blank(),
-        #panel.grid.minor=element_blank(),
-        panel.border=element_blank(),
-        axis.line=element_line(),
-        #text=element_text(family='Times'),
-        legend.position='none')
-```
-
-
-```{r models}
+```{r models, include = FALSE}
 #setting up of predictors 
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
@@ -451,12 +382,54 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier) 
 
-base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier) #ac weighted is not a functional parameter (ie it's just ignored in rma.mv) -- I suspect you don't need it because you are entering vi (which is not weights)
+base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier) #ac weighted is not a functional parameter (ie it's just ignored in rma.mv) -- I suspect you don't need it because you are entering vi (which is not weights)
 
-method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier & !is.na(DB$method)) #ac weighted is not a parameter
+method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
+
+ #full model (with moderators of interest). 
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+
+```
 
 
- #age varies with method
+### Publication bias
+
+We assessed the presence of a potential publication bias in the literature by plotting N funnel plots. The first one was based on the simple model without hierarchical structure nor moderators. We symmetrized this funnel plot using the “trim and fill” method (ADD REF). The second funnel plot was based on the mixed model with hierarchical random structure and moderators. We tested the asymmetry of the funnel plots by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
+
+# Results
+
+## Database description
+We found a total of `r length(papers)` papers reporting `r length(DB$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
+Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`.
+Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(min(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB$method))` experimental methods were used: XX studies used Near-Infrared Spectroscopy (NIRS), 1 study used fMRI, 12 studies used Central Fixation (CF), 3 used High-Amplitude Sucking (HAS), 1 used Head-turn Preference Procedure (HPP), and 9 used Passive Listening (PL). 
+
+## Publication bias
+Evidence of bias at level of papers
+Evidence of bias at level of literature
+```{r publication bias}
+#add symmetrize
+tf <- trimfill(simple_model) 
+fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
+
+
+#Figure
+pdf("Fig1.pdf")
+par(mfrow=c(1,2)) #graphical parameters: A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by rows (mfrow), respectively.
+
+funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
+dev.off()
+
+# testing for asymetry (indicates a publication bias) #ac this is highly significant
+regtest(DB$g_calc,DB$g_var_calc)
+ranktest(DB$g_calc,DB$g_var_calc)
+
+```
+
+## Main effects
+
+```{r } 
+#age varies with method
 #plot g as a function of method
 mycols=c("black","blue","red","green")
 names(mycols)<-levels(DB$method)
@@ -472,21 +445,30 @@ tapply(DB$g_calc,DB$test_lang, sd, na.rm=T)
 DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
 table(DB2$test_lang,DB2$natural)
 
- #full model (with moderators of interest). 
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite) #ac weighted is not a parameter
-
 summary(full_model)
-
-#subset to natural sounds. 
-natural_only <-rma.mv(g_calc, g_var_calc, mods=~ homospecific*agec, random = ~ 1 | study_ID/same_infant, data=DB, weighted=TRUE, method = "REML", subset=!DB$outlier & !is.na(DB$natural) & DB$natural=='yes')
-
-summary(natural_only)
 ```
 We found a mean weighted effect size g= (CI[,])
+
+## Including Plots
+
+```{r Figure Template, include=FALSE}
+
+apatheme=theme_bw()+
+  theme(#panel.grid.major=element_blank(),
+        #panel.grid.minor=element_blank(),
+        panel.border=element_blank(),
+        axis.line=element_line(),
+        #text=element_text(family='Times'),
+        legend.position='none')
+```
+
 ```{r plots}
 forest.rma(full_model, main = 'Forest plot of effect sizes', xlab = 'Hedges\' g') 
 
+
+
 ```
+
 Heterogeneity
 Moderators
 age, type & interaction
