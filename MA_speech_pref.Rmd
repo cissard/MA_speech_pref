@@ -382,12 +382,12 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier) 
 
-base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier) #ac weighted is not a functional parameter (ie it's just ignored in rma.mv) -- I suspect you don't need it because you are entering vi (which is not weights)
+base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite) #ac weighted is not a functional parameter (ie it's just ignored in rma.mv) -- I suspect you don't need it because you are entering vi (which is not weights)
 
 method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
 
  #full model (with moderators of interest). 
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ natural*test_lang*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
 ```
 
@@ -427,14 +427,32 @@ ranktest(DB$g_calc,DB$g_var_calc)
 ```
 
 ## Main effects
+```{r Figure Template, include=FALSE}
 
-```{r } 
+apatheme=theme_bw()+
+  theme(#panel.grid.major=element_blank(),
+        #panel.grid.minor=element_blank(),
+        panel.border=element_blank(),
+        axis.line=element_line(),
+        #text=element_text(family='Times'),
+        legend.position='none')
+```
+
+```{r plots} 
+#Effect of naturalness
+DB$age_months = DB$mean_age_1/30.44
+ggplot(data = DB, aes(x = age_months, y = g_calc))+
+  geom_point()+
+  stat_smooth(method = "lm")+
+  scale_x_continuous(name="Mean age (months)")
+  
 #age varies with method
 #plot g as a function of method
 mycols=c("black","blue","red","green")
 names(mycols)<-levels(DB$method)
 mycols
-plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7, legend=TRUE) #"legend" is not a graphical parameter
+plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7)
+legend(DB$mean_age_1, DB$g_calc, legend=unique(DB$method), col=mycols[DB$method]) #doesn't work and I don't understand why
 
  #check also for test_lang (nativeness)
  #The language used for the speech trials doesn't make a difference
@@ -451,22 +469,11 @@ We found a mean weighted effect size g= (CI[,])
 
 ## Including Plots
 
-```{r Figure Template, include=FALSE}
 
-apatheme=theme_bw()+
-  theme(#panel.grid.major=element_blank(),
-        #panel.grid.minor=element_blank(),
-        panel.border=element_blank(),
-        axis.line=element_line(),
-        #text=element_text(family='Times'),
-        legend.position='none')
-```
-
-```{r plots}
-forest.rma(full_model, main = 'Forest plot of effect sizes', xlab = 'Hedges\' g') 
-
-
-
+```{r forest plot}
+pdf("forest_plot_noMod.pdf")
+for_plot = forest.rma(base_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
+dev.off()
 ```
 
 Heterogeneity
