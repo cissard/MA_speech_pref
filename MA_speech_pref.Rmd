@@ -8,7 +8,6 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = TRUE, echo = FALSE) #options for all the code chunks of the document.
-ggplot2::theme_set(langcog::theme_mikabr(base_family = "Ubuntu"))
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
@@ -387,8 +386,14 @@ base_model <- rma.mv(g_calc, g_var_calc, random = ~ 1 | study_ID/same_infant, da
 method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
 
  #full model (with moderators of interest). 
-full_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+full_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
+full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+
+DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
+table(DB2$test_lang,DB2$natural)
+
+summary(full_model)
 ```
 
 
@@ -400,9 +405,19 @@ We assessed the presence of a potential publication bias in the literature by pl
 
 ## Database description
 We found a total of `r length(papers)` papers reporting `r length(DB$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
-Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`.
-Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(min(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`).
+Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` months (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(min(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
 Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB$method))` experimental methods were used: XX studies used Near-Infrared Spectroscopy (NIRS), 1 study used fMRI, 12 studies used Central Fixation (CF), 3 used High-Amplitude Sucking (HAS), 1 used Head-turn Preference Procedure (HPP), and 9 used Passive Listening (PL). 
+
+## Summary effect size
+
+We found a mean weighted effect size g =`r base_model$beta` (SE = `r base_model$se` CI[`r base_model$ci.lb`,`r base_model$ci.ub`]).
+
+```{r forest plot}
+pdf("forest_plot_noMod.pdf")
+for_plot = forest.rma(base_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
+dev.off()
+```
 
 ## Publication bias
 Evidence of bias at level of papers
@@ -427,53 +442,85 @@ ranktest(DB$g_calc,DB$g_var_calc)
 ```
 
 ## Main effects
-```{r Figure Template, include=FALSE}
-
-apatheme=theme_bw()+
-  theme(#panel.grid.major=element_blank(),
-        #panel.grid.minor=element_blank(),
-        panel.border=element_blank(),
-        axis.line=element_line(),
-        #text=element_text(family='Times'),
-        legend.position='none')
-```
 
 ```{r plots} 
-#Effect of naturalness
 DB$age_months = DB$mean_age_1/30.44
-ggplot(data = DB, aes(x = age_months, y = g_calc))+
-  geom_point()+
-  stat_smooth(method = "lm")+
-  scale_x_continuous(name="Mean age (months)")
-  
-#age varies with method
+
+#Effect of naturalness
+ggplot(data=DB[!is.na(DB$natural),],aes(x=natural, y=g_calc))+
+  geom_jitter(aes(x=natural, y=g_calc, size=1/DB[!is.na(DB$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  stat_summary(fun.data="mean_cl_normal", colour = c("mediumvioletred","green3"), na.rm=T)+
+  scale_x_discrete(name = "other sound", labels=c("artificial","natural"), na.translate = FALSE)+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 20))
+
+ggsave("scatter_natural.pdf")
+
+ggplot(data=DB[!is.na(DB$natural),], aes(x=age_months, y=g_calc, colour=natural))+
+  geom_point(aes(size=1/DB[!is.na(DB$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 20), legend.position = c(.9, .9))
+
+ggsave("natural-age.pdf")
+
+# Effect of vocalness
+ggplot(data=DB[!is.na(DB$vocal),],aes(x=vocal, y=g_calc))+
+  geom_jitter(aes(x=vocal, y=g_calc, size=1/DB[!is.na(DB$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
+  stat_summary(fun.data="mean_cl_normal", colour = c("turquoise2","tomato"), na.rm=T)+
+  scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 20))
+
+ggsave("scatter_vocal.pdf")
+
+ggplot(data=DB[!is.na(DB$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
+  geom_point(aes(size=1/DB[!is.na(DB$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  scale_size(range = c(1, 5))+
+  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 20), legend.position = c(.9, .9))
+
+ggsave("vocal-age.pdf")
+
+#method varies with age
 #plot g as a function of method
 mycols=c("black","blue","red","green")
-names(mycols)<-levels(DB$method)
+names(mycols) <- levels(DB$method)
 mycols
-plot(DB$g_calc~DB$mean_age_1,col=mycols[DB$method],pch=20,cex=.7)
-legend(DB$mean_age_1, DB$g_calc, legend=unique(DB$method), col=mycols[DB$method]) #doesn't work and I don't understand why
+plot(DB$g_calc~DB$mean_age_1,col = mycols[DB$method],pch=20,cex=.7)
 
- #check also for test_lang (nativeness)
- #The language used for the speech trials doesn't make a difference
-plot(DB$g_calc~DB$mean_age_1,col=DB$test_lang, main='effect of nativeness')
-tapply(DB$g_calc,DB$test_lang, mean, na.rm=T)
-tapply(DB$g_calc,DB$test_lang, sd, na.rm=T)
+ggplot(data=DB[!is.na(DB$test_lang),], aes(x=age_months, y=g_calc))+
+  geom_point(aes(size=1/DB[!is.na(DB$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(method = "glm", na.rm = TRUE, color='gray40')+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 20))
 
-DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
-table(DB2$test_lang,DB2$natural)
+ggsave("age.pdf")
 
-summary(full_model)
-```
-We found a mean weighted effect size g= (CI[,])
+#Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
+ggplot(data=DB[!is.na(DB$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
+  geom_point(aes(size=1/DB[!is.na(DB$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  scale_size(range = c(1, 5))+
+  geom_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
+  theme_classic()+
+  theme(text = element_text(size = 20), legend.position = c(.9, .9))
 
-## Including Plots
+ggsave("lang-age.pdf")
 
-
-```{r forest plot}
-pdf("forest_plot_noMod.pdf")
-for_plot = forest.rma(base_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
-dev.off()
 ```
 
 Heterogeneity
