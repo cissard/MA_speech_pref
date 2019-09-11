@@ -57,16 +57,31 @@ for (i in 1:nrow(DB)){
 
 #if all of these measures are not reported, use an imputed correlation value
 #we also account for the observation that some re-calculated values are impossible and replace those
-DB$corr=as.numeric(as.character(DB$corr)) #ac introduced to avoid error below -- see ^^*^^
-for (i in 1:nrow(DB)){
-  db = DB[i,]
-  if (db$participant_design == "within_two") {
-    if (is.na(db$corr) | db$corr > .99 | db$corr < .01){ #ac ^^*^^ In Ops.factor(db$corr, 0.99) : ‘>’ not meaningful for factors error because the NAs were taken as factor
-      db$corr = runif(1, min = 0.01, max = 0.99)
-    }
-    DB[i,] = db
-  }
+# Impute values for missing correlations
+set.seed(111)
+# First we replace corr values outside the range (.01,.99) with NA
+DB = DB %>%
+  mutate(corr = abs(corr)) %>%
+  mutate(corr = ifelse(corr > .99 | corr < .01, NA, corr))
+# Then impute NA values
+if (all(is.na(DB$corr))) {
+  DB$corr_imputed <- NA
+} else {
+  DB$corr_imputed <- DB$corr %>%
+    Hmisc::impute(fun = "random") %>%
+    as.numeric()
 }
+
+DB$corr=as.numeric(as.character(DB$corr)) #ac introduced to avoid error below -- see ^^*^^
+#for (i in 1:nrow(DB)){
+ # db = DB[i,]
+  #if (db$participant_design == "within_two") {
+   # if (is.na(db$corr) | db$corr > .99 | db$corr < .01){ #ac ^^*^^ In Ops.factor(db$corr, 0.99) : ‘>’ not meaningful for factors error because the NAs were taken as factor
+    #  db$corr = runif(1, min = 0.01, max = 0.99)
+    #}
+    #DB[i,] = db
+  #}
+#}
 
 #We create variables for effect sizes (ES)
 DB$d_calc = NA
@@ -110,24 +125,28 @@ for (i in 1:nrow(DB)){
     } else {d_var_calc = NA}
     
   } else if (db$participant_design == "within_two") {
-    
+    if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
+      #if correlation between two measures is not reported, use an imputed correlation value
+      #we also account for the observation that some re-calculated values are impossible and replace those
+      corr <- db$corr_imputed
+    }else{corr <- db$corr}
     #effect size calculation
     if (complete(db$x_1, db$x_2, db$SD_1, db$SD_2)) {
       pooled_SD <- sqrt((db$SD_1 ^ 2 + db$SD_2 ^ 2) / 2) # Lipsey & Wilson (2001)
       d_calc <- (db$x_1 - db$x_2) / pooled_SD # Lipsey & Wilson (2001)
       es_method  <- "group_means_two"
     } else if (complete(db$t)) {
-      wc <- sqrt(2 * (1 - db$corr))
+      wc <- sqrt(2 * (1 - corr))
       d_calc <- (db$t / sqrt(db$n_1)) * wc #Dunlap et al., 1996, p.171
       es_method  <- "t_two"
     } else if (complete(db$F)) {
-      wc <- sqrt(2 * (1 - db$corr))
+      wc <- sqrt(2 * (1 - corr))
       d_calc <- sqrt(db$F / db$n_1) * wc
       es_method  <- "f_two"
     } else {d_calc = NA}
     #now that effect size are calculated, effect size variance is calculated
     if (complete(db$n_1, d_calc)) {
-      d_var_calc <- (2 * (1 - db$corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
+      d_var_calc <- (2 * (1 - corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
     } else if (complete(db$d, db$d_var)) {
       #if d and d_var were already reported, use those values
       d_calc <- db$d
