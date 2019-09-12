@@ -1,6 +1,6 @@
 ---
 title: "Infants prefer to listen to speech: A meta-analysis."
-author: "Cécile Issard and Alejandrina Cristia"
+author: "Cécile Issard, Sho Tsuji and Alejandrina Cristia"
 date: "`r format(Sys.time(), '%d %m, %Y')`"
 output: pdf_document
 #bibliography: bibliography.bib
@@ -18,7 +18,6 @@ library(tidyr)
 library(ggplot2)
 library(stringr)
 library(purrr)
-#library(langcog) #ac not needed? remove
 library(grid)
 library(gridExtra)
 library(RCurl)
@@ -28,6 +27,15 @@ sessionInfo()
 
 
 read.csv('speech_pref_full_DB.csv')->DB
+
+#unique studies
+papers <- levels(factor(DB$short_cite))
+
+#number of unique infants
+DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
+temp<-aggregate(n~same_infant,DB,mean)
+
+summary(DB$mean_age_1)
 ```
 - Target journal: Developmental science
 - Article type: short report
@@ -159,6 +167,7 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 #ac changed include so that we can print out the model results to check for stability
 
 #fit models
+DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
 
 simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite) 
 
@@ -171,7 +180,6 @@ full_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random =
 
 full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
-DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
 table(DB2$test_lang,DB2$natural)
 
 summary(full_model)
@@ -189,10 +197,8 @@ voc_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal , random = ~ 1 | study_ID/s
 summary(voc_model)
 #ac confirmed
 
-#ac papers & temp needed in the text below, but not yet generated; making a fake one here just to be able to knit the code
-papers=temp=NULL
 #ac base_model required below to be an rma object, but now it's a robu object; here I fake attribute simple model to base model
-base_model<-simple_model
+#base_model<-simple_model
 ```
 
 
@@ -214,7 +220,7 @@ We found a mean weighted effect size g =`r base_model$beta` (SE = `r base_model$
 
 ```{r forest plot}
 pdf("forest_plot_noMod.pdf")
-for_plot = forest.rma(base_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
+for_plot = forest.rma(simple_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
 dev.off()
 ```
 
@@ -321,18 +327,6 @@ vio_lang <- ggplot(data=DB[!is.na(DB$test_lang),],aes(x=test_lang, y=g_calc))+
   theme(text = element_text(size = 20))
 
 ggsave("violin_lang.pdf")
-
-ggplot(data=DB[!is.na(DB$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
-  geom_point(aes(size=1/DB[!is.na(DB$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  scale_size(range = c(1, 5))+
-  geom_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
-  theme_classic()+
-  theme(text = element_text(size = 20), legend.position = c(.9, .9))
-
-ggsave("lang-age.pdf")
 
 ```
 

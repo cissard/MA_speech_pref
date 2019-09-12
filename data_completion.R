@@ -34,14 +34,7 @@ for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
 for(mycol in c("natural","vocal","homospecific","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
 summary(DB)
 
-#unique studies
-papers <- levels(factor(DB$short_cite))
 
-#number of unique infants
-DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
-temp<-aggregate(n~same_infant,DB,mean)
-
-summary(DB$mean_age_1)
 
 #calculate correlations
 for (i in 1:nrow(DB)){
