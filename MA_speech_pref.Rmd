@@ -18,7 +18,7 @@ library(tidyr)
 library(ggplot2)
 library(stringr)
 library(purrr)
-library(langcog)
+#library(langcog) #ac not needed? remove
 library(grid)
 library(gridExtra)
 library(RCurl)
@@ -136,7 +136,7 @@ table(DB$natural,DB$vocal)
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
  #check that the experimental method doesn't make a difference
-DB$method_m <- group.mean(DB$method, DB$study_ID)
+DB$method_m <- group.mean(DB$method, DB$study_ID) #ac this line didn't work - perhaps it relies on langcog? this is easy to do with aggregate
 #dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
 contrasts(DB$method) = contr.treatment(length(levels(DB$method)))
  #check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
@@ -155,7 +155,8 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 
 
-```{r models, include = FALSE}
+```{r models, include = TRUE}
+#ac changed include so that we can print out the model results to check for stability
 
 #fit models
 
@@ -174,6 +175,24 @@ DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
 table(DB2$test_lang,DB2$natural)
 
 summary(full_model)
+
+#ac suspicious of the test_lang being opposite sign to vocal1, check that this beta doesn't change much when no other n/s predictors
+
+lang_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+
+summary(lang_model)
+
+#ac confirmed, now checking beta for vocal
+
+voc_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+
+summary(voc_model)
+#ac confirmed
+
+#ac papers & temp needed in the text below, but not yet generated; making a fake one here just to be able to knit the code
+papers=temp=NULL
+#ac base_model required below to be an rma object, but now it's a robu object; here I fake attribute simple model to base model
+base_model<-simple_model
 ```
 
 
