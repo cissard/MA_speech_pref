@@ -1,3 +1,5 @@
+setwd("/Users/Cecile/Documents/MA_speech_pref")
+
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
 library(metafor)
@@ -7,7 +9,6 @@ library(tidyr)
 library(ggplot2)
 library(stringr)
 library(purrr)
-library(langcog)
 library(grid)
 library(gridExtra)
 library(RCurl)
@@ -210,8 +211,14 @@ DB$outlier[DB$d_calc > mean(DB$d_calc, na.rm = TRUE) + 3*sd(DB$d_calc, na.rm = T
 outliers<-subset(DB,outlier==T)
 outliers
 
+#age in months (for plotting)
+DB$age_months = DB$mean_age_1/30.44
+
 #centering of age (although some rows also have mean_age_2, it is always the same as mean_age_1 in this db, hence the latter is used)
 DB$agec<-scale(DB$mean_age_1,scale=F)
+
+#Calculate the weight of each ES (for plotting)
+DB$weight = 1/DB$g_var_calc
 
 # save the complete data base
 write.csv(DB,'speech_pref_full_DB.csv')
