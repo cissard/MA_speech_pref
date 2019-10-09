@@ -185,15 +185,15 @@ method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum 
 #method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
 
 #full models (with moderators of interest). 
-full_model <- robu(g_calc ~ test_lang + vocal*agec, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+model_vocal <- robu(g_calc ~ test_lang + vocal*agec, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 
 #full_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
 #full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
-full_model2 <- robu(g_calc ~ test_lang + natural*agec, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+model_natural <- robu(g_calc ~ test_lang + natural*agec, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 
-full_model2 <- robu(g_calc ~ test_lang*agec + natural*agec + vocal*agec + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+full_model <- robu(g_calc ~ test_lang*agec + natural*agec + vocal*agec + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 
 
 table(DB2$test_lang,DB2$natural)
