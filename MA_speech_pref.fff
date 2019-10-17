@@ -1,0 +1,12 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\centering \includegraphics{MA_speech_pref_files/figure-latex/publication bias-1}
+
+}
+
+\caption{ }(\#fig:publication bias)
+\end{figure*}
+\efloatseparator
+ 

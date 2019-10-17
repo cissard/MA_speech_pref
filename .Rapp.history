@@ -1,0 +1,8 @@
+setwd('/Users/Cecile/Documents/MA_speech_pref')
+read.csv('speech_pref_full_DB.csv')->DB
+DB
+DB3 = DB[!is.na(DB$g_calc),]#
+variables = c("short_cite", "g_calc", "g_var_calc", "method", "n_1", "mean_age_1", "test_lang", "vocal", "natural")#
+summary_DB  = DB[variables]
+summary_DB
+is.data.frame(summary_DB)
