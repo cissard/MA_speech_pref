@@ -17,7 +17,7 @@ affiliation:
   - id            : "1"
     institution   : "Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives"
   - id            : "2"
-    institution   : "University of Tokyo"
+    institution   : "International Research Center for Neurointelligence, The University of Tokyo"
 
 # authornote: |
 #   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
@@ -225,31 +225,37 @@ contrasts(DB$contrast_stim) <- contr.treatment(length(levels(DB$contrast_stim)),
 
 
 ```{r models, include = TRUE}
-#ac changed include so that we can print out the model results to check for stability
 
 #fit models
-DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F,]
+DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F&DB$method!='PL',] #keep only the behavioral studies, remove outliers and NAs.
 
 simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite) #for trim & fill and funnel plot
 
-base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+#average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
+DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
-#
-method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+#base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
+
+#method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+method_model <- robu(g_calc ~ method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
   
 #method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
 
-#full models (with moderators of interest). 
-model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+# models with moderators of interest. 
+
+#model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
+model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
 #full_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
 #full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
-model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+#model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
-full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-
+#full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
 table(DB2$test_lang,DB2$natural)
 
