@@ -220,6 +220,8 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 DB$contrast_stim <- factor(DB$contrast_stim)
 contrasts(DB$contrast_stim) <- contr.treatment(length(levels(DB$contrast_stim)),base=13)
 
+relevel(DB$method,"HAS")->DB$method #baseline method should be HAS because it's the one used with newborns
+
 ```
 
 
@@ -287,10 +289,12 @@ summary(voc_model)
 
 
 ```{r residuals}
-reg=lm(DB$g_calc ~ DB$method)
+#ac 2019-10-28 there was a bug here
+
+reg=lm(DB$g_calc[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)] ~ DB$method[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)])
 regres=residuals(reg)
 
-plot(regres ~ DB$natural)
+plot(regres ~ DB$natural[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)])
 
 ```
 ### Publication bias
