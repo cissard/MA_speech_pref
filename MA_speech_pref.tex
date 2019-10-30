@@ -1,5 +1,5 @@
-\documentclass[]{apa6}
-
+\documentclass[man]{apa6}
+\usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -9,134 +9,111 @@
 \else % if luatex or xelatex
   \ifxetex
     \usepackage{mathspec}
-    \usepackage{xltxtra,xunicode}
   \else
     \usepackage{fontspec}
   \fi
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-  \newcommand{\euro}{€}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
-\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Infants prefer to listen to speech: A meta-analysis.},
+            pdfauthor={Cécile Issard, Sho Tsuji, \& Alejandrina Cristia},
+            pdfkeywords={Meta-analysis, infants, speech preference, auditory development, natural
+sounds},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
 
-% Table formatting
-\usepackage{longtable, booktabs}
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+
+  \title{Infants prefer to listen to speech: A meta-analysis.}
+    \author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \&
+Alejandrina Cristia\textsuperscript{1}}
+    \date{}
+  
+\shorttitle{Preference for speech sounds in infancy}
+\affiliation{
+\vspace{0.5cm}
+\textsuperscript{1} Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives\\\textsuperscript{2} International Research Center for Neurointelligence, The University of Tokyo}
+\keywords{Meta-analysis, infants, speech preference, auditory development, natural sounds\newline\indent Word count: X}
+\usepackage{csquotes}
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+\usepackage{longtable}
 \usepackage{lscape}
-% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
-\usepackage{multirow}		% Table styling
-\usepackage{tabularx}		% Control Column width
-\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
-\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{threeparttablex}
 
-% Create new environments so endfloat can handle them
-% \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
 
-\newenvironment{lltable}
-  {\begin{landscape}\begin{center}\begin{ThreePartTable}}
-  {\end{ThreePartTable}\end{center}\end{landscape}}
-
-  \usepackage{ifthen} % Only add declarations when endfloat package is loaded
-  \ifthenelse{\equal{\string }{\string man}}{%
-   \DeclareDelayedFloatFlavor{ThreePartTable}{table} % Make endfloat play with longtable
-   % \DeclareDelayedFloatFlavor{ltable}{table} % Make endfloat play with lscape
-   \DeclareDelayedFloatFlavor{lltable}{table} % Make endfloat play with lscape & longtable
-  }{}%
-
-
-
-% The following enables adjusting longtable caption width to table width
-% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
 \makeatletter
 \newcommand\LastLTentrywidth{1em}
 \newlength\longtablewidth
 \setlength{\longtablewidth}{1in}
-\newcommand\getlongtablewidth{%
- \begingroup
-  \ifcsname LT@\roman{LT@tables}\endcsname
-  \global\longtablewidth=0pt
-  \renewcommand\LT@entry[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}%
-  \@nameuse{LT@\roman{LT@tables}}%
-  \fi
-\endgroup}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
 
 
-  \usepackage{graphicx}
-  \makeatletter
-  \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-  \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-  \makeatother
-  % Scale images if necessary, so that they will not overflow the page
-  % margins by default, and it is still possible to overwrite the defaults
-  % using explicit options in \includegraphics[width, height, ...]{}
-  \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\ifxetex
-  \usepackage[setpagesize=false, % page size defined by xetex
-              unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
-\else
-  \usepackage[unicode=true]{hyperref}
-\fi
-\hypersetup{breaklinks=true,
-            pdfauthor={},
-            pdftitle={Infants prefer to listen to speech: A meta-analysis.},
-            colorlinks=true,
-            citecolor=blue,
-            urlcolor=blue,
-            linkcolor=black,
-            pdfborder={0 0 0}}
-\urlstyle{same}  % don't use monospace font for urls
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{lineno}
 
-\setlength{\parindent}{0pt}
-%\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\linenumbers
 
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\authornote{
 
+Correspondence concerning this article should be addressed to Cécile
+Issard, Laboratoire de Sciences Cognitives et Psycholinguistique,
+Département d'Études Cognitives, Ecole Normale Supérieure, 29 rue d'Ulm,
+75005 Paris, France. E-mail:
+\href{mailto:cecile.issard@gmail.com}{\nolinkurl{cecile.issard@gmail.com}}}
 
-% Manuscript styling
-\captionsetup{font=singlespacing,justification=justified}
-\usepackage{csquotes}
-\usepackage{upgreek}
-
-
-
-\usepackage{tikz} % Variable definition to generate author note
-
-% fix for \tightlist problem in pandoc 1.14
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-% Essential manuscript parts
-  \title{Infants prefer to listen to speech: A meta-analysis.}
-
-  \shorttitle{Preference for speech sounds in infancy}
-
-
-  \author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
-
-  % \def\affdep{{"", "", ""}}%
-  % \def\affcity{{"", "", ""}}%
-
-  \affiliation{
-    \vspace{0.5cm}
-          \textsuperscript{1} Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale
-Supérieure, Département d'Études Cognitives\\
-          \textsuperscript{2} International Research Center for Neurointelligence, The University of
-Tokyo  }
-
-  \authornote{
-    Correspondence concerning this article should be addressed to Cécile
-    Issard, Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole
-    Normale Supérieure, Département d'Études Cognitives, 29 rue d'Ulm, 75005
-    Paris, France. E-mail:
-    \href{mailto:cecile.issard@gmail.com}{\nolinkurl{cecile.issard@gmail.com}}
-  }
-
-
-  \abstract{The human auditory system is amazingly efficient at processing speech.
+\abstract{
+The human auditory system is amazingly efficient at processing speech.
 Some works suggest that this capacity is present from birth, infants
 preferring to listen to natural speech than to other types of sounds,
 enabling them to select the signals that are relevant for communication
@@ -156,72 +133,15 @@ or to non-vocal sounds. Preference was stronger when the speech stimuli
 were in the infants' native language. This suggests that the
 representation of speech as a distinct auditory object comes fromis
 modulated by the degree of familiarity with the sounds of the language
-they are exposed to.}
-  \keywords{Meta-analysis, infants, speech preference, auditory development, natural
-sounds \\
-
-    \indent Word count: X
-  }
+they are exposed to.
 
 
-
-
+}
 
 \begin{document}
-
 \maketitle
 
-\setcounter{secnumdepth}{0}
-
-
-
-\begin{itemize}
-\tightlist
-\item
-  Target journal: Developmental science
-\item
-  Article type: short report
-\item
-  4000 words
-\item
-  6 keywords
-\item
-  Running title: 40 characters
-\item
-  Submit one normal and one blinded version
-\item
-  Separate files for title page, main text, and figures
-\item
-  No identifiying info in the main text.
-\item
-  up to 4 research highlights; each 25 words
-\item
-  Abstract: 250 words
-\end{itemize}
-
-Main text file:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Title
-\item
-  Research highlights
-\item
-  Abstract and key words
-\item
-  Main
-\item
-  References
-\item
-  Figures and tables (each clearly identified, labelled and on a
-  separate page)
-\item
-  Appendices (if relevant).
-\end{enumerate}
-
-Authors ' contribution: C.I. reviewed literature. C.I. and A.C. coded
+Authors' contribution: C.I. reviewed literature. C.I. and A.C. coded
 data. C.I., S.T. and A.C.analyzed data. C.I. and A.C. wrote the paper.
 
 \section{Introduction}\label{introduction}
@@ -544,10 +464,24 @@ effect size) in this model therefore corresponds to the preference found
 when age is zero.
 
 \begin{verbatim}
-##          
-##           no yes
-##   foreign  3  17
-##   native  18   7
+## RVE: Correlated Effects Model with Small-Sample Corrections 
+## 
+## Model: g_calc ~ 1 
+## 
+## Number of studies = 29 
+## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
+## Rho = 0.8 
+## I.sq = 80.38913 
+## Tau.sq = 0.1489067 
+## 
+##                Estimate StdErr t-value  dfs    P(|t|>) 95% CI.L 95% CI.U
+## 1 X.Intercept.    0.478 0.0766    6.23 26.9 0.00000116     0.32    0.635
+##   Sig
+## 1 ***
+## ---
+## Signif. codes: < .01 *** < .05 ** < .10 *
+## ---
+## Note: If df < 4, do not trust the results
 \end{verbatim}
 
 \begin{verbatim}
@@ -562,24 +496,24 @@ when age is zero.
 ## Tau.sq = 0.1719252 
 ## 
 ##                          Estimate  StdErr t-value   dfs P(|t|>) 95% CI.L
-## 1           X.Intercept.  1.19970 0.68171   1.760  5.02   0.138 -0.55034
+## 1           X.Intercept.  0.61408 0.75668   0.812  6.94   0.444 -1.17827
 ## 2             test_lang2 -0.52687 0.69383  -0.759 10.02   0.465 -2.07240
 ## 3             mean_age_1 -0.00340 0.00526  -0.646  2.42   0.574 -0.02263
 ## 4               natural1 -0.10810 0.42229  -0.256  4.16   0.810 -1.26251
 ## 5                 vocal1 -0.15907 0.36515  -0.436  4.21   0.685 -1.15328
-## 6              methodHAS -0.58562 0.53771  -1.089  2.83   0.360 -2.35652
-## 7              methodHPP  0.15368 0.44863   0.343  6.39   0.743 -0.92796
+## 6               methodCF  0.58562 0.53771   1.089  2.83   0.360 -1.18528
+## 7              methodHPP  0.73931 0.48707   1.518  2.26   0.254 -1.14292
 ## 8  test_lang2.mean_age_1  0.00316 0.00287   1.102  8.45   0.301 -0.00339
 ## 9    mean_age_1.natural1  0.00306 0.00299   1.026  6.34   0.343 -0.00415
 ## 10     mean_age_1.vocal1 -0.00227 0.00303  -0.749  6.62   0.479 -0.00951
 ##    95% CI.U Sig
-## 1   2.94975    
+## 1   2.40644    
 ## 2   1.01866    
 ## 3   0.01584    
 ## 4   1.04631    
 ## 5   0.83515    
-## 6   1.18528    
-## 7   1.23533    
+## 6   2.35652    
+## 7   2.62154    
 ## 8   0.00971    
 ## 9   0.01028    
 ## 10  0.00497    
@@ -592,26 +526,24 @@ when age is zero.
 \begin{verbatim}
 ## RVE: Correlated Effects Model with Small-Sample Corrections 
 ## 
-## Model: g_calc ~ test_lang + natural * mean_age_1 
+## Model: g_calc ~ natural * mean_age_1 
 ## 
 ## Number of studies = 29 
 ## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
 ## Rho = 0.8 
-## I.sq = 81.53745 
-## Tau.sq = 0.1827984 
+## I.sq = 80.93995 
+## Tau.sq = 0.1700603 
 ## 
 ##                        Estimate  StdErr t-value  dfs P(|t|>) 95% CI.L
-## 1        X.Intercept.  0.542769 0.40048   1.355 8.82   0.209 -0.36598
-## 2          test_lang2  0.063177 0.22472   0.281 9.06   0.785 -0.44463
-## 3            natural1 -0.147919 0.40777  -0.363 8.59   0.726 -1.07706
-## 4          mean_age_1 -0.000395 0.00342  -0.115 3.82   0.914 -0.01007
-## 5 natural1.mean_age_1  0.000498 0.00337   0.148 5.09   0.888 -0.00812
+## 1        X.Intercept.  0.589570 0.36139   1.631 3.96   0.179 -0.41749
+## 2            natural1 -0.137200 0.39044  -0.351 8.99   0.733 -1.02061
+## 3          mean_age_1 -0.000655 0.00297  -0.221 3.06   0.839 -0.00999
+## 4 natural1.mean_age_1  0.000695 0.00304   0.228 4.99   0.828 -0.00713
 ##   95% CI.U Sig
-## 1  1.45152    
-## 2  0.57098    
-## 3  0.78122    
-## 4  0.00928    
-## 5  0.00912    
+## 1  1.59662    
+## 2  0.74621    
+## 3  0.00868    
+## 4  0.00852    
 ## ---
 ## Signif. codes: < .01 *** < .05 ** < .10 *
 ## ---
@@ -670,64 +602,6 @@ when age is zero.
 ##    0.38626556    0.02319572    0.33526236    0.36152402    1.08797229
 \end{verbatim}
 
-\begin{verbatim}
-## 
-## Multivariate Meta-Analysis Model (k = 81; method: REML)
-## 
-##    logLik   Deviance        AIC        BIC       AICc  
-## -127.2568   254.5137   262.5137   271.9915   263.0542  
-## 
-## Variance Components: 
-## 
-##             estim    sqrt  nlvls  fixed                factor
-## sigma^2.1  0.0287  0.1695     24     no              study_ID
-## sigma^2.2  0.0794  0.2818     39     no  study_ID/same_infant
-## 
-## Test for Residual Heterogeneity: 
-## QE(df = 79) = 450.7595, p-val < .0001
-## 
-## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 3.1427, p-val = 0.0763
-## 
-## Model Results:
-## 
-##             estimate      se    zval    pval    ci.lb   ci.ub    
-## intrcpt       0.2527  0.0810  3.1195  0.0018   0.0939  0.4115  **
-## test_lang2    0.1576  0.0889  1.7728  0.0763  -0.0166  0.3319   .
-## 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Multivariate Meta-Analysis Model (k = 81; method: REML)
-## 
-##    logLik   Deviance        AIC        BIC       AICc  
-## -128.2582   256.5164   264.5164   273.9942   265.0570  
-## 
-## Variance Components: 
-## 
-##             estim    sqrt  nlvls  fixed                factor
-## sigma^2.1  0.0180  0.1342     24     no              study_ID
-## sigma^2.2  0.0880  0.2966     39     no  study_ID/same_infant
-## 
-## Test for Residual Heterogeneity: 
-## QE(df = 79) = 451.5476, p-val < .0001
-## 
-## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 1.1710, p-val = 0.2792
-## 
-## Model Results:
-## 
-##          estimate      se     zval    pval    ci.lb   ci.ub     
-## intrcpt    0.4022  0.0838   4.8008  <.0001   0.2380  0.5663  ***
-## vocal1    -0.0983  0.0909  -1.0821  0.2792  -0.2765  0.0798     
-## 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
 \includegraphics{MA_speech_pref_files/figure-latex/residuals-1.pdf}
 \#\#\# Publication bias
 
@@ -747,7 +621,7 @@ effect sizes, see Table 1. All of them have been submitted to or
 published in peer-reviewed journals. Studies tended to have small sample
 sizes, with a median N of 20 children (Range = 55, M = 21.39, Total:
 963). Infants ranged from 0 to 12 months (1.21 to 380.50 days).
-Individual samples comprised 20 \% of female participants on average.
+Individual samples comprised 42 \% of female participants on average.
 Infants were native of 7 different languages across the whole database
 (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). Studies
 were performed in 13 different laboratories from 6 different countries
@@ -760,12 +634,14 @@ High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure
 
 \subsection{Summary effect size}\label{summary-effect-size}
 
-We found a mean weighted effect size g = (SE = CI{[},{]}).
+We found a mean weighted effect size g =0.48 (SE = 0.08 CI = {[}0.32 ,
+0.63{]}).
 
-\begin{verbatim}
-## pdf 
-##   2
-\end{verbatim}
+\begin{figure}
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/forest plot-1.pdf}
+\caption{}
+\end{figure}
 
 \subsection{Publication bias}\label{publication-bias}
 
@@ -801,7 +677,7 @@ literature
 \subsection{Main effects}\label{main-effects}
 
 \begin{verbatim}
-##      CF     HAS     HPP      PL 
+##     HAS      CF     HPP      PL 
 ## "black"  "blue"   "red" "green"
 \end{verbatim}
 
@@ -925,10 +801,6 @@ were made for researchers, reviewers, and editors.
 \hypertarget{refs}{}
 
 \endgroup
-
-
-
-
 
 
 \end{document}

@@ -6,7 +6,7 @@ author:
   - name          : "Cécile Issard"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives, 29 rue d'Ulm, 75005 Paris, France"
+    address       : "Laboratoire de Sciences Cognitives et Psycholinguistique, Département d'Études Cognitives, Ecole Normale Supérieure, 29 rue d'Ulm, 75005 Paris, France"
     email         : "cecile.issard@gmail.com"
   - name          : "Sho Tsuji"
     affiliation   : "2"
@@ -77,30 +77,6 @@ temp<-aggregate(n~same_infant,DB,mean)
 
 summary(DB$mean_age_1)
 ```
-
-- Target journal: Developmental science
-- Article type: short report
-- 4000 words
-- 6 keywords
-- Running title: 40 characters
-- Submit one normal and one blinded version
-- Separate files for title page, main text, and figures
-- No identifiying info in the main text.
-- up to 4 research highlights; each 25 words
-- Abstract: 250 words
-
-Main text file:
-
-1. Title 
-2. Research highlights
-3. Abstract and key words
-4. Main 
-5. References
-6. Figures and tables (each clearly identified, labelled and on a separate page)
-7. Appendices (if relevant).
-
-Authors \' contribution: C.I. reviewed literature. C.I. and A.C. coded data.  C.I., S.T. and A.C.analyzed data.  C.I. and A.C. wrote the paper.
-
 # Introduction
 
 Speech is the main signal for human vocal communication. Adult individuals efficiently detect speech sounds in their environment, and use them to spot conspecifics and build social interactions. Since seminal experimental results suggest that infants react more to speech than to certain other sounds (Ecklund-Flores & Turkewitz, 1996), it is conceivable that newborns are equipped with a preference for speech sounds, and that human infants become further entrenched in this preference as they age and gain additional exposure to speech.  Here, we synthesize empirical data on infants’ preferences for speech over artificial sounds, natural sounds, as well as human non-speech sounds, with the hope of illuminating the strength of evidence supporting various theories proposed to explain infants' preferential listening and processing studies.
@@ -201,14 +177,15 @@ table(DB$contrast_stim)
 #setting up of predictors 
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
- #check that the experimental method doesn't make a difference
-# DB$method_m <- aggregate(DB$method, DB$study_ID, mean) #ac this line didn't work - perhaps it relies on langcog? this is easy to do with aggregate
+#check that the experimental method doesn't make a difference
+relevel(DB$method,"HAS")->DB$method #put HAS as the 1st level
 #dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
-contrasts(DB$method) = contr.treatment(length(levels(DB$method)))
- #check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
+contrasts(DB$method) = contr.treatment(length(levels(DB$method)),base=1) #baseline method should be HAS because it's the one used with newborns
+
+#check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
 contrasts(DB$test_lang) <- contr.treatment(length(levels(DB$test_lang)),base=1)
 
- #moderators of interest
+#moderators of interest
 contrasts(DB$natural) <- contr.treatment(length(levels(DB$natural)),base=2)
 
 DB$homospecific <- factor(DB$homospecific)
@@ -219,9 +196,6 @@ contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
 
 DB$contrast_stim <- factor(DB$contrast_stim)
 contrasts(DB$contrast_stim) <- contr.treatment(length(levels(DB$contrast_stim)),base=13)
-
-relevel(DB$method,"HAS")->DB$method #baseline method should be HAS because it's the one used with newborns
-
 ```
 
 
@@ -254,19 +228,19 @@ model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweight
 #full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
 
 #model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+model_natural <- robu(g_calc ~ natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
 #full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
-table(DB2$test_lang,DB2$natural)
+
+print(base_model)
 
 print(full_model)
 
 print(model_natural)
 
 print(model_vocal)
-
 #look if the contrasted stimulus itself makes a difference
 table(DB$contrast_stim) #nb of ES/contrast (sound type contrasted to speech)
 tapply(DB$g_calc,DB$contrast_stim,mean, na.rm=T)
@@ -275,14 +249,9 @@ tapply(DB$g_calc,DB$contrast_stim,mean, na.rm=T)
 #ac suspicious of the test_lang being opposite sign to vocal1, check that this beta doesn't change much when no other n/s predictors
 
 lang_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
-
-summary(lang_model)
-
 #ac confirmed, now checking beta for vocal
 
 voc_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
-
-summary(voc_model)
 #ac confirmed
 
 ```
@@ -307,17 +276,17 @@ We assessed the presence of a potential publication bias in the body of literatu
 ## Database description
 We found a total of `r length(papers)` papers reporting `r length(DB$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
 Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`).
-Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` months (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(min(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` months (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(mean(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
 Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB$method))` experimental methods were used: 11 studies used Passive Listening (PL) with neuro-imaging, with 8 studies using Near-Infrared Spectroscopy (NIRS), and 3 studies using fMRI; 12 studies used Central Fixation (CF); 3 used High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure (HPP). 
 
 ## Summary effect size
 
-We found a mean weighted effect size g =`r base_model$beta` (SE = `r base_model$se` CI[`r base_model$ci.lb`,`r base_model$ci.ub`]).
+We found a mean weighted effect size g =`r base_model$reg_table$b.r` (SE = `r base_model$reg_table$SE` CI = [`r base_model$reg_table$CI.L` , `r base_model$reg_table$CI.U`]).
 
 ```{r forest plot}
-pdf("forest_plot_noMod.pdf")
+#pdf("forest_plot_noMod.pdf")
 for_plot = forest.rma(simple_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
-dev.off()
+#dev.off()
 ```
 
 ## Publication bias
@@ -360,7 +329,7 @@ vio_nat <- ggplot(data=DB[!is.na(DB$natural),], aes(x=natural, y=g_calc))+
   scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
-  theme(text = element_text(size = 20))
+  theme(text = element_text(size = 15))
 
 ggsave("violin_natural.pdf")
 
@@ -371,7 +340,7 @@ ggplot(data=DB[!is.na(DB$natural),], aes(x=age_months, y=g_calc, colour=natural)
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   theme_classic()+
-  theme(text = element_text(size = 20), legend.position = c(.9, .9))
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 ggsave("natural-age.pdf")
 
@@ -383,7 +352,7 @@ vio_voc <- ggplot(data=DB[!is.na(DB$vocal),],aes(x=vocal, y=g_calc))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_fill_manual(values = c("turquoise2","tomato"), labels=c("artificial","natural"), name = "other sound")+
   theme_classic()+
-  theme(text = element_text(size = 20))
+  theme(text = element_text(size = 15))
 
 ggsave("violin_vocal.pdf")
 
@@ -395,7 +364,7 @@ voc_age <- ggplot(data=DB[!is.na(DB$vocal),],aes(x=age_months, y=g_calc, colour=
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
   theme_classic()+
-  theme(text = element_text(size = 20), legend.position = c(.9, .9))
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 ggsave("vocal-age.pdf")
 
@@ -407,11 +376,22 @@ ggplot(data=DB[!is.na(DB$test_lang),], aes(x=age_months, y=g_calc))+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
-  theme(text = element_text(size = 20))
+  theme(text = element_text(size = 15))
 
 ggsave("age.pdf")
 
 #Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
+ggplot(data=DB[!is.na(DB$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
+  geom_point(aes(size=1/DB[!is.na(DB$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  scale_size(range = c(1, 5))+
+  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+ggsave("lang_age.pdf")
 
 vio_lang <- ggplot(data=DB[!is.na(DB$test_lang),],aes(x=test_lang, y=g_calc))+
   geom_violin(aes(fill=test_lang), show.legend = F, na.rm = TRUE) +
@@ -436,7 +416,6 @@ vio_contrast <- ggplot(data=DB[!is.na(DB$contrast_stim),],aes(x=contrast_stim, y
 
 ggsave("violin_contrast.pdf")
 
-vio_lang
 ```
 
 
