@@ -68,14 +68,19 @@ sessionInfo()
 
 read.csv('speech_pref_full_DB.csv')->DB
 
+DB2 = DB[DB$method!='PL',] #keep only the behavioral studies, remove outliers and NAs.
+
+#Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
+DB2$outlier[DB2$g_calc > mean(DB2$g_calc, na.rm = TRUE) + 3*sd(DB2$g_calc, na.rm = TRUE) | DB2$g_calc < mean(DB2$g_calc, na.rm = TRUE) - 3*sd(DB2$g_calc, na.rm = TRUE)]<-T 
+
 #unique studies
 papers <- levels(factor(DB$short_cite))
 
 #number of unique infants
-DB$n<-rowSums( cbind (DB$n_1,DB$n_2), na.rm=TRUE)
-temp<-aggregate(n~same_infant,DB,mean)
+DB2$n<-rowSums( cbind (DB2$n_1,DB2$n_2), na.rm=TRUE)
+temp<-aggregate(n~same_infant,DB2,mean)
 
-summary(DB$mean_age_1)
+summary(DB2$mean_age_1)
 ```
 # Introduction
 
@@ -166,36 +171,36 @@ We did not center age. Centering age makes the intercept (global effect size) co
 
 ```{r moderators, include=FALSE}
 #distribution of moderators
-g_age <- tapply(DB$g_calc, DB$mean_age_1, mean)#ES by age
-table(DB$natural)#no. of natural and non-natural data points
-table(DB$vocal)#no. of vocal and non-vocal data points
-table(DB$homospecific)#no. of homo- and heterospecific data points
-table(DB$homospecific,DB$vocal)
-table(DB$natural,DB$vocal)
-table(DB$contrast_stim)
+g_age <- tapply(DB2$g_calc, DB2$mean_age_1, mean)#ES by age
+table(DB2$natural)#no. of natural and non-natural data points
+table(DB2$vocal)#no. of vocal and non-vocal data points
+table(DB2$homospecific)#no. of homo- and heterospecific data points
+table(DB2$homospecific,DB2$vocal)
+table(DB2$natural,DB2$vocal)
+table(DB2$contrast_stim)
 
 #setting up of predictors 
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
 #check that the experimental method doesn't make a difference
-relevel(DB$method,"HAS")->DB$method #put HAS as the 1st level
+relevel(DB2$method,"HAS")->DB2$method #put HAS as the 1st level
 #dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
-contrasts(DB$method) = contr.treatment(length(levels(DB$method)),base=1) #baseline method should be HAS because it's the one used with newborns
+contrasts(DB2$method) = contr.treatment(length(levels(DB2$method)),base=1) #baseline method should be HAS because it's the one used with newborns
 
 #check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
-contrasts(DB$test_lang) <- contr.treatment(length(levels(DB$test_lang)),base=1)
+contrasts(DB2$test_lang) <- contr.treatment(length(levels(DB2$test_lang)),base=1)
 
 #moderators of interest
-contrasts(DB$natural) <- contr.treatment(length(levels(DB$natural)),base=2)
+contrasts(DB2$natural) <- contr.treatment(length(levels(DB2$natural)),base=2)
 
-DB$homospecific <- factor(DB$homospecific)
-contrasts(DB$homospecific) <- contr.treatment(length(levels(DB$homospecific)))
+DB2$homospecific <- factor(DB2$homospecific)
+contrasts(DB2$homospecific) <- contr.treatment(length(levels(DB2$homospecific)))
 
-DB$vocal <- factor(DB$vocal)
-contrasts(DB$vocal) <- contr.treatment(length(levels(DB$vocal)),base=2)
+DB2$vocal <- factor(DB2$vocal)
+contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
 
-DB$contrast_stim <- factor(DB$contrast_stim)
-contrasts(DB$contrast_stim) <- contr.treatment(length(levels(DB$contrast_stim)),base=13)
+DB2$contrast_stim <- factor(DB2$contrast_stim)
+contrasts(DB2$contrast_stim) <- contr.treatment(length(levels(DB2$contrast_stim)),base=13)
 ```
 
 
@@ -203,36 +208,35 @@ contrasts(DB$contrast_stim) <- contr.treatment(length(levels(DB$contrast_stim)),
 ```{r models, include = TRUE}
 
 #fit models
-DB2 = DB[!is.na(DB$g_calc)&DB$outlier==F&DB$method!='PL',] #keep only the behavioral studies, remove outliers and NAs.
 
-simple_model <- rma(g_calc, g_var_calc, data=DB, weighted = TRUE, method = "REML", subset=!DB$outlier, slab =DB$short_cite) #for trim & fill and funnel plot
+simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) #for trim & fill and funnel plot
 
 #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
 DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
-#base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+base_model2 <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
 
 #method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 method_model <- robu(g_calc ~ method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
   
-#method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier & !is.na(DB$method))
+#method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier & !is.na(DB2$method))
 
 # models with moderators of interest. 
 
 #model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
 model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
-#full_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+#vocal_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
 
-#full_model2 <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
+#natural_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
 
 #model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-model_natural <- robu(g_calc ~ natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
-#full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-full_model <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-
+#full_model2 <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
+full_model <- robu(g_calc ~ test_lang + natural + vocal + mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+#full_metafor <- rma.mv(g_calc, g_var_calc, mods = ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier & !is.na(DB2$method))
 
 print(base_model)
 
@@ -242,28 +246,23 @@ print(model_natural)
 
 print(model_vocal)
 #look if the contrasted stimulus itself makes a difference
-table(DB$contrast_stim) #nb of ES/contrast (sound type contrasted to speech)
-tapply(DB$g_calc,DB$contrast_stim,mean, na.rm=T)
+table(DB2$contrast_stim) #nb of ES/contrast (sound type contrasted to speech)
+tapply(DB2$g_calc,DB2$contrast_stim,mean, na.rm=T)
 #large diff between samples sizes -> imp to run a model.
-
-#ac suspicious of the test_lang being opposite sign to vocal1, check that this beta doesn't change much when no other n/s predictors
-
-lang_model <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
-#ac confirmed, now checking beta for vocal
-
-voc_model <-rma.mv(g_calc, g_var_calc, mods= ~ vocal , random = ~ 1 | study_ID/same_infant, data=DB, method = "REML", subset=!DB$outlier, slab =DB$short_cite)
-#ac confirmed
-
 ```
 
 
 ```{r residuals}
 #ac 2019-10-28 there was a bug here
 
-reg=lm(DB$g_calc[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)] ~ DB$method[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)])
+reg=lm(DB2$g_calc[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$method[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
 regres=residuals(reg)
 
-plot(regres ~ DB$natural[!is.na(DB$g_calc) & !is.na(DB$method) & !is.na(DB$natural)])
+plot(regres ~ DB2$natural[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
+
+#vocal
+#natural
+#language
 
 ```
 ### Publication bias
@@ -274,10 +273,10 @@ We assessed the presence of a potential publication bias in the body of literatu
 # Results
 
 ## Database description
-We found a total of `r length(papers)` papers reporting `r length(DB$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
-Studies tended to have small sample sizes, with a median N of `r median(DB$n)` children (Range = `r max(DB$n)-min(DB$n)`, M = `r mean(DB$n)`, Total: `r round(sum(temp$n))`).
-Infants ranged from `r round(min(DB$mean_age_1)/30.44)` to `r round(max(DB$mean_age_1)/30.44)` months (`r min(DB$mean_age_1)` to `r max(DB$mean_age_1)` days). Individual samples comprised `r round(mean(DB$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
-Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB$method))` experimental methods were used: 11 studies used Passive Listening (PL) with neuro-imaging, with 8 studies using Near-Infrared Spectroscopy (NIRS), and 3 studies using fMRI; 12 studies used Central Fixation (CF); 3 used High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure (HPP). 
+We found a total of `r length(papers)` papers reporting `r length(DB2$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
+Studies tended to have small sample sizes, with a median N of `r median(DB2$n)` children (Range = `r max(DB2$n)-min(DB2$n)`, M = `r mean(DB2$n)`, Total: `r round(sum(temp$n))`).
+Infants ranged from `r round(min(DB2$mean_age_1)/30.44)` to `r round(max(DB2$mean_age_1)/30.44)` months (`r min(DB2$mean_age_1)` to `r max(DB2$mean_age_1)` days). Individual samples comprised `r round(mean(DB2$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB2$method))` experimental methods were used: 11 studies used Passive Listening (PL) with neuro-imaging, with 8 studies using Near-Infrared Spectroscopy (NIRS), and 3 studies using fMRI; 12 studies used Central Fixation (CF); 3 used High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure (HPP). 
 
 ## Summary effect size
 
@@ -303,11 +302,11 @@ fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect
 png(filename = "Funnel.png")
 
 #funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
-#dev.off()
+dev.off()
 
 # testing for asymetry (indicates a publication bias) #ac this is highly significant
-regtest(DB$g_calc,DB$g_var_calc)
-ranktest(DB$g_calc,DB$g_var_calc)
+SEg = regtest(DB2$g_calc,DB2$g_var_calc)
+ranktest(DB2$g_calc,DB2$g_var_calc)
 
 ```
 
@@ -321,10 +320,18 @@ names(mycols) <- levels(DB$method)
 mycols
 plot(DB$g_calc~DB$mean_age_1,col = mycols[DB$method],pch=20,cex=.7)
 
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=method, y=g_calc))+
+  geom_violin(aes(fill=method), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=method, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.2, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "method", labels=levels(DB2$method), na.translate = FALSE)+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 15))
+
 #Effect of naturalness
-vio_nat <- ggplot(data=DB[!is.na(DB$natural),], aes(x=natural, y=g_calc))+
+vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
   geom_violin(aes(fill=natural), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=natural, y=g_calc, size=1/DB[!is.na(DB$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  geom_jitter(aes(x=natural, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "other sound", labels=c("artificial","natural"), na.translate = FALSE)+
   scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
@@ -333,9 +340,9 @@ vio_nat <- ggplot(data=DB[!is.na(DB$natural),], aes(x=natural, y=g_calc))+
 
 ggsave("violin_natural.pdf")
 
-ggplot(data=DB[!is.na(DB$natural),], aes(x=age_months, y=g_calc, colour=natural))+
-  geom_point(aes(size=1/DB[!is.na(DB$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
@@ -345,9 +352,9 @@ ggplot(data=DB[!is.na(DB$natural),], aes(x=age_months, y=g_calc, colour=natural)
 ggsave("natural-age.pdf")
 
 # Effect of vocalness
-vio_voc <- ggplot(data=DB[!is.na(DB$vocal),],aes(x=vocal, y=g_calc))+
+vio_voc <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=vocal, y=g_calc))+
   geom_violin(aes(fill=vocal), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=vocal, y=g_calc, size=1/DB[!is.na(DB$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
+  geom_jitter(aes(x=vocal, y=g_calc, size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_fill_manual(values = c("turquoise2","tomato"), labels=c("artificial","natural"), name = "other sound")+
@@ -356,10 +363,10 @@ vio_voc <- ggplot(data=DB[!is.na(DB$vocal),],aes(x=vocal, y=g_calc))+
 
 ggsave("violin_vocal.pdf")
 
-voc_age <- ggplot(data=DB[!is.na(DB$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
-  geom_point(aes(size=1/DB[!is.na(DB$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+voc_age <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
-  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
@@ -370,8 +377,8 @@ ggsave("vocal-age.pdf")
 
 voc_age
 
-ggplot(data=DB[!is.na(DB$test_lang),], aes(x=age_months, y=g_calc))+
-  geom_point(aes(size=1/DB[!is.na(DB$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(method = "glm", na.rm = TRUE, color='gray40')+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
@@ -381,10 +388,10 @@ ggplot(data=DB[!is.na(DB$test_lang),], aes(x=age_months, y=g_calc))+
 ggsave("age.pdf")
 
 #Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
-ggplot(data=DB[!is.na(DB$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
-  geom_point(aes(size=1/DB[!is.na(DB$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
-  stat_smooth(data=subset(DB, outlier = F), method = "glm", na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
@@ -393,9 +400,9 @@ ggplot(data=DB[!is.na(DB$test_lang),],aes(x=age_months, y=g_calc, colour=test_la
 
 ggsave("lang_age.pdf")
 
-vio_lang <- ggplot(data=DB[!is.na(DB$test_lang),],aes(x=test_lang, y=g_calc))+
+vio_lang <- ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=test_lang, y=g_calc))+
   geom_violin(aes(fill=test_lang), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=test_lang, y=g_calc, size=1/DB[!is.na(DB$test_lang),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  geom_jitter(aes(x=test_lang, y=g_calc, size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "speech sound", labels=c("foreign","native"), na.translate = FALSE)+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
@@ -405,9 +412,9 @@ vio_lang <- ggplot(data=DB[!is.na(DB$test_lang),],aes(x=test_lang, y=g_calc))+
 ggsave("violin_lang.pdf")
 
 #violin plot / contrasted sound
-vio_contrast <- ggplot(data=DB[!is.na(DB$contrast_stim),],aes(x=contrast_stim, y=g_calc))+
+vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim, y=g_calc))+
   geom_violin(aes(fill=contrast_stim), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=contrast_stim, y=g_calc, size=1/DB[!is.na(DB$contrast_stim),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  geom_jitter(aes(x=contrast_stim, y=g_calc, size=1/DB2[!is.na(DB2$contrast_stim),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "contrast sound", na.translate = FALSE)+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   #scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+

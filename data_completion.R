@@ -138,7 +138,7 @@ for (i in 1:nrow(DB)){
       d_calc <- sqrt(db$F / db$n_1) * wc
       es_method  <- "f_two"
     } else {d_calc = NA}
-    #now that effect size are calculated, effect size variance is calculated
+    #now that effect sizes are calculated, effect size variance is calculated
     if (complete(db$n_1, d_calc)) {
       d_var_calc <- (2 * (1 - corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
     } else if (complete(db$d, db$d_var)) {

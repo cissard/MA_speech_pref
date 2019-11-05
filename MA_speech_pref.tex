@@ -141,9 +141,6 @@ they are exposed to.
 \begin{document}
 \maketitle
 
-Authors' contribution: C.I. reviewed literature. C.I. and A.C. coded
-data. C.I., S.T. and A.C.analyzed data. C.I. and A.C. wrote the paper.
-
 \section{Introduction}\label{introduction}
 
 Speech is the main signal for human vocal communication. Adult
@@ -468,14 +465,14 @@ when age is zero.
 ## 
 ## Model: g_calc ~ 1 
 ## 
-## Number of studies = 29 
-## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
+## Number of studies = 39 
+## Number of outcomes = 81 (min = 1 , mean = 2.08 , median = 2 , max = 8 )
 ## Rho = 0.8 
-## I.sq = 80.38913 
-## Tau.sq = 0.1489067 
+## I.sq = 80.69746 
+## Tau.sq = 0.1561011 
 ## 
 ##                Estimate StdErr t-value  dfs    P(|t|>) 95% CI.L 95% CI.U
-## 1 X.Intercept.    0.478 0.0766    6.23 26.9 0.00000116     0.32    0.635
+## 1 X.Intercept.    0.401 0.0642    6.25 36.9 0.00000029    0.271    0.531
 ##   Sig
 ## 1 ***
 ## ---
@@ -489,34 +486,36 @@ when age is zero.
 ## 
 ## Model: g_calc ~ test_lang * mean_age_1 + natural * mean_age_1 + vocal * mean_age_1 + method 
 ## 
-## Number of studies = 29 
-## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
+## Number of studies = 39 
+## Number of outcomes = 81 (min = 1 , mean = 2.08 , median = 2 , max = 8 )
 ## Rho = 0.8 
-## I.sq = 79.74901 
-## Tau.sq = 0.1719252 
+## I.sq = 82.1415 
+## Tau.sq = 0.1980262 
 ## 
-##                          Estimate  StdErr t-value   dfs P(|t|>) 95% CI.L
-## 1           X.Intercept.  0.61408 0.75668   0.812  6.94   0.444 -1.17827
-## 2             test_lang2 -0.52687 0.69383  -0.759 10.02   0.465 -2.07240
-## 3             mean_age_1 -0.00340 0.00526  -0.646  2.42   0.574 -0.02263
-## 4               natural1 -0.10810 0.42229  -0.256  4.16   0.810 -1.26251
-## 5                 vocal1 -0.15907 0.36515  -0.436  4.21   0.685 -1.15328
-## 6               methodCF  0.58562 0.53771   1.089  2.83   0.360 -1.18528
-## 7              methodHPP  0.73931 0.48707   1.518  2.26   0.254 -1.14292
-## 8  test_lang2.mean_age_1  0.00316 0.00287   1.102  8.45   0.301 -0.00339
-## 9    mean_age_1.natural1  0.00306 0.00299   1.026  6.34   0.343 -0.00415
-## 10     mean_age_1.vocal1 -0.00227 0.00303  -0.749  6.62   0.479 -0.00951
+##                           Estimate  StdErr t-value  dfs P(|t|>) 95% CI.L
+## 1           X.Intercept. -0.027566 0.36293 -0.0760 3.08   0.944 -1.16491
+## 2             test_lang2  0.032210 0.23991  0.1343 9.73   0.896 -0.50435
+## 3             mean_age_1 -0.001117 0.00331 -0.3374 3.77   0.754 -0.01054
+## 4               natural1 -0.114875 0.27783 -0.4135 4.78   0.697 -0.83908
+## 5                 vocal1  0.022931 0.24024  0.0955 4.44   0.928 -0.61903
+## 6                method2  0.768738 0.35040  2.1939 2.59   0.130 -0.45342
+## 7                method3  0.807200 0.31769  2.5408 2.40   0.106 -0.36319
+## 8                method4  0.303534 0.33249  0.9129 2.35   0.445 -0.94292
+## 9  test_lang2.mean_age_1  0.000808 0.00112  0.7195 8.18   0.492 -0.00177
+## 10   mean_age_1.natural1  0.002263 0.00216  1.0488 6.73   0.330 -0.00288
+## 11     mean_age_1.vocal1 -0.002506 0.00248 -1.0089 7.35   0.345 -0.00832
 ##    95% CI.U Sig
-## 1   2.40644    
-## 2   1.01866    
-## 3   0.01584    
-## 4   1.04631    
-## 5   0.83515    
-## 6   2.35652    
-## 7   2.62154    
-## 8   0.00971    
-## 9   0.01028    
-## 10  0.00497    
+## 1   1.10978    
+## 2   0.56877    
+## 3   0.00831    
+## 4   0.60933    
+## 5   0.66489    
+## 6   1.99090    
+## 7   1.97760    
+## 8   1.54999    
+## 9   0.00339    
+## 10  0.00741    
+## 11  0.00331    
 ## ---
 ## Signif. codes: < .01 *** < .05 ** < .10 *
 ## ---
@@ -526,24 +525,26 @@ when age is zero.
 \begin{verbatim}
 ## RVE: Correlated Effects Model with Small-Sample Corrections 
 ## 
-## Model: g_calc ~ natural * mean_age_1 
+## Model: g_calc ~ test_lang + natural * mean_age_1 
 ## 
-## Number of studies = 29 
-## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
+## Number of studies = 39 
+## Number of outcomes = 81 (min = 1 , mean = 2.08 , median = 2 , max = 8 )
 ## Rho = 0.8 
-## I.sq = 80.93995 
-## Tau.sq = 0.1700603 
+## I.sq = 81.90769 
+## Tau.sq = 0.1855135 
 ## 
-##                        Estimate  StdErr t-value  dfs P(|t|>) 95% CI.L
-## 1        X.Intercept.  0.589570 0.36139   1.631 3.96   0.179 -0.41749
-## 2            natural1 -0.137200 0.39044  -0.351 8.99   0.733 -1.02061
-## 3          mean_age_1 -0.000655 0.00297  -0.221 3.06   0.839 -0.00999
-## 4 natural1.mean_age_1  0.000695 0.00304   0.228 4.99   0.828 -0.00713
+##                        Estimate  StdErr t-value   dfs P(|t|>) 95% CI.L
+## 1        X.Intercept.  0.301632 0.27701  1.0889  7.13   0.312 -0.35103
+## 2          test_lang2  0.192098 0.15837  1.2130 16.16   0.243 -0.14336
+## 3            natural1 -0.090350 0.29236 -0.3090 10.60   0.763 -0.73681
+## 4          mean_age_1  0.000606 0.00259  0.2338  4.52   0.825 -0.00628
+## 5 natural1.mean_age_1 -0.000232 0.00262 -0.0885  6.54   0.932 -0.00651
 ##   95% CI.U Sig
-## 1  1.59662    
-## 2  0.74621    
-## 3  0.00868    
-## 4  0.00852    
+## 1  0.95429    
+## 2  0.52756    
+## 3  0.55611    
+## 4  0.00749    
+## 5  0.00605    
 ## ---
 ## Signif. codes: < .01 *** < .05 ** < .10 *
 ## ---
@@ -555,24 +556,24 @@ when age is zero.
 ## 
 ## Model: g_calc ~ test_lang + vocal * mean_age_1 
 ## 
-## Number of studies = 29 
-## Number of outcomes = 45 (min = 1 , mean = 1.55 , median = 1 , max = 3 )
+## Number of studies = 39 
+## Number of outcomes = 81 (min = 1 , mean = 2.08 , median = 2 , max = 8 )
 ## Rho = 0.8 
-## I.sq = 80.85368 
-## Tau.sq = 0.1772125 
+## I.sq = 81.71522 
+## Tau.sq = 0.18418 
 ## 
 ##                      Estimate  StdErr t-value   dfs P(|t|>) 95% CI.L
-## 1      X.Intercept.  0.639783 0.33516   1.909 16.14  0.0742 -0.07024
-## 2        test_lang2  0.035320 0.17727   0.199 14.78  0.8448 -0.34301
-## 3            vocal1 -0.408076 0.31403  -1.299 12.54  0.2172 -1.08902
-## 4        mean_age_1 -0.000436 0.00355  -0.123  4.49  0.9076 -0.00989
-## 5 vocal1.mean_age_1  0.001172 0.00358   0.327  6.79  0.7533 -0.00735
+## 1      X.Intercept.  0.388278 0.25574  1.5183 10.31   0.159 -0.17923
+## 2        test_lang2  0.166826 0.14197  1.1751 23.49   0.252 -0.12653
+## 3            vocal1 -0.222663 0.24389 -0.9130 17.52   0.374 -0.73607
+## 4        mean_age_1  0.000359 0.00268  0.1343  4.94   0.898 -0.00655
+## 5 vocal1.mean_age_1  0.000261 0.00272  0.0961  7.56   0.926 -0.00606
 ##   95% CI.U Sig
-## 1  1.34980   *
-## 2  0.41365    
-## 3  0.27287    
-## 4  0.00902    
-## 5  0.00969    
+## 1  0.95578    
+## 2  0.46018    
+## 3  0.29074    
+## 4  0.00727    
+## 5  0.00659    
 ## ---
 ## Signif. codes: < .01 *** < .05 ** < .10 *
 ## ---
@@ -634,8 +635,8 @@ High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure
 
 \subsection{Summary effect size}\label{summary-effect-size}
 
-We found a mean weighted effect size g =0.48 (SE = 0.08 CI = {[}0.32 ,
-0.63{]}).
+We found a mean weighted effect size g =0.40 (SE = 0.06 CI = {[}0.27 ,
+0.53{]}).
 
 \begin{figure}
 \centering
@@ -658,13 +659,8 @@ literature
 \end{figure}
 
 \begin{verbatim}
-## 
-## Regression Test for Funnel Plot Asymmetry
-## 
-## model:     mixed-effects meta-regression model
-## predictor: standard error
-## 
-## test for funnel plot asymmetry: z = 6.8548, p < .0001
+## pdf 
+##   2
 \end{verbatim}
 
 \begin{verbatim}
