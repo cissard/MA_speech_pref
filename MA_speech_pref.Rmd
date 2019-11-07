@@ -82,6 +82,10 @@ temp<-aggregate(n~same_infant,DB2,mean)
 
 summary(DB2$mean_age_1)
 ```
+## Aknowledgement
+
+This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
+
 # Introduction
 
 Speech is the main signal for human vocal communication. Adult individuals efficiently detect speech sounds in their environment, and use them to spot conspecifics and build social interactions. Since seminal experimental results suggest that infants react more to speech than to certain other sounds (Ecklund-Flores & Turkewitz, 1996), it is conceivable that newborns are equipped with a preference for speech sounds, and that human infants become further entrenched in this preference as they age and gain additional exposure to speech.  Here, we synthesize empirical data on infants’ preferences for speech over artificial sounds, natural sounds, as well as human non-speech sounds, with the hope of illuminating the strength of evidence supporting various theories proposed to explain infants' preferential listening and processing studies.
@@ -214,25 +218,22 @@ simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REM
 #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
 DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
-base_model2 <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+#base_model2 <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
 
 #method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 method_model <- robu(g_calc ~ method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
-  
 #method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier & !is.na(DB2$method))
 
 # models with moderators of interest. 
 
 #model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
 model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-
 #vocal_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
-
-#natural_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
 
 #model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
 model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+#natural_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
 
 #full_model2 <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
 full_model <- robu(g_calc ~ test_lang + natural + vocal + mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
@@ -245,6 +246,7 @@ print(full_model)
 print(model_natural)
 
 print(model_vocal)
+
 #look if the contrasted stimulus itself makes a difference
 table(DB2$contrast_stim) #nb of ES/contrast (sound type contrasted to speech)
 tapply(DB2$g_calc,DB2$contrast_stim,mean, na.rm=T)
@@ -253,15 +255,33 @@ tapply(DB2$g_calc,DB2$contrast_stim,mean, na.rm=T)
 
 
 ```{r residuals}
-#ac 2019-10-28 there was a bug here
 
-reg=lm(DB2$g_calc[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$method[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
-regres=residuals(reg)
+method_reg = lm(DB2$g_calc[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$method[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
 
-plot(regres ~ DB2$natural[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
+DB2$method_res[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] = residuals(method_reg)
 
 #vocal
+ggplot(data=DB2[!is.na(DB2$g_calc),], aes(x=age_months, y=method_res, colour=vocal))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$g_calc),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB2[!is.na(DB2$g_calc),], outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_colour_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
 #natural
+plot(DB2$method_res[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$natural[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)], xlab="natural", ylab="Residuals")
+
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=natural))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
 #language
 
 ```
@@ -357,7 +377,7 @@ vio_voc <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=vocal, y=g_calc))+
   geom_jitter(aes(x=vocal, y=g_calc, size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_fill_manual(values = c("turquoise2","tomato"), labels=c("artificial","natural"), name = "other sound")+
+  scale_fill_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15))
 
@@ -388,15 +408,15 @@ age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
 ggsave("age.pdf")
 
 #Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
-ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=age_months, y=g_calc, colour=test_lang))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
   theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+  theme(text = element_text(size = 15), legend.position = c(.9, .8))
 
 ggsave("lang_age.pdf")
 

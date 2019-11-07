@@ -2,17 +2,13 @@ setwd("/Users/Cecile/Documents/MA_speech_pref")
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
-library(metafor)
-library(robumeta)
 library(dplyr)
 library(tidyr)
-library(ggplot2)
 library(stringr)
 library(purrr)
 library(grid)
 library(gridExtra)
 library(RCurl)
-library(papaja)
 
 # Comment out next set of lines for RECALCULATION
 require(RCurl)
