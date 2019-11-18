@@ -25,9 +25,10 @@ affiliation:
 #   Enter author note here.
 
 abstract: |
-The human auditory system is amazingly efficient at processing speech. Some works suggest that this capacity is present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, in experimental studies, a large variety of sounds have been contrasted to speech, with infants of very different ages. Drawing a global picture of how this capacity emerges is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over any other type of sound. Contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference from birth to one year of age. Still contrary to what individual studies suggested, we found the same amount of preference whether speech was contrasted to other natural sounds or to artificial sounds; as well as whether speech was contrasted to other vocal sounds or to non-vocal sounds. Preference was stronger when the speech stimuli were in the infants' native language. This suggests that the representation of speech as a distinct auditory object comes fromis modulated by the degree of familiarity with the sounds of the language they are exposed to.
+The human auditory system is amazingly efficient at processing speech, with a preference for these sounds reported by full term birth. More generally, infants tested at a variety of ages have been presented with contrasts between native or foreign speech and another sound, which may be vocal or not, natural or not. These data constitute a rich pool of evidence that can be sourced from to assess to what extent familiarity, vocal quality, and naturalness affect speech preference across development. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity, vocal quality, or naturalness. We found no effect of age: infants showed the same strength of preference throughout the first year of life. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants. 
+
   
-  keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
+keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
 wordcount         : "X"
 
 # bibliography      : ["r-references.bib"]
@@ -47,7 +48,7 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include=F}
 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = FALSE, echo = FALSE) #options for all the code chunks of the document.
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, cache = FALSE, echo = FALSE, include = F) #options for all the code chunks of the document.
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
@@ -88,173 +89,110 @@ This work was supported by an Agence Nationale de la Recherche grant to A.C. (AN
 
 # Introduction
 
-Speech is the main signal for human vocal communication. Adult individuals efficiently detect speech sounds in their environment, and use them to spot conspecifics and build social interactions. Since seminal experimental results suggest that infants react more to speech than to certain other sounds (Ecklund-Flores & Turkewitz, 1996), it is conceivable that newborns are equipped with a preference for speech sounds, and that human infants become further entrenched in this preference as they age and gain additional exposure to speech.  Here, we synthesize empirical data on infants’ preferences for speech over artificial sounds, natural sounds, as well as human non-speech sounds, with the hope of illuminating the strength of evidence supporting various theories proposed to explain infants' preferential listening and processing studies.
+Given the importance of speech for human vocal communication, it is conceivable that infants are born equipped with a preference for speech, which becomes stronger with age and exposure. Here, we synthesize empirical data on infants’ preferences for speech over non-speech sounds to assess the explanatory role of three factors: stimulus naturalness, vocal quality, and familiarity.
+
 [insert Figure 1 here]
 
+
 ## Potential dimensions underlying preference patterns
-There are three key conceptual explanations for infants preference for speech: (a) Preference for natural over artificial sounds; (b) preference for vocal over non-vocal sounds; and (c)  preference for familiar over unfamiliar sounds (see Figure 1 for a representation of these distinctions). These three explanations are mutually compatible, such that one or more may be found to be true. In this section, we explain how these explanations differ, and briefly review some results on each, before turning to the potential effects of age. 
+There are three key conceptual explanations for infants preference for speech over competitor sounds: Preference for (a) natural over artificial sounds; (b) familiar over unfamiliar sounds; and (c) vocal over non-vocal sounds (Figure 1). These explanations are mutually compatible, and one or more may be true.
 
 ### Natural versus artificial sounds
 
-Natural sounds are those produced with biological systems, including vocal tracts but also the sound of walking and heart rate. Inspection of their acoustic characteristics reveals that in many cases natural and artificial sounds may not have the same structure. For example, backward speech has unnatural formant transitions and seemingly abrupt closures that are not found in naturally produced sounds. We know that natural sounds are processed more accurately by the auditory system, from the cochlea (Lewicki, 2006) to the auditory cortex (e.g. Gehr et al., 2000; see Mizrahi et al., 2014 for a review). As a result, we can expect a preference for speech over artificial sounds that is present from birth and stable over age, predictions that seem to be validated in a first glance of the literature (Vouloumanos & Werker, 2007; Vouloumanos, 2014).  
+Natural sounds are those produced by biological systems, including vocal tracts but also the sound of walking and heart rate. In many cases natural and artificial sounds differ in their  acoustic characteristics. For example, backward speech has unnatural formant transitions and seemingly abrupt closures compared to naturally produced sounds. Natural sounds are processed more accurately by the auditory system, from the cochlea (Lewicki, 2006) to the auditory cortex (e.g. Mizrahi et al., 2014). This predicts a preference for speech over artificial competitors that is present from birth, consistent with existing literature (e.g., Vouloumanos & Werker, 2007).  
+
 
 ### Familiarity
 
-An alternative to the above explanation could be proposed based on familiarity: Perhaps infants prefer speech to foils when these vary in the level of familiarity, since artificial sounds may be less common (and thus less familiar to the infants) than natural sounds.  There are no behavioral results directly testing the prediction that infants show stronger preferences when tested with more familiar speech stimuli (for instance, spoken in their native, as compared to a foreign language), but results from neuroimaging studies do predict indirect evidence for this view. For instance,  newborns' brain activation was different for forward than to backward speech when the native language was used as the speech stimuli, but not when a foreign language was used (Sato et al., 2012; May et al., 2018). 
+Perhaps infants prefer speech to other sounds since it is a frequent sound. Newborns prefer their native speech to prosodically distinct foreign speech (e.g., Mehler et al., 1988), which supports a preference for sound patterns heard frequently in the womb. There are no behavioral results directly testing the prediction that infants show stronger preferences for speech over a foil when tested with more familiar speech stimuli (for instance, spoken in their native, as compared to a foreign language), but results from neuroimaging studies provide indirect evidence for this view. For instance, newborns' brain activation was different for forward than backward speech when the native language was used as the speech stimuli, but not when a foreign language was used (May et al., 2018). 
 
 
 ### Vocal versus non-vocal sounds
 
-Many results summarized above may be accommodated by a third hypothesis, postulating a preference for vocal over non-vocal sounds. Vocal sounds are those made with a mouth, and thus typically a subset of natural sounds. There is some evidence which is easy to explain with this hypothesis but cannot be predicted from the natural sound preference or the familiarity preference: Newborns made more head-turns to speech than to heartbeat (Ecklund-Flores & Turkewitz, 1996), but they listened equivalently to speech and monkey calls (Vouloumanos & Werker, 2010). Arguably, speech and heartbeat are equally natural and they are both familiar to a newborn and thus this result cannot be accommodated by either of the other explanations. 
-Changes as a function of development
+Many results summarized above may be accommodated by a third hypothesis, postulating a preference for vocal over non-vocal sounds. Vocal sounds are those made with a mouth, and thus typically a subset of natural sounds. Newborns made more head-turns to speech than to heartbeat (Ecklund-Flores & Turkewitz, 1996), arguably both equally natural and familiar to them, but they listened equivalently to speech and monkey calls, despite the greater familiarity of the former (Vouloumanos & Werker, 2010). 
 
-When infants are born at term, they have already experienced speech and natural sounds more generally for about three months (and throughout their auditory lifelong experience). While little is known about production experience in utero and how this may affect their perception of sounds as being vocal, it is certain that newborns will have experienced their native speech, which other work suggests newborns prefer to prosodically distinct foreign speech (REF). The latter finding actually suggests a potential inconsistency in findings in this body of literature: While the preference for native over foreign speech is consistent with the familiarity preference discussed above, this familiarity may also predict a preference for native speech over monkey vocalizations, which has not obtained (REF). In fact, 1- to 4-month-old infants responded more to speech than to other human sounds (Shultz & Vouloumanos, 2010). To complicate matters further, one study reports that 9-month-olds listened longer to monkey calls than speech (Sorcinelli et al., 2019), which is in stark contradiction with a preference systematically driven by familiarity.
-Setting this issue aside, it remains clear that as infants age, they gain experience with stimuli in their environment as well as their own vocal production. In addition to the effects of experience, development of the auditory pathway may affect perception (e.g., Mazuka, XX, & Tsuji, 2018). These age-related changes may affect the preference for speech in various ways. One of them is by infants' developing an increasingly narrow and precise definition of the spoken stimulus they prefer. Indeed, whereas newborns do not prefer speech over monkey calls, three-month-olds do (Vouloumanos et al., 2010). If the definition of speech becomes increasingly narrow, it is conceivable that some of the naturalness, familiarity, and vocal quality effects would change as a function of age, such that very close stimuli (e.g., speech versus another natural sound) initially leads to a weak preference, but, as infants age, this preference may be as strong as that found for very different stimuli (e.g., speech versus an artificial sound).
-While many articles discuss potential changes in the pattern of preference as a function of age (e.g. Ferry et al., 2013; Shultz & Vouloumanos, 2010; Shultz et al., 2014), only two papers from the same laboratory that we know of includes multiple age groups tested with the exact same stimuli and procedure (Vouloumanos et al., 2010; Vouloumanos & Werker, 2004), such that comparisons are often done using the demonstrably problematic method of stating "there is a difference here but not there, therefore there is an interaction" (REF).
+### Changes as a function of development
+
+Development may affect the preference for speech in various ways. Whereas newborns do not prefer speech over monkey calls, three-month-olds do (Vouloumanos et al., 2010). This suggests that as they age, infants might develop an increasingly narrow definition of the stimulus they prefer. In this case  naturalness, familiarity, and vocal quality effects should change as a function of age:  Very close stimuli (e.g., speech versus another natural sound) initially leads to a weak preference, but, as infants age, this preference may be as strong as that found for very different stimuli (e.g., speech versus an artificial sound).
+Many articles discuss potential changes in the pattern of preference as a function of age (e.g. Ferry et al., 2013; Shultz & Vouloumanos, 2010; Shultz et al., 2014). To our knowledge, only two papers from the same laboratory include multiple age groups tested with the exact same stimulus categories and procedure (Vouloumanos et al., 2010; Vouloumanos & Werker, 2004). In fact, statements about age-related changes are often done using the demonstrably problematic method of concluding that there is an interaction without actually testing for it statistically  (Gelman & Stern, 2012). It is therefore important to directly test these statements.
 
 
 ## A meta-analytic approach
 
-In sum, previous work on infants' preferences is broadly compatible with preference for natural over artificial, vocal over non-vocal, and familiar over unfamiliar sounds, potentially interacting with infants' age. Some key predictions are unfortunately missing, including the effect of familiarity and the potential interactions with age. In this paper, we seek to shed light on these gaps by employing a meta-analytic approach. 
+In sum, previous work on infants' preferences is broadly compatible with preference for natural over artificial, vocal over non-vocal, and familiar over unfamiliar sounds, potentially interacting with infants' age. In this paper, we seek to directly test these interpretations of the literature by employing a meta-analytic approach. 
+Meta-analyses involve  combining studies that may vary in their methodology. One limitation is therefore that one cannot isolate specific variables as well as in direct experimentation. Therefore, meta-analyses may miss subtle effects. Nonetheless, they  have several useful features. They can reveal small effects not obvious in individual studies by combining them to obtain larger samples. Additionally, by integrating data across different laboratories, they provide evidence for the generalizability of effects across labs. Finally, meta-analyses offer tools to detect publication bias in the literature. 
 
-Meta-analyses offer a way to test the effect of factors that are not part of the original design, by redescribing the stimuli used as a function of those factors and thus combining individual studies that tested different stimuli from a common category (e.g., natural sounds). Meta-analyses may also be able to reveal small effects not obvious in smaller studies because they can be based on combined, and therefore larger, samples. Additionally, by merging across studies carried out by different researchers and in different laboratories, they provide statistical evidence of how much we can trust that the results will replicate to new samples tested elsewhere: If an effect emerges in this combined dataset, it is more likely to be a replicable one that different labs can find. Finally, meta-analyses offers tools to detect publication bias in the literature, providing an index of to what extent global results are trustworthy. 
+Specifically for the present case, a meta-analysis allows to statistically test different explanations. We can test the effect of factors that are not part of the original design, by redescribing the stimuli used as a function of those factors. For instance, a study measuring preference for native speech over native backward speech provides data on a natural versus artificial, as well as a vocal versus non-vocal contrast. We can also draw a developmental timeline across the age range covered by the literature. 
 
-More specifically in the present case, a meta-analysis allows to draw a developmental timeline across the age range covered by the literature, and statistically test how the different factors discussed in different individual studies interact with age in ways that individual studies on speech preference have not yet done. Importantly, previous meta-analyses in infant perception have provided important theoretical and empirical insights that contradicted qualitative reviews. For example, it has been proposed that infants’ preference for novel or familiar items related to infants' age such that, all things equal, younger infants showed familiarity preferences whereas older infants exhibited novelty preferences (Hunter & Ames, 1988). However, Bergmann and Cristia (2016?) found stable familiarity preferences for word segmentation in natural speech across the first two years; and Black and Bergmann (2016) found a stable novelty effect for artificial grammars implemented in synthesized speech and a stable familiarity effect for those implemented in natural speech. Meta-analysis are therefore important to statistically and systematically test the theoretical predictions proposed in qualitative reviews.
-However, meta-analyses have an important limitation we should bear in mind. To begin with, we  combine studies with different experimental designs together, which does not allow us to isolate specific variables as well as direct experimentation does. As a result, one can use them to focus on common factors between studies, but may miss subtle effects that require such experimental isolation. 
-Given the scarcity of direct evidence on the potential explanations laid out above (naturalness, vocal quality, and familiarity, as a function of age), we conducted a meta-analysis to test whether infants' preference for speech sounds over other types of sounds is stable in newborns, and how it develops over the first year of life. Based on previous individual studies, we predicted that infants will show (see Figure 2): 
-1. a preference for speech over artificial sounds that was stable over development; 
-2. a greater preference for speech over other vocal sounds as a function of age;
-3. a greater preference for native speech over foils as a function of age, whereas the opposite will take place for foreign speech.
+Meta-analyses can even provide theoretical and empirical insights that contradict qualitative reviews. For example, it has been proposed that infants’ preference for novel or familiar items related to infants' age such that, all things equal, younger infants showed familiarity preferences whereas older infants exhibited novelty preferences (Hunter & Ames, 1988). However, Bergmann and Cristia (2016?) found stable familiarity preferences for word segmentation in natural speech across the first two years; and Black and Bergmann (2016) found a stable novelty effect for artificial grammars implemented in synthesized speech whereas  those implemented in natural speech led to stable familiarity preferences. Meta-analyses are therefore important to statistically and systematically test the theoretical predictions proposed in qualitative reviews.
 
-In addition, since we were engaging in a systematic review for this meta-analysis, we decided to also include neuroimaging and electrophysiological studies. Although these studies can sometimes shed light on functional specialization, they are often used as proxies for the depth of treatment of information, and can thus provide indirect evidence on the perceptual basis for a preference. Put otherwise, if we find a difference in the neural bases, it is possible that a preference would be observed were infants of the same age tested with the same stimuli in a behavioral preference setup. In contrast, if there is no difference in processing at all, it seems unlikely that a preference could emerge.  
+Given the scarcity of direct evidence on the potential explanations laid out above (naturalness, vocal quality, and familiarity, as a function of age), we conducted a meta-analysis to test whether infants' preference for speech sounds over other types of sounds is stable in newborns, and how it develops over the first year of life. Assuming all three factors are true, and further assuming that the definition of the preferred stimulus narrows with age, we predicted that infants will show (see Figure 2): 
+1. a greater preference for speech over natural sounds as a function of age, but a stable preference for speech over artificial sounds that is stable over development, 2. but an increasing preference for speech over natural sounds; 
+3. a greater preference for speech over other vocal sounds as a function of age, but a stable preference for speech over non-vocal sounds over development;
+4. a greater preference for native speech over non-speech as a function of age, but a smaller preference for foreign speech over non-speech with age .
 
 # Methods
 
-To ensure quality, we followed recommendations from the Preferred Reporting Items for Systematic reviews and Meta-Analyses (PRISMA; Moher et al., 2009). The PRISMA checklist and flowchart as well as other information can be found on the online supplementary materials (Anonymized, 2019).
-
 ## Literature search
-The information sources used to compose the initial list included suggestions by experts (authors of this work); two google scholar searches (“ ("speech preference" OR "own-species vocalization" ) AND infant”, and “("speech preference" OR "own-species vocalization" ) AND infant - "infant-directed" ”) complemented with the same searches in PubMed and PsycInfo; and a google alert, as well as inspection of the reference lists of all full included papers.
+
+We composed the initial list of studies with suggestions by experts (authors of this work); one google scholar searches ( ("speech preference" OR "own-species vocalization") AND infant - "infant-directed"), the same search in PubMed and PsycInfo (last searches on 24/09/2019); and a google alert. We also inspected the reference lists of all included papers.
 
 ## Inclusion criteria
-After a first screening based on titles and abstracts using more liberal inclusion criteria, we decided on inclusion based on full paper reading as follows. We included studies that tested human infants from birth to 1 year of age, and contrasted speech sounds with any other type of sound, measuring behavioral (e.g., looking times) or neurophysiological responses to the sounds (EEG, fNIRS, fMRI, MEG). We excluded studies that only contrasted foreign against native language, did not present natural speech sounds at all, presented speech in the mother’s voice, or intentionally mixed speech with other vocal sounds within the same sound condition. We included published (i.e., journal articles) as well as unpublished works (i.e., doctoral dissertations as long as sufficient information was provided). A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; Anonymized, 2019).
+
+After a first screening based on titles and abstracts using more liberal inclusion criteria, we decided on inclusion based on full paper reading. We included studies that tested human infants from birth to 1 year of age, and contrasted speech sounds with any other type of sound, measuring behavioral responses to the sounds (e.g., looking times). We excluded studies that only contrasted foreign against native language, did not present natural speech sounds at all, presented speech in the mother’s voice, or intentionally mixed speech with other vocal sounds within the same sound condition. We also excluded neuroimaging studies to avoid mixing results from different brain regions with different response profiles. We included published (i.e., journal articles) as well as unpublished works (i.e., doctoral dissertations as long as sufficient information was provided). 
+
+A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; Anonymized, 2019).
 
 [Insert Figure 3 here]
 
 ## Coding
-The full list of the variables coded is available in the supplementary material. Important to the present project are infant age, methodological variables (testing method: central fixation, head-turn preference procedure, high amplitude sucking/passive listening), and key stimuli characteristics. Specifically, we coded the language in which the speech sounds were recorded (native or foreign language), and natural, vocal for the sound opposed to speech. A sound was coded as natural if it was produced by a biological organism without any further acoustic manipulation. If the authors applied acoustic manipulations it was coded as artificial. A sound was considered as vocal if it was produced by an animal vocal tract, either original or modified.  
+The critical variables for our purpose are infant age, methodological variables (testing method: central fixation, high amplitude sucking, head-turn preference procedure, high amplitude sucking/passive listening), and key stimuli characteristics. Specifically, we coded the language in which the speech sounds were recorded (native or foreign), and  whether the sound opposed to speech was natural or not, vocal or not. This competitor was coded as natural if it was produced by a biological organism without any further acoustic manipulation. If the authors applied acoustic manipulations it was coded as artificial. This sound was considered as vocal if it was produced by an animal vocal tract, either original or modified.  
 
-Data were coded by the first author. In addition, 20% of the papers were selected to be coded by the second author independently, with disagreements resolved by discussion. There were 10 disagreements out of a total of 260 fields filled in indicative of the coders not following the codebook, which led to a revision of all data in four variables. 
+Data were coded by the first author. In addition, 20% of the papers were randomly selected to be coded by the second author independently, with disagreements resolved by discussion. There were 10 disagreements out of a total of 260 fields filled in indicative of the coders not following the codebook, which led to a revision of all data in four variables. 
 
-We coded all the statistical information reported in the included papers.  If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When individual data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes  were directly reported as a Cohen’s d or a Hedges' g, we also coded this. 
+We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes  were directly reported as a Cohen’s d or a Hedges' g, we also coded this. 
 
-It was not feasible to code risk at the level of papers, since in this literature there are no cases of conflict of interest that are as easily discovered as in the medical literature. 
-
-## Statistical analysis
-
-### Individual effect sizes
-
-Once the data were coded, we computed individual effect sizes (Cohen's d) that were not directly reported in the papers, along with their respective variance. 
-We first computed the correlation between the two measurements (e.g. looking time during speech and during monkey calls). We computed this correlation based on the t-statistic, the respective means and SDs (Lipsey \& Wilson, 2001) if they were all reported. If not, we imputed this correlation randomly.  We computed effect size using the respective means and SDs (Lipsey & Wilson, 2001). If they were not reported, we computed effect size based on t- or F-statistic (Dunlap et al., 1996). We finally calculated the variance of each effect size (Lipsey & Wilson, 2001).. 
-
-Effect sizes were first computed as Cohen's d, and then transformed to Hedges' g by multiplying d by a correction based on the degree of freedom (REF). 
-The R code used to calculate effect sizes is available in the online supplementary materials (Anonymized, 2019).
-
-### Meta-analytic models
-
-We first estimated the global effect size in this literature by fitting a meta-analytic regression without any moderator using the R package Robumeta**(REF)**. Next, we used the R package Robumeta **(REF)** to fit meta-analytic regressions that take into account the hierarchical structure of the data, including effect sizes possibly obtained from the same infants groups within papers. We specified the following moderators:
-
-- mean age of children;
-- experimental method (Central fixation, Head-turn Preference Procedure, High Amplitude Sucking/Passive Listening);
-- familiarity with the language used (native or foreign);
-- naturalness of the contrastive sound (coded as yes if it was natural and no otherwise).
-- vocalness of the contrastive sound (coded as yes if it was vocal and no otherwise).
-- interactions with age for familiarity, naturalness, and vocalness. 
-
-We did not center age. Centering age makes the intercept (global effect size) correspond to the mean age of the dataset, which would be preferable in datasets where age does not vary much or is not a crucial moderator. However, inspection of our predictions in Figure 1 reveals that we have clear expectations regarding main effects and interactions which are best reflected if age is not centered. The intercept (global effect size) in this model therefore corresponds to the preference found when age is zero. 
+The PRISMA checklist, data, and code can be found on the online supplementary materials ([Anonymized](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), 2019).
 
 
-```{r moderators, include=FALSE}
-#distribution of moderators
-g_age <- tapply(DB2$g_calc, DB2$mean_age_1, mean)#ES by age
-table(DB2$natural)#no. of natural and non-natural data points
-table(DB2$vocal)#no. of vocal and non-vocal data points
-table(DB2$homospecific)#no. of homo- and heterospecific data points
-table(DB2$homospecific,DB2$vocal)
-table(DB2$natural,DB2$vocal)
-table(DB2$contrast_stim)
+## Effect sizes
 
-#setting up of predictors 
-#http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
+Once the data were coded, we extracted effect sizes, along with their respective variance. Effect sizes were standardized differences (Cohen’s d) between response to speech and to the other sound.
+If they were not directly reported in the papers, we computed them using the respective means and SDs (@Lipsey & Wilson, 2001), or a t- or F-statistic (@Dunlap et al., 1996). As our effect sizes came from within-subject comparisons (e.g. looking time of the same infant during speech and during monkey calls), we needed to take into account the correlation between the two measurements in effect sizes and effect size variances computations. We computed this correlation based on the t-statistic, the respective means and SDs (@Lipsey \& Wilson, 2001) if they were all reported; or imputed this correlation randomly if not. We finally calculated the variance of each effect size (@Lipsey & Wilson, 2001). Cohen's d were transformed to Hedges' g by multiplying d by a correction for small sample sizes based on the degree of freedom (Borenstein et al., 2011). This procedure led to XX (some of them coming from the same infant group, hence not mutually independent) effect sizes, XX from published, peer-reviewed paper, and 1 from a thesis.
 
-#check that the experimental method doesn't make a difference
-relevel(DB2$method,"HAS")->DB2$method #put HAS as the 1st level
-#dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
-contrasts(DB2$method) = contr.treatment(length(levels(DB2$method)),base=1) #baseline method should be HAS because it's the one used with newborns
+All analyses use the R [CITER] package Robumeta (@Hedges et al., 2010), which allows to fit meta-analytic regressions that take into account the correlated structure of the data, when repeated measures are obtained from the same infant groups within papers. 
 
-#check that the language doesn't make a difference (true speech preference and not pref for native language, hence familiarity)
-contrasts(DB2$test_lang) <- contr.treatment(length(levels(DB2$test_lang)),base=1)
+# Results
 
-#moderators of interest
-contrasts(DB2$natural) <- contr.treatment(length(levels(DB2$natural)),base=2)
+## Database description
 
-DB2$homospecific <- factor(DB2$homospecific)
-contrasts(DB2$homospecific) <- contr.treatment(length(levels(DB2$homospecific)))
+We found a total of `r length(papers)` papers reporting `r length(DB2$g_calc)` (not mutually independent) effect sizes, see Table 1. `r length(papers)` papers have been submitted to or published in peer-reviewed journals (citations). The remaining 1 paper was a thesis  (@Ference2018).
 
-DB2$vocal <- factor(DB2$vocal)
-contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
+Studies tended to have small sample sizes, with a median N of `r median(DB2$n)` children (Range = `r max(DB2$n)-min(DB2$n)`, M = `r mean(DB2$n)`, Total: `r round(sum(temp$n))`).
+Infants ranged from `r round(min(DB2$mean_age_1)/30.44)` to `r round(max(DB2$mean_age_1)/30.44)` months (`r min(DB2$mean_age_1)` to `r max(DB2$mean_age_1)` days), although the majority were under 9 months of age (71.42% of the studies). Individual samples comprised `r round(mean(DB2$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
+Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB2$method))` experimental methods were used: 12 studies used Central Fixation (CF) (@Cooper & Aslin,1994; @Vouloumanos & Werker (2004); @Vouloumanos et al. (2010); @Shultz & Vouloumanos (2010); @Colombo & Bundy (1981); @Vouloumanos et al. (2009); @Sorcinelli et al. (2019); @Yamashiro et al. (2019); @Segal & Kishon-Rabin (2011); @Curtin & Vouloumanos (2013); @Vouloumanos & Curtin (2014); @Ference, 2018); 3 used High-Amplitude Sucking (HAS) (@Vouloumanos & Werker, 2007; @Vouloumanos et al., 2010; @Spence & DeCasper, 1987); and 1 used Head-turn Preference Procedure (HPP) (@Ecklund-Flores & Turkewitz, 1996).
 
-DB2$contrast_stim <- factor(DB2$contrast_stim)
-contrasts(DB2$contrast_stim) <- contr.treatment(length(levels(DB2$contrast_stim)),base=13)
-```
+## Summary effect size
 
-
-
-```{r models, include = TRUE}
-
-#fit models
-
-simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) #for trim & fill and funnel plot
-
+```{r forest plot}
 #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
 DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
-#base_model2 <- robu(g_calc ~ 1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
+# Model without moderators to get the summary effect size
 base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
 
-#method_model <- robu(g_calc ~ method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-method_model <- robu(g_calc ~ method, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
-#method_model <- rma.mv(g_calc, g_var_calc, mods = ~method, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier & !is.na(DB2$method))
+# same model with metafor for a nice forest plot 
+simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) 
 
-# models with moderators of interest. 
-
-#model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
-model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-#vocal_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + vocal*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
-
-#model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T) 
-model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-#natural_metafor <-rma.mv(g_calc, g_var_calc, mods= ~ test_lang + natural*agec, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier, slab =DB2$short_cite)
-
-#full_model2 <- robu(g_calc ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, data=DB2, modelweights = "HIER", studynum = same_infant, var.eff.size = g_var_calc, small = T)
-full_model <- robu(g_calc ~ test_lang + natural + vocal + mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-#full_metafor <- rma.mv(g_calc, g_var_calc, mods = ~ test_lang*mean_age_1 + natural*mean_age_1 + vocal*mean_age_1 + method, random = ~ 1 | study_ID/same_infant, data=DB2, method = "REML", subset=!DB2$outlier & !is.na(DB2$method))
-
-print(base_model)
-
-print(full_model)
-
-print(model_natural)
-
-print(model_vocal)
-
-#look if the contrasted stimulus itself makes a difference
-table(DB2$contrast_stim) #nb of ES/contrast (sound type contrasted to speech)
-tapply(DB2$g_calc,DB2$contrast_stim,mean, na.rm=T)
-#large diff between samples sizes -> imp to run a model.
+for_plot = forest.rma(simple_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
+#dev.off()
 ```
 
+Integrating across all studies in a meta-analytic regression without any moderator, we found a summary effect size g of `r base_model$reg_table$b.r` (SE = `r base_model$reg_table$SE` CI = [`r base_model$reg_table$CI.L` , `r base_model$reg_table$CI.U`]), corresponding to a medium effect size. 
+
+
 ```{r resampling}
-# We repeat correlation imputation and recompute effect sizes 100 times to check it doesn't change the results.
+# Sanity check: We repeat random imputation of missing correlation between the two measures (done in data_completion.R for the main database), and recompute effect sizes 100 times to check it doesn't change the results.
 library(Hmisc)
 
 #set up the dataframe that will contain the results after resampling (one line per resampling)
@@ -340,6 +278,172 @@ resamp_alphas <- length(resamp_alphas[resamp_alphas==0])/length(resamp_alphas)
 resamp_alphas
 ```
 
+## Publication bias
+
+We assessed the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure 4). A regression test on these data was significant (z = 6.40, p < 0.0001), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = 0.5172, p < .0001), indicating a publication bias in the literature.
+To further investigate this bias, we  symmetrized the funnel plot with the “trim and fill” method (Duval, 2005). XX18 (SE = XX5.87) missing studies were needed on the left side of the plot to symmetrize the funnel plot. 
+
+[insert Figure 4 here]
+
+```{r publication bias, fig.align="center", include = F}
+
+#add symmetrize
+tf <- trimfill(simple_model) 
+fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
+
+
+#Figure
+png(filename = "Funnel.png")
+
+#funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
+dev.off()
+
+# testing for asymetry (indicates a publication bias) #ac this is highly significant
+SEg = regtest(DB2$g_calc,DB2$g_var_calc)
+k = ranktest(DB2$g_calc,DB2$g_var_calc)
+
+```
+
+
+## Moderator analyses
+
+We then tested if the preference found above could be explained by the dimensions discussed in the literature. Following our hypothesis, we fit a meta-analytic model with the following moderators: 
+
+- mean age of children;
+- familiarity with the language used (native or foreign);
+- naturalness of the contrastive sound (coded as yes if it was natural and no otherwise).
+- vocal quality of the contrastive sound (coded as yes if it was vocal and no otherwise).
+
+```{r moderators}
+#distribution of moderators
+g_age <- tapply(DB2$g_calc, DB2$mean_age_1, mean)#ES by age
+table(DB2$natural)#no. of natural and non-natural data points
+table(DB2$vocal)#no. of vocal and non-vocal data points
+table(DB2$homospecific)#no. of homo- and heterospecific data points
+table(DB2$homospecific,DB2$vocal)
+table(DB2$natural,DB2$vocal)
+table(DB2$contrast_stim)
+
+#setting up of predictors 
+#http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
+
+#check that the experimental method doesn't make a difference
+relevel(DB2$method,"HAS")->DB2$method #put HAS as the 1st level
+#dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
+contrasts(DB2$method) = contr.treatment(length(levels(DB2$method)),base=1) #baseline method should be HAS because it's the one used with newborns
+
+#moderators of interest
+contrasts(DB2$test_lang) <- contr.treatment(length(levels(DB2$test_lang)),base=1)
+
+contrasts(DB2$natural) <- contr.treatment(length(levels(DB2$natural)),base=2)
+
+DB2$vocal <- factor(DB2$vocal)
+contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
+
+# models with moderators of interest. 
+
+model_vocal <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+
+model_natural <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+
+full_model <- robu(g_calc ~ test_lang + natural + vocal + mean_age_1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
+
+```
+
+There was only a significant effect of the experimental method used (central fixation led to higher effect sizes than the other methods; see Figure 5). None of the other moderators was significant (see Table 1).
+
+Due to the relatively low number of effect sizes available in the literature, we did not add interactions with age to the model to avoid overfitting. Inspection of results in Figure 5 show that the confidence intervals of all conditions overlap almost exactly across the tested ages, excluding the possibility of such interactions. 
+ 
+```{r plots} 
+vio_method <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=method, y=g_calc))+
+  geom_violin(aes(fill=method), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=method, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.2, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "method", labels=levels(DB2$method), na.translate = FALSE)+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+#Effect of naturalness
+vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
+  geom_violin(aes(fill=natural), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=natural, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "other sound", labels=c("artificial","natural"), na.translate = FALSE)+
+  scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+nat_age <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+# Effect of vocalness
+vio_voc <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=vocal, y=g_calc))+
+  geom_violin(aes(fill=vocal), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=vocal, y=g_calc, size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_fill_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15))
+
+voc_age <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  scale_size(range = c(1, 5))+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(method = "glm", na.rm = TRUE, color='gray40')+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  theme_classic()+
+  theme(text = element_text(size = 15))
+
+#Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
+lang_age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  scale_size(range = c(1, 5))+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
+
+vio_lang <- ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=test_lang, y=g_calc))+
+  geom_violin(aes(fill=test_lang), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=test_lang, y=g_calc, size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "speech sound", labels=c("foreign","native"), na.translate = FALSE)+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 20))
+
+#violin plot / contrasted sound
+vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim, y=g_calc))+
+  geom_violin(aes(fill=contrast_stim), show.legend = F, na.rm = TRUE) +
+  geom_jitter(aes(x=contrast_stim, y=g_calc, size=1/DB2[!is.na(DB2$contrast_stim),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
+  scale_x_discrete(name = "contrast sound", na.translate = FALSE)+
+  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  #scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
+  theme_classic()+
+  theme(text = element_text(size = 20), axis.text.x = element_text(angle = 45, size = 10))
+
+```
+
+Readers may wonder to what extent our results are obscured by the influence of experimental method, which is known to be sizable in the cognitive developmental literature (@Bergman et al., 2018). Inspection of plots where effect sizes has been residualized from experimental method (Supplementary figure SX) looks virtually identical. 
+
 ```{r residuals}
 
 method_reg = lm(DB2$g_calc[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$method[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
@@ -377,195 +481,24 @@ ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=method_res, colour=
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 ```
-### Publication bias
-
-We assessed the presence of a potential publication bias in the body of literature by symmetrizing the funnel plot with the “trim and fill” method (Duval, 2005). To do so, we needed to use the simplest regression, without any moderators. We tested the asymmetry of the funnel plot by regressing effect size as a function of effect size standard error and running a Kendall's tau rank test. 
-
-
-# Results
-
-## Database description
-We found a total of `r length(papers)` papers reporting `r length(DB2$g_calc)` (not mutually independent) effect sizes, see Table 1. All of them have been submitted to or published in peer-reviewed journals. 
-Studies tended to have small sample sizes, with a median N of `r median(DB2$n)` children (Range = `r max(DB2$n)-min(DB2$n)`, M = `r mean(DB2$n)`, Total: `r round(sum(temp$n))`).
-Infants ranged from `r round(min(DB2$mean_age_1)/30.44)` to `r round(max(DB2$mean_age_1)/30.44)` months (`r min(DB2$mean_age_1)` to `r max(DB2$mean_age_1)` days). Individual samples comprised `r round(mean(DB2$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
-Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB2$method))` experimental methods were used: 11 studies used Passive Listening (PL) with neuro-imaging, with 8 studies using Near-Infrared Spectroscopy (NIRS), and 3 studies using fMRI; 12 studies used Central Fixation (CF); 3 used High-Amplitude Sucking (HAS); and 1 used Head-turn Preference Procedure (HPP). 
-
-## Summary effect size
-
-We found a mean weighted effect size g =`r base_model$reg_table$b.r` (SE = `r base_model$reg_table$SE` CI = [`r base_model$reg_table$CI.L` , `r base_model$reg_table$CI.U`]).
-
-```{r forest plot}
-#pdf("forest_plot_noMod.pdf")
-for_plot = forest.rma(simple_model, order = 'obs', annotate = FALSE, xlim = c(-4.5,3), alim = c(-3,3), top=0, main = 'Forest plot of effect sizes', xlab = 'Effect size (Hedges\' g)', mlab = "", steps = 7, fonts = 'mono', cex = 0.4, cex.axis = 0.6, cex.lab = 0.7) 
-#dev.off()
-```
-
-## Publication bias
-Evidence of bias at level of papers
-Evidence of bias at level of literature
-```{r publication bias, fig.align="center"}
-
-#add symmetrize
-tf <- trimfill(simple_model) 
-fun.fig <- funnel(tf, cex=1.5, xlab='Hedges\' g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
-
-
-#Figure
-png(filename = "Funnel.png")
-
-#funnel(base_model,cex=1.5,xlab='Hedge\'s g', ylab="Standard Error of Effect Size g", digits=2, main="Funnel plot speech preference", legend=TRUE)
-dev.off()
-
-# testing for asymetry (indicates a publication bias) #ac this is highly significant
-SEg = regtest(DB2$g_calc,DB2$g_var_calc)
-ranktest(DB2$g_calc,DB2$g_var_calc)
-
-```
-
-## Main effects
-
-```{r plots} 
-#method varies with age
-#plot g as a function of method
-mycols=c("black","blue","red","green")
-names(mycols) <- levels(DB$method)
-mycols
-plot(DB$g_calc~DB$mean_age_1,col = mycols[DB$method],pch=20,cex=.7)
-
-ggplot(data=DB2[!is.na(DB2$natural),], aes(x=method, y=g_calc))+
-  geom_violin(aes(fill=method), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=method, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.2, h = 0), show.legend = F, na.rm = TRUE)+
-  scale_x_discrete(name = "method", labels=levels(DB2$method), na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-#Effect of naturalness
-vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
-  geom_violin(aes(fill=natural), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=natural, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
-  scale_x_discrete(name = "other sound", labels=c("artificial","natural"), na.translate = FALSE)+
-  scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-ggsave("violin_natural.pdf")
-
-ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-ggsave("natural-age.pdf")
-
-# Effect of vocalness
-vio_voc <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=vocal, y=g_calc))+
-  geom_violin(aes(fill=vocal), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=vocal, y=g_calc, size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
-  scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_fill_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15))
-
-ggsave("violin_vocal.pdf")
-
-voc_age <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  scale_size(range = c(1, 5))+
-  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-ggsave("vocal-age.pdf")
-
-voc_age
-
-age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(method = "glm", na.rm = TRUE, color='gray40')+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  theme_classic()+
-  theme(text = element_text(size = 15))
-
-ggsave("age.pdf")
-
-#Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
-ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  scale_size(range = c(1, 5))+
-  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-ggsave("lang_age.pdf")
-
-vio_lang <- ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=test_lang, y=g_calc))+
-  geom_violin(aes(fill=test_lang), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=test_lang, y=g_calc, size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
-  scale_x_discrete(name = "speech sound", labels=c("foreign","native"), na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 20))
-
-ggsave("violin_lang.pdf")
-
-#violin plot / contrasted sound
-vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim, y=g_calc))+
-  geom_violin(aes(fill=contrast_stim), show.legend = F, na.rm = TRUE) +
-  geom_jitter(aes(x=contrast_stim, y=g_calc, size=1/DB2[!is.na(DB2$contrast_stim),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
-  scale_x_discrete(name = "contrast sound", na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
-  #scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 20), axis.text.x = element_text(angle = 45, size = 10))
-
-ggsave("violin_contrast.pdf")
-
-```
-
-
-Heterogeneity
-Moderators
-age, type & interaction
-
 
 # Discussion
 
-Our meta-analysis synthesizes the available literature on infants’ preference for speech sound. Our results confirm those of individual studies, showing that infants reliably prefer speech over other types of sounds from birth. When all studies were considered together, we found a sizable intercept at birth. For comparison, the main effect for native vowel discrimination is estimated at XX (Tsuji & Cristia, 2013); that for preference for familiarized words in passages at XX (Bergmann & Cristia, ).
+Our meta-analysis synthesizes the available literature on infants’ preference for speech sounds. Our results confirm that infants reliably prefer speech over other types of sounds from birth. When all studies were considered together with no moderators, we found a sizable intercept (g=.XX). For comparison, the main effect for native vowel discrimination using looking time methods is estimated at .25 (Tsuji & Cristia, 2013; data inspected in metalab.stanford.edu on 2019-10-18). We had predicted infants' speech preference to be larger when the competitor was an artificial sound than when it was a natural one; when the competitor was non-vocal; and when the speech was in the infants' native language. In fact, we were unable to disprove the null hypothesis of no difference for all three factors, with widely overlapping distributions of effect sizes for studies varying along the three dimensions. 
 
-A key goal was to interrogate this effect further to assess whether three potential explanations for it hold up, both at birth and with potential interactions with age: A preference for natural over artificial, vocal over non-vocal, and familiar over unfamiliar sounds. We discuss each in turn.
+We had also hypothesized age to play a major role, because it may correlate with a reshaping of the category definition for speech itself. Indeed, studies comparing processing of human speech against human non-speech as well as animal vocalizations more generally (Vouloumanos et al., 2010; Mac Donald et al., 2019) often discuss these age-related differences in categorization of these sounds. Surprisingly, age did not significantly moderate the overall preference for speech.
 
-We reviewed evidence that the auditory system encodes better natural than artificial sounds (REF), and that naturalness makes a difference for a higher-level linguistic task, namely word segmentation (Black & Bergmann, 2016). In view of such results, we expected infants' speech preference to be larger when the competitor was an artificial sound than when it was a natural one. In fact, we found that naturalness alone did not significantly moderate infants' preference for speech sounds. Therefore, we can confidently state that a low-level difference in processing of natural versus artificial sounds is unlikely to explain away speech preference. speech triggers different cognitive mechanisms than other sounds. Not incompatible as in this meta-analysis natural speech stimuli when contrasted to only synthetic speech. We don't know if infants would have been able to find "words" with natural sounds other than syllables (i.e. frequent sequences of several natural sounds).
+From birth and regardless of changes co-occurring with age, infants show a preference for speech, which cannot be reduced to three simpler explanations: naturalness, vocalness, or familiarity (represented here by the native/foreign contrast). This capacity to preferentially listen to speech sounds from birth suggests that infants are born with the capacity to recognize their conspecifics’ communication signals. This parallels what has been proposed by the Conspec model for faces: infants would be born with knowledge about faces, enabling them to orient their attention toward them, even without any prior exposure to faces (Morton & Jonhson, 1991). The fact that familiarity with the language used in the experiment did not modulate infants’ preference suggest that exposure did not play a crucial role for speech either. However, contrary to faces, fetuses are exposed to speech that is low-pass filtered by the womb throughout the last trimester of gestation (Querleu et al., 1988, Lecanuet & Granier-Deferre, 1993). It is therefore possible that prenatal experience with low-pass filtered speech helps infants to form a representation of speech, independently of the language spoken. 
 
-Some previous work had found a preference for speech over other natural sounds, which may have been indicative of a preference for vocal sounds. If so, one would have expected greater speech preferences when the competitor was non-vocal than when it was a vocal sound. Our meta-analytic regression, however, revealed no significant difference between these two contrasts.
+ The Conspec model proposes that faces would be detected because of their spatial structure (Morton & Johnson, 1991). Similarly, it is possible that infants prefer speech because of its complex acoustic structure and fast transitions (Rosen, 2007). Speech is characterized by joint spectral and temporal modulations at specific rates (Singh & Theunissen, 2003). It is possible that infants attune to this specific spectro-temporal structure [though see @YMK11DCN, for evidence that this explanation alone may not be sufficient for neural responses]. Testing this explanation would require to carry out acoustic analyses of the actual stimuli used in the studies. Thus, we recommend interested researchers to gather more data in which the competitor is acoustically simple versus complex; and to deposit the actual stimuli in a public archive such as the Open Science Framework (REF). 
+	
+One may wonder whether we fail to find many differences because of a lack of statistical power, particularly in view of between-study variability. We think it is unlikely that all null results reported in this paper are due to this. Inspection of results in Figure 3 show that the confidence intervals of all conditions overlap almost exactly. Moreover, Table XX shows that the estimate for all these factors is close to zero (the maximum being XX). That said, more data would be welcome to confirm our results with more statistical power. It would also be important to carry out more tests on infants older than 9 months. Language production gains in complexity at about this age [@Oller+al-99, which could affect infants' speech preference. We particularly recommend using as competitor natural vocal stimuli, and as target foreign speech, which would help fill in an important gap in our dataset. 
 
-Do infants show a greater preference for speech when the speech stimuli are in their native language, than when they are in a foreign language? For this factor as well, we could not disprove the null hypothesis of no difference, with widely overlapping distributions of effect sizes for studies using native as opposed to foreign speech stimuli (controlling for the competitor via the other factors discussed above).
+Another finding of our meta-analysis is that the distribution of effect sizes in the literature is consistent with publication bias, in view of a strong asymmetry of the funnel plot. In fact, the trim-and-fill method suggested XX points may be missing, which is a considerable number given that we have XX effect sizes in total (i.e., a quarter more would be missing). Unsurprisingly, the missing studies are in the negative section, i.e., a preference *against* speech, a result that could lead authors to doubt their own data and not submit it to journals, or that would be considered odd by reviewers and editors, who may ask that the data be removed (or who may recommend the paper to be rejected altogether). These missing studies constitute an important limitation of our results. The literature being biased toward positive effect sizes, the true effect size might be smaller than the one we found (vertical line on Figure X). 
 
-We hypothesized age to play a major role, not only because it was correlated with experiences that are crucial for the formation of categories underlying some of the factors above (e.g., vocalness, nativeness), but also because it may correlate with a reshaping of the category definition for speech itself. Indeed, studies comparing processing of human speech against human non-speech as well as animal vocalizations more generally (REF, REF) often discuss these age-related differences in categorization of these sounds. Surprisingly, age did not significantly moderate the overall preference for speech, and it did not interact with the other three factors.
+Ultimately, preferential processing of speech may support higher level cognitive tasks. The human species is a highly social one. Detecting speech signals would allow to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics (@Vouloumanos et al., 2009). This would lay the track for social cognition. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Infants could categorize visual stimuli (i.e. associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech (@Fulkerson & Waxman, 2007; @Ferry et al, 2010; @Ferry et al, 2013). Interestingly, infants categorized visual stimuli when presented with speech, melodies, or monkey vocalizations (Fulkerson & Haaf, 2003; Ferry et al, 2013). These results support the idea that infants may preferentially process complex sounds. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk (@Sorcinelli et al., 2019). It is therefore important to take stock of what we know today. 
 
-There are at least two potential interpretations of the overall pattern of results. One of them is that, from birth and regardless of changes co-occurring with age, infants show a preference for speech, which cannot be reduced to three simpler explanations: naturalness, vocalness, or familiarity (represented here by the native/foreign contrast). There exists one simple explanation that we could not test here because there were not enough studies with appropriate conditions, and that is the possibility that infants prefer speech because of its complex acoustic structure and fast transitions. To explore this explanation, it would be ideal to carry out acoustic analyses of the actual stimuli used in the studies. Thus, we recommend interested researchers to gather more data in which the competitor is acoustically simple versus complex; and to deposit the actual stimuli in a public archive such as the Open Science Framework (REF). It would also be important to carry out more tests on infants older than 9 months. Language production gains in complexity at about this age REF, and it is possible that this would affect infants' speech preference. We particularly recommend using as competitor natural vocal stimuli, and as target foreign speech, which would help fill in an important gap in our dataset.
-
-More data in general would be helpful also in view of the second potential interpretation of our results: One may wonder whether we fail to find many differences because of a lack of statistical power, particularly in view of between-study variability. We think it unlikely that all null results reported in this paper are due to this for two reasons. First, we did have enough power to detect one main effect, namely experimental method. It has been repeatedly observed in developmental meta-analyses that effect sizes are greatly affected by this variable (see Bergmann et al., 2018, for a synthesis across meta-analysis in developmental psychology). We estimated the effect of method here at about XX. Thus, at the very least, the effects of the factors we studied can be considered to be smaller than this. Second, inspection of results in Figure 3 show that the confidence intervals of all conditions overlap almost exactly. Moreover, Table XX shows that the estimate for all these factors is very close to zero (the maximum being XX). That said, we agree that more data would be welcome.
-
-For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Another finding of our meta-analysis is that the distribution of effect sizes in the literature is consistent with publication bias, in view of a strong asymmetry of the funnel plot. In fact, the trim-and-fill method suggested 18 points may be missing, which is a considerable number given that we have 82 effect sizes in total (i.e., nearly a quarter more would be missing). Unsurprisingly, the missing studies are in the negative section, i.e., a preference *against* speech, a result that could lead authors to doubt their own data and not submit it to journals, or that would be considered odd by reviewers and editors, who may ask that the data be removed (or who may recommend the paper to be rejected altogether). 
-
-Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should double their sample sizes. The median sample size at present is 20, which is close to the field standard (Bergmann et al., 2018) but much lower than current recommendations (REF). Second, authors should consider proposing their studies as registered reports (REF). This is a new publication scheme (available for journals X Y Z, see a full list on XXX), where manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices (REF), known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon.
-
-Infants' preference for speech is a fascinating phenomenon. Beyond the human species, the capacity to recognize signals from conspecifics might be crucial for survival and it may be present in other social species (e.g. mice, or great apes). To our knowledge, such studies have not been carried out, but we hope they are in the future. More specific to our species, preferential processing of speech may support higher level cognitive tasks, such as categorization (Waxman, 1997; 2007; 2010, Ferry). And the preference itself may be a meaningful index of processing that can be used to identify children at risk REF. For all of these reasons, it is important to take stock of what we know today. Our meta-analysis compiled public results on this key phenomenon, establishing that there is a small to medium effect size associated with it. This preference was not modulated by age, nor three characteristics of the stimuli employed (whether the speech was native or foreign; whether the competitor was natural or artificial, vocal or non-vocal). The analyses also suggested publication bias, for which recommendations were made for researchers, reviewers, and editors.
+Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should strive to increase their sample sizes. The median sample size at present is 20, which is close to the field standard (@Bergmann et al., 2018) but much lower than current recommendations (@Oakes, 2017). Second, authors should consider proposing their studies as registered reports (@REF). In this new publication scheme (available for Developmental Science, Infancy, Infant Behavior and Development, and Journal of Child Language at the time of writing, see a full up-to-date list on https://cos.io/rr/), manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices [@simmons2011false], known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon. For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have ([Anonymized link](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8)), whatever the results and publication status.
 
 
 \newpage

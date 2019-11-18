@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  7 NOV 2019 15:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  18 NOV 2019 18:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -986,30 +986,30 @@ Package csquotes Info: ... none found.
 (./MA_speech_pref.aux)
 \openout1 = `MA_speech_pref.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 141.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 141.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 119.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 119.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 141.
-LaTeX Font Info:    ... okay on input line 141.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 141.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 119.
+LaTeX Font Info:    ... okay on input line 119.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 119.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1084,7 +1084,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 141.
+LaTeX Info: Redefining \microtypecontext on input line 119.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1099,7 +1099,7 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 \AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring OFF on input line 141.
+Package hyperref Info: Link coloring OFF on input line 119.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1107,51 +1107,51 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count153
 )
-LaTeX Info: Redefining \ref on input line 141.
-LaTeX Info: Redefining \pageref on input line 141.
-LaTeX Info: Redefining \nameref on input line 141.
+LaTeX Info: Redefining \ref on input line 119.
+LaTeX Info: Redefining \pageref on input line 119.
+LaTeX Info: Redefining \nameref on input line 119.
 (./MA_speech_pref.out) (./MA_speech_pref.out)
 \@outlinefile=\write5
 \openout5 = `MA_speech_pref.out'.
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 143.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 121.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 143.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 121.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 143.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 121.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 143
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 121
 .
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 143
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 121
 .
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 143.
+(Font)              <12> on input line 121.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 143.
+(Font)              <8> on input line 121.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 143.
-LaTeX Font Info:    Try loading font information for U+msa on input line 143.
+(Font)              <6> on input line 121.
+LaTeX Font Info:    Try loading font information for U+msa on input line 121.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 143.
+LaTeX Font Info:    Try loading font information for U+msb on input line 121.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1160,237 +1160,50 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 ) [1{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5] [6] [7] [8] [9]
-Underfull \vbox (badness 1824) has occurred while \output is active []
+] [2] [3] [4] [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[10]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 445.
+[6] [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[8] [9] [10]
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 424.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 470.
+) [11] [12]
+Underfull \vbox (badness 4752) has occurred while \output is active []
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [11] [12] [13] [14]
-<MA_speech_pref_files/figure-latex/residuals-1.pdf, id=160, 459.7175pt x 316.18
-124pt>
-File: MA_speech_pref_files/figure-latex/residuals-1.pdf Graphic file (type pdf)
+[13]
+Underfull \vbox (badness 4752) has occurred while \output is active []
 
-<use MA_speech_pref_files/figure-latex/residuals-1.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-1.pdf used
- on input line 597.
-(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-
-<MA_speech_pref_files/figure-latex/residuals-2.pdf, id=161, 469.755pt x 325.215
-pt>
-File: MA_speech_pref_files/figure-latex/residuals-2.pdf Graphic file (type pdf)
-
-<use MA_speech_pref_files/figure-latex/residuals-2.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-2.pdf used
- on input line 598.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-<MA_speech_pref_files/figure-latex/residuals-3.pdf, id=162, 459.7175pt x 316.18
-124pt>
-File: MA_speech_pref_files/figure-latex/residuals-3.pdf Graphic file (type pdf)
-
-<use MA_speech_pref_files/figure-latex/residuals-3.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-3.pdf used
- on input line 599.
-(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-
-<MA_speech_pref_files/figure-latex/residuals-4.pdf, id=163, 469.755pt x 325.215
-pt>
-File: MA_speech_pref_files/figure-latex/residuals-4.pdf Graphic file (type pdf)
-
-<use MA_speech_pref_files/figure-latex/residuals-4.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-4.pdf used
- on input line 600.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Overfull \hbox (18.89694pt too wide) in paragraph at lines 597--602
-[][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[15]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[16 <./MA_speech_pref_files/figure-latex/residuals-1.pdf> <./MA_speech_pref_fil
-es/figure-latex/residuals-2.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[17 <./MA_speech_pref_files/figure-latex/residuals-3.pdf> <./MA_speech_pref_fil
-es/figure-latex/residuals-4.pdf>]
-\openout4 = `MA_speech_pref.fff'.
-
-(MA_speech_pref.fff) [18]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 665
-.
-(/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<MA_speech_pref_files/figure-latex/plots-1.pdf, id=213, 437.635pt x 250.9375pt>
-File: MA_speech_pref_files/figure-latex/plots-1.pdf Graphic file (type pdf)
-<use MA_speech_pref_files/figure-latex/plots-1.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-1.pdf used on 
-input line 674.
-(pdftex.def)             Requested size: 437.6406pt x 250.94069pt.
-
-<MA_speech_pref_files/figure-latex/plots-2.pdf, id=214, 469.755pt x 325.215pt>
-File: MA_speech_pref_files/figure-latex/plots-2.pdf Graphic file (type pdf)
-<use MA_speech_pref_files/figure-latex/plots-2.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-2.pdf used on 
-input line 675.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-<MA_speech_pref_files/figure-latex/plots-3.pdf, id=215, 459.7175pt x 316.18124p
-t>
-File: MA_speech_pref_files/figure-latex/plots-3.pdf Graphic file (type pdf)
-<use MA_speech_pref_files/figure-latex/plots-3.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-3.pdf used on 
-input line 676.
-(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-
-<MA_speech_pref_files/figure-latex/plots-4.pdf, id=216, 469.755pt x 325.215pt>
-File: MA_speech_pref_files/figure-latex/plots-4.pdf Graphic file (type pdf)
-<use MA_speech_pref_files/figure-latex/plots-4.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-4.pdf used on 
-input line 677.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-<MA_speech_pref_files/figure-latex/plots-5.pdf, id=217, 463.7325pt x 316.18124p
-t>
-File: MA_speech_pref_files/figure-latex/plots-5.pdf Graphic file (type pdf)
-<use MA_speech_pref_files/figure-latex/plots-5.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-5.pdf used on 
-input line 678.
-(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
-[19 <./MA_speech_pref_files/figure-latex/plots-1.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[20 <./MA_speech_pref_files/figure-latex/plots-2.pdf> <./MA_speech_pref_files/f
-igure-latex/plots-3.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[21 <./MA_speech_pref_files/figure-latex/plots-4.pdf> <./MA_speech_pref_files/f
-igure-latex/plots-5.pdf>] [22] [23]
-Overfull \hbox (6279.52332pt too wide) in paragraph at lines 766--766
-[]\T1/lmtt/m/n/12 More data in general would be helpful also in view of the sec
-ond potential interpretation of our results: One may wonder whether we fail to 
-find many differences because of a lack of statistical power, particularly in v
-iew of between-study variability. We think it unlikely that all null results re
-ported in this paper are due to this for two reasons. First, we did have enough
- power to detect one main effect, namely experimental method. It has been repea
-tedly observed in developmental meta-analyses that effect sizes are greatly aff
-ected by this variable (see Bergmann et al., 2018, for a synthesis across meta-
-analysis in developmental psychology). We estimated the effect of method here a
-t about XX. Thus, at the very least, the effects of the factors we studied can 
-be considered to be smaller than this. Second, inspection of results in Figure 
-3 show that the confidence intervals of all conditions overlap almost exactly. 
-Moreover, Table XX shows that the estimate for all these factors is very close 
-to zero (the maximum being XX). That said, we agree that more data would be wel
-come.[] 
- []
-
-
-Overfull \hbox (4834.5726pt too wide) in paragraph at lines 766--766
-[]\T1/lmtt/m/n/12 For interested readers who intend to collect such data, we re
-commend caution when designing the study, and transparency when reporting it. A
-nother finding of our meta-analysis is that the distribution of effect sizes in
- the literature is consistent with publication bias, in view of a strong asymme
-try of the funnel plot. In fact, the trim-and-fill method suggested 18 points m
-ay be missing, which is a considerable number given that we have 82 effect size
-s in total (i.e., nearly a quarter more would be missing). Unsurprisingly, the 
-missing studies are in the negative section, i.e., a preference *against* speec
-h, a result that could lead authors to doubt their own data and not submit it t
-o journals, or that would be considered odd by reviewers and editors, who may a
-sk that the data be removed (or who may recommend the paper to be rejected alto
-gether).[] 
- []
-
-
-Overfull \hbox (10108.0252pt too wide) in paragraph at lines 766--766
-[]\T1/lmtt/m/n/12 Given the crucial importance of understanding infants\TS1/lmt
-t/m/n/12 ' \T1/lmtt/m/n/12 speech preference, we make the following recommendat
-ions for further data collection, analysis, and reporting. First, authors shoul
-d double their sample sizes. The median sample size at present is 20, which is 
-close to the field standard (Bergmann et al., 2018) but much lower than current
- recommendations (REF). Second, authors should consider proposing their studies
- as registered reports (REF). This is a new publication scheme (available for j
-ournals X Y Z, see a full list on XXX), where manuscripts are submitted before 
-data are collected. Reviewers and editors make publication decisions based sole
-ly on the introduction and methods. Once the paper is accepted, the author coll
-ects the data, analyses it according to a pipeline described in the accepted me
-thods, and writes up the rest of the manuscript. The paper is then reviewed onc
-e more for readability, but it cannot be rejected if the results are surprising
- or uncomfortable for the field. Third, for authors who would rather not follow
- this publication route, we still strongly recommend the use of pre-specified a
-nalysis plans. These have the virtue of, when used correctly, allowing both aut
-hors and readers to separate confirmation from exploration, reducing the likeli
-hood of inadvertently engaging in questionable research practices (REF), known 
-to increase false positives. Finally, we strongly recommend reviewers and edito
-rs to evaluate submitted manuscripts on the basis of the quality of the methods
-, and not of the results. If a study fails to report a speech preference, or ac
-tually reports a preference for the competitor, this may actually reflect the r
-eality of this phenomenon.[] 
- []
-
-[24] AED endfloat: Processing end Figures and Tables (./MA_speech_pref.fff
-<MA_speech_pref_files/figure-latex/forest plot-1.pdf, id=284, 440.64626pt x 285
-.065pt>
-File: MA_speech_pref_files/figure-latex/forest plot-1.pdf Graphic file (type pd
-f)
-<use MA_speech_pref_files/figure-latex/forest plot-1.pdf>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/forest plot-1.pdf us
-ed on input line 5.
-(pdftex.def)             Requested size: 440.64517pt x 285.0643pt.
-[25
-
-
- <./MA_speech_pref_files/figure-latex/forest plot-1.pdf>]
-<MA_speech_pref_files/figure-latex/publication bias-1.png, id=301, 1957.3125pt 
-x 1355.0625pt>
-File: MA_speech_pref_files/figure-latex/publication bias-1.png Graphic file (ty
-pe png)
-<use MA_speech_pref_files/figure-latex/publication bias-1.png>
-Package pdftex.def Info: MA_speech_pref_files/figure-latex/publication bias-1.p
-ng used on input line 14.
-(pdftex.def)             Requested size: 469.73474pt x 325.20097pt.
-[26
-
- <./MA_speech_pref_files/figure-latex/publication bias-1.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 796.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 796.
+[14] [15] AED endfloat: Processing end Figures and Tables
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 603.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 603.
 (./MA_speech_pref.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 796.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 796.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 603.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 603.
 Package rerunfilecheck Info: File `MA_speech_pref.out' has not changed.
-(rerunfilecheck)             Checksum: B3B34400C4267C180934BE12DB0613CD;3394.
+(rerunfilecheck)             Checksum: A5C847A05E70AD7A4769D40049B79457;3297.
  ) 
 Here is how much of TeX's memory you used:
- 15807 strings out of 492995
- 234832 string characters out of 6132703
- 348841 words of memory out of 5000000
- 18980 multiletter control sequences out of 15000+600000
- 50965 words of font info for 78 fonts, out of 8000000 for 9000
+ 15659 strings out of 492995
+ 230873 string characters out of 6132703
+ 346386 words of memory out of 5000000
+ 18859 multiletter control sequences out of 15000+600000
+ 50341 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,10n,47p,1734b,531s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,10n,47p,801b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
 /texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2017/
 texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type
 1/public/lm/lmr8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/
 lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on MA_speech_pref.pdf (26 pages, 369290 bytes).
+Output written on MA_speech_pref.pdf (15 pages, 145102 bytes).
 PDF statistics:
- 348 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 52 named destinations out of 1000 (max. 500000)
- 6376 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 195 PDF objects out of 1000 (max. 8388607)
+ 171 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 6313 words of extra memory for PDF output out of 10000 (max. 10000000)
 
