@@ -25,9 +25,9 @@ affiliation:
 #   Enter author note here.
 
 abstract: |
-  The human auditory system is amazingly efficient at processing speech. Some works suggest that this capacity is present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, in experimental studies, a large variety of sounds have been contrasted to speech, with infants of very different ages. Drawing a global picture of how this capacity emerges is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over any other type of sound. Contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference from birth to one year of age. Still contrary to what individual studies suggested, we found the same amount of preference whether speech was contrasted to other natural sounds or to artificial sounds; as well as whether speech was contrasted to other vocal sounds or to non-vocal sounds. Preference was stronger when the speech stimuli were in the infants' native language. This suggests that the representation of speech as a distinct auditory object comes fromis modulated by the degree of familiarity with the sounds of the language they are exposed to.
+The human auditory system is amazingly efficient at processing speech. Some works suggest that this capacity is present from birth, infants preferring to listen to natural speech than to other types of sounds, enabling them to select the signals that are relevant for communication with conspecifics. However, in experimental studies, a large variety of sounds have been contrasted to speech, with infants of very different ages. Drawing a global picture of how this capacity emerges is therefore difficult. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over any other type of sound. Contrary to the results of individual studies, we found no effect of age: infants showed the same amount of preference from birth to one year of age. Still contrary to what individual studies suggested, we found the same amount of preference whether speech was contrasted to other natural sounds or to artificial sounds; as well as whether speech was contrasted to other vocal sounds or to non-vocal sounds. Preference was stronger when the speech stimuli were in the infants' native language. This suggests that the representation of speech as a distinct auditory object comes fromis modulated by the degree of familiarity with the sounds of the language they are exposed to.
   
-keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
+  keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
 wordcount         : "X"
 
 # bibliography      : ["r-references.bib"]
@@ -253,6 +253,92 @@ tapply(DB2$g_calc,DB2$contrast_stim,mean, na.rm=T)
 #large diff between samples sizes -> imp to run a model.
 ```
 
+```{r resampling}
+# We repeat correlation imputation and recompute effect sizes 100 times to check it doesn't change the results.
+library(Hmisc)
+
+#set up the dataframe that will contain the results after resampling (one line per resampling)
+resamp_stats = base_model$reg_table
+resamp_prob = base_model$reg_table$prob
+
+for (s in 1:100){
+  
+  data = DB2 #make a copy of the database without the imputed correlations
+  data$corr_imputed[is.na(data$corr)==T] = NA
+  data$corr_imputed[data$participant_design == "within_two"] <- impute(data$corr[data$participant_design == "within_two"],fun='random')
+  
+  # recompute effect sizes
+  # empty the relevant variables
+  data$d_calc = NA
+  data$d_var_calc = NA
+  data$g_calc = NA
+  data$g_var_calc = NA
+  data$es_method = NA
+  
+  #effect size calculation
+  for (i in 1:nrow(data)){
+    db = data[i,]
+    if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
+      #if correlation between two measures is not reported, use an imputed correlation value
+      #we also account for the observation that some re-calculated values are impossible and replace those
+      corr <- db$corr_imputed
+    }else{corr <- db$corr}
+    
+    if (complete(db$x_1, db$x_2, db$SD_1, db$SD_2)) {
+      pooled_SD <- sqrt((db$SD_1 ^ 2 + db$SD_2 ^ 2) / 2) # Lipsey & Wilson (2001)
+      d_calc <- (db$x_1 - db$x_2) / pooled_SD # Lipsey & Wilson (2001)
+      es_method  <- "group_means_two"
+    } else if (complete(db$t)) {
+      wc <- sqrt(2 * (1 - corr))
+      d_calc <- (db$t / sqrt(db$n_1)) * wc #Dunlap et al., 1996, p.171
+      es_method  <- "t_two"
+    } else if (complete(db$F)) {
+      wc <- sqrt(2 * (1 - corr))
+      d_calc <- sqrt(db$F / db$n_1) * wc
+      es_method  <- "f_two"
+    } else {d_calc = NA}
+    #now that effect sizes are calculated, effect size variance is calculated
+    if (complete(db$n_1, d_calc)) {
+      d_var_calc <- (2 * (1 - corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
+    } else if (complete(db$d, db$d_var)) {
+      #if d and d_var were already reported, use those values
+      d_calc <- db$d
+      d_var_calc <- db$d_var
+      es_method  <- "d_two"
+    } else {d_var_calc = NA}
+    
+    df <- db$n_1 - 1
+    J <- 1 - 3 / (4 * (df - 1))
+    g_calc <- d_calc * J
+    g_var_calc <- J ^ 2 * d_var_calc
+    
+    #add the results to the database
+    db$d_calc = d_calc
+    db$d_var_calc = d_var_calc
+    db$g_calc = g_calc
+    db$g_var_calc = g_var_calc
+    db$es_method = es_method
+    
+    data[i,] = db
+  }
+  
+  #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
+  data$outlier <- F #create the variable, and set as no by default (majority of cases hopefully!)
+  data$outlier[data$d_calc > mean(data$d_calc, na.rm = TRUE) + 3*sd(data$d_calc, na.rm = TRUE) | data$d_calc < mean(data$d_calc, na.rm = TRUE) - 3*sd(data$d_calc, na.rm = TRUE)]<-T 
+  
+  # Re-fit the meta-analytic model
+  #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
+  data = data %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
+  base <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
+  resamp_stats = bind_rows(resamp_stats,base$reg_table)
+  
+}
+
+# check that the results don't change in 95 % of cases
+resamp_alphas <- ifelse(resamp_stats$prob < 0.05, 1, 0)
+resamp_alphas <- length(resamp_alphas[resamp_alphas==0])/length(resamp_alphas)
+resamp_alphas
+```
 
 ```{r residuals}
 
@@ -473,14 +559,14 @@ We hypothesized age to play a major role, not only because it was correlated wit
 
 There are at least two potential interpretations of the overall pattern of results. One of them is that, from birth and regardless of changes co-occurring with age, infants show a preference for speech, which cannot be reduced to three simpler explanations: naturalness, vocalness, or familiarity (represented here by the native/foreign contrast). There exists one simple explanation that we could not test here because there were not enough studies with appropriate conditions, and that is the possibility that infants prefer speech because of its complex acoustic structure and fast transitions. To explore this explanation, it would be ideal to carry out acoustic analyses of the actual stimuli used in the studies. Thus, we recommend interested researchers to gather more data in which the competitor is acoustically simple versus complex; and to deposit the actual stimuli in a public archive such as the Open Science Framework (REF). It would also be important to carry out more tests on infants older than 9 months. Language production gains in complexity at about this age REF, and it is possible that this would affect infants' speech preference. We particularly recommend using as competitor natural vocal stimuli, and as target foreign speech, which would help fill in an important gap in our dataset.
 
-	More data in general would be helpful also in view of the second potential interpretation of our results: One may wonder whether we fail to find many differences because of a lack of statistical power, particularly in view of between-study variability. We think it unlikely that all null results reported in this paper are due to this for two reasons. First, we did have enough power to detect one main effect, namely experimental method. It has been repeatedly observed in developmental meta-analyses that effect sizes are greatly affected by this variable (see Bergmann et al., 2018, for a synthesis across meta-analysis in developmental psychology). We estimated the effect of method here at about XX. Thus, at the very least, the effects of the factors we studied can be considered to be smaller than this. Second, inspection of results in Figure 3 show that the confidence intervals of all conditions overlap almost exactly. Moreover, Table XX shows that the estimate for all these factors is very close to zero (the maximum being XX). That said, we agree that more data would be welcome.
+More data in general would be helpful also in view of the second potential interpretation of our results: One may wonder whether we fail to find many differences because of a lack of statistical power, particularly in view of between-study variability. We think it unlikely that all null results reported in this paper are due to this for two reasons. First, we did have enough power to detect one main effect, namely experimental method. It has been repeatedly observed in developmental meta-analyses that effect sizes are greatly affected by this variable (see Bergmann et al., 2018, for a synthesis across meta-analysis in developmental psychology). We estimated the effect of method here at about XX. Thus, at the very least, the effects of the factors we studied can be considered to be smaller than this. Second, inspection of results in Figure 3 show that the confidence intervals of all conditions overlap almost exactly. Moreover, Table XX shows that the estimate for all these factors is very close to zero (the maximum being XX). That said, we agree that more data would be welcome.
 
-	For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Another finding of our meta-analysis is that the distribution of effect sizes in the literature is consistent with publication bias, in view of a strong asymmetry of the funnel plot. In fact, the trim-and-fill method suggested 18 points may be missing, which is a considerable number given that we have 82 effect sizes in total (i.e., nearly a quarter more would be missing). Unsurprisingly, the missing studies are in the negative section, i.e., a preference *against* speech, a result that could lead authors to doubt their own data and not submit it to journals, or that would be considered odd by reviewers and editors, who may ask that the data be removed (or who may recommend the paper to be rejected altogether). 
+For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Another finding of our meta-analysis is that the distribution of effect sizes in the literature is consistent with publication bias, in view of a strong asymmetry of the funnel plot. In fact, the trim-and-fill method suggested 18 points may be missing, which is a considerable number given that we have 82 effect sizes in total (i.e., nearly a quarter more would be missing). Unsurprisingly, the missing studies are in the negative section, i.e., a preference *against* speech, a result that could lead authors to doubt their own data and not submit it to journals, or that would be considered odd by reviewers and editors, who may ask that the data be removed (or who may recommend the paper to be rejected altogether). 
 
-	Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should double their sample sizes. The median sample size at present is 20, which is close to the field standard (Bergmann et al., 2018) but much lower than current recommendations (REF). Second, authors should consider proposing their studies as registered reports (REF). This is a new publication scheme (available for journals X Y Z, see a full list on XXX), where manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices (REF), known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon.
+Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should double their sample sizes. The median sample size at present is 20, which is close to the field standard (Bergmann et al., 2018) but much lower than current recommendations (REF). Second, authors should consider proposing their studies as registered reports (REF). This is a new publication scheme (available for journals X Y Z, see a full list on XXX), where manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices (REF), known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon.
 
 Infants' preference for speech is a fascinating phenomenon. Beyond the human species, the capacity to recognize signals from conspecifics might be crucial for survival and it may be present in other social species (e.g. mice, or great apes). To our knowledge, such studies have not been carried out, but we hope they are in the future. More specific to our species, preferential processing of speech may support higher level cognitive tasks, such as categorization (Waxman, 1997; 2007; 2010, Ferry). And the preference itself may be a meaningful index of processing that can be used to identify children at risk REF. For all of these reasons, it is important to take stock of what we know today. Our meta-analysis compiled public results on this key phenomenon, establishing that there is a small to medium effect size associated with it. This preference was not modulated by age, nor three characteristics of the stimuli employed (whether the speech was native or foreign; whether the competitor was natural or artificial, vocal or non-vocal). The analyses also suggested publication bias, for which recommendations were made for researchers, reviewers, and editors.
- 
+
 
 \newpage
 

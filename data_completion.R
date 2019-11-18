@@ -15,7 +15,7 @@ require(RCurl)
 u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
 tc <- getURL(u, ssl.verifypeer=FALSE)
 DB <- read.csv(textConnection(tc))
-write.csv(DB,"MA_speech_pref_data.csv")
+
 # Uncomment next line for OFFLINE MODE
 #DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
 
@@ -31,8 +31,6 @@ for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
 for(mycol in c("natural","vocal","homospecific","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
 summary(DB)
 
-
-
 #calculate correlations
 for (i in 1:nrow(DB)){
   db = DB[i,]
@@ -44,6 +42,8 @@ for (i in 1:nrow(DB)){
     DB[i,] = db
   }
 }
+
+write.csv(DB,"MA_speech_pref_data.csv")
 
 #if all of these measures are not reported, use an imputed correlation value
 #we also account for the observation that some re-calculated values are impossible and replace those
