@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  7 NOV 2019 15:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  7 NOV 2019 15:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1201,7 +1201,16 @@ Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-3.pdf used
  on input line 599.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
 
-Overfull \hbox (18.89694pt too wide) in paragraph at lines 597--601
+<MA_speech_pref_files/figure-latex/residuals-4.pdf, id=163, 469.755pt x 325.215
+pt>
+File: MA_speech_pref_files/figure-latex/residuals-4.pdf Graphic file (type pdf)
+
+<use MA_speech_pref_files/figure-latex/residuals-4.pdf>
+Package pdftex.def Info: MA_speech_pref_files/figure-latex/residuals-4.pdf used
+ on input line 600.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Overfull \hbox (18.89694pt too wide) in paragraph at lines 597--602
 [][] 
  []
 
@@ -1212,63 +1221,65 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [16 <./MA_speech_pref_files/figure-latex/residuals-1.pdf> <./MA_speech_pref_fil
-es/figure-latex/residuals-2.pdf>] [17 <./MA_speech_pref_files/figure-latex/resi
-duals-3.pdf>]
+es/figure-latex/residuals-2.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[17 <./MA_speech_pref_files/figure-latex/residuals-3.pdf> <./MA_speech_pref_fil
+es/figure-latex/residuals-4.pdf>]
 \openout4 = `MA_speech_pref.fff'.
 
-(MA_speech_pref.fff)
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 664
+(MA_speech_pref.fff) [18]
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 665
 .
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [18]
-<MA_speech_pref_files/figure-latex/plots-1.pdf, id=205, 437.635pt x 250.9375pt>
+)
+<MA_speech_pref_files/figure-latex/plots-1.pdf, id=213, 437.635pt x 250.9375pt>
 File: MA_speech_pref_files/figure-latex/plots-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/plots-1.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-1.pdf used on 
-input line 673.
+input line 674.
 (pdftex.def)             Requested size: 437.6406pt x 250.94069pt.
 
-<MA_speech_pref_files/figure-latex/plots-2.pdf, id=206, 469.755pt x 325.215pt>
+<MA_speech_pref_files/figure-latex/plots-2.pdf, id=214, 469.755pt x 325.215pt>
 File: MA_speech_pref_files/figure-latex/plots-2.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/plots-2.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-2.pdf used on 
-input line 674.
+input line 675.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-<MA_speech_pref_files/figure-latex/plots-3.pdf, id=207, 459.7175pt x 316.18124p
+<MA_speech_pref_files/figure-latex/plots-3.pdf, id=215, 459.7175pt x 316.18124p
 t>
 File: MA_speech_pref_files/figure-latex/plots-3.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/plots-3.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-3.pdf used on 
-input line 675.
+input line 676.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
 
-<MA_speech_pref_files/figure-latex/plots-4.pdf, id=208, 469.755pt x 325.215pt>
+<MA_speech_pref_files/figure-latex/plots-4.pdf, id=216, 469.755pt x 325.215pt>
 File: MA_speech_pref_files/figure-latex/plots-4.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/plots-4.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-4.pdf used on 
-input line 676.
+input line 677.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-<MA_speech_pref_files/figure-latex/plots-5.pdf, id=209, 463.7325pt x 316.18124p
+<MA_speech_pref_files/figure-latex/plots-5.pdf, id=217, 463.7325pt x 316.18124p
 t>
 File: MA_speech_pref_files/figure-latex/plots-5.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/plots-5.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/plots-5.pdf used on 
-input line 677.
+input line 678.
 (pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
-
+[19 <./MA_speech_pref_files/figure-latex/plots-1.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[19 <./MA_speech_pref_files/figure-latex/plots-1.pdf> <./MA_speech_pref_files/f
-igure-latex/plots-2.pdf>]
+[20 <./MA_speech_pref_files/figure-latex/plots-2.pdf> <./MA_speech_pref_files/f
+igure-latex/plots-3.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[20 <./MA_speech_pref_files/figure-latex/plots-3.pdf> <./MA_speech_pref_files/f
-igure-latex/plots-4.pdf>] [21 <./MA_speech_pref_files/figure-latex/plots-5.pdf>
-] [22]
-Overfull \hbox (6279.52332pt too wide) in paragraph at lines 765--765
+[21 <./MA_speech_pref_files/figure-latex/plots-4.pdf> <./MA_speech_pref_files/f
+igure-latex/plots-5.pdf>] [22] [23]
+Overfull \hbox (6279.52332pt too wide) in paragraph at lines 766--766
 []\T1/lmtt/m/n/12 More data in general would be helpful also in view of the sec
 ond potential interpretation of our results: One may wonder whether we fail to 
 find many differences because of a lack of statistical power, particularly in v
@@ -1287,7 +1298,7 @@ come.[]
  []
 
 
-Overfull \hbox (4834.5726pt too wide) in paragraph at lines 765--765
+Overfull \hbox (4834.5726pt too wide) in paragraph at lines 766--766
 []\T1/lmtt/m/n/12 For interested readers who intend to collect such data, we re
 commend caution when designing the study, and transparency when reporting it. A
 nother finding of our meta-analysis is that the distribution of effect sizes in
@@ -1303,7 +1314,7 @@ gether).[]
  []
 
 
-Overfull \hbox (10108.0252pt too wide) in paragraph at lines 765--765
+Overfull \hbox (10108.0252pt too wide) in paragraph at lines 766--766
 []\T1/lmtt/m/n/12 Given the crucial importance of understanding infants\TS1/lmt
 t/m/n/12 ' \T1/lmtt/m/n/12 speech preference, we make the following recommendat
 ions for further data collection, analysis, and reporting. First, authors shoul
@@ -1329,9 +1340,8 @@ tually reports a preference for the competitor, this may actually reflect the r
 eality of this phenomenon.[] 
  []
 
-[23] [24] AED endfloat: Processing end Figures and Tables (./MA_speech_pref.fff
-
-<MA_speech_pref_files/figure-latex/forest plot-1.pdf, id=275, 440.64626pt x 285
+[24] AED endfloat: Processing end Figures and Tables (./MA_speech_pref.fff
+<MA_speech_pref_files/figure-latex/forest plot-1.pdf, id=284, 440.64626pt x 285
 .065pt>
 File: MA_speech_pref_files/figure-latex/forest plot-1.pdf Graphic file (type pd
 f)
@@ -1343,7 +1353,7 @@ ed on input line 5.
 
 
  <./MA_speech_pref_files/figure-latex/forest plot-1.pdf>]
-<MA_speech_pref_files/figure-latex/publication bias-1.png, id=292, 1957.3125pt 
+<MA_speech_pref_files/figure-latex/publication bias-1.png, id=301, 1957.3125pt 
 x 1355.0625pt>
 File: MA_speech_pref_files/figure-latex/publication bias-1.png Graphic file (ty
 pe png)
@@ -1354,22 +1364,22 @@ ng used on input line 14.
 [26
 
  <./MA_speech_pref_files/figure-latex/publication bias-1.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 795.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 795.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 796.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 796.
 (./MA_speech_pref.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 795.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 795.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 796.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 796.
 Package rerunfilecheck Info: File `MA_speech_pref.out' has not changed.
 (rerunfilecheck)             Checksum: B3B34400C4267C180934BE12DB0613CD;3394.
  ) 
 Here is how much of TeX's memory you used:
- 15803 strings out of 492995
- 234613 string characters out of 6132703
- 350841 words of memory out of 5000000
- 18976 multiletter control sequences out of 15000+600000
+ 15807 strings out of 492995
+ 234832 string characters out of 6132703
+ 348841 words of memory out of 5000000
+ 18980 multiletter control sequences out of 15000+600000
  50965 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,10n,47p,1734b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,10n,47p,1734b,531s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local
 /texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2017/
 texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-dist
@@ -1377,10 +1387,10 @@ texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-dist
 1/public/lm/lmr8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/
 lmri12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on MA_speech_pref.pdf (26 pages, 359720 bytes).
+Output written on MA_speech_pref.pdf (26 pages, 369290 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
+ 348 PDF objects out of 1000 (max. 8388607)
+ 283 compressed objects within 3 object streams
  52 named destinations out of 1000 (max. 500000)
- 6371 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6376 words of extra memory for PDF output out of 10000 (max. 10000000)
 

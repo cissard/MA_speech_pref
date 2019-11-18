@@ -63,15 +63,6 @@ if (all(is.na(DB$corr))) {
 }
 
 DB$corr=as.numeric(as.character(DB$corr)) #ac introduced to avoid error below -- see ^^*^^
-#for (i in 1:nrow(DB)){
- # db = DB[i,]
-  #if (db$participant_design == "within_two") {
-   # if (is.na(db$corr) | db$corr > .99 | db$corr < .01){ #ac ^^*^^ In Ops.factor(db$corr, 0.99) : ‘>’ not meaningful for factors error because the NAs were taken as factor
-    #  db$corr = runif(1, min = 0.01, max = 0.99)
-    #}
-    #DB[i,] = db
-  #}
-#}
 
 #We create variables for effect sizes (ES)
 DB$d_calc = NA

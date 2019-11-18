@@ -271,7 +271,6 @@ ggplot(data=DB2[!is.na(DB2$g_calc),], aes(x=age_months, y=method_res, colour=voc
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 #natural
-plot(DB2$method_res[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$natural[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)], xlab="natural", ylab="Residuals")
 
 ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=natural))+
   geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
@@ -283,7 +282,14 @@ ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=na
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 #language
-
+ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=method_res, colour=test_lang))+
+  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
+  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
+  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
+  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_colour_manual(values = c("red3","skyblue"), labels=c("foreign","native"), name = "speech sound")+
+  theme_classic()+
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 ```
 ### Publication bias
 
@@ -346,7 +352,7 @@ ggplot(data=DB2[!is.na(DB2$natural),], aes(x=method, y=g_calc))+
   scale_x_discrete(name = "method", labels=levels(DB2$method), na.translate = FALSE)+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
-  theme(text = element_text(size = 15))
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 #Effect of naturalness
 vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
@@ -356,7 +362,7 @@ vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
   scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
-  theme(text = element_text(size = 15))
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 ggsave("violin_natural.pdf")
 
@@ -416,7 +422,7 @@ ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test
   scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
   theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .8))
+  theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 ggsave("lang_age.pdf")
 
