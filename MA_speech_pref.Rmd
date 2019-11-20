@@ -19,17 +19,17 @@ affiliation:
   - id            : "2"
     institution   : "International Research Center for Neurointelligence, The University of Tokyo"
 
-# authornote: |
-#   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
-# 
-#   Enter author note here.
+authornote: |
+  The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis.
 
+  This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
+  
 abstract: |
   The human auditory system is amazingly efficient at processing speech, with a preference for these sounds reported by full term birth. More generally, infants tested at a variety of ages have been presented with contrasts between native or foreign speech and another sound, which may be vocal or not, natural or not. These data constitute a rich pool of evidence that can be sourced from to assess to what extent familiarity, vocal quality, and naturalness affect speech preference across development. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity, vocal quality, or naturalness. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants.
 
   
 keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
-wordcount         : "3971"
+# wordcount         : "3971"
 
 bibliography      : ["bibliography.bib"]
 
@@ -83,16 +83,16 @@ temp<-aggregate(n~same_infant,DB2,mean)
 
 summary(DB2$mean_age_1)
 ```
-## Aknowledgement
+# Highlights
 
-This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
+- Infants reliably prefer natural speech over other types of sounds, from birth to the end of the first year of life
+- Speech is preferred over both artificial and other natural sounds
+- Speech is preferred over both non-vocal and other vocal sounds
+- The difference between whether infants are familiar or not with the language used was not significant
 
 # Introduction
 
 Given the importance of speech for human vocal communication, it is conceivable that infants are born equipped with a preference for speech, which becomes stronger with age and exposure. Here, we synthesize empirical data on infants’ preferences for speech over non-speech sounds to assess the explanatory role of three factors: stimulus naturalness, vocal quality, and familiarity.
-
-[insert Figure 1 here]
-
 
 ## Potential dimensions underlying preference patterns
 There are three key conceptual explanations for infants preference for speech over competitor sounds: Preference for (a) natural over artificial sounds; (b) familiar over unfamiliar sounds; and (c) vocal over non-vocal sounds (Figure 1). These explanations are mutually compatible, and one or more may be true.
@@ -148,7 +148,6 @@ After a first screening based on titles and abstracts using more liberal inclusi
 
 A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; [Anonymized link, 2019](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8)).
 
-[Insert Figure 3 here]
 
 ## Coding
 The critical variables for our purpose are infant age, methodological variables (testing method: central fixation, high amplitude sucking, head-turn preference procedure, high amplitude sucking/passive listening), and key stimuli characteristics. Specifically, we coded the language in which the speech sounds were recorded (native or foreign), and  whether the sound opposed to speech was natural or not, vocal or not. This competitor was coded as natural if it was produced by a biological organism without any further acoustic manipulation. If the authors applied acoustic manipulations it was coded as artificial. This sound was considered as vocal if it was produced by an animal vocal tract, either original or modified.  
@@ -177,8 +176,6 @@ Studies tended to have small sample sizes, with a median N of `r median(DB2$n)` 
 Infants ranged from `r round(min(DB2$mean_age_1)/30.44)` to `r round(max(DB2$mean_age_1)/30.44)` months (`r min(DB2$mean_age_1)` to `r max(DB2$mean_age_1)` days), although the majority were under 9 months of age (`r length(unique(DB2$study_ID[DB2$age_months<=9]))/length(unique(DB2$study_ID))*100`% of the studies). Individual samples comprised `r round(mean(DB2$gender_1, na.rm=TRUE)*100)` % of female participants on average. Infants were native of 7 different languages across the whole database (English, French, Japanese, Italian, Russian, Yiddish, Hebrew). 
 Studies were performed in 13 different laboratories from 6 different countries (United States, Canada, Israel, France, Japan, Italy). `r length(unique(DB2$method))` experimental methods were used: 12 studies used Central Fixation (CF) [@cooper_developmental_1994; @vouloumanos_tuned_2004; @vouloumanos_tuning_2010; @shultz_three-month-olds_2010; @colombo_method_1981; @vouloumanos_five-month-old_2009; @sorcinelli_preference_2019; @yamashiro_does_2019; @segal_listening_2011; @curtin_speech_2013; @vouloumanos_foundational_2014; @ference_role_2018]; 3 used High-Amplitude Sucking (HAS) [@vouloumanos_listening_2007; @vouloumanos_tuning_2010; @spence_prenatal_1987]
 ; and 1 used Head-turn Preference Procedure (HPP) [@ecklund-flores_asymmetric_1996].
-
-[Insert Figure 4 here]
 
 ## Summary effect size
 
@@ -308,9 +305,7 @@ k = ranktest(DB2$g_calc,DB2$g_var_calc)
 ```
 
 We assessed the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure 5)[^2]. A regression test on these data was significant (z = `r SEg$zval`, p = `r SEg$pval`), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = `r k$tau`, p = `r k$pval`), indicating a publication bias in the literature.
-To further investigate this bias, we  symmetrized the funnel plot with the “trim and fill” method [@duval_trim_2000]. `r tf$k0` (SE = `r tf$se.k0`) missing studies were needed on the left side of the plot to symmetrize the funnel plot. 
-
-[insert Figure 5 here]
+To further investigate this bias, we  symmetrized the funnel plot with the “trim and fill” method [@duval_trim_2000]. `r tf$k0` (SE = `r tf$se.k0`) missing studies were needed on the left side of the plot to symmetrize the funnel plot.
 
 [^2]: If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors. 
 
@@ -364,7 +359,7 @@ None of the moderators was significant (see Figure 6 and Table 1).
 
 table1 = rbind(base_model$reg_table[,c(2:4,7:8)],full_model$reg_table[2:5,c(2:4,7:8)])
 
-apa_table(table1, col.names=c("estimate","SE","t","confidence interval - lower bound","confidence interval - upper bound"), digits=2, caption = "Table 1: Statistical results of a meta-regression with all main effects and interactions with age. The intercepts correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).")
+apa_table(table1, col.names=c("estimate","SE","t","confidence interval - lower bound","confidence interval - upper bound"), digits=2, caption = "Table 1: Statistical results of a meta-regression with all main effects and interactions with age. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).", escape= T)
 ```
 
 

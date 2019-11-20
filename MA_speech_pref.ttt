@@ -3,7 +3,7 @@
 [tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table1}}
+\caption{\label{tab:Table1}Table 1: Statistical results of a meta-regression with all main effects and interactions with age. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
 \begin{tabular}{lllll}
 \toprule
 estimate & SE & t & confidence interval - lower bound & confidence interval - upper bound\\
