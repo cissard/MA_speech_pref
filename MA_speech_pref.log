@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  21 NOV 2019 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  21 NOV 2019 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1181,11 +1181,6 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 212.
 [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (22.12335pt too wide) in paragraph at lines 490--503
- [] 
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [12] [13]
@@ -1212,7 +1207,7 @@ Package rerunfilecheck Info: File `MA_speech_pref.out' has not changed.
 Here is how much of TeX's memory you used:
  15883 strings out of 492995
  234506 string characters out of 6132703
- 346343 words of memory out of 5000000
+ 348315 words of memory out of 5000000
  18974 multiletter control sequences out of 15000+600000
  81135 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1225,7 +1220,7 @@ texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-dist
 /lmr7.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr8.pfb></
 usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on MA_speech_pref.pdf (23 pages, 222377 bytes).
+Output written on MA_speech_pref.pdf (23 pages, 222389 bytes).
 PDF statistics:
  359 PDF objects out of 1000 (max. 8388607)
  323 compressed objects within 4 object streams
