@@ -1,4 +1,4 @@
-\documentclass[man]{apa6}
+\documentclass[man,floatsintext]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -94,12 +94,6 @@ Alejandrina Cristia\textsuperscript{1}}
 \newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
 
 
-\DeclareDelayedFloatFlavor{ThreePartTable}{table}
-\DeclareDelayedFloatFlavor{lltable}{table}
-\DeclareDelayedFloatFlavor*{longtable}{table}
-\makeatletter
-\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
-\makeatother
 \usepackage{lineno}
 
 \linenumbers
@@ -186,7 +180,7 @@ including vocal tracts but also the sound of walking and heart rate. In
 many cases natural and artificial sounds differ in their acoustic
 characteristics. For example, backward speech has unnatural formant
 transitions and seemingly abrupt closures compared to naturally produced
-sounds. Natural sounds are processed more accurately by the auditory
+sounds. Natural sounds are processed more efficiently by the auditory
 system, from the cochlea (Smith \& Lewicki, 2006) to the auditory cortex
 (e.g., Mizrahi, Shalev, \& Nelken, 2014). This predicts a preference for
 speech over artificial competitors that is present from birth,
@@ -302,8 +296,7 @@ Figure 2):
 \item
   a greater preference for speech over natural sounds as a function of
   age, but a stable preference for speech over artificial sounds that is
-  stable over development, 2. but an increasing preference for speech
-  over natural sounds;
+  stable over development;
 \item
   a greater preference for speech over other vocal sounds as a function
   of age, but a stable preference for speech over non-vocal sounds over
@@ -429,24 +422,24 @@ Studies tended to have small sample sizes, with a median N of 16
 children (Range = 52, M = 20.66, Total: 659). Infants ranged from 0 to
 12 months (1.50 to 380.50 days), although the majority were under 9
 months of age (66.67\% of the studies). Individual samples comprised 48
-\% of female participants on average. Infants were native of 7 different
-languages across the whole database (English, French, Japanese, Italian,
-Russian, Yiddish, Hebrew). Studies were performed in 13 different
-laboratories from 6 different countries (United States, Canada, Israel,
-France, Japan, Italy). 3 experimental methods were used: 12 studies used
-Central Fixation (CF) (Colombo \& Bundy, 1981; Cooper \& Aslin, 1994;
-Curtin \& Vouloumanos, 2013; J. D. Ference, 2018; Segal \& Kishon-Rabin,
-2011; Shultz \& Vouloumanos, 2010; Sorcinelli et al., 2019; Vouloumanos
-\& Curtin, 2014; Vouloumanos \& Werker, 2004; Vouloumanos et al., 2009,
-2010; Yamashiro et al., 2019); 3 used High-Amplitude Sucking (HAS)
-(Spence \& DeCasper, 1987; Vouloumanos \& Werker, 2007; Vouloumanos et
-al., 2010) ; and 1 used Head-turn Preference Procedure (HPP)
-(Ecklund-Flores \& Turkewitz, 1996).
+\% of female participants on average. Infants were native of 6 different
+languages across the whole database (English, French, Russian, Yiddish,
+Hebrew, Italian). Studies were performed in 13 different laboratories
+from 4 different countries (United States, Canada, Israel, Italy). 3
+experimental methods were used: 12 studies used Central Fixation (CF)
+(Colombo \& Bundy, 1981; Cooper \& Aslin, 1994; Curtin \& Vouloumanos,
+2013; J. D. Ference, 2018; Segal \& Kishon-Rabin, 2011; Shultz \&
+Vouloumanos, 2010; Sorcinelli et al., 2019; Vouloumanos \& Curtin, 2014;
+Vouloumanos \& Werker, 2004; Vouloumanos et al., 2009, 2010; Yamashiro
+et al., 2019); 3 used High-Amplitude Sucking (HAS) (Spence \& DeCasper,
+1987; Vouloumanos \& Werker, 2007; Vouloumanos et al., 2010) ; and 1
+used Head-turn Preference Procedure (HPP) (Ecklund-Flores \& Turkewitz,
+1996).
 
 \subsection{Summary effect size}\label{summary-effect-size}
 
 Integrating across all studies in a meta-analytic regression without any
-moderator, we found a summary effect size g of 0.53 (SE = 0.09 CI =
+moderator, we found a summary effect size g of 0.53 (SE = 0.09, CI =
 {[}0.34 , 0.73{]}) (Figure 4, diamond), corresponding to a medium effect
 size.
 
@@ -494,8 +487,8 @@ None of the moderators was significant (see Figure 6 and Table 1).
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table1}Table 1: Statistical results of a meta-regression with all main effects and interactions with age. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
-\begin{tabular}{lllll}
+\caption{\label{tab:Table1}Statistical results of a meta-regression with all main effects and interactions with age. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\begin{tabular}{ccccccccccccccccccccccccc}
 \toprule
 estimate & SE & t & confidence interval - lower bound & confidence interval - upper bound\\
 \midrule
