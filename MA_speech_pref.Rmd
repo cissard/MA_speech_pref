@@ -21,6 +21,8 @@ affiliation:
 
 authornote: |
   The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis.
+  
+  Our data is fully available in the corresponding OSF repository: http://tidy.ws/bqjc4U
 
   This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
   
@@ -152,7 +154,7 @@ We composed the initial list of studies with suggestions by experts (authors of 
 
 After a first screening based on titles and abstracts using more liberal inclusion criteria, we decided on inclusion based on full paper reading. We included studies that tested human infants from birth to one year of age, and contrasted speech sounds with any other type of sound, measuring behavioral responses to the sounds (e.g., looking times). We excluded studies that only contrasted foreign against native language, did not present natural speech sounds at all, presented speech in the mother’s voice, or intentionally mixed speech with other vocal sounds within the same sound condition. We also excluded neuroimaging studies to avoid mixing results from different brain regions with different response profiles. We included published (i.e., journal articles) as well as unpublished works (i.e., doctoral dissertations as long as sufficient information was provided). 
 
-A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; [Anonymized link, 2019](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8)).
+A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8).
 
 
 ## Coding
@@ -162,7 +164,7 @@ Data were coded by the first author. In addition, 20% of the papers were randoml
 
 We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes  were directly reported as a Cohen’s d or a Hedges' g, we also coded this. 
 
-The PRISMA checklist, data, and code can be found on the online supplementary materials ([Anonymized link](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), 2019).
+The PRISMA checklist, data, and code can be found on the online supplementary materials (https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8).
 
 
 ## Effect sizes
@@ -374,12 +376,12 @@ apa_table(table1, digits=2, align='lccc', col.names=c("","estimate","SE","t","co
 
 Due to the relatively low number of effect sizes available in the literature, we did not add interactions with age to the model to avoid overfitting. Inspection of results in Figure 5 show that the confidence intervals of all conditions overlap almost exactly across the tested ages, excluding the possibility of such interactions. 
  
-```{r plots} 
+```{r plots}
 vio_method <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=method, y=g_calc))+
   geom_violin(aes(fill=method), show.legend = F, na.rm = TRUE) +
   geom_jitter(aes(x=method, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.2, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "method", labels=levels(DB2$method), na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
@@ -389,15 +391,15 @@ vio_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=natural, y=g_calc))+
   geom_jitter(aes(x=natural, y=g_calc, size=1/DB2[!is.na(DB2$natural),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "other sound", labels=c("artificial","natural"), na.translate = FALSE)+
   scale_fill_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
-nat_age <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
   geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
@@ -407,17 +409,17 @@ vio_voc <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=vocal, y=g_calc))+
   geom_violin(aes(fill=vocal), show.legend = F, na.rm = TRUE) +
   geom_jitter(aes(x=vocal, y=g_calc, size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), position=position_jitter(w=0.1, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "other sound", na.translate = FALSE, labels = c("non-vocal", "vocal"))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_fill_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15))
 
-voc_age <- ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
+ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
   geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("turquoise2","tomato"), labels = c("non-vocal","vocal"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
@@ -426,17 +428,17 @@ age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
   geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(method = "glm", na.rm = TRUE, color='gray40')+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   theme_classic()+
   theme(text = element_text(size = 15))
 
 #Effect of familiarity with the speech sounds? Nativeness (test_lang) and age.
-lang_age <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
+ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
   geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_colour_manual(values = c("red3","skyblue"), labels = c("foreign","native"), name = "speech sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
@@ -445,7 +447,7 @@ vio_lang <- ggplot(data=DB2[!is.na(DB2$test_lang),],aes(x=test_lang, y=g_calc))+
   geom_violin(aes(fill=test_lang), show.legend = F, na.rm = TRUE) +
   geom_jitter(aes(x=test_lang, y=g_calc, size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "speech sound", labels=c("foreign","native"), na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 20))
@@ -455,7 +457,7 @@ vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim,
   geom_violin(aes(fill=contrast_stim), show.legend = F, na.rm = TRUE) +
   geom_jitter(aes(x=contrast_stim, y=g_calc, size=1/DB2[!is.na(DB2$contrast_stim),]$g_var_calc), position=position_jitter(w=0.15, h = 0), show.legend = F, na.rm = TRUE)+
   scale_x_discrete(name = "contrast sound", na.translate = FALSE)+
-  scale_y_continuous(name = "Effect size (Hedge's g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
+  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-3, 3), breaks = seq(-3,3,1))+
   #scale_fill_manual(values = c("red3","skyblue"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 20), axis.text.x = element_text(angle = 45, size = 10))
@@ -472,32 +474,32 @@ DB2$method_res = NA #set-up an empty column
 DB2$method_res[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] = residuals(method_reg) #fill it with the residuals
 
 #vocal
-res_voc <- ggplot(data=DB2[!is.na(DB2$g_calc),], aes(x=age_months, y=method_res, colour=vocal))+
+ggplot(data=DB2[!is.na(DB2$g_calc),], aes(x=age_months, y=method_res, colour=vocal))+
   geom_point(aes(size=1/DB2[!is.na(DB2$g_calc),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2[!is.na(DB2$g_calc),], outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
   scale_colour_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 #natural
 
-res_nat <- ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=natural))+
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=natural))+
   geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
   scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
 #language
-res_lang <- ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=method_res, colour=test_lang))+
+ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=method_res, colour=test_lang))+
   geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedge's g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
+  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
   scale_colour_manual(values = c("red3","skyblue"), labels=c("foreign","native"), name = "speech sound")+
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
@@ -519,7 +521,7 @@ Another finding of our meta-analysis is that the distribution of effect sizes in
 
 Ultimately, preferential processing of speech may support higher level cognitive tasks. The human species is a highly social one. Detecting speech signals would allow to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics [@vouloumanos_five-month-old_2009]. This would lay the track for social cognition. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Infants could categorize visual stimuli (i.e. associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech [@fulkerson_words_2007; @ferry_categorization_2010; @ferry_nonhuman_2013]. Interestingly, infants categorized visual stimuli when presented with speech, melodies, or monkey vocalizations [@fulkerson_influence_2003; @ferry_nonhuman_2013]. These results support the idea that infants may preferentially process complex sounds. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk [@sorcinelli_preference_2019]. It is therefore important to take stock of what we know today. 
 
-Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should strive to increase their sample sizes. The median sample size at present is 20, which is close to the field standard [@bergmann_promoting_2018] but much lower than current recommendations [@oakes_sample_2017]. Second, authors should consider proposing their studies as registered reports [@kiyonaga_practical_2019]. In this new publication scheme (available for Developmental Science, Infancy, Infant Behavior and Development, and Journal of Child Language at the time of writing, see a full up-to-date list on https://cos.io/rr/), manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices [@simmons_false-positive_2011], known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon. For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have ([Anonymized link](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8)), whatever the results and publication status.
+Given the crucial importance of understanding infants' speech preference, we make the following recommendations for further data collection, analysis, and reporting. First, authors should strive to increase their sample sizes. The median sample size at present is 20, which is close to the field standard [@bergmann_promoting_2018] but much lower than current recommendations [@oakes_sample_2017]. Second, authors should consider proposing their studies as registered reports [@kiyonaga_practical_2019]. In this new publication scheme (available for Developmental Science, Infancy, Infant Behavior and Development, and Journal of Child Language at the time of writing, see a full up-to-date list on https://cos.io/rr/), manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. Once the paper is accepted, the author collects the data, analyses it according to a pipeline described in the accepted methods, and writes up the rest of the manuscript. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. Third, for authors who would rather not follow this publication route, we still strongly recommend the use of pre-specified analysis plans. These have the virtue of, when used correctly, allowing both authors and readers to separate confirmation from exploration, reducing the likelihood of inadvertently engaging in questionable research practices [@simmons_false-positive_2011], known to increase false positives. Finally, we strongly recommend reviewers and editors to evaluate submitted manuscripts on the basis of the quality of the methods, and not of the results. If a study fails to report a speech preference, or actually reports a preference for the competitor, this may actually reflect the reality of this phenomenon. For interested readers who intend to collect such data, we recommend caution when designing the study, and transparency when reporting it. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have (https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), whatever the results and publication status.
 
 
 \newpage
