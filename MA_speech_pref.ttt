@@ -3,16 +3,16 @@
 [tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table1}Table 1: Statistical results of a meta-regression with all main effects and interactions with age. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
-\begin{tabular}{lllll}
+\caption{\label{tab:Table1}Statistical results of meta-regression with all main effects. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\begin{tabular}{lccclccclccclccclccc}
 \toprule
-estimate & SE & t & confidence interval - lower bound & confidence interval - upper bound\\
+ & estimate & SE & t & confidence interval\\
 \midrule
-0.53 & 0.09 & 5.65 & 0.34 & 0.73\\
-0.14 & 0.24 & 0.61 & -0.39 & 0.68\\
--0.03 & 0.27 & -0.10 & -0.63 & 0.58\\
--0.12 & 0.27 & -0.46 & -0.75 & 0.50\\
-0.00 & 0.00 & 0.34 & 0.00 & 0.00\\
+summary effect size & 0.53 & 0.09 & 5.65 & 0.34 - 0.73\\
+familiarity & 0.14 & 0.24 & 0.61 & -0.39 - 0.68\\
+naturalness & -0.03 & 0.27 & -0.10 & -0.63 - 0.58\\
+vocal quality & -0.12 & 0.27 & -0.46 & -0.75 - 0.5\\
+age & 0.00 & 0.00 & 0.34 & 0 - 0\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}

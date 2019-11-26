@@ -24,16 +24,16 @@ authornote: |
 
   This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
   
-abstract: |
-  The human auditory system is amazingly efficient at processing speech, with a preference for these sounds reported by full term birth. More generally, infants tested at a variety of ages have been presented with contrasts between native or foreign speech and another sound, which may be vocal or not, natural or not. These data constitute a rich pool of evidence that can be sourced from to assess to what extent familiarity, vocal quality, and naturalness affect speech preference across development. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity, vocal quality, or naturalness. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants.
+# abstract: |
+#  The human auditory system is amazingly efficient at processing speech, with a preference for these sounds reported by full term birth. More generally, infants tested at a variety of ages have been presented with contrasts between native or foreign speech and another sound, which may be vocal or not, natural or not. These data constitute a rich pool of evidence that can be sourced from to assess to what extent familiarity, vocal quality, and naturalness affect speech preference across development. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity, vocal quality, or naturalness. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants.
 
   
-keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
+# keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
 # wordcount         : "3971"
 
 bibliography      : ["bibliography.bib"]
 
-floatsintext      : yes
+floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -89,6 +89,12 @@ summary(DB2$mean_age_1)
 - Speech is preferred over both artificial and other natural sounds
 - Speech is preferred over both non-vocal and other vocal sounds
 - The difference between whether infants are familiar or not with the language used was not significant
+
+# Abstract
+
+  The human auditory system is amazingly efficient at processing speech, with a preference for these sounds reported by full term birth. More generally, infants tested at a variety of ages have been presented with contrasts between native or foreign speech and another sound, which may be vocal or not, natural or not. These data constitute a rich pool of evidence that can be sourced from to assess to what extent familiarity, vocal quality, and naturalness affect speech preference across development. We synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity, vocal quality, or naturalness. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants.
+  
+*Keywords:* meta-analysis, infants, speech preference, auditory development, natural sounds, vocal sounds
 
 # Introduction
 
@@ -156,7 +162,7 @@ Data were coded by the first author. In addition, 20% of the papers were randoml
 
 We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes  were directly reported as a Cohen’s d or a Hedges' g, we also coded this. 
 
-The PRISMA checklist, data, and code can be found on the online supplementary materials ([Anonymized](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), 2019).
+The PRISMA checklist, data, and code can be found on the online supplementary materials ([Anonymized link](https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), 2019).
 
 
 ## Effect sizes
@@ -359,10 +365,10 @@ None of the moderators was significant (see Figure 6 and Table 1).
 table1 = rbind(base_model$reg_table[,c(2:4,7:8)],full_model$reg_table[2:5,c(2:4,7:8)])
 rownames(table1)=c('summary effect size','familiarity','naturalness','vocal quality','age')
 
-table1[,4]=paste0(round(table1[,4],2),"-",round(table1[,5],2))
+table1[,4]=paste0(round(table1[,4],2)," - ",round(table1[,5],2))
 table1=table1[,-5]
 
-apa_table(table1, digits=2, col.names=c("","estimate","SE","t","confidence interval"), caption = "Statistical results of meta-regression with all main effects. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).", escape= T)
+apa_table(table1, digits=2, align='lccc', col.names=c("","estimate","SE","t","confidence interval"), caption = "Statistical results of meta-regression with all main effects. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).", escape= T)
 ```
 
 
