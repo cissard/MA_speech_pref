@@ -8,11 +8,11 @@
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-summary effect size & 0.53 & 0.09 & 5.65 & 0.34 - 0.73\\
-familiarity & 0.14 & 0.24 & 0.61 & -0.39 - 0.68\\
-naturalness & -0.03 & 0.27 & -0.10 & -0.63 - 0.58\\
-vocal quality & -0.12 & 0.27 & -0.46 & -0.75 - 0.5\\
-age & 0.00 & 0.00 & 0.34 & 0 - 0\\
+average effect size & 0.47 & 0.09 & 5.07 & 0.28 - 0.66\\
+familiarity & 0.24 & 0.25 & 0.96 & -0.31 - 0.79\\
+naturalness & 0.02 & 0.26 & 0.07 & -0.57 - 0.6\\
+vocal quality & -0.13 & 0.24 & -0.53 & -0.7 - 0.44\\
+age & 0.00 & 0.00 & 0.52 & 0 - 0\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
