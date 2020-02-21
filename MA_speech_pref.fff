@@ -2,8 +2,20 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/plots-1.pdf}
+\includegraphics{MA_speech_pref_files/figure-latex/forest plot-1.pdf}
 \caption{}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\centering \includegraphics{MA_speech_pref_files/figure-latex/publication bias-1}
+
+}
+
+\caption{ }(\#fig:publication bias)
 \end{figure*}
 \efloatseparator
  
