@@ -1,13 +1,10 @@
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
-
 \begin{center}
 \begin{threeparttable}
-
 \caption{\label{tab:Table1}Statistical results of meta-regression with all main effects. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
-
-\begin{tabular}{lcccl}
+\begin{tabular}{lccclccclccclccclccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
@@ -18,10 +15,8 @@ vocal quality & -0.08 & 0.23 & -0.35 & -0.61 - 0.46\\
 age & 0.00 & 0.00 & 0.15 & 0 - 0\\
 \bottomrule
 \end{tabular}
-
 \end{threeparttable}
 \end{center}
-
 \end{table*}
 \efloatseparator
  
