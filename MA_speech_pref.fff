@@ -2,20 +2,85 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/forest plot-1.pdf}
-\caption{}
+\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png}
+\caption{\label{fig:unnamed-chunk-1}Speech is a natural, vocal sound.}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
+\centering
+\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png}
+\caption{\label{fig:unnamed-chunk-2}Hypothesized pattern of preference: the
+x axis shows age, the y axis represents the effect size derived from the
+contrast between a speech condition and a competitor condition
+(preference for speech over the competitor is plotted up; the lower
+quadrants are empty because we do not predict a preference for the
+competitor over speech). A: Speech contrasted to natural (green) or
+artificial (purple) competitors. B: Speech contrasted to vocal (orange)
+or non-vocal (cyan) competitors. C: Collapsing across competitors,
+separating speech in a foreign language (red); speech in the native
+language (blue).}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
 
-{\centering \includegraphics{MA_speech_pref_files/figure-latex/publication bias-1}
+\centering
+\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.pdf}
+\caption{\label{fig:unnamed-chunk-3}PRISMA flowchart summarizing the
+literature review and selection process.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
 
-}
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/forest-1.pdf}
+\caption{\label{fig:forest}Forest plot of effect sizes available in the
+literature.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
 
-\caption{ }(\#fig:publication bias)
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/publication bias-1.pdf}
+\caption{(\#fig:publication bias)Funnel plot for publication bias.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
+\caption{\label{fig:natural}Effect sizes as a function of age and natural
+quality of the competitor}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
+\caption{\label{fig:vocal}Effect sizes as a function of age and vocal
+quality of the competitor}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/unnamed-chunk-4-1.pdf}
+\caption{\label{fig:unnamed-chunk-4}Effect sizes as a function of age and
+familiarity with the speech sounds.}
 \end{figure*}
 \efloatseparator
  
