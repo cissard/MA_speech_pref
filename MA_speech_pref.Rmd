@@ -27,10 +27,10 @@ authornote: |
   Our data is fully available in the corresponding OSF repository: http://tidy.ws/bqjc4U
   
 abstract: |
- The human auditory system is amazingly efficient at processing speech, with a preference for this type of sound reported by full term birth. Numerous studies have investigated this preference at a variety of ages, and with a large variety of sounds contrasted to speech, from monkey calls to white noise. Many of these contrasts confound familiar, natural, and/or vocal sounds, inviting a meta-analytic investigation in which these three conceptually distinct explanations (preference for familiar, natural, or vocal sounds) are statistically tested. Moreover, when reviewed qualitatively, previous experimental work suggested that infants' preference for speech would initially encompass a broad range of natural or vocal sounds, and then tune in to species-specific vocalizations, namely speech. A meta-analytic framework allows us to check whether this explanation holds for the entire body of literature. We therefore synthesized the literature by conducting a meta-analysis of studies testing speech preference in infants from birth to one year of age. We found a medium effect size, with infants preferring speech over other sounds. This preference was not significantly moderated by familiarity with the language of the speech sound, vocal quality, or naturalness of the competitor. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon, especially in older infants.
+ Previous experimental work suggested that infants initially prefer a broad range of natural or vocal sounds, and then tune in to speech. To check whether this explanation holds for the entire body of literature, we conducted a meta-analysis of studies testing speech preference in infants. Infants reliably preferred speech over other sounds, but this preference was not significantly moderated by vocal quality, or naturalness of the competitor. We found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon.
   
 keywords          : "Meta-analysis, infants, speech preference, auditory development, natural sounds"
-wordcount         : "4400"
+wordcount         : "4579"
 
 bibliography      : ["bibliography.bib"]
 
@@ -44,7 +44,7 @@ draft             : no
 
 documentclass     : "apa6"
 classoption       : "man"
-output            : papaja::apa6_pdf
+output            : papaja::apa6_word
 ---
 
 ```{r setup, include=F}
@@ -492,68 +492,6 @@ vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim,
 
 ```
 
-Experimental method is known to be sizable in the cognitive developmental literature [@bergmann_promoting_2018]. We assessed that it did not impact our results by residualizing effect sizes from experimental method (Supplementary figures S2, S3, and S4). 
-
-```{r leverage}
-#remove the potentially leveraging data point
-DBL=DB2[DB2$same_infant!='sorcinelli_TD2',]
-
-ggplot(data=DBL[!is.na(DBL$vocal)&!is.na(DBL$g_calc),], aes(x=age_months, y=g_calc, colour=vocal))+
-  geom_point(aes(size=1/DBL[!is.na(DBL$vocal)&!is.na(DBL$g_calc),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DBL[!is.na(DBL$vocal)&!is.na(DBL$g_calc),], outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Effect size (Hedges' g)", limits = c(-1, 3), breaks = seq(-1,3,1))+
-  geom_hline(yintercept=0, linetype="dashed", color="grey")+
-  scale_colour_manual(values = c("turquoise2","tomato"))+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = "none")
-
-model_vocal_l <- robu(g_calc ~ test_lang + vocal*mean_age_1, data=DBL, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-
-model_natural_l <- robu(g_calc ~ test_lang + natural*mean_age_1, data=DBL, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-
-full_model_l<- robu(g_calc ~ test_lang + natural + vocal + mean_age_1, data=DBL, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
-
-```
-
-```{r residuals}
-
-method_reg = lm(DB2$g_calc[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] ~ DB2$method[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)])
-
-DB2$method_res = NA #set-up an empty column
-DB2$method_res[!is.na(DB2$g_calc) & !is.na(DB2$method) & !is.na(DB2$natural)] = residuals(method_reg) #fill it with the residuals
-
-#vocal
-ggplot(data=DB2[!is.na(DB2$g_calc),], aes(x=age_months, y=method_res, colour=vocal))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$g_calc),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DB2[!is.na(DB2$g_calc),], outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
-  scale_colour_manual(values = c("turquoise2","tomato"), labels=c("non-vocal","vocal"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-#natural
-
-ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=method_res, colour=natural))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
-  scale_colour_manual(values = c("mediumvioletred","green3"), labels=c("artificial","natural"), name = "other sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-
-#language
-ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=method_res, colour=test_lang))+
-  geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
-  stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
-  scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
-  scale_y_continuous(name = "Residuals (Hedges' g)", limits = c(-2, 2), breaks = seq(-2,2,1))+
-  scale_colour_manual(values = c("red3","skyblue"), labels=c("foreign","native"), name = "speech sound")+
-  theme_classic()+
-  theme(text = element_text(size = 15), legend.position = c(.9, .9))
-```
 
 # Discussion
 
@@ -566,7 +504,7 @@ The fact that familiarity with the language used in the experiment did not modul
 
 The Conspec model proposes that faces would be detected because of their spatial structure [@morton_conspec_1991]. Similarly, it is possible that infants prefer speech because of its complex acoustic structure and fast transitions [@rosen_constructing_2007]. Spectral or temporal modulations taken separately are not sufficient to elicit neural responses similar to the ones elicited by speech [@minagawa-kawai_assessing_2011]. However, speech is characterized by joint spectrotemporal modulations at specific rates [@singh_modulation_2003]. It is possible that infants attune to this specific spectro-temporal structure [though see @norman-haignere_neural_2018 showing that they only explain neural responses in primary auditory cortex]. Testing this explanation would require to compute the modulation spectra of the actual stimuli used in the studies. Thus, we recommend interested researchers to deposit their stimuli in a public archive such as the Open Science Framework [@foster_open_2017]. 
 
-Ultimately, preferential processing of speech may support higher level cognitive tasks. The human species is a highly social one. Detecting speech signals would allow to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics [@vouloumanos_five-month-old_2009]. This would lay the track for social cognition. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Infants could categorize visual stimuli (i.e., associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech [@fulkerson_words_2007; @ferry_categorization_2010; @ferry_nonhuman_2013]. Interestingly, infants categorized visual stimuli when presented with speech, melodies, monkey [@fulkerson_influence_2003], or lemur vocalizations [@ferry_nonhuman_2013]. These results support the idea that infants may preferentially process complex sounds. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk [@sorcinelli_preference_2019]. It is therefore important to take stock of what we know today. 
+Ultimately, preferential processing of speech may support higher level cognitive tasks. The human species is a highly social one. Detecting speech signals would allow to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics [@vouloumanos_five-month-old_2009]. This would lay the track for social cognition. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Infants could categorize visual stimuli (i.e., associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech [@fulkerson_words_2007; @ferry_categorization_2010; @ferry_nonhuman_2013]. Interestingly, infants categorized visual stimuli when presented with speech, melodies, monkey [@fulkerson_influence_2003], or lemur vocalizations [@ferry_nonhuman_2013]. These results support the idea that infants may preferentially process complex sounds. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk [@sorcinelli_preference_2019]. Understanding this phenomenon is therefore crucial for both theoretical and clinical advances. 
 
 We want to close by drawing the reader's attention to three limitations of the present study. 
 First, the distribution of effect sizes in the literature is consistent with publication bias, in view of a strong asymmetry of the funnel plot. In fact, the trim-and-fill method suggested `r tf$k0` points may be missing, which is a considerable number given that we have `r length(DB2$g_calc)` effect sizes in total (i.e., a fifth more would be missing). The missing studies are in the negative section, i.e., a preference *against* speech, a result that could lead authors to doubt their own data and not submit it to journals, or that would be considered odd by reviewers and editors, who may ask that the data be removed (or who may recommend the paper to be rejected altogether). These missing studies constitute an important limitation of our results. The literature being biased toward positive effect sizes, the true effect size might be smaller than the one we found (vertical line on Figure 5). To correct this bias, we invite researchers to use registered reports [@kiyonaga_practical_2019]. In this new publication scheme (available for Developmental Science, Infancy, Infant Behavior and Development, and Journal of Child Language at the time of writing, see a full up-to-date list on https://cos.io/rr/), manuscripts are submitted before data are collected. Reviewers and editors make publication decisions based solely on the introduction and methods. The paper is then reviewed once more for readability, but it cannot be rejected if the results are surprising or uncomfortable for the field. This would facilitate the publication of studies failing to report a speech preference, or actually reporting a preference for the competitor, which would in turn help to draw a more accurate picture of the phenomenon. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have (https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), whatever the results and publication status. 
