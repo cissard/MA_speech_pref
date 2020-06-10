@@ -29,7 +29,7 @@ language (blue).}
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.pdf}
+\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg}
 \caption{\label{fig:unnamed-chunk-3}PRISMA flowchart summarizing the
 literature review and selection process.}
 \end{figure*}
@@ -60,7 +60,8 @@ literature.}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
 \caption{\label{fig:natural}Effect sizes as a function of age and natural
-quality of the competitor}
+quality of the competitor. The size of each dot is inversely
+proportional to the variance.}
 \end{figure*}
 \efloatseparator
  
@@ -70,7 +71,8 @@ quality of the competitor}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
 \caption{\label{fig:vocal}Effect sizes as a function of age and vocal
-quality of the competitor}
+quality of the competitor. The size of each dot is inversely
+proportional to the variance.}
 \end{figure*}
 \efloatseparator
  
@@ -80,7 +82,8 @@ quality of the competitor}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/unnamed-chunk-4-1.pdf}
 \caption{\label{fig:unnamed-chunk-4}Effect sizes as a function of age and
-familiarity with the speech sounds.}
+familiarity with the speech sounds. The size of each dot is inversely
+proportional to the variance.}
 \end{figure*}
 \efloatseparator
  
