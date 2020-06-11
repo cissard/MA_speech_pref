@@ -70,7 +70,7 @@ sessionInfo()
 
 read.csv('speech_pref_full_DB.csv')->DB
 
-DB2 = DB[DB$method!='PL',] #keep only the behavioral studies, remove outliers and NAs.
+DB2 = DB[DB$method!='PL' & !is.na(DB$g_calc),] #keep only the behavioral studies, remove outliers and NAs.
 
 #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
 DB2$outlier[DB2$g_calc > mean(DB2$g_calc, na.rm = TRUE) + 3*sd(DB2$g_calc, na.rm = TRUE) | DB2$g_calc < mean(DB2$g_calc, na.rm = TRUE) - 3*sd(DB2$g_calc, na.rm = TRUE)]<-T 
@@ -143,7 +143,7 @@ Given the scarcity of direct evidence on the potential explanations laid out abo
 2. a greater preference for speech over other natural sounds as a function of age, but a preference for speech over artificial sounds that is stable over development;
 3. a greater preference for speech over other vocal sounds as a function of age, but a stable preference for speech over non-vocal sounds over development.
 
-```{r, include=T, fig.cap="Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue)."}
+```{r, include=T, fig.cap = "Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue)."}
 knitr::include_graphics("/Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png")
 ```
 
@@ -159,7 +159,7 @@ After a first screening based on titles and abstracts using more liberal inclusi
 
 A PRISMA flow chart summarizes the literature review and selection process (Figure 3). We documented all the studies that we inspected in a decision spreadsheet (available in the online supplementary materials; https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8).
 
-```{r, include=T, fig.cap="PRISMA flowchart summarizing the literature review and selection process."}
+```{r, include=T, fig.cap = "PRISMA flowchart summarizing the literature review and selection process."}
 knitr::include_graphics("/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg")
 ```
 
@@ -202,12 +202,12 @@ base_model <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_
 # same model with metafor for a nice forest plot 
 simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) 
 
-forest.rma(simple_model, annotate = FALSE, xlim = c(-13,3), ylim=c(-1, 56),  
-       xlab = 'Effect size (Hedges\' g)', mlab = "", alim = c(-3,3), steps = 7, cex.axis = 0.6, cex.lab = 0.7, 
-       ilab=cbind(round(DB2[!DB2$outlier & !is.na(DB2$g_calc)]$age_months, digits = 1), levels(DB2$method), levels(DB2$natural), levels(DB2$vocal), levels(DB2$test_lang)),
-       ilab.xpos=c(-9,-7.5,-6,-4.5, -3)) 
+forest.rma(simple_model, annotate = FALSE, xlim = c(-13,3), ylim = c(-1,51),
+       xlab = 'Effect size (Hedges\' g)', mlab = "", alim = c(-2,3), steps = 6, cex.axis = 0.6, cex.lab = 0.7, 
+       ilab=cbind(round(DB2[!DB2$outlier,]$age_months, digits = 1), DB2[!DB2$outlier,]$method, DB2[!DB2$outlier,]$natural, DB2[!DB2$outlier,]$vocal, DB2[!DB2$outlier,]$test_lang),
+       ilab.xpos=c(-7.4,-6.2,-5,-3.8, -2.5)) 
 op <- par(cex=.75)
-text(c(-9,-7.5,-6,-4.5, -3), 57, c("age", "method", "natural", "vocal", "language"))
+text(c(-7.4,-6.2,-5,-3.8, -2.5), 50, c("age", "method", "natural", "vocal", "language"))
 ```
 
 Integrating across all studies in a meta-analytic regression without any moderator, we found an average effect size g of `r base_model$reg_table$b.r` (SE = `r base_model$reg_table$SE`, CI = [`r base_model$reg_table$CI.L` , `r base_model$reg_table$CI.U`]) (Table 1, and Figure 4, diamond), corresponding to a medium effect size.
@@ -506,8 +506,10 @@ Our meta-analysis synthesizes the available literature on infants’ preference 
 
 We had also hypothesized age to play a major role, because it may correlate with a reshaping of the category definition for speech itself. Indeed, studies comparing processing of human speech against human non-speech as well as animal vocalizations more generally [@vouloumanos_tuning_2010; @mcdonald_infant_2019] often discuss these age-related differences in categorization of these sounds. Surprisingly, age did not significantly moderate the overall preference for speech, as shown by the null estimate of this moderator (Table 1). This result was replicated in a separate model for age only, which showed an estimate for the intercept similar to the intercept found in the meta-regression with no moderator (Supplementary results S5). Moreover, the scatterplot of effect sizes as a function of age reveals clearly no change with age even when plotted without other moderators (Supplementary figure S6).  This null effect of age, combined with the sizeable intercept, confirms that infants reliably prefer speech over other types of sounds from birth.
 
-In other words, from birth on, infants show a preference for speech, which cannot be reduced to three simpler explanations: naturalness, vocalness, or familiarity (represented here by comparing effects for native versus competitor against those for foreign versus competitor). This capacity to preferentially listen to speech sounds from birth suggests that infants are born with the capacity to recognize their conspecifics’ communication signals. This parallels what has been proposed by the Conspec model for faces: Infants would be born with knowledge about faces, enabling them to orient their attention toward them, even without any prior exposure to faces [@morton_conspec_1991]. A capacity to recognize conspecifics, either from their face or their voice, is consistent with the similar processing stages between voice and face perception [@yovel_unified_2013].
+In other words, from birth on, infants show a preference for speech, which cannot be reduced to the three simpler explanations tested here: naturalness, vocalness, or familiarity (represented here by comparing effects for native versus competitor against those for foreign versus competitor). This capacity to preferentially listen to speech sounds from birth suggests that infants are born with the capacity to recognize their conspecifics’ communication signals. This parallels what has been proposed by the Conspec model for faces: Infants would be born with knowledge about faces, enabling them to orient their attention toward them, even without any prior exposure to faces [@morton_conspec_1991]. A capacity to recognize conspecifics, either from their face or their voice, is consistent with the similar processing stages between voice and face perception [@yovel_unified_2013].
 The fact that familiarity with the language used in the experiment did not modulate infants’ preference suggests that exposure did not play a crucial role for speech either. However, contrary to faces, fetuses are exposed to speech that is low-pass filtered by the womb throughout the last trimester of gestation [@querleu_fetal_1988; @lecanuet_speech_1993]. It is therefore possible that prenatal experience with low-pass filtered speech helps infants to form a representation of speech, independently of the language spoken. 
+
+basic perceptual abilities are present at birth and become increasingly differentiated and refined over age Turati 2004. Filters, potentially corresponding to neurons response profiles (Moore & Woolley, 2019).
 
 The Conspec model proposes that faces would be detected because of their spatial structure [@morton_conspec_1991]. Similarly, it is possible that infants prefer speech because of its complex acoustic structure and fast transitions [@rosen_constructing_2007]. Spectral or temporal modulations taken separately are not sufficient to elicit neural responses similar to the ones elicited by speech [@minagawa-kawai_assessing_2011]. However, speech is characterized by joint spectrotemporal modulations at specific rates [@singh_modulation_2003]. It is possible that infants attune to this specific spectro-temporal structure [though see @norman-haignere_neural_2018 showing that they only explain neural responses in primary auditory cortex]. Testing this explanation would require to compute the modulation spectra of the actual stimuli used in the studies. Thus, we recommend interested researchers to deposit their stimuli in a public archive such as the Open Science Framework [@foster_open_2017]. 
 
