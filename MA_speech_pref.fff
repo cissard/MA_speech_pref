@@ -3,7 +3,7 @@
 
 \centering
 \includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png}
-\caption{\label{fig:unnamed-chunk-1}Speech is a natural, vocal sound.}
+\caption{\label{fig:venn}Speech is a natural, vocal sound.}
 \end{figure*}
 \efloatseparator
  
@@ -12,16 +12,15 @@
 
 \centering
 \includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png}
-\caption{\label{fig:unnamed-chunk-2}Hypothesized pattern of preference: the
-x axis shows age, the y axis represents the effect size derived from the
-contrast between a speech condition and a competitor condition
-(preference for speech over the competitor is plotted up; the lower
-quadrants are empty because we do not predict a preference for the
-competitor over speech). A: Speech contrasted to natural (green) or
-artificial (purple) competitors. B: Speech contrasted to vocal (orange)
-or non-vocal (cyan) competitors. C: Collapsing across competitors,
-separating speech in a foreign language (red); speech in the native
-language (blue).}
+\caption{\label{fig:hyp}Hypothesized pattern of preference: the x axis shows
+age, the y axis represents the effect size derived from the contrast
+between a speech condition and a competitor condition (preference for
+speech over the competitor is plotted up; the lower quadrants are empty
+because we do not predict a preference for the competitor over speech).
+A: Speech contrasted to natural (green) or artificial (purple)
+competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan)
+competitors. C: Collapsing across competitors, separating speech in a
+foreign language (red); speech in the native language (blue).}
 \end{figure*}
 \efloatseparator
  
@@ -30,8 +29,8 @@ language (blue).}
 
 \centering
 \includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg}
-\caption{\label{fig:unnamed-chunk-3}PRISMA flowchart summarizing the
-literature review and selection process.}
+\caption{\label{fig:prisma}PRISMA flowchart summarizing the literature
+review and selection process.}
 \end{figure*}
 \efloatseparator
  
@@ -41,7 +40,7 @@ literature review and selection process.}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/forest-1.pdf}
 \caption{\label{fig:forest}Forest plot of effect sizes available in the
-literature.}
+literature, along with their respective moderator status.}
 \end{figure*}
 \efloatseparator
  
@@ -50,7 +49,11 @@ literature.}
 
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/publication bias-1.pdf}
-\caption{(\#fig:publication bias)Funnel plot for publication bias.}
+\caption{(\#fig:publication bias)Funnel plot of effect sizes and their
+respective standard errors. Black dots: effect sizes observed in the
+literature. White dots: missing effect sizes, suggestive of a
+publication bias\(^2\). Vertical line: average effect size after filling
+the missing effect sizes.}
 \end{figure*}
 \efloatseparator
  
@@ -80,10 +83,10 @@ proportional to the variance.}
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/unnamed-chunk-4-1.pdf}
-\caption{\label{fig:unnamed-chunk-4}Effect sizes as a function of age and
-familiarity with the speech sounds. The size of each dot is inversely
-proportional to the variance.}
+\includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
+\caption{\label{fig:lang}Effect sizes as a function of age and familiarity
+with the speech sounds. The size of each dot is inversely proportional
+to the variance.}
 \end{figure*}
 \efloatseparator
  
