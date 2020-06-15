@@ -38,6 +38,16 @@ review and selection process.}
 \ifnextchar[{\eatarg}{}
 
 \centering
+\includegraphics{MA_speech_pref_files/figure-latex/competitors-1.pdf}
+\caption{\label{fig:competitors}Histogram of the number of effect size for
+each competitor.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
 \includegraphics{MA_speech_pref_files/figure-latex/forest-1.pdf}
 \caption{\label{fig:forest}Forest plot of effect sizes available in the
 literature, along with their respective moderator status.}
