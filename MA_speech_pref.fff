@@ -39,7 +39,7 @@ review and selection process.}
 
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/competitors-1.pdf}
-\caption{\label{fig:competitors}Histogram of the number of effect size for
+\caption{\label{fig:competitors}Histogram of the number of effect sizes for
 each competitor.}
 \end{figure*}
 \efloatseparator
@@ -58,12 +58,12 @@ literature, along with their respective moderator status.}
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/publication bias-1.pdf}
-\caption{(\#fig:publication bias)Funnel plot of effect sizes and their
-respective standard errors. Black dots: effect sizes observed in the
-literature. White dots: missing effect sizes, suggestive of a
-publication bias\(^2\). Vertical line: average effect size after filling
-the missing effect sizes.}
+\includegraphics{MA_speech_pref_files/figure-latex/bias-1.pdf}
+\caption{\label{fig:bias}Funnel plot of effect sizes and their respective
+standard errors. Black dots: effect sizes observed in the literature.
+White dots: missing effect sizes, suggestive of a publication
+bias\(^2\). Vertical line: average effect size after filling the missing
+effect sizes.}
 \end{figure*}
 \efloatseparator
  

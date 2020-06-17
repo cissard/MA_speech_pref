@@ -3,12 +3,30 @@
 [tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table1}Statistical results of meta-regression with all main effects. The estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
-\begin{tabular}{lccclccclccclccclccc}
+\caption{\label{tab:Table1}Statistical results of meta-regression without any moderator.}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
 average effect size & 0.42 & 0.07 & 6.37 & 0.28 - 0.55\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.42 & 0.16 & 2.64 & 0.08 - 0.76\\
 familiarity & -0.01 & 0.13 & -0.08 & -0.29 - 0.27\\
 naturalness & 0.16 & 0.14 & 1.20 & -0.13 - 0.46\\
 vocal quality & -0.13 & 0.18 & -0.75 & -0.51 - 0.25\\
