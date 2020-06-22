@@ -486,6 +486,10 @@ finally calculated the variance of each effect size (Lipsey \& Wilson,
 correction for small sample sizes based on the degree of freedom
 (Borenstein, Hedges, Higgins, \& Rothstein, 2011).
 
+We did not center age because our hypotheses included a developmental
+progression from birth to the end of the first year of life. We were
+therefore interested in the intercept at age 0 (i.e.~birth).
+
 All analyses use the R (R Core Team, 2018) package Robumeta (Hedges,
 Tipton, \& Johnson, 2010), which allows to fit meta-analytic regressions
 that take into account the correlated structure of the data, when
@@ -514,7 +518,7 @@ publication contributing 1 effect size was a thesis (J. D. Ference,
 Experiments tended to have small sample sizes, with a median N of 16
 children (Range = {[}60, 4{]}, M = 19.35, Total: 699). Infants ranged
 from 0 to 12 months (1.50 to 380.50 days), although the majority were
-under 9 months of age (84.38\% of the experiments). Individual samples
+under 6 months of age (75\% of the experiments). Individual samples
 comprised 45\% of female participants on average. Infants were native of
 6 different languages across the whole database (English, French,
 Russian, Yiddish, Hebrew, Italian). Experiments were performed in 10
@@ -565,8 +569,8 @@ literature, along with their respective moderator status.}
 \end{figure}
 
 Integrating across all experiments in a meta-analytic regression without
-any moderator, we found an average effect size g of 0.42 (SE = 0.07, CI
-= {[}0.28 , 0.55{]}) (Table 1, and Figure \ref{tab:Table1}, diamond),
+any moderator, we found an average effect size g of 0.36 (SE = 0.06, CI
+= {[}0.23 , 0.48{]}) (Table 1, and Figure \ref{tab:Table1}, diamond),
 corresponding to a medium effect size. Heterogeneity among effect sizes
 was estimated at \(\tau^2\) = 0.11 (I\textsuperscript{2} = 74.44\%),
 which was significant (Q = 170.72, p\textless{}0.001) despite the
@@ -580,7 +584,7 @@ removal of outliers before running the model.
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-average effect size & 0.42 & 0.07 & 6.37 & 0.28 - 0.55\\
+average effect size & 0.36 & 0.06 & 5.74 & 0.23 - 0.48\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -644,16 +648,16 @@ None of the moderators was significant (see Figures \ref{fig:natural},
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal, at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
 \begin{tabular}{lcccclcccclcccclcccclcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.42 & 0.16 & 2.64 & 0.08 - 0.76\\
-familiarity & -0.01 & 0.13 & -0.08 & -0.29 - 0.27\\
-naturalness & 0.16 & 0.14 & 1.20 & -0.13 - 0.46\\
-vocal quality & -0.13 & 0.18 & -0.75 & -0.51 - 0.25\\
-age & 0.00 & 0.00 & 0.04 & 0 - 0\\
+intercept & 0.36 & 0.15 & 2.42 & 0.04 - 0.67\\
+familiarity & -0.08 & 0.12 & -0.67 & -0.35 - 0.18\\
+naturalness & 0.21 & 0.11 & 1.89 & -0.03 - 0.46\\
+vocal quality & -0.20 & 0.17 & -1.22 & -0.56 - 0.16\\
+age & 0.00 & 0.00 & 0.55 & 0 - 0\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -664,41 +668,99 @@ Due to the relatively low number of effect sizes available in the
 literature, we did not add interactions with age to the model to avoid
 overfitting. The confidence intervals of all conditions overlap almost
 exactly across the tested ages, excluding the possibility of such
-interactions (Figure \ref{fig:natural}, \ref{fig:vocal}, and
-\ref{fig:lang}). The absence of interaction between age and other
-moderators was confirmed by three separate models for each moderator,
-that did not yield any significant effect or interaction (Supplementary
-Results S1).
+interactions (Table \ref{tab:Table2}, and Figure \ref{fig:natural},
+\ref{fig:vocal}, and \ref{fig:lang}). The absence of interaction between
+age and other moderators was confirmed by three separate models for each
+moderator, that did not yield any significant effect or interaction
+(Table \ref{tab:TableNatural}, \ref{tab:TableVocal}, and
+\ref{tab:TableLang}).
 
 \begin{figure}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
 \caption{\label{fig:natural}Effect sizes as a function of age and natural
 quality of the competitor. The size of each dot is inversely
-proportional to the variance.}
+proportional to the variance. Positive effect sizes reflect a preference
+for the speech sound, negative effect sizes reflect a preference for the
+competitor sound.}
 \end{figure}
+
+\begin{table}[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableNatural}Statistical results of meta-regression with naturalness and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is natural, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is artificial (naturalness).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.29 & 0.24 & 1.22 & -0.32 - 0.9\\
+naturalness & 0.07 & 0.26 & 0.27 & -0.49 - 0.63\\
+naturalness*age & 0.00 & 0.00 & 0.06 & -0.01 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
 
 \begin{figure}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
 \caption{\label{fig:vocal}Effect sizes as a function of age and vocal
 quality of the competitor. The size of each dot is inversely
-proportional to the variance.}
+proportional to the variance. Positive effect sizes reflect a preference
+for the speech sound, negative effect sizes reflect a preference for the
+competitor sound.}
 \end{figure}
+
+\begin{table}[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableVocal}Statistical results of meta-regression with vocal quality and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is vocal, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is non-vocal (vocal quality).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.44 & 0.17 & 2.61 & 0.04 - 0.83\\
+vocal quality & -0.32 & 0.20 & -1.58 & -0.75 - 0.11\\
+age & 0.00 & 0.00 & 0.80 & 0 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
 
 \begin{figure}
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
 \caption{\label{fig:lang}Effect sizes as a function of age and familiarity
 with the speech sounds. The size of each dot is inversely proportional
-to the variance.}
+to the variance. Positive effect sizes reflect a preference for the
+speech sound, negative effect sizes reflect a preference for the
+competitor sound.}
 \end{figure}
+
+\begin{table}[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableLang}Statistical results of meta-regression with language of the speech sounds and interaction with age. The intercept corresponds to the effect size when speech is in a foreign language at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.63 & 0.31 & 1.99 & -0.11 - 1.37\\
+familiarity & -0.37 & 0.33 & -1.12 & -1.1 - 0.37\\
+familiarity * age & 0.00 & 0.00 & 1.24 & 0 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table}
 
 \section{Discussion}\label{discussion}
 
 Our meta-analysis synthesizes the available literature on infants'
 preference for speech sounds. When all experiments were considered
-together with no moderators, we found a sizable intercept (g=0.42). For
+together with no moderators, we found a sizable intercept (g=0.36). For
 comparison, the average effect for native vowel discrimination using
 looking time methods is estimated at 0.25 (Tsuji \& Cristia, 2014, data
 inspected in \url{http://metalab.stanford.edu} on 2019-10-18). These
@@ -716,7 +778,7 @@ three factors. Distributions of effect sizes for experiments varying
 along the three dimensions widely overlap, and the confidence intervals
 of all conditions overlap almost exactly (Figures 6, 7, and 8).
 Moreover, Table 1 shows that the estimate for all these factors is close
-to zero (the maximum being 0.16). Our findings therefore suggest that
+to zero (the maximum being 0.21). Our findings therefore suggest that
 none of these parameters fully explain infants' preference for speech
 sounds.
 
@@ -801,37 +863,44 @@ be used to identify children at risk (Sorcinelli et al., 2019).
 Understanding this phenomenon is therefore crucial for both theoretical
 and clinical advances.
 
-We want to close by drawing the reader's attention to three limitations
-of the present study. \enquote{Finally, we recognize that readers might
+The median sample size at present is 16, which is close to the field
+standard (Bergmann et al., 2018) but much lower than current
+recommendations (Oakes, 2017). Well-chosen sample sizes are crucial for
+powerful experiments (Simmons, Nelson, \& Simonsohn, 2011). Our
+meta-analysis provides the average effect size across the literature,
+which will, in turn, allow researchers to run power analyses to
+determine the sample size they need in future experiments.
+
+We want to close by drawing the reader's attention to XX limitations of
+the present study. \enquote{Finally, we recognize that readers might
 have several concerns about the methods used here. First, how can we say
-that\ldots{}}(Chen \& Wiens, 2020) First, the distribution of effect
+that\ldots{}} (Chen \& Wiens, 2020) First, the distribution of effect
 sizes in the literature is consistent with publication bias, in view of
-a strong asymmetry of the funnel plot. In fact, the trim-and-fill method
-suggested 13 points may be missing, which is a considerable number given
-that we have 51 effect sizes in total (i.e., a fifth more would be
-missing). The missing experiments are in the negative section, i.e., a
-preference \emph{against} speech, a result that could lead authors to
-doubt their own data and not submit it to journals, or that would be
-considered odd by reviewers and editors, who may ask that the data be
-removed (or who may recommend the paper to be rejected altogether).
-These missing experiments constitute an important limitation of our
-results. The literature being biased toward positive effect sizes, the
-true effect size might be smaller than the one we found (vertical line
-on Figure 5). To correct this bias, we invite researchers to use
-registered reports (Kiyonaga \& Scimeca, 2019). In this new publication
-scheme (available for Developmental Science, Infancy, Infant Behavior
-and Development, and Journal of Child Language at the time of writing,
-see a full up-to-date list on \url{https://cos.io/rr/}), manuscripts are
-submitted before data are collected. Reviewers and editors make
-publication decisions based solely on the introduction and methods. The
-paper is then reviewed once more for readability, but it cannot be
-rejected if the results are surprising or uncomfortable for the field.
-This would facilitate the publication of experiments failing to report a
-speech preference, or actually reporting a preference for the
-competitor, which would in turn help to draw a more accurate picture of
-the phenomenon. Our dataset can be community-augmented, and we invite
-researchers investigating this phenomenon to complement it with any data
-they would have
+a strong asymmetry of the funnel plot. The trim-and-fill method
+suggested 13 points may be missing. Given that we have 51 effect sizes
+in total, a fifth more would be missing. The missing experiments are in
+the negative section, i.e., a preference \emph{against} speech, a result
+that could lead authors to doubt their own data and not submit it to
+journals, or that would be considered odd by reviewers and editors, who
+may ask that the data be removed (or who may recommend the paper to be
+rejected altogether). These missing experiments constitute an important
+limitation of our results. The literature being biased toward positive
+effect sizes, the true effect size might be smaller than the one we
+found (vertical line on Figure 5). To correct this bias, we invite
+researchers to use registered reports (Kiyonaga \& Scimeca, 2019). In
+this new publication scheme (available for Developmental Science,
+Infancy, Infant Behavior and Development, and Journal of Child Language
+at the time of writing, see a full up-to-date list on
+\url{https://cos.io/rr/}), manuscripts are submitted before data are
+collected. Reviewers and editors make publication decisions based solely
+on the introduction and methods. The paper is then reviewed once more
+for readability, but it cannot be rejected if the results are surprising
+or uncomfortable for the field. This would facilitate the publication of
+experiments failing to report a speech preference, or actually reporting
+a preference for the competitor, which would in turn help to draw a more
+accurate picture of the phenomenon. Our dataset can be
+community-augmented, and we invite researchers investigating this
+phenomenon to complement it with any data they would have
 (\url{https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8}),
 whatever the results and publication status. {[}SHOW THAT IT LIKELY
 DOESN'T CHANGE THE RESULTS. WE WERE ABLE TO SHOW AN OVERALL PREFERENCE,
@@ -841,29 +910,29 @@ acknowledge that there are many potential sources of error in our study,
 but none seem likely to overturn our main conclusions.}(Chen \& Wiens,
 2020)
 
-Second, the median sample size at present is 16, which is close to the
-field standard (Bergmann et al., 2018) but much lower than current
-recommendations (Oakes, 2017). Unjustified sample sizes can
-inadvertently lead to questionable research practices (Simmons, Nelson,
-\& Simonsohn, 2011), known to increase false positives. Our
-meta-analysis provides the average effect size across the literature,
-which will allow researchers to run power analyses to determine the
-sample size they need.
+Our meta-analysis revealed uneven distributions of experiments across
+age and stimulus dimensions. One may think that this uneven age
+distribution could be one potential reason for the lack of an age
+effect. However, by aggregating the numerous individual studies of a
+literature, meta-analyses gain statistical power. As such, meta-analytic
+results have more cumulative explanatory value than any single study.
+Previous experiments suggested that infants initially don't discriminate
+speech from other vocal sounds, and then tune to speech around five
+months of age. With a sample size of 987 infants, covering a much wider
+age range than individual experiments, our meta-analysis provide
+evidence for an alternative view of the phenomenon, namely that infant
+prefer speech from birth onwards, a preference that cannot be fully
+explained by stimulus vocalness, or familiarity with the sounds of the
+language used. This clearly points to the value of meta-analysis: to
+advance a field and inspire follow-up studies. In particular, future
+experiments should test infants older than 9 months. Language production
+gains in complexity at about this age (Oller, Eilers, Neal, \& Schwartz,
+1999), which could affect infants' speech preference. Experiments using
+natural vocal stimuli as competitor, and foreign speech as target, would
+contribute to fill in the gap in the litterature that our meta-analysis
+revealed.
 
-Third, our meta-analysis revealed uneven distributions of experiments
-across age and stimulus dimensions. In particular, future experiments
-should test infants older than 9 months. Language production gains in
-complexity at about this age (Oller, Eilers, Neal, \& Schwartz, 1999),
-which could affect infants' speech preference. experiments using natural
-vocal stimuli as competitor, and foreign speech as target, would
-contribute to fill in an important gap in the litterature.
-
-To conclude, the present study provides evidence for a preference for
-speech from birth onwards, which cannot be fully explained by stimulus
-naturalness, vocalness, or familiarity. This early preference might
-reflect an innate capacity to detect relevant social-communicative
-signals in the environment. {[}CONCLUDE REMINDING THE OPEN QUESTIONS OUR
-MA RAISES{]}
+{[}CONCLUDE REMINDING THE OPEN QUESTIONS OUR MA RAISES{]}
 
 \newpage
 

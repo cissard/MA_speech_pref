@@ -8,7 +8,7 @@
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-average effect size & 0.42 & 0.07 & 6.37 & 0.28 - 0.55\\
+average effect size & 0.36 & 0.06 & 5.74 & 0.23 - 0.48\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -21,16 +21,76 @@ average effect size & 0.42 & 0.07 & 6.37 & 0.28 - 0.55\\
 [tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal, at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
 \begin{tabular}{lcccclcccclcccclcccclcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.42 & 0.16 & 2.64 & 0.08 - 0.76\\
-familiarity & -0.01 & 0.13 & -0.08 & -0.29 - 0.27\\
-naturalness & 0.16 & 0.14 & 1.20 & -0.13 - 0.46\\
-vocal quality & -0.13 & 0.18 & -0.75 & -0.51 - 0.25\\
-age & 0.00 & 0.00 & 0.04 & 0 - 0\\
+intercept & 0.36 & 0.15 & 2.42 & 0.04 - 0.67\\
+familiarity & -0.08 & 0.12 & -0.67 & -0.35 - 0.18\\
+naturalness & 0.21 & 0.11 & 1.89 & -0.03 - 0.46\\
+vocal quality & -0.20 & 0.17 & -1.22 & -0.56 - 0.16\\
+age & 0.00 & 0.00 & 0.55 & 0 - 0\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableNatural}Statistical results of meta-regression with naturalness and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is natural, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is artificial (naturalness).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.29 & 0.24 & 1.22 & -0.32 - 0.9\\
+naturalness & 0.07 & 0.26 & 0.27 & -0.49 - 0.63\\
+naturalness*age & 0.00 & 0.00 & 0.06 & -0.01 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableVocal}Statistical results of meta-regression with vocal quality and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is vocal, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is non-vocal (vocal quality).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.44 & 0.17 & 2.61 & 0.04 - 0.83\\
+vocal quality & -0.32 & 0.20 & -1.58 & -0.75 - 0.11\\
+age & 0.00 & 0.00 & 0.80 & 0 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableLang}Statistical results of meta-regression with language of the speech sounds and interaction with age. The intercept corresponds to the effect size when speech is in a foreign language at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity).}
+\begin{tabular}{lcccclcccclcccclcccclcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.63 & 0.31 & 1.99 & -0.11 - 1.37\\
+familiarity & -0.37 & 0.33 & -1.12 & -1.1 - 0.37\\
+familiarity * age & 0.00 & 0.00 & 1.24 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
