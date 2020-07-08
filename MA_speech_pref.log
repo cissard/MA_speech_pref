@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  22 JUN 2020 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  22 JUN 2020 19:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1138,71 +1138,74 @@ LaTeX Font Info:    Try loading font information for TS1+lmr on input line 145.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [4]
+)
 \openout4 = `MA_speech_pref.fff'.
 
-(MA_speech_pref.fff) [5]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 255.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 255.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 255.
-
-Underfull \vbox (badness 1406) has occurred while \output is active []
-
-[6] [7]
+(MA_speech_pref.fff)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[8] [9] [10]
+[4] [5]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 250.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 250.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 250.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[6] [7]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[11] [12] [13]
+[8]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:stimuli' on page 14 undefined on input line 549.
+[9] [10] [11] [12] [13]
+
+LaTeX Warning: Reference `fig:stimuli' on page 14 undefined on input line 562.
 
 
-<MA_speech_pref_files/figure-latex/stimuli-1.pdf, id=179, 463.7325pt x 313.17pt
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[14]
+<MA_speech_pref_files/figure-latex/stimuli-1.pdf, id=184, 463.7325pt x 313.17pt
 >
 File: MA_speech_pref_files/figure-latex/stimuli-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/stimuli-1.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/stimuli-1.pdf used o
-n input line 552.
+n input line 565.
 (pdftex.def)             Requested size: 463.73842pt x 313.174pt.
 
-<MA_speech_pref_files/figure-latex/stimuli-2.pdf, id=180, 469.755pt x 325.215pt
+<MA_speech_pref_files/figure-latex/stimuli-2.pdf, id=185, 469.755pt x 325.215pt
 >
 File: MA_speech_pref_files/figure-latex/stimuli-2.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/stimuli-2.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/stimuli-2.pdf used o
-n input line 553.
+n input line 566.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (22.89095pt too wide) in paragraph at lines 552--554
+Overfull \hbox (22.89095pt too wide) in paragraph at lines 565--567
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[14]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[15 <./MA_speech_pref_files/figure-latex/stimuli-1.pdf> <./MA_speech_pref_files
-/figure-latex/stimuli-2.pdf>]
+[15 <./MA_speech_pref_files/figure-latex/stimuli-1.pdf>]
 \openout3 = `MA_speech_pref.ttt'.
 
-(MA_speech_pref.ttt) [16] [17]
+(MA_speech_pref.ttt) [16 <./MA_speech_pref_files/figure-latex/stimuli-2.pdf>] [
+17] [18]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[18] [19]
+[19]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[20] [21] [22]
+[20]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[21] [22] [23]
 Underfull \vbox (badness 1558) has occurred while \output is active []
-
-[23]
-Underfull \vbox (badness 4686) has occurred while \output is active []
 
 [24]
 Underfull \vbox (badness 4686) has occurred while \output is active []
@@ -1210,20 +1213,23 @@ Underfull \vbox (badness 4686) has occurred while \output is active []
 [25]
 Underfull \vbox (badness 4686) has occurred while \output is active []
 
-[26] [27]
+[26]
 Underfull \vbox (badness 4686) has occurred while \output is active []
 
-[28] [29] AED endfloat: Processing end Figures and Tables [30] (./MA_speech_pre
-f.ttt [31
+[27] [28]
+Underfull \vbox (badness 4686) has occurred while \output is active []
 
+[29] [30] AED endfloat: Processing end Figures and Tables [31] (./MA_speech_pre
+f.ttt [32
 
-] [32
 
 ] [33
 
 ] [34
 
 ] [35
+
+] [36
 
 ]) (./MA_speech_pref.fff
 </Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png, id=427, 929.472
@@ -1234,11 +1240,11 @@ e (type png)
 Package pdftex.def Info: /Users/Cecile/Documents/MA_speech_pref/figures_intro/V
 enn.png used on input line 5.
 (pdftex.def)             Requested size: 469.75575pt x 251.61862pt.
-[36
+[37
 
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png>]
-</Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png, id=434, 8
+</Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png, id=435, 8
 97.3525pt x 329.23pt>
 File: /Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png Graph
 ic file (type png)
@@ -1246,7 +1252,7 @@ ic file (type png)
 Package pdftex.def Info: /Users/Cecile/Documents/MA_speech_pref/figures_intro/h
 ypotheses.png used on input line 14.
 (pdftex.def)             Requested size: 469.74786pt x 172.34596pt.
-[37
+[38
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png>]
 </Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg, id=441, 963.6
@@ -1257,7 +1263,7 @@ ile (type jpg)
 Package pdftex.def Info: /Users/Cecile/Documents/MA_speech_pref/figures_intro/P
 RISMA.jpg used on input line 31.
 (pdftex.def)             Requested size: 469.75679pt x 264.23819pt.
-[38
+[39
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg>]
 <MA_speech_pref_files/figure-latex/competitors-1.pdf, id=446, 459.7175pt x 316.
@@ -1268,7 +1274,7 @@ f)
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/competitors-1.pdf us
 ed on input line 41.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-[39
+[40
 
  <./MA_speech_pref_files/figure-latex/competitors-1.pdf>]
 <MA_speech_pref_files/figure-latex/forest-1.pdf, id=458, 440.64626pt x 250.9375
@@ -1278,7 +1284,7 @@ File: MA_speech_pref_files/figure-latex/forest-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/forest-1.pdf used on
  input line 51.
 (pdftex.def)             Requested size: 440.66533pt x 250.94835pt.
-[40
+[41
 
  <./MA_speech_pref_files/figure-latex/forest-1.pdf>]
 <MA_speech_pref_files/figure-latex/bias-1.pdf, id=470, 440.64626pt x 254.9525pt
@@ -1288,7 +1294,7 @@ File: MA_speech_pref_files/figure-latex/bias-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/bias-1.pdf used on i
 nput line 61.
 (pdftex.def)             Requested size: 440.66533pt x 254.96352pt.
-[41
+[42
 
  <./MA_speech_pref_files/figure-latex/bias-1.pdf>]
 <MA_speech_pref_files/figure-latex/natural-1.pdf, id=482, 459.7175pt x 316.1812
@@ -1298,17 +1304,17 @@ File: MA_speech_pref_files/figure-latex/natural-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/natural-1.pdf used o
 n input line 74.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-[42
+[43
 
  <./MA_speech_pref_files/figure-latex/natural-1.pdf>]
-<MA_speech_pref_files/figure-latex/vocal-1.pdf, id=497, 459.7175pt x 316.18124p
+<MA_speech_pref_files/figure-latex/vocal-1.pdf, id=498, 459.7175pt x 316.18124p
 t>
 File: MA_speech_pref_files/figure-latex/vocal-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/vocal-1.pdf>
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/vocal-1.pdf used on 
 input line 87.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-[43
+[44
 
  <./MA_speech_pref_files/figure-latex/vocal-1.pdf>]
 <MA_speech_pref_files/figure-latex/lang-1.pdf, id=513, 463.7325pt x 316.18124pt
@@ -1318,14 +1324,14 @@ File: MA_speech_pref_files/figure-latex/lang-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: MA_speech_pref_files/figure-latex/lang-1.pdf used on i
 nput line 100.
 (pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
-[44
+[45
 
  <./MA_speech_pref_files/figure-latex/lang-1.pdf>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1269.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1269.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1279.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1279.
 (./MA_speech_pref.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1269.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1269.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1279.
 
 Package rerunfilecheck Info: File `MA_speech_pref.out' has not changed.
 (rerunfilecheck)             Checksum: 5B17938FC2EA764AA3697D7D8805474B;3372.
@@ -1334,13 +1340,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 15741 strings out of 492995
- 233884 string characters out of 6132703
- 348193 words of memory out of 5000000
+ 15742 strings out of 492995
+ 233891 string characters out of 6132703
+ 347195 words of memory out of 5000000
  18772 multiletter control sequences out of 15000+600000
  79631 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,10n,47p,801b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,11n,47p,801b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
 texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
 17/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2017/texmf-dist/
@@ -1351,10 +1357,10 @@ mmi12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr10.pfb><
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2017
 /texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2017/texmf-dist/
 fonts/type1/public/lm/lmri12.pfb>
-Output written on MA_speech_pref.pdf (44 pages, 955205 bytes).
+Output written on MA_speech_pref.pdf (45 pages, 956007 bytes).
 PDF statistics:
  595 PDF objects out of 1000 (max. 8388607)
- 508 compressed objects within 6 object streams
- 147 named destinations out of 1000 (max. 500000)
+ 507 compressed objects within 6 object streams
+ 148 named destinations out of 1000 (max. 500000)
  10480 words of extra memory for PDF output out of 12000 (max. 10000000)
 
