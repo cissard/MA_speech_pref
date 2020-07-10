@@ -1,4 +1,9 @@
-Files of the project:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/cissard/MA_speech_pref/master?urlpath=rstudio)
+
+.. image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/cissard/MA_speech_pref/master?urlpath=rstudio
+ 
+ Files of the project:
 
 - Decision speadsheet: list of papers considered for inclusion, the inclusion criteria, and the authors contacted.
 
