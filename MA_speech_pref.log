@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  14 JUL 2020 12:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.10.25)  14 JUL 2020 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1195,16 +1195,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 \openout3 = `MA_speech_pref.ttt'.
 
 (MA_speech_pref.ttt) [16 <./MA_speech_pref_files/figure-latex/stimuli-2.pdf>] [
-17]
-
-LaTeX Warning: Reference `table:Table1' on page 18 undefined on input line 431.
-
-
-
-LaTeX Warning: Reference `table:Table1' on page 18 undefined on input line 433.
-
-
-[18]
+17] [18]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
 [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] AED endfloat: Processing end 
@@ -1220,7 +1211,7 @@ Figures and Tables [29] (./MA_speech_pref.ttt [30
 ] [34
 
 ]) (./MA_speech_pref.fff
-</Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png, id=442, 929.472
+</Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png, id=444, 929.472
 5pt x 497.86pt>
 File: /Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png Graphic fil
 e (type png)
@@ -1232,7 +1223,7 @@ enn.png used on input line 5.
 
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png>]
-</Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png, id=449, 8
+</Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png, id=451, 8
 97.3525pt x 329.23pt>
 File: /Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png Graph
 ic file (type png)
@@ -1243,7 +1234,7 @@ ypotheses.png used on input line 14.
 [36
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png>]
-</Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg, id=455, 963.6
+</Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg, id=457, 963.6
 pt x 542.025pt>
 File: /Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg Graphic f
 ile (type jpg)
@@ -1254,7 +1245,7 @@ RISMA.jpg used on input line 23.
 [37
 
  </Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg>]
-<MA_speech_pref_files/figure-latex/competitors-1.pdf, id=461, 459.7175pt x 316.
+<MA_speech_pref_files/figure-latex/competitors-1.pdf, id=463, 459.7175pt x 316.
 18124pt>
 File: MA_speech_pref_files/figure-latex/competitors-1.pdf Graphic file (type pd
 f)
@@ -1265,7 +1256,7 @@ ed on input line 32.
 [38
 
  <./MA_speech_pref_files/figure-latex/competitors-1.pdf>]
-<MA_speech_pref_files/figure-latex/forest-1.pdf, id=473, 440.64626pt x 250.9375
+<MA_speech_pref_files/figure-latex/forest-1.pdf, id=475, 440.64626pt x 250.9375
 pt>
 File: MA_speech_pref_files/figure-latex/forest-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/forest-1.pdf>
@@ -1275,7 +1266,7 @@ Package pdftex.def Info: MA_speech_pref_files/figure-latex/forest-1.pdf used on
 [39
 
  <./MA_speech_pref_files/figure-latex/forest-1.pdf>]
-<MA_speech_pref_files/figure-latex/bias-1.pdf, id=485, 440.64626pt x 254.9525pt
+<MA_speech_pref_files/figure-latex/bias-1.pdf, id=487, 440.64626pt x 254.9525pt
 >
 File: MA_speech_pref_files/figure-latex/bias-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/bias-1.pdf>
@@ -1285,7 +1276,7 @@ nput line 50.
 [40
 
  <./MA_speech_pref_files/figure-latex/bias-1.pdf>]
-<MA_speech_pref_files/figure-latex/natural-1.pdf, id=497, 459.7175pt x 316.1812
+<MA_speech_pref_files/figure-latex/natural-1.pdf, id=499, 459.7175pt x 316.1812
 4pt>
 File: MA_speech_pref_files/figure-latex/natural-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/natural-1.pdf>
@@ -1295,7 +1286,7 @@ n input line 59.
 [41
 
  <./MA_speech_pref_files/figure-latex/natural-1.pdf>]
-<MA_speech_pref_files/figure-latex/vocal-1.pdf, id=513, 459.7175pt x 316.18124p
+<MA_speech_pref_files/figure-latex/vocal-1.pdf, id=515, 459.7175pt x 316.18124p
 t>
 File: MA_speech_pref_files/figure-latex/vocal-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/vocal-1.pdf>
@@ -1305,7 +1296,7 @@ input line 68.
 [42
 
  <./MA_speech_pref_files/figure-latex/vocal-1.pdf>]
-<MA_speech_pref_files/figure-latex/lang-1.pdf, id=528, 463.7325pt x 316.18124pt
+<MA_speech_pref_files/figure-latex/lang-1.pdf, id=530, 463.7325pt x 316.18124pt
 >
 File: MA_speech_pref_files/figure-latex/lang-1.pdf Graphic file (type pdf)
 <use MA_speech_pref_files/figure-latex/lang-1.pdf>
@@ -1327,13 +1318,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 15758 strings out of 492995
- 234177 string characters out of 6132703
+ 15757 strings out of 492995
+ 234163 string characters out of 6132703
  347195 words of memory out of 5000000
- 18772 multiletter control sequences out of 15000+600000
+ 18771 multiletter control sequences out of 15000+600000
  79502 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,11n,47p,2015b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,11n,47p,2013b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
 texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
 17/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2017/texmf-dist/
@@ -1344,10 +1335,10 @@ mmi12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr10.pfb><
 texlive/2017/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2017
 /texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2017/texmf-dist/
 fonts/type1/public/lm/lmri12.pfb>
-Output written on MA_speech_pref.pdf (43 pages, 955421 bytes).
+Output written on MA_speech_pref.pdf (43 pages, 955459 bytes).
 PDF statistics:
- 613 PDF objects out of 1000 (max. 8388607)
- 527 compressed objects within 6 object streams
+ 615 PDF objects out of 1000 (max. 8388607)
+ 529 compressed objects within 6 object streams
  166 named destinations out of 1000 (max. 500000)
  10480 words of extra memory for PDF output out of 12000 (max. 10000000)
 
