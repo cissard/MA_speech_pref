@@ -26,6 +26,8 @@ authornote: |
   
   Our data is fully available in the corresponding OSF repository: http://tidy.ws/bqjc4U
   
+  We thank Chiara Santolin, Martin Zettersten, Jenny Saffran, Christina Vanden Bosch Der Nederlanden, and Athena Vouloumanos for contributing unpublished data.
+  
 abstract: |
  Previous experimental studies suggested that infants show a preference for speech over auditory competitors, but the mechanism underlying the preference remains unclear, with some results pointing to a preference for (a) familiar sounds; (b) vocal sounds; or (c) natural sounds more generally, with potentially changes over development. To shed light on whether some of these mechanisms may be at play, we conducted a meta-analysis of experiments testing speech preference in infants. Infants reliably preferred speech over other sounds, but this preference was not significantly moderated by familiarity, vocal quality, or naturalness of the competitor. Also, we found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results contradict current views of the literature, and call for further investigation of the phenomenon.
   
@@ -253,12 +255,12 @@ base_model <- robu(g_calc ~ 1, data=DB2[!DB2$outlier,], modelweights = "CORR", s
 # same model with metafor for a nice forest plot 
 simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) 
 
-forest.rma(simple_model, annotate = FALSE, xlim = c(-13,3), ylim = c(-1,51), order = 'obs',
+forest.rma(simple_model, annotate = FALSE, xlim = c(-13,3), ylim = c(-1,54), order = 'obs',
        xlab = 'Effect size (Hedges\' g)', mlab = "", alim = c(-2,3), steps = 6, cex.axis = 0.6, cex.lab = 0.7, 
        ilab=cbind(round(DB2[!DB2$outlier,]$age_months, digits = 1), DB2[!DB2$outlier,]$method, DB2[!DB2$outlier,]$natural, DB2[!DB2$outlier,]$vocal, DB2[!DB2$outlier,]$test_lang),
        ilab.xpos=c(-7.4,-6.2,-5,-3.8, -2.5)) 
 op <- par(cex=.75)
-text(c(-7.4,-6.2,-5,-3.8, -2.5), 50, c("age", "method", "natural", "vocal", "language"))
+text(c(-7.4,-6.2,-5,-3.8, -2.5), 53, c("age", "method", "natural", "vocal", "language"))
 ```
 
 Integrating across all experiments in a meta-analytic regression without any moderator, we found an average effect size g of `r base_model$reg_table$b.r` (SE = `r base_model$reg_table$SE`, CI = [`r base_model$reg_table$CI.L` , `r base_model$reg_table$CI.U`]) (Table 1, and Figure \@ref(fig:forest), diamond), corresponding to a medium effect size.
@@ -376,7 +378,7 @@ k = ranktest(DB2$g_calc,DB2$g_var_calc)
 
 ```
 
-We checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure \@ref(fig:bias)).[^2] A regression test on these data was significant (z = `r SEg$zval`, p = `r SEg$pval`), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = `r k$tau`, p = `r k$pval`), consistent with a publication bias in the literature.
+We checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure \@ref(fig:bias))[^2]. A regression test on these data was significant (z = `r SEg$zval`, p = `r SEg$pval`), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = `r k$tau`, p = `r k$pval`), consistent with a publication bias in the literature.
 
 
 [^2]: If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors. 
@@ -385,7 +387,7 @@ To check whether this bias fully explains infants' speech preference, we  symmet
 
 ## Moderator analyses
 
-We then tested if heterogeneity could be ccounted for by the mechanistic explanations described in our introduction. Following our hypotheses, we fit a meta-analytic model with the following moderators: 
+We then tested if heterogeneity could be accounted for by the mechanistic explanations described in our introduction. Following our hypotheses, we fit a meta-analytic model with the following moderators: 
 
 - mean age of children;
 - familiarity with the language used (native or foreign);
