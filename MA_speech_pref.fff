@@ -20,8 +20,17 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.jpg}
+\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.png}
 \caption{\label{fig:prisma}PRISMA flowchart summarizing the literature review and selection process.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/stimuli-1.pdf}
+\caption{\label{fig:stimuli}Histograms of the number of effect sizes for each language and moderator status.}
 \end{figure*}
 \efloatseparator
  

@@ -8,7 +8,7 @@
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-average effect size & 0.34 & 0.06 & 5.41 & 0.21 - 0.47\\
+average effect size & 0.31 & 0.06 & 5.10 & 0.19 - 0.44\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -26,11 +26,11 @@ average effect size & 0.34 & 0.06 & 5.41 & 0.21 - 0.47\\
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.32 & 0.14 & 2.20 & 0.01 - 0.63\\
-familiarity & -0.06 & 0.12 & -0.48 & -0.32 - 0.2\\
-naturalness & 0.23 & 0.11 & 2.02 & -0.02 - 0.47\\
-vocal quality & -0.15 & 0.15 & -0.98 & -0.48 - 0.18\\
-age & 0.00 & 0.00 & 0.29 & 0 - 0\\
+intercept & 0.27 & 0.14 & 1.93 & -0.03 - 0.57\\
+familiarity & -0.03 & 0.12 & -0.22 & -0.27 - 0.22\\
+naturalness & 0.21 & 0.11 & 1.97 & -0.02 - 0.44\\
+vocal quality & -0.09 & 0.14 & -0.66 & -0.4 - 0.21\\
+age & 0.00 & 0.00 & 0.07 & 0 - 0\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -48,9 +48,9 @@ age & 0.00 & 0.00 & 0.29 & 0 - 0\\
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.32 & 0.21 & 1.52 & -0.21 - 0.86\\
-naturalness & 0.04 & 0.23 & 0.15 & -0.47 - 0.54\\
-naturalness*age & 0.00 & 0.00 & 0.39 & 0 - 0\\
+intercept & 0.37 & 0.19 & 1.92 & -0.09 - 0.84\\
+naturalness & -0.04 & 0.21 & -0.20 & -0.5 - 0.41\\
+naturalness*age & 0.00 & 0.00 & 0.99 & 0 - 0\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -68,9 +68,9 @@ naturalness*age & 0.00 & 0.00 & 0.39 & 0 - 0\\
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.45 & 0.15 & 2.97 & 0.1 - 0.81\\
-vocal quality & -0.33 & 0.19 & -1.77 & -0.74 - 0.07\\
-vocal quality*age & 0.00 & 0.00 & 1.47 & 0 - 0.01\\
+intercept & 0.47 & 0.13 & 3.74 & 0.18 - 0.77\\
+vocal quality & -0.36 & 0.17 & -2.18 & -0.72 - -0.01\\
+vocal quality*age & 0.00 & 0.00 & 2.51 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -88,9 +88,9 @@ vocal quality*age & 0.00 & 0.00 & 1.47 & 0 - 0.01\\
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.65 & 0.30 & 2.14 & -0.06 - 1.35\\
-familiarity & -0.39 & 0.32 & -1.22 & -1.09 - 0.32\\
-familiarity * age & 0.00 & 0.00 & 1.54 & 0 - 0.01\\
+intercept & 0.64 & 0.29 & 2.19 & -0.04 - 1.32\\
+familiarity & -0.39 & 0.31 & -1.27 & -1.06 - 0.29\\
+familiarity * age & 0.00 & 0.00 & 1.76 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
