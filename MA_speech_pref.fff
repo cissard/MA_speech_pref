@@ -1,27 +1,21 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png}
-\caption{\label{fig:venn}Speech is a natural, vocal sound.}
+\includegraphics[width=6.17in]{figures_intro/Venn} \caption{Speech is a natural, vocal sound.}\label{fig:venn}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png}
-\caption{\label{fig:hyp}Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}
+\includegraphics[width=3.2in]{figures_intro/hypotheses} \caption{Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}\label{fig:hyp}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.png}
-\caption{\label{fig:prisma}PRISMA flowchart summarizing the literature review and selection process.}
+\includegraphics[width=3.2in]{figures_intro/PRISMA} \caption{PRISMA flowchart summarizing the literature review and selection process.}\label{fig:prisma}
 \end{figure*}
 \efloatseparator
  
@@ -48,7 +42,7 @@
 
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/forest-1.pdf}
-\caption{\label{fig:forest}Forest plot of effect sizes available in the literature, along with their respective moderator status.}
+\caption{\label{fig:forest}Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line.}
 \end{figure*}
 \efloatseparator
  
@@ -58,6 +52,15 @@
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/bias-1.pdf}
 \caption{\label{fig:bias}Funnel plot of effect sizes and their respective standard errors. Black dots: effect sizes observed in the literature. White dots: missing effect sizes, suggestive of a publication bias\(^2\). Vertical line: average effect size after filling the missing effect sizes.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
+\caption{\label{fig:lang}Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
 \efloatseparator
  
@@ -76,15 +79,6 @@
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
 \caption{\label{fig:vocal}Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
-\end{figure*}
-\efloatseparator
- 
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-
-\centering
-\includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
-\caption{\label{fig:lang}Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
 \efloatseparator
  

@@ -1,4 +1,4 @@
-setwd("/Users/Cecile/Documents/MA_speech_pref")
+#setwd("/Users/Cecile/Documents/MA_speech_pref")
 
 source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
@@ -11,13 +11,14 @@ library(gridExtra)
 library(RCurl)
 
 # Comment out next set of lines for RECALCULATION
-require(RCurl)
-u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
-tc <- getURL(u, ssl.verifypeer=FALSE)
-DB <- read.csv(textConnection(tc))
+#AC: Google sheets direct read out has been broken for a few weeks
+#require(RCurl)
+#u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
+#tc <- getURL(u, ssl.verifypeer=FALSE)
+#DB <- read.csv(textConnection(tc))
 
 # Uncomment next line for OFFLINE MODE
-#DB <- read.csv("MA_speech_pref_data.csv", header = T, sep = ",", na.strings = "")
+DB <- read.csv("MA_speech_pref_data - Data.csv", header = T, sep = ",", na.strings = "")
 
 ## FIX, remove empty columns
 rmcol=NULL
@@ -28,7 +29,9 @@ dim(DB)
 
 ## FIX, DOUBLE CHECK ALEX & CECILE !! REPLACE ALL EMPTY WITH NA
 for(mycol in colnames(DB)) DB[DB[,mycol]=="" & !is.na(DB[,mycol]),mycol]<-NA
+for(mycol in c("homospecific","utterance_length","trial_length","prosody","r","d","d_var")) DB[DB[,mycol]=="NA" & !is.na(DB[,mycol]),mycol]<-NA
 for(mycol in c("natural","vocal","homospecific","test_lang")) DB[,mycol]<-factor(DB[,mycol]) 
+for(mycol in c("n_excluded_1","gender_1","corr","x_1","x_2","x_1","SD_1","SD_2","t","F","F..1.n.","df.F.","d")) DB[,mycol]=as.numeric(as.character(DB[,mycol]))
 summary(DB)
 
 #calculate correlations
@@ -185,6 +188,8 @@ for (i in 1:nrow(DB)){
   db$es_method = es_method
   
   DB[i,] = db
+  #print(i)
+
 }
 #ac: lots of errors in the loop above - is that ok? 
 #Cécile: Hmm weird, I cleaned my environment and reran the code but I didn't get any error... What kind of error do you get?
@@ -220,3 +225,4 @@ mean(DB$g_calc,na.rm=T)
 sd(DB$g_calc,na.rm=T)
 boxplot(DB$g_calc)
 points(DB$g_calc)
+

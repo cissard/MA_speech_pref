@@ -99,7 +99,7 @@ summary(DB2$mean_age_1)
 In gregarious species, the ability of individuals to orient their attention towards conspecifics' vocalizations is crucial for social interactions and communication. Correspondingly, numerous results have demonstrated processing advantages for conspecific vocalizations in a wide variety of species, including primates and birds [@poremba_processing_2013]. Previous work has suggested that in humans, communication skills develop from early infancy, manifesting in an early preference for speech over other types of sound  [@vouloumanos_listening_2007;@vouloumanos_tuning_2010;@ecklund-flores_asymmetric_1996]. This preference may emerge through a variety of simpler mechanisms, saliently including a preference for familiar over unfamiliar sounds, natural over artificial sounds, and vocal over non-vocal sounds (Figure \@ref(fig:venn)). Here, we synthesize the available empirical data on infants’ preferences for speech over non-speech sounds to assess the size of this effect, and the explanatory role of these mechanisms. 
 
 ```{r venn, include=T, fig.cap="Speech is a natural, vocal sound."}
-knitr::include_graphics("/Users/Cecile/Documents/MA_speech_pref/figures_intro/Venn.png")
+knitr::include_graphics("figures_intro/Venn.png")
 ```
 
 
@@ -137,7 +137,7 @@ We then turn to our key interest, namely shedding light on the potential mechani
 3. a greater preference for speech over other vocal sounds as a function of age, but a stable preference for speech over non-vocal sounds over development.
 
 ```{r hyp, include=T, fig.cap = "Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue)."}
-knitr::include_graphics("/Users/Cecile/Documents/MA_speech_pref/figures_intro/hypotheses.png")
+knitr::include_graphics("figures_intro/hypotheses.png")
 ```
 
 # Methods
@@ -157,7 +157,7 @@ Given our key interest in the preference for speech over other sounds, we exclud
 A PRISMA flow chart summarizes the literature review and selection process (Figure \@ref(fig:prisma)). The full list of the papers that were inspected together final inclusion decisions are available in a decision spreadsheet (see the online supplementary materials; https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8).
 
 ```{r prisma, include=T, fig.cap = "PRISMA flowchart summarizing the literature review and selection process."}
-knitr::include_graphics("/Users/Cecile/Documents/MA_speech_pref/figures_intro/PRISMA.png")
+knitr::include_graphics("figures_intro/PRISMA.png")
 ```
 
 ## Coding
@@ -263,7 +263,7 @@ apa_table(table1, digits=2, align='lcccc', col.names=c("","estimate","SE","t","c
 
 ```
 
-```{r resampling}
+```{r resampling, eval=F}
 # Sanity check: We repeat random imputation of missing correlation between the two measures (done in data_completion.R for the main database), and recompute effect sizes 100 times to check it doesn't change the results.
 library(Hmisc)
 
