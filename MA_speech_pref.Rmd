@@ -263,93 +263,6 @@ apa_table(table1, digits=2, align='lcccc', col.names=c("","estimate","SE","t","c
 
 ```
 
-```{r resampling, eval=F}
-# Sanity check: We repeat random imputation of missing correlation between the two measures (done in data_completion.R for the main database), and recompute effect sizes 100 times to check it doesn't change the results.
-library(Hmisc)
-
-#set up the dataframe that will contain the results after resampling (one line per resampling)
-resamp_stats = base_model$reg_table
-resamp_prob = base_model$reg_table$prob
-
-for (s in 1:100){
-  
-  data = DB2 #make a copy of the database without the imputed correlations
-  data$corr_imputed[is.na(data$corr)==T] = NA
-  data$corr_imputed[data$participant_design == "within_two"] <- impute(data$corr[data$participant_design == "within_two"],fun='random')
-  
-  # recompute effect sizes
-  # empty the relevant variables
-  data$d_calc = NA
-  data$d_var_calc = NA
-  data$g_calc = NA
-  data$g_var_calc = NA
-  data$es_method = NA
-  
-  #effect size calculation
-  for (i in 1:nrow(data)){
-    db = data[i,]
-    if (is.na(db$corr) | db$corr > .99 | db$corr < .01){
-      #if correlation between two measures is not reported, use an imputed correlation value
-      #we also account for the observation that some re-calculated values are impossible and replace those
-      corr <- db$corr_imputed
-    }else{corr <- db$corr}
-    
-    if (complete(db$x_1, db$x_2, db$SD_1, db$SD_2)) {
-      pooled_SD <- sqrt((db$SD_1 ^ 2 + db$SD_2 ^ 2) / 2) # Lipsey & Wilson (2001)
-      d_calc <- (db$x_1 - db$x_2) / pooled_SD # Lipsey & Wilson (2001)
-      es_method  <- "group_means_two"
-    } else if (complete(db$t)) {
-      wc <- sqrt(2 * (1 - corr))
-      d_calc <- (db$t / sqrt(db$n_1)) * wc #Dunlap et al., 1996, p.171
-      es_method  <- "t_two"
-    } else if (complete(db$F)) {
-      wc <- sqrt(2 * (1 - corr))
-      d_calc <- sqrt(db$F / db$n_1) * wc
-      es_method  <- "f_two"
-    } else {d_calc = NA}
-    #now that effect sizes are calculated, effect size variance is calculated
-    if (complete(db$n_1, d_calc)) {
-      d_var_calc <- (2 * (1 - corr)/ db$n_1) + (d_calc ^ 2 / (2 * db$n_1)) # Lipsey & Wilson (2001)
-    } else if (complete(db$d, db$d_var)) {
-      #if d and d_var were already reported, use those values
-      d_calc <- db$d
-      d_var_calc <- db$d_var
-      es_method  <- "d_two"
-    } else {d_var_calc = NA}
-    
-    df <- db$n_1 - 1
-    J <- 1 - 3 / (4 * (df - 1))
-    g_calc <- d_calc * J
-    g_var_calc <- J ^ 2 * d_var_calc
-    
-    #add the results to the database
-    db$d_calc = d_calc
-    db$d_var_calc = d_var_calc
-    db$g_calc = g_calc
-    db$g_var_calc = g_var_calc
-    db$es_method = es_method
-    
-    data[i,] = db
-  }
-  
-  #Mark effect sizes more than 3 SD away from the mean effect (in both positive and negative directions) as outliers
-  data$outlier <- F #create the variable, and set as no by default (majority of cases hopefully!)
-  data$outlier[data$d_calc > mean(data$d_calc, na.rm = TRUE) + 3*sd(data$d_calc, na.rm = TRUE) | data$d_calc < mean(data$d_calc, na.rm = TRUE) - 3*sd(data$d_calc, na.rm = TRUE)]<-T 
-  
-  # Re-fit the meta-analytic model
-  #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
-  data = data %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
-  base <- robu(g_calc ~ 1, data=DB2, modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
-  resamp_stats = bind_rows(resamp_stats,base$reg_table)
-  
-}
-
-# check that the results don't change in 95 % of cases
-resamp_alphas <- ifelse(resamp_stats$prob < 0.05, 1, 0)
-resamp_alphas <- length(resamp_alphas[resamp_alphas==0])/length(resamp_alphas)
-resamp_alphas
-```
-
 ## Publication bias
 
 ```{r bias, include = T, fig.cap="Funnel plot of effect sizes and their respective standard errors. Black dots: effect sizes observed in the literature. White dots: missing effect sizes, suggestive of a publication bias$^2$. Vertical line: average effect size after filling the missing effect sizes."}
@@ -601,7 +514,7 @@ Our meta-analysis synthesizes the available literature on infants’ preference 
 The significant heterogeneity we found among the literature suggests that underlying factors modulate this effect. We had predicted infants' speech preference to be larger when the competitor was an artificial sound than when it was a natural one; when the competitor was non-vocal; and when the speech was in the infants' native language. In fact, we were unable to disprove the null hypothesis of no difference for all three factors. Our meta-analysis revealed uneven distributions of experiments across age and stimulus dimensions, and that the distribution of effect sizes in the literature is consistent with publication bias. It is possible that the effect of our three moderators would emerge if the publication biased was solved. However, by aggregating the numerous individual studies of a literature, meta-analyses gain statistical power. As such, meta-analytic results have more cumulative explanatory value than single studies. Moreover, distributions of effect sizes for experiments varying along the three dimensions widely overlap. Our findings therefore suggest that none of these parameters fully explain infants' preference for speech sounds. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have (https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8), whatever the results and publication status, to solve the publication bias and confirm our findings.
 This clearly points to the value of meta-analysis: to take stock of a field and inspire follow-up studies. In particular, future experiments should test infants older than 9 months. Language production gains in complexity at about this age [@oller_precursors_1999], which could affect infants' speech preference. Experiments using natural vocal stimuli as competitor, and foreign speech as target, would contribute to fill in the gap in the litterature that our meta-analysis revealed.
 
-OUr results suggest that, from birth on, infants show a preference for speech, which cannot be accounted by the three explanations tested here: naturalness, vocalness, or familiarity with the native language. It is possible that infants prefer speech because of its complex acoustic structure and fast transitions [@rosen_constructing_2007]. Spectral or temporal modulations taken separately are not sufficient to elicit neural responses similar to the ones elicited by speech [@minagawa-kawai_assessing_2011]. However, speech is characterized by joint spectrotemporal modulations at specific rates [@singh_modulation_2003]. It is possible that infants are sensitive to this specific spectro-temporal structure [though see @norman-haignere_neural_2018 showing that they only explain neural responses in primary auditory cortex, suggesting that other factors contribute to the behavioral response in later processing stages]. Testing this explanation would require to compute the modulation spectra of the actual stimuli used in the experiments. Thus, we recommend interested researchers to deposit their stimuli in a public archive such as the Open Science Framework [@foster_open_2017].
+Our results suggest that, from birth on, infants show a preference for speech, which cannot be accounted by the three explanations tested here: naturalness, vocalness, or familiarity with the native language. It is possible that infants prefer speech because of its complex acoustic structure and fast transitions [@rosen_constructing_2007]. Spectral or temporal modulations taken separately are not sufficient to elicit neural responses similar to the ones elicited by speech [@minagawa-kawai_assessing_2011]. However, speech is characterized by joint spectrotemporal modulations at specific rates [@singh_modulation_2003]. It is possible that infants are sensitive to this specific spectro-temporal structure [though see @norman-haignere_neural_2018 showing that they only explain neural responses in primary auditory cortex, suggesting that other factors contribute to the behavioral response in later processing stages]. Testing this explanation would require to compute the modulation spectra of the actual stimuli used in the experiments. Thus, we recommend interested researchers to deposit their stimuli in a public archive such as the Open Science Framework [@foster_open_2017].
 
 A capacity to preferentially listen to speech sounds from birth suggests that infants are born with the capacity to recognize their conspecifics’ communication signals. This parallels what has been proposed for faces: Infants are born with the capacity to orient their attention toward them, even without any prior exposure to faces [@morton_conspec_1991; @turati_why_2004]. This would stem from basic perceptual abilities present at birth, namely that the visual system would be tuned to a spatial structure that correspond to those of faces [@morton_conspec_1991; @turati_why_2004]. As newborns have never been exposed to such visual stimuli before, it would reflect general properties (i.e. filters) of the visual system. Similarly, the auditory system could be tuned to a spectro-temporal structure that speech presents. The combination of this non-specific bias with the systematic variations of the auditory environment would result in preferential responses to speech from birth. However, contrary to faces, fetuses are exposed to speech that is low-pass filtered by the womb throughout the last trimester of gestation [@querleu_fetal_1988; @lecanuet_speech_1993]. It is therefore possible that prenatal experience with low-pass filtered speech helps infants to form a representation of speech, by refining the response properties of the auditory system to speech.
 The fact that familiarity with the language used in the experiment did not modulate infants’ preference suggests that this effect is not triggered by familiarity with the sounds of the native language. Infants would therefore form a representation that is specific enough to discriminate speech from other natural or vocal sounds, but general enough to be independant of the language spoken.
