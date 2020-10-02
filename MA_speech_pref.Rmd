@@ -231,7 +231,7 @@ ggplot(data = DB2)+
 
 ## Average effect size
 
-```{r forest, include=T, fig.cap = "Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line."}
+```{r forest, include=T, fig.cap = "Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line. Moderators status: language 1: foreign, 2: native; natural 1: artificial, 2: natural; vocal 1: non-vocal, 2: vocal; method: 1: central fixation, 2: High-amplitude sucking, 3: Head-turn Preference Procedure."}
 #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
 DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
