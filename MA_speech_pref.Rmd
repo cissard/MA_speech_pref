@@ -231,7 +231,7 @@ ggplot(data = DB2)+
 
 ## Average effect size
 
-```{r forest, include=T, fig.cap = "Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line. ",fig.width=7,fig.height=10}
+```{r forest, include=T, fig.cap = "Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line. ",fig.width=7,fig.height=9}
 #average variance / infant group to build models with CORR, and allow robumeta to detect correlated effect sizes within papers. 
 DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 
@@ -239,13 +239,13 @@ DB2 = DB2 %>% group_by(same_infant) %>% mutate(g_var_m = mean(g_var_calc))
 base_model <- robu(g_calc ~ 1, data=DB2[!DB2$outlier,], modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T) 
 
 # same model with metafor for a nice forest plot 
-simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$short_cite) 
+simple_model <- rma(g_calc, g_var_calc, data=DB2, weighted = TRUE, method = "REML", subset=!DB2$outlier & !is.na(DB2$g_calc), slab =DB2$study_ID) 
 
 forest.rma(simple_model, annotate = FALSE, xlim = c(-13,3), ylim = c(-1,54), order = 'obs',
-       xlab = 'Effect size (Hedges\' g)', mlab = "", alim = c(-2,3), steps = 6, cex.axis = 0.6, cex.lab = 0.7, 
+       xlab = 'Effect size (Hedges\' g)', mlab = "", alim = c(-1.5,3), steps = 6, cex.axis = 0.6, cex.lab = 0.7, 
        ilab=cbind(round(DB2[!DB2$outlier,]$age_months, digits = 1), as.character(DB2[!DB2$outlier,]$method), as.character(DB2[!DB2$outlier,]$natural), as.character(DB2[!DB2$outlier,]$vocal), as.character(DB2[!DB2$outlier,]$test_lang)),
        ilab.xpos=c(-7.4,-6.2,-5,-3.8, -2.5)) 
-op <- par(cex=.75)
+op <- par(cex=.5)
 text(c(-7.4,-6.2,-5,-3.8, -2.5), 53, c("age", "method", "natural", "vocal", "language"))
 ```
 

@@ -1,21 +1,27 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\includegraphics[width=6.17in]{figures_intro/Venn} \caption{Speech is a natural, vocal sound.}\label{fig:venn}
+\centering
+\includegraphics{figures_intro/Venn.png}
+\caption{\label{fig:venn}Speech is a natural, vocal sound.}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\includegraphics[width=3.2in]{figures_intro/hypotheses} \caption{Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}\label{fig:hyp}
+\centering
+\includegraphics{figures_intro/hypotheses.png}
+\caption{\label{fig:hyp}Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\includegraphics[width=3.2in]{figures_intro/PRISMA} \caption{PRISMA flowchart summarizing the literature review and selection process.}\label{fig:prisma}
+\centering
+\includegraphics{figures_intro/PRISMA.png}
+\caption{\label{fig:prisma}PRISMA flowchart summarizing the literature review and selection process.}
 \end{figure*}
 \efloatseparator
  
