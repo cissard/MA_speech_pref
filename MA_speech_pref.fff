@@ -2,8 +2,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{figures_intro/Venn.png}
-\caption{\label{fig:venn}Speech is a natural, vocal sound.}
+\includegraphics{figures_intro/figure_hyp.png}
+\caption{\label{fig:venn}Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}
 \end{figure*}
 \efloatseparator
  
