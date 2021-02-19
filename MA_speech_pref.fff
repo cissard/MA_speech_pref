@@ -65,15 +65,6 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
-\caption{\label{fig:lang}Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
-\end{figure*}
-\efloatseparator
- 
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-
-\centering
 \includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
 \caption{\label{fig:natural}Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
@@ -85,6 +76,15 @@
 \centering
 \includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
 \caption{\label{fig:vocal}Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
+\caption{\label{fig:lang}Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
 \efloatseparator
  

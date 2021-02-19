@@ -21,36 +21,16 @@ average effect size & 0.36 & 0.06 & 5.53 & 0.23 - 0.49\\
 [tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when speech is in a foreign language, and the competitor is natural, and vocal, at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+\caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when the competitor is natural, and vocal, and speech is in a foreign language, at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
 intercept & 0.25 & 0.14 & 1.73 & -0.05 - 0.55\\
-familiarity & 0.01 & 0.12 & 0.10 & -0.24 - 0.26\\
 naturalness & 0.22 & 0.12 & 1.92 & -0.03 - 0.48\\
 vocal quality & -0.06 & 0.16 & -0.41 & -0.4 - 0.28\\
+language & 0.01 & 0.12 & 0.10 & -0.24 - 0.26\\
 age & 0.00 & 0.00 & 0.29 & 0 - 0\\
-\bottomrule
-\end{tabular}
-\end{threeparttable}
-\end{center}
-\end{table*}
-\efloatseparator
- 
-\begin{table*}[hbt]
-\ifnextchar[{\eatarg}{}
-[tbp]
-\begin{center}
-\begin{threeparttable}
-\caption{\label{tab:TableLang}Statistical results of meta-regression with language of the speech sounds and interaction with age. The intercept corresponds to the effect size when speech is in a foreign language at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity).}
-\begin{tabular}{lcccc}
-\toprule
- & estimate & SE & t & confidence interval\\
-\midrule
-intercept & 0.73 & 0.30 & 2.46 & 0.04 - 1.42\\
-familiarity & -0.46 & 0.31 & -1.48 & -1.16 - 0.23\\
-familiarity * age & 0.00 & 0.00 & 2.13 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
@@ -91,6 +71,26 @@ naturalness*age & 0.00 & 0.00 & 0.86 & 0 - 0\\
 intercept & 0.48 & 0.15 & 3.21 & 0.13 - 0.82\\
 vocal quality & -0.32 & 0.19 & -1.65 & -0.74 - 0.1\\
 vocal quality*age & 0.00 & 0.00 & 2.24 & 0 - 0.01\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{center}
+\end{table*}
+\efloatseparator
+ 
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+\begin{center}
+\begin{threeparttable}
+\caption{\label{tab:TableLang}Statistical results of meta-regression with language of the speech sounds and interaction with age. The intercept corresponds to the effect size when speech is in a foreign language at age 0. The moderator estimate correspond to changes in the intercept when the target stimuli are in the native language.}
+\begin{tabular}{lcccc}
+\toprule
+ & estimate & SE & t & confidence interval\\
+\midrule
+intercept & 0.73 & 0.30 & 2.46 & 0.04 - 1.42\\
+language & -0.46 & 0.31 & -1.48 & -1.16 - 0.23\\
+language * age & 0.00 & 0.00 & 2.13 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 \end{threeparttable}
