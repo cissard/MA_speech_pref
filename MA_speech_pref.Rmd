@@ -1,5 +1,5 @@
 ---
-title             : "Infants’ preference for speech is stable across the first year of life: Meta-analytic evidence // No developmental tuning of speech preference in the first year of life: Meta-analytic evidence // Development of infants' preference for speech: A meta-analysis"
+title             : "Infants’ preference for speech is stable across the first year of life: Meta-analytic evidence"
 shorttitle        : "Preference for speech sounds in infancy"
 
 author: 
@@ -313,15 +313,19 @@ table(DB2$contrast_stim)
 #http://stats.idre.ucla.edu/r/library/r-library-contrast-coding-systems-for-categorical-variables/
 
 #check that the experimental method doesn't make a difference
+DB2$method = factor(DB2$method)
 relevel(DB2$method,"HAS")->DB2$method #put HAS as the 1st level
 #dummy coding: each level is compared to a reference level of the dependent variable, intercept corresponds to the reference level.
 contrasts(DB2$method) = contr.treatment(length(levels(DB2$method)),base=1) #baseline method should be HAS because it's the one used with newborns
 
 #moderators of interest
+DB2$test_lang = factor(DB2$test_lang)
 contrasts(DB2$test_lang) <- contr.treatment(length(levels(DB2$test_lang)),base=1)
 
+DB2$natural = factor(DB2$test_lang)
 contrasts(DB2$natural) <- contr.treatment(length(levels(DB2$natural)),base=2)
 
+DB2$vocal = factor(DB2$vocal)
 DB2$vocal <- factor(DB2$vocal)
 contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
 
