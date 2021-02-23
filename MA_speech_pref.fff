@@ -1,27 +1,21 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{figures_intro/figure_hyp.png}
-\caption{\label{fig:venn}Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}
+\includegraphics[width=5.31in]{figures_intro/tuning} \caption{Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}\label{fig:venn}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{figures_intro/hypotheses.png}
-\caption{\label{fig:hyp}Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}
+\includegraphics[width=6.63in]{figures_intro/hypotheses} \caption{Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}\label{fig:hyp}
 \end{figure*}
 \efloatseparator
  
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\centering
-\includegraphics{figures_intro/PRISMA.png}
-\caption{\label{fig:prisma}PRISMA flowchart summarizing the literature review and selection process.}
+\includegraphics[width=3.2in]{figures_intro/PRISMA} \caption{PRISMA flowchart summarizing the literature review and selection process.}\label{fig:prisma}
 \end{figure*}
 \efloatseparator
  

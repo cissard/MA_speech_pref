@@ -305,6 +305,7 @@ These moderators were specified without interactions to avoid overfitting.
 table(DB2$natural)#no. of natural and non-natural data points
 table(DB2$vocal)#no. of vocal and non-vocal data points
 table(DB2$homospecific)#no. of homo- and heterospecific data points
+table(DB2$test_lang)
 table(DB2$homospecific,DB2$vocal)
 table(DB2$natural,DB2$vocal)
 table(DB2$contrast_stim)
@@ -322,14 +323,16 @@ contrasts(DB2$method) = contr.treatment(length(levels(DB2$method)),base=1) #base
 DB2$test_lang = factor(DB2$test_lang)
 contrasts(DB2$test_lang) <- contr.treatment(length(levels(DB2$test_lang)),base=1)
 
-DB2$natural = factor(DB2$test_lang)
+DB2$natural = factor(DB2$natural)
 contrasts(DB2$natural) <- contr.treatment(length(levels(DB2$natural)),base=2)
 
 DB2$vocal = factor(DB2$vocal)
 DB2$vocal <- factor(DB2$vocal)
 contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
+table(DB2$natural,DB2$vocal,DB2$test_lang)
+summary(table(DB2$natural,DB2$vocal,DB2$test_lang))#super significant, these are correlated!
 
-DB2$mean_age_1 = as.factor(DB2$mean_age_1)
+#DB2$mean_age_1 = as.factor(DB2$mean_age_1) # removed -- not sure if the intention was to render it numeric, but it already is
 # model with moderators of interest. 
 
 full_model <- robu(g_calc ~ natural + vocal + test_lang + mean_age_1, data=DB2[!DB2$outlier,], modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)

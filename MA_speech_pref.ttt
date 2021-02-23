@@ -1,100 +1,125 @@
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
+
 \begin{center}
 \begin{threeparttable}
+
 \caption{\label{tab:Table1}Statistical results of meta-regression without any moderator.}
+
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-average effect size & 0.36 & 0.06 & 5.53 & 0.23 - 0.49\\
+average effect size & 0.35 & 0.06 & 5.52 & 0.22 - 0.48\\
 \bottomrule
 \end{tabular}
+
 \end{threeparttable}
 \end{center}
+
 \end{table*}
 \efloatseparator
  
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
+
 \begin{center}
 \begin{threeparttable}
+
 \caption{\label{tab:Table2}Statistical results of meta-regression with all moderators. The intercept corresponds to the effect size when the competitor is natural, and vocal, and speech is in a foreign language, at age 0. The moderator estimates correspond to changes in the intercept when the target stimuli are in the native language (familiarity); the competitor is artificial (naturalness); and the competitor is non-vocal (vocal quality).}
+
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.25 & 0.14 & 1.73 & -0.05 - 0.55\\
-naturalness & 0.22 & 0.12 & 1.92 & -0.03 - 0.48\\
-vocal quality & -0.06 & 0.16 & -0.41 & -0.4 - 0.28\\
-language & 0.01 & 0.12 & 0.10 & -0.24 - 0.26\\
-age & 0.00 & 0.00 & 0.29 & 0 - 0\\
+intercept & 0.23 & 0.14 & 1.63 & -0.07 - 0.53\\
+naturalness & 0.26 & 0.12 & 2.22 & 0.01 - 0.51\\
+vocal quality & -0.09 & 0.15 & -0.61 & -0.41 - 0.23\\
+language & 0.00 & 0.12 & 0.03 & -0.25 - 0.26\\
+age & 0.00 & 0.00 & 0.41 & 0 - 0\\
 \bottomrule
 \end{tabular}
+
 \end{threeparttable}
 \end{center}
+
 \end{table*}
 \efloatseparator
  
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
+
 \begin{center}
 \begin{threeparttable}
+
 \caption{\label{tab:TableNatural}Statistical results of meta-regression with naturalness and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is natural, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is artificial (naturalness).}
+
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.37 & 0.21 & 1.77 & -0.14 - 0.88\\
-naturalness & 0.01 & 0.23 & 0.04 & -0.49 - 0.51\\
-naturalness*age & 0.00 & 0.00 & 0.86 & 0 - 0\\
+intercept & 0.33 & 0.22 & 1.50 & -0.21 - 0.87\\
+naturalness & 0.05 & 0.24 & 0.19 & -0.47 - 0.57\\
+naturalness*age & 0.00 & 0.00 & 0.71 & 0 - 0\\
 \bottomrule
 \end{tabular}
+
 \end{threeparttable}
 \end{center}
+
 \end{table*}
 \efloatseparator
  
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
+
 \begin{center}
 \begin{threeparttable}
+
 \caption{\label{tab:TableVocal}Statistical results of meta-regression with vocal quality and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is vocal, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is non-vocal (vocal quality).}
+
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.48 & 0.15 & 3.21 & 0.13 - 0.82\\
-vocal quality & -0.32 & 0.19 & -1.65 & -0.74 - 0.1\\
-vocal quality*age & 0.00 & 0.00 & 2.24 & 0 - 0.01\\
+intercept & 0.47 & 0.16 & 2.94 & 0.1 - 0.84\\
+vocal quality & -0.35 & 0.20 & -1.72 & -0.77 - 0.08\\
+vocal quality*age & 0.00 & 0.00 & 2.22 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
+
 \end{threeparttable}
 \end{center}
+
 \end{table*}
 \efloatseparator
  
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
+
 \begin{center}
 \begin{threeparttable}
+
 \caption{\label{tab:TableLang}Statistical results of meta-regression with language of the speech sounds and interaction with age. The intercept corresponds to the effect size when speech is in a foreign language at age 0. The moderator estimate correspond to changes in the intercept when the target stimuli are in the native language.}
+
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.73 & 0.30 & 2.46 & 0.04 - 1.42\\
-language & -0.46 & 0.31 & -1.48 & -1.16 - 0.23\\
-language * age & 0.00 & 0.00 & 2.13 & 0 - 0.01\\
+intercept & 0.67 & 0.29 & 2.33 & 0 - 1.34\\
+language & -0.42 & 0.31 & -1.37 & -1.1 - 0.26\\
+language * age & 0.00 & 0.00 & 2.01 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
+
 \end{threeparttable}
 \end{center}
+
 \end{table*}
 \efloatseparator
  
