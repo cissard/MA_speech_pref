@@ -332,7 +332,7 @@ contrasts(DB2$vocal) <- contr.treatment(length(levels(DB2$vocal)),base=2)
 table(DB2$natural,DB2$vocal,DB2$test_lang)
 summary(table(DB2$natural,DB2$vocal,DB2$test_lang))#super significant, these are correlated!
 
-#DB2$mean_age_1 = as.factor(DB2$mean_age_1) # removed -- not sure if the intention was to render it numeric, but it already is
+
 # model with moderators of interest. 
 
 full_model <- robu(g_calc ~ natural + vocal + test_lang + mean_age_1, data=DB2[!DB2$outlier,], modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)

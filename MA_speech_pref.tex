@@ -1,39 +1,49 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[english,man]{apa6}
+\documentclass[
+  english,
+  man]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
-            pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
+  pdfauthor={Cécile Issard1, Sho Tsuji2, \& Alejandrina Cristia1},
+  pdflang={en-EN},
+  pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -43,16 +53,23 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -89,20 +106,12 @@
   {\section{\normalfont\normalsize\abstractname}}
   {\section*{\normalfont\normalsize\abstractname}}
   {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
 \makeatother
 \shorttitle{Preference for speech sounds in infancy}
-\author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
-\affiliation{
-\vspace{0.5cm}
-\textsuperscript{1} Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives\\\textsuperscript{2} International Research Center for Neurointelligence, The University of Tokyo}
-\authornote{This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
-
-The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis.
-
-Our data is fully available in the corresponding OSF repository: http://tidy.ws/bqjc4U
-
-
-Correspondence concerning this article should be addressed to Cécile Issard, Laboratoire de Sciences Cognitives et Psycholinguistique, Département d'Études Cognitives, Ecole Normale Supérieure, 29 rue d'Ulm, 75005 Paris, France. E-mail: cecile.issard@gmail.com}
 \keywords{Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
@@ -111,21 +120,38 @@ Correspondence concerning this article should be addressed to Cécile Issard, La
 \renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
 \usepackage{csquotes}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,main=english]{babel}
-\else
-  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{english}
+\else
+  \usepackage[shorthands=off,main=english]{babel}
 \fi
 
 \title{Infants' preference for speech is stable across the first year of life: Meta-analytic evidence}
-
+\author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
 \date{}
+
+
+\authornote{
+
+This work was supported by an Agence Nationale de la Recherche grant to A.C. (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to A.C.
+
+The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis.
+
+Our data is fully available in the corresponding OSF repository: \url{http://tidy.ws/bqjc4U}
+
+Correspondence concerning this article should be addressed to Cécile Issard, Laboratoire de Sciences Cognitives et Psycholinguistique, Département d'Études Cognitives, Ecole Normale Supérieure, 29 rue d'Ulm, 75005 Paris, France. E-mail: \href{mailto:cecile.issard@gmail.com}{\nolinkurl{cecile.issard@gmail.com}}
+
+}
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives\\\textsuperscript{2} International Research Center for Neurointelligence, The University of Tokyo}
 
 \abstract{
 Previous work suggested that humans' sophisticated speech perception abilities stem from an early capacity to pay attention to speech in the auditory environment. Previous studies have therefore tested if infants prefer speech to other sounds at a variety of ages, but provided contrasted results. In this paper, we make the hypothesis that speech is initially encoded similarly to other natural or vocal sounds, and that infants tune to speech during the first year of life as they acquire their native language. To test this hypothesis, we conducted a meta-analysis of experiments testing speech preference in infants, sorting experiments by whether they used native or foreign speech on the one hand, and vocal or non-vocal, natural or artificial sound on the other hand. Synthesizing data from 775 infants across 38 experiments, we found a medium effect size, confirming at the scale of the literature that infants reliably prefer speech over other sounds. However, this preference was not significantly moderated by the language used, nor vocal quality, or naturalness of the competitor. Strinkingly, we found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results suggest that speech is processed in a specific way by an innate dedicated system, dictinct from other sounds processing.
 }
+
+
 
 \begin{document}
 \maketitle
@@ -509,7 +535,7 @@ Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analy
 Duval, S., \& Tweedie, R. (2000). Trim and Fill: A Simple Funnel-Plot--Based Method of Testing and Adjusting for Publication Bias in Meta-Analysis. \emph{Biometrics}, \emph{56}(2), 455--463. \url{https://doi.org/10.1111/j.0006-341X.2000.00455.x}
 
 \leavevmode\hypertarget{ref-ecklund-flores_asymmetric_1996}{}%
-Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \href{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\textless{}205::AID-DEV2\textgreater{}3.0.CO;2-V}
+Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
 
 \leavevmode\hypertarget{ref-ference_role_2018}{}%
 Ference, J. D. (2018). The Role of Attentional Biases for Conspecific Vocalizations. \url{https://doi.org/http://dx.doi.org/10.11575/PRISM/31878}
@@ -632,5 +658,6 @@ Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Eviden
 Yamashiro, A., Curtin, S., \& Vouloumanos, A. (2019). Does an Early Speech Preference Predict Linguistic and Social-Pragmatic Attention in Infants Displaying and Not Displaying Later ASD Symptoms? \emph{Journal of Autism and Developmental Disorders}. \url{https://doi.org/10.1007/s10803-019-03924-2}
 
 \endgroup
+
 
 \end{document}
