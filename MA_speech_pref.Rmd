@@ -30,7 +30,7 @@ abstract: |
  Previous work suggested that humans' sophisticated speech perception abilities stem from an early capacity to pay attention to speech in the auditory environment. Previous studies have therefore tested if infants prefer speech to other sounds at a variety of ages, but provided contrasted results. In this paper, we make the hypothesis that speech is initially encoded similarly to other natural or vocal sounds, and that infants tune to speech during the first year of life as they acquire their native language. To test this hypothesis, we conducted a meta-analysis of experiments testing speech preference in infants, sorting experiments by whether they used native or foreign speech on the one hand, and vocal or non-vocal, natural or artificial sound on the other hand. Synthesizing data from 775 infants across 38 experiments, we found a medium effect size, confirming at the scale of the literature that infants reliably prefer speech over other sounds. However, this preference was not significantly moderated by the language used, nor vocal quality, or naturalness of the competitor. Strinkingly, we found no effect of age: infants showed the same strength of preference throughout the first year of life. Speech therefore appears to be preferred from birth, even to other natural or vocal sounds. These results suggest that speech is processed in a specific way by an innate dedicated system, dictinct from other sounds processing.
   
 keywords          : "Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning"
-wordcount         : 
+wordcount         : "5257"
 
 bibliography      : ["bibliography.bib"]
 annotate_references: yes
@@ -568,6 +568,8 @@ ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc))+
 \begingroup
 \setlength{\parindent}{-0.5in}
 \setlength{\leftskip}{0.5in}
+
+References marked with an asterisk indicate studies included in the meta-analysis.
 
 <div id = "refs"></div>
 \endgroup
