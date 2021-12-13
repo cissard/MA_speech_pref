@@ -1,4 +1,4 @@
-#setwd("/Users/Cecile/Documents/MA_speech_pref")
+setwd("/Users/Cecile/Documents/MA_speech_pref")
 
 # source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
@@ -18,10 +18,10 @@ complete <- function(...) {
 
 # Comment out next set of lines for RECALCULATION
 #AC: Google sheets direct read out has been broken for a few weeks
-#require(RCurl)
-#u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
-#tc <- getURL(u, ssl.verifypeer=FALSE)
-#DB <- read.csv(textConnection(tc))
+# require(RCurl)
+# u <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRzzqtgNdfoKTMqb4bWyy5LyH5XdrOEy4sl3VNDCnGIyvdrny4wwUBeKPvy8tXczN0ri0yp94Kxgun_/pub?gid=0&single=true&output=csv"
+# tc <- getURL(u, ssl.verifypeer=FALSE)
+# DB <- read.csv(textConnection(tc))
 
 # Uncomment next line for OFFLINE MODE
 DB <- read.csv("MA_speech_pref_data - Data.csv", header = T, sep = ",", na.strings = "")
