@@ -85,9 +85,9 @@
 
 % Create new environments so endfloat can handle them
 % \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
 
 % Enables adjusting longtable caption width to table width
 % Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
@@ -99,20 +99,6 @@
 
 % \setlength{\parindent}{0.5in}
 % \setlength{\parskip}{0pt plus 0pt minus 0pt}
-
-% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
-% See https://github.com/crsh/papaja/issues/292
-\makeatletter
-\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
-  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-  {-1em}%
-  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
-
-\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
-  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-  {-\z@\relax}%
-  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
-\makeatother
 
 % \usepackage{etoolbox}
 \makeatletter
@@ -382,7 +368,7 @@ average effect size & 0.35 & 0.06 & 5.52 & 0.22 - 0.48\\
 \caption{\label{fig:bias}Funnel plot of effect sizes and their respective standard errors. Black dots: effect sizes observed in the literature. White dots: missing effect sizes, suggestive of a publication bias\(^2\). Vertical line: average effect size after filling the missing effect sizes.}
 \end{figure}
 
-We checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges' g (see funnel plot in Figure \ref{fig:bias})\footnote{If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors.}. A regression test on these data was significant (z = 7.83, p \textless{} 0.01), as was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = 0.49, p \textless{} 0.01), consistent with a publication bias in the literature.
+We checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges' g (see funnel plot in Figure \ref{fig:bias})\footnote{If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors.}. A regression test on these data was significant (z = 5.84, p \textless{} 0.01), as was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = 0.43, p \textless{} 0.01), consistent with a publication bias in the literature.
 
 To check whether this bias fully explains infants' speech preference, we symmetrized the funnel plot with the ``trim and fill'' method (Duval \& Tweedie, 2000). To symmetrize the funnel plot, 12 (SE = 4.71) missing experiments were needed on the left side of the plot. The corrected effect size was estimated at 0.22 (SE = 0.07) after filling in the 12 missing experiments, which is still significantly different from zero. Thus, even correcting for a potential publication bias, we still find statistical evidence for infants' preferring speech over competitors.
 
@@ -557,19 +543,19 @@ Bergmann, C., \& Cristia, A. (2016). Development of infants' segmentation of wor
 Bergmann, C., Tsuji, S., Piccinini, P. E., Lewis, M. L., Braginsky, M., Frank, M. C., \& Cristia, A. (2018). Promoting {Replicability} in {Developmental} {Research} {Through} {Meta}-analyses: {Insights} {From} {Language} {Acquisition} {Research}. \emph{Child Development}, \emph{89}(6), 1996--2009. \url{https://doi.org/10.1111/cdev.13079}
 
 \leavevmode\hypertarget{ref-black_quantifying_2017}{}%
-Black, A., \& Bergmann, C. (2017). \emph{Quantifying infants' statistical word segmentation: {A} meta-analysis}. 124--129. Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
+Black, A., \& Bergmann, C. (2017). Quantifying infants' statistical word segmentation: {A} meta-analysis (pp. 124--129). Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
 
 \leavevmode\hypertarget{ref-borenstein_introduction_2011}{}%
 Borenstein, M., Hedges, L. V., Higgins, J. P. T., \& Rothstein, H. R. (2011). \emph{Introduction to {Meta}-{Analysis}}. John Wiley \& Sons.
 
 \leavevmode\hypertarget{ref-colombo_method_1981}{}%
-\textsuperscript{*} Colombo, J., \& Bundy, R. S. (1981). A method for the measurement of infant auditory selectivity. \emph{Infant Behavior and Development}, \emph{4}, 219--223. \url{https://doi.org/10.1016/S0163-6383(81)80025-2}
+Colombo, J., \& Bundy, R. S. (1981). A method for the measurement of infant auditory selectivity. \emph{Infant Behavior and Development}, \emph{4}, 219--223. \url{https://doi.org/10.1016/S0163-6383(81)80025-2}
 
 \leavevmode\hypertarget{ref-cooper_developmental_1994}{}%
-\textsuperscript{*} Cooper, R. P., \& Aslin, R. N. (1994). Developmental {Differences} in {Infant} {Attention} to the {Spectral} {Properties} of {Infant}-{Directed} {Speech}. \emph{Child Development}, \emph{65}(6), 1663--1677. \url{https://doi.org/10.2307/1131286}
+Cooper, R. P., \& Aslin, R. N. (1994). Developmental {Differences} in {Infant} {Attention} to the {Spectral} {Properties} of {Infant}-{Directed} {Speech}. \emph{Child Development}, \emph{65}(6), 1663--1677. \url{https://doi.org/10.2307/1131286}
 
 \leavevmode\hypertarget{ref-curtin_speech_2013}{}%
-\textsuperscript{*} Curtin, S., \& Vouloumanos, A. (2013). Speech {Preference} is {Associated} with {Autistic}-{Like} {Behavior} in 18-{Months}-{Olds} at {Risk} for {Autism} {Spectrum} {Disorder}. \emph{Journal of Autism and Developmental Disorders}, \emph{43}(9), 2114--2120. \url{https://doi.org/10.1007/s10803-013-1759-1}
+Curtin, S., \& Vouloumanos, A. (2013). Speech {Preference} is {Associated} with {Autistic}-{Like} {Behavior} in 18-{Months}-{Olds} at {Risk} for {Autism} {Spectrum} {Disorder}. \emph{Journal of Autism and Developmental Disorders}, \emph{43}(9), 2114--2120. \url{https://doi.org/10.1007/s10803-013-1759-1}
 
 \leavevmode\hypertarget{ref-dunlap_meta-analysis_1996}{}%
 Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analysis of experiments with matched groups or repeated measures designs. \emph{Psychological Methods}, \emph{1}(2), 170--177. \url{https://doi.org/10.1037/1082-989X.1.2.170}
@@ -578,10 +564,10 @@ Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analy
 Duval, S., \& Tweedie, R. (2000). Trim and {Fill}: {A} {Simple} {Funnel}-{Plot}--{Based} {Method} of {Testing} and {Adjusting} for {Publication} {Bias} in {Meta}-{Analysis}. \emph{Biometrics}, \emph{56}(2), 455--463. \url{https://doi.org/10.1111/j.0006-341X.2000.00455.x}
 
 \leavevmode\hypertarget{ref-ecklund-flores_asymmetric_1996}{}%
-\textsuperscript{*} Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
+Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
 
 \leavevmode\hypertarget{ref-ference_role_2018}{}%
-\textsuperscript{*} Ference, J. D. (2018). \emph{The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
+Ference, J. D. (2018). The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
 
 \leavevmode\hypertarget{ref-ferry_categorization_2010}{}%
 Ferry, A. L., Hespos, S. J., \& Waxman, S. R. (2010). Categorization in 3- and 4-{Month}-{Old} {Infants}: {An} {Advantage} of {Words} {Over} {Tones}. \emph{Child Development}, \emph{81}(2), 472--479. \url{https://doi.org/10.1111/j.1467-8624.2009.01408.x}
@@ -647,22 +633,22 @@ Oller, D. K., Eilers, R. E., Neal, A. R., \& Schwartz, H. K. (1999). Precursors 
 Querleu, D., Renard, X., Versyp, F., Paris-Delrue, L., \& Crèpin, G. (1988). Fetal hearing. \emph{European Journal of Obstetrics \& Gynecology and Reproductive Biology}, \emph{28}(3), 191--212. \url{https://doi.org/10.1016/0028-2243(88)90030-5}
 
 \leavevmode\hypertarget{ref-r_core_team_r:_2018}{}%
-R Core Team. (2018). \emph{R: {A} {Language} and {Environment} for {Statistical} {Computing}}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
+R Core Team. (2018). R: {A} {Language} and {Environment} for {Statistical} {Computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
 
 \leavevmode\hypertarget{ref-rosen_constructing_2007}{}%
 Rosen, S., \& Iverson, P. (2007). Constructing adequate non-speech analogues: What is special about speech anyway? \emph{Developmental Science}, \emph{10}(2), 165--168. \url{https://doi.org/10.1111/j.1467-7687.2007.00550.x}
 
 \leavevmode\hypertarget{ref-santolin_role_2019}{}%
-\textsuperscript{*} Santolin, C., Russo, S., Calignano, G., Saffran, J. R., \& Valenza, E. (2019). The role of prosody in infants' preference for speech: {A} comparison between speech and birdsong. \emph{Infancy}, \emph{24}(5), 827--833. \url{https://doi.org/10.1111/infa.12295}
+Santolin, C., Russo, S., Calignano, G., Saffran, J. R., \& Valenza, E. (2019). The role of prosody in infants' preference for speech: {A} comparison between speech and birdsong. \emph{Infancy}, \emph{24}(5), 827--833. \url{https://doi.org/10.1111/infa.12295}
 
 \leavevmode\hypertarget{ref-santolin_infants_2020}{}%
-\textsuperscript{*} Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). \emph{Infants' preference for non-native speech versus birdsong. {Unpublished} data.} Retrieved from \url{https://github.com/mzettersten/birdsong}
+Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). Infants' preference for non-native speech versus birdsong. {Unpublished} data. Retrieved from \url{https://github.com/mzettersten/birdsong}
 
 \leavevmode\hypertarget{ref-segal_listening_2011}{}%
-\textsuperscript{*} Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {{}} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
+Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {{}} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
 
 \leavevmode\hypertarget{ref-shultz_three-month-olds_2010}{}%
-\textsuperscript{*} Shultz, S., \& Vouloumanos, A. (2010). Three-{Month}-{Olds} {Prefer} {Speech} to {Other} {Naturally} {Occurring} {Signals}. \emph{Language Learning and Development}, \emph{6}(4), 241--257. \url{https://doi.org/10.1080/15475440903507830}
+Shultz, S., \& Vouloumanos, A. (2010). Three-{Month}-{Olds} {Prefer} {Speech} to {Other} {Naturally} {Occurring} {Signals}. \emph{Language Learning and Development}, \emph{6}(4), 241--257. \url{https://doi.org/10.1080/15475440903507830}
 
 \leavevmode\hypertarget{ref-singh_modulation_2003}{}%
 Singh, N. C., \& Theunissen, F. E. (2003). Modulation spectra of natural sounds and ethological theories of auditory processing. \emph{The Journal of the Acoustical Society of America}, \emph{114}(6), 3394. \url{https://doi.org/10.1121/1.1624067}
@@ -671,34 +657,34 @@ Singh, N. C., \& Theunissen, F. E. (2003). Modulation spectra of natural sounds 
 Smith, E. C., \& Lewicki, M. S. (2006). Efficient auditory coding. \emph{Nature}, \emph{439}(7079), 978--982. \url{https://doi.org/10.1038/nature04485}
 
 \leavevmode\hypertarget{ref-sorcinelli_preference_2019}{}%
-\textsuperscript{*} Sorcinelli, A., Ference, J., Curtin, S., \& Vouloumanos, A. (2019). Preference for speech in infancy differentially predicts language skills and autism-like behaviors. \emph{Journal of Experimental Child Psychology}, \emph{178}, 295--316. \url{https://doi.org/10.1016/j.jecp.2018.09.011}
+Sorcinelli, A., Ference, J., Curtin, S., \& Vouloumanos, A. (2019). Preference for speech in infancy differentially predicts language skills and autism-like behaviors. \emph{Journal of Experimental Child Psychology}, \emph{178}, 295--316. \url{https://doi.org/10.1016/j.jecp.2018.09.011}
 
 \leavevmode\hypertarget{ref-spence_prenatal_1987}{}%
-\textsuperscript{*} Spence, M. J., \& DeCasper, A. J. (1987). Prenatal experience with low-frequency maternal-voice sounds influence neonatal perception of maternal voice samples. \emph{Infant Behavior and Development}, \emph{10}(2), 133--142. \url{https://doi.org/10.1016/0163-6383(87)90028-2}
+Spence, M. J., \& DeCasper, A. J. (1987). Prenatal experience with low-frequency maternal-voice sounds influence neonatal perception of maternal voice samples. \emph{Infant Behavior and Development}, \emph{10}(2), 133--142. \url{https://doi.org/10.1016/0163-6383(87)90028-2}
 
 \leavevmode\hypertarget{ref-turati_why_2004}{}%
 Turati, C. (2004). Why {Faces} {Are} {Not} {Special} to {Newborns}: {An} {Alternative} {Account} of the {Face} {Preference}. \emph{Current Directions in Psychological Science}, \emph{13}(1), 5--8. \url{https://doi.org/10.1111/j.0963-7214.2004.01301002.x}
 
 \leavevmode\hypertarget{ref-vanden_bosch_der_nederlanden_infant_2020}{}%
-\textsuperscript{*} Vanden Bosch der Nederlanden, C. M., \& Vouloumanos, A. (2020). Infant biases for detecting speech in complex scenes. \emph{Under Review}.
+Vanden Bosch der Nederlanden, C. M., \& Vouloumanos, A. (2020). Infant biases for detecting speech in complex scenes. \emph{Under Review}.
 
 \leavevmode\hypertarget{ref-vouloumanos_foundational_2014}{}%
-\textsuperscript{*} Vouloumanos, A., \& Curtin, S. (2014). Foundational {Tuning}: {How} {Infants}' {Attention} to {Speech} {Predicts} {Language} {Development}. \emph{Cognitive Science}, \emph{38}(8), 1675--1686. \url{https://doi.org/10.1111/cogs.12128}
+Vouloumanos, A., \& Curtin, S. (2014). Foundational {Tuning}: {How} {Infants}' {Attention} to {Speech} {Predicts} {Language} {Development}. \emph{Cognitive Science}, \emph{38}(8), 1675--1686. \url{https://doi.org/10.1111/cogs.12128}
 
 \leavevmode\hypertarget{ref-vouloumanos_five-month-old_2009}{}%
-\textsuperscript{*} Vouloumanos, A., Druhen, M. J., Hauser, M. D., \& Huizink, A. T. (2009). Five-month-old infants' identification of the sources of vocalizations. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{106}(44), 18867--18872. \url{https://doi.org/10.1073/pnas.0906049106}
+Vouloumanos, A., Druhen, M. J., Hauser, M. D., \& Huizink, A. T. (2009). Five-month-old infants' identification of the sources of vocalizations. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{106}(44), 18867--18872. \url{https://doi.org/10.1073/pnas.0906049106}
 
 \leavevmode\hypertarget{ref-vouloumanos_tuning_2010}{}%
-\textsuperscript{*} Vouloumanos, A., Hauser, M. D., Werker, J. F., \& Martin, A. (2010). The tuning of human neonates' preference for speech. \emph{Child Development}, \emph{81}(2), 517--527. \url{https://doi.org/10.1111/j.1467-8624.2009.01412.x}
+Vouloumanos, A., Hauser, M. D., Werker, J. F., \& Martin, A. (2010). The tuning of human neonates' preference for speech. \emph{Child Development}, \emph{81}(2), 517--527. \url{https://doi.org/10.1111/j.1467-8624.2009.01412.x}
 
 \leavevmode\hypertarget{ref-vouloumanos_tuned_2004}{}%
-\textsuperscript{*} Vouloumanos, A., \& Werker, J. F. (2004). Tuned to the signal: The privileged status of speech for young infants. \emph{Developmental Science}, \emph{7}(3), 270--276. \url{https://doi.org/10.1111/j.1467-7687.2004.00345.x}
+Vouloumanos, A., \& Werker, J. F. (2004). Tuned to the signal: The privileged status of speech for young infants. \emph{Developmental Science}, \emph{7}(3), 270--276. \url{https://doi.org/10.1111/j.1467-7687.2004.00345.x}
 
 \leavevmode\hypertarget{ref-vouloumanos_listening_2007}{}%
-\textsuperscript{*} Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Evidence for a bias for speech in neonates. \emph{Developmental Science}, \emph{10}(2), 159--164. \url{https://doi.org/10.1111/j.1467-7687.2007.00549.x}
+Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Evidence for a bias for speech in neonates. \emph{Developmental Science}, \emph{10}(2), 159--164. \url{https://doi.org/10.1111/j.1467-7687.2007.00549.x}
 
 \leavevmode\hypertarget{ref-yamashiro_does_2019}{}%
-\textsuperscript{*} Yamashiro, A., Curtin, S., \& Vouloumanos, A. (2019). Does an {Early} {Speech} {Preference} {Predict} {Linguistic} and {Social}-{Pragmatic} {Attention} in {Infants} {Displaying} and {Not} {Displaying} {Later} {ASD} {Symptoms}? \emph{Journal of Autism and Developmental Disorders}. \url{https://doi.org/10.1007/s10803-019-03924-2}
+Yamashiro, A., Curtin, S., \& Vouloumanos, A. (2019). Does an {Early} {Speech} {Preference} {Predict} {Linguistic} and {Social}-{Pragmatic} {Attention} in {Infants} {Displaying} and {Not} {Displaying} {Later} {ASD} {Symptoms}? \emph{Journal of Autism and Developmental Disorders}. \url{https://doi.org/10.1007/s10803-019-03924-2}
 
 \end{CSLReferences}
 
