@@ -19,8 +19,6 @@ average effect size & 0.38 & 0.07 & 5.53 & 0.24 - 0.53\\
 \end{center}
 
 \end{table*}
-\efloatseparator
- 
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
@@ -46,8 +44,6 @@ age & 0.00 & 0.00 & 1.05 & 0 - 0\\
 \end{center}
 
 \end{table*}
-\efloatseparator
- 
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
@@ -71,8 +67,6 @@ naturalness*age & 0.00 & 0.00 & 0.97 & 0 - 0.01\\
 \end{center}
 
 \end{table*}
-\efloatseparator
- 
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
@@ -96,8 +90,6 @@ vocal quality*age & 0.00 & 0.00 & 2.40 & 0 - 0.01\\
 \end{center}
 
 \end{table*}
-\efloatseparator
- 
 \begin{table*}[hbt]
 \ifnextchar[{\eatarg}{}
 [tbp]
@@ -121,5 +113,3 @@ language * age & 0.00 & 0.00 & 2.24 & 0 - 0.01\\
 \end{center}
 
 \end{table*}
-\efloatseparator
- 
