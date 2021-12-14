@@ -94,8 +94,12 @@ summary(DB2$mean_age_1)
 - The language used for the speech sounds made no significant difference
 
 # Introduction
+# This first paragraph summarizes the main theory of speech preference, with the factors most commonly discussed (human/monkeys, speech/other vocalizations). I hope this will make it clear that we do know this view, and that our MA nuances it by including less cited/overlooked papers (not to mention that these mostly cited papers are all from the Vouloumanos lab. It might be good to take into account results from other labs).
 
-Humans acquire their communication skills from early infancy, with specialized speech perception abilities well before they produce their first word. These perceptual capacities manifest in an early preference for speech over other types of sound [@vouloumanos_listening_2007;@vouloumanos_tuning_2010;@ecklund-flores_asymmetric_1996]. However, how this preference develops is debated: some studies show a broad preference for speech and other related sounds (e.g. monkey calls) at birth that narrows to speech in the first months of life [@vouloumanos_tuning_2010], whereas others have found a preference for speech from birth [@ecklund-flores_asymmetric_1996]. These contrastive results raise questions about the mechanisms that support speech perception in infants: does the auditory system process all sounds similarly, or are there dedicated mechanisms for speech? Does the auditory system have properties that match particularly well with the acoustics of speech, as well as sounds with close acoustical properties (e.g. other natural or vocal sounds)? Or does the auditory system encode all sounds equally well, the preference coming from high-level linguistic processing (i.e. specific to the language learned)? Drawing a developmental curve is crucial to tackle these questions: if speech is processed in a specific way as compared to other sounds, then from birth, infants should show a preference for speech as compared to other sounds. If speech benefits from properties that also apply to other sounds, then infants should first have a general preference for acoustically close sounds that match these properties (among them speech), and then gradually tune to speech as they are exposed to speech. Finally, if speech processing relies on the same auditory-general mechanisms as any other sound, then speech preference should emerge during the first year of life with language acquisition and depend on the language learned.  
+Humans acquire their communication skills from early infancy, with specialized speech perception abilities well before they produce their first word. These perceptual capacities manifest in an early preference for speech over other types of sound [@vouloumanos_listening_2007;@vouloumanos_tuning_2010;@ecklund-flores_asymmetric_1996]. Some studies show, at birth, a preference for speech over sine-wave speech (i.e. time-varying sinusoidals tracking the fundamental frequency and the first three formants)[@vouloumanos_listening_2007]. Studies find no preference between speech and monkey calls at birth [@vouloumanos_tuning_2010;@shultz_three-month-olds_2010], but a preference for speech over monkey calls at three month old [@vouloumanos_tuning_2010]. These results have led to the idea that speech is a privileged signal for humans: newborns would have a preference for the vocalizations of humans and non-human primates, and by three-month old tune in to human speech specifically [@vouloumanos_listen_2014]. These studies even found that three-month-olds favor human speech over other human vocalizations [@shultz_three-month-olds_2010]. Because these results have been obtained both with the participants' native language [@vouloumanos_listening_2007;@vouloumanos_tuning_2010], and foreign language [@shultz_three-month-olds_2010], it was claimed that infants tune to the speech signal itself, and not simply the familiar sounds of their native language [@vouloumanos_listen_2014].
+
+However, others studies may provide an alternative view of the phenomenon. have found a preference for speech from birth [@ecklund-flores_asymmetric_1996]. These contrastive results raise questions about the mechanisms that support speech perception in infants: does the auditory system process all sounds similarly, or are there dedicated mechanisms for speech? Does the auditory system have properties that match particularly well with the acoustics of speech, as well as sounds with close acoustical properties (e.g. other natural or vocal sounds)? Or does the auditory system encode all sounds equally well, the preference coming from high-level linguistic processing (i.e. specific to the language learned)? Drawing a developmental curve is crucial to tackle these questions: if speech is processed in a specific way as compared to other sounds, then from birth, infants should show a preference for speech as compared to other sounds. If speech benefits from properties that also apply to other sounds, then infants should first have a general preference for acoustically close sounds that match these properties (among them speech), and then gradually tune to speech as they are exposed to speech. Finally, if speech processing relies on the same auditory-general mechanisms as any other sound, then speech preference should emerge during the first year of life with language acquisition and depend on the language learned.  
+
 Here, to test these hypotheses, we synthesize the available empirical data on infants’ preferences for speech over non-speech sounds from birth to the end of the first year of life, and use a meta-analytic approach to test if the factors cited above explain the variability found in the literature. 
 
 ```{r venn, include=T, fig.cap="Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds."}
@@ -366,7 +370,7 @@ apa_table(table2, digits=2, align='lcccc', col.names=c("","estimate","SE","t","c
 
 
 ```{r natural, include=T, fig.cap="Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
-scatter = ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
+ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
   geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
   scale_x_continuous(name = "Mean age (months)", breaks = seq(0,12,1))+
@@ -376,9 +380,9 @@ scatter = ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, col
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
-stim = knitr::include_graphics("Natural-artificial.png")
+#stim = knitr::include_graphics("Natural-artificial.png")
 
-grid.arrange(stim, scatter, ncol=2, nrow=1)
+#grid.arrange(stim, scatter, ncol=2, nrow=1)
 ```
 
 ```{r TableNatural, results="asis", include=T} 
@@ -395,7 +399,7 @@ apa_table(table_nat, digits=2, align='lcccc', col.names=c("","estimate","SE","t"
 ```
 
 ```{r vocal, include=T, fig.cap="Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
-scatter = ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
+ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
   geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
@@ -406,9 +410,9 @@ scatter = ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
-stim = knitr::include_graphics("voc-nonvoc.png")
-
-grid.arrange(stim, scatter, ncol=2, nrow=1)
+# stim = knitr::include_graphics("voc-nonvoc.png")
+# 
+# grid.arrange(stim, scatter, ncol=2, nrow=1)
 ```
 
 ```{r TableVocal, results="asis", include=T} 
@@ -425,7 +429,7 @@ apa_table(table_voc, digits=2, align='lcccc', col.names=c("","estimate","SE","t"
 ```
 
 ```{r lang, include=T, fig.cap="Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
-scatter = ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
+ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
   geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
@@ -436,9 +440,9 @@ scatter = ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, c
   theme_classic()+
   theme(text = element_text(size = 15), legend.position = c(.9, .9))
 
-stim = knitr::include_graphics("native-foreign.png")
-
-grid.arrange(stim, scatter, ncol=2, nrow=1)
+# stim = knitr::include_graphics("native-foreign.png")
+# 
+# grid.arrange(stim, scatter, ncol=2, nrow=1)
 ```
 
 ```{r TableLang, results="asis", include=T} 
