@@ -5,10 +5,14 @@
 \documentclass[
   english,
   man]{apa6}
+\title{Infants' preference for speech is stable across the first year of life: Meta-analytic evidence}
+\author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
+\date{}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -70,6 +74,29 @@
   \let\oldsubparagraph\subparagraph
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 % Manuscript styling
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -85,9 +112,9 @@
 
 % Create new environments so endfloat can handle them
 % \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
 
 % Enables adjusting longtable caption width to table width
 % Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
@@ -99,20 +126,6 @@
 
 % \setlength{\parindent}{0.5in}
 % \setlength{\parskip}{0pt plus 0pt minus 0pt}
-
-% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
-% See https://github.com/crsh/papaja/issues/292
-\makeatletter
-\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
-  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-  {-1em}%
-  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
-
-\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
-  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-  {-\z@\relax}%
-  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
-\makeatother
 
 % \usepackage{etoolbox}
 \makeatletter
@@ -134,7 +147,7 @@
 \renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
 \usepackage{csquotes}
-\ifxetex
+\ifXeTeX
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{english}
@@ -144,33 +157,9 @@
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
 \fi
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-
-\title{Infants' preference for speech is stable across the first year of life: Meta-analytic evidence}
-\author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
-\date{}
 
 
 \authornote{
@@ -216,26 +205,35 @@ Previous work suggested that humans' sophisticated speech perception abilities s
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-\hypertarget{this-first-paragraph-summarizes-the-main-theory-of-speech-preference-with-the-factors-most-commonly-discussed-humanmonkeys-speechother-vocalizations.-i-hope-this-will-make-it-clear-that-we-do-know-this-view-and-that-our-ma-nuances-it-by-including-less-citedoverlooked-papers-not-to-mention-that-these-mostly-cited-papers-are-all-from-the-vouloumanos-lab.-it-might-be-good-to-take-into-account-results-from-other-labs.}{%
-\section{This first paragraph summarizes the main theory of speech preference, with the factors most commonly discussed (human/monkeys, speech/other vocalizations). I hope this will make it clear that we do know this view, and that our MA nuances it by including less cited/overlooked papers (not to mention that these mostly cited papers are all from the Vouloumanos lab. It might be good to take into account results from other labs).}\label{this-first-paragraph-summarizes-the-main-theory-of-speech-preference-with-the-factors-most-commonly-discussed-humanmonkeys-speechother-vocalizations.-i-hope-this-will-make-it-clear-that-we-do-know-this-view-and-that-our-ma-nuances-it-by-including-less-citedoverlooked-papers-not-to-mention-that-these-mostly-cited-papers-are-all-from-the-vouloumanos-lab.-it-might-be-good-to-take-into-account-results-from-other-labs.}}
+\textbf{ci2all This first paragraph summarizes the main theory of speech preference, with the factors most commonly discussed (human/monkeys, speech/other vocalizations). I hope this will make it clear that we do know this view, and that our MA nuances it by including less cited/overlooked papers (not to mention that these mostly cited papers are all from the Vouloumanos lab. It might be good to take into account results from other labs).}
 
-Humans acquire their communication skills from early infancy, with specialized speech perception abilities well before they produce their first word. These perceptual capacities manifest in an early preference for speech over other types of sound (Ecklund-Flores \& Turkewitz, 1996; Vouloumanos, Hauser, Werker, \& Martin, 2010; Vouloumanos \& Werker, 2007). Some studies show, at birth, a preference for speech over sine-wave speech (i.e.~time-varying sinusoidals tracking the fundamental frequency and the first three formants)(Vouloumanos \& Werker, 2007). Studies find no preference between speech and monkey calls at birth (Shultz \& Vouloumanos, 2010; Vouloumanos, Hauser, Werker, \& Martin, 2010), but a preference for speech over monkey calls at three month old (Vouloumanos, Hauser, Werker, \& Martin, 2010). These results have led to the idea that speech is a privileged signal for humans: newborns would have a preference for the vocalizations of humans and non-human primates, and by three-month old tune in to human speech specifically (Vouloumanos \& Waxman, 2014). These studies even found that three-month-olds favor human speech over other human vocalizations (Shultz \& Vouloumanos, 2010). Because these results have been obtained both with the participants' native language (Vouloumanos, Hauser, Werker, \& Martin, 2010; Vouloumanos \& Werker, 2007), and foreign language (Shultz \& Vouloumanos, 2010), it was claimed that infants tune to the speech signal itself, and not simply the familiar sounds of their native language (Vouloumanos \& Waxman, 2014).
+\textbf{ac2ci I made some edits particularly at the end of the para}
 
-However, others studies may provide an alternative view of the phenomenon. have found a preference for speech from birth (Ecklund-Flores \& Turkewitz, 1996). These contrastive results raise questions about the mechanisms that support speech perception in infants: does the auditory system process all sounds similarly, or are there dedicated mechanisms for speech? Does the auditory system have properties that match particularly well with the acoustics of speech, as well as sounds with close acoustical properties (e.g.~other natural or vocal sounds)? Or does the auditory system encode all sounds equally well, the preference coming from high-level linguistic processing (i.e.~specific to the language learned)? Drawing a developmental curve is crucial to tackle these questions: if speech is processed in a specific way as compared to other sounds, then from birth, infants should show a preference for speech as compared to other sounds. If speech benefits from properties that also apply to other sounds, then infants should first have a general preference for acoustically close sounds that match these properties (among them speech), and then gradually tune to speech as they are exposed to speech. Finally, if speech processing relies on the same auditory-general mechanisms as any other sound, then speech preference should emerge during the first year of life with language acquisition and depend on the language learned.
+Humans acquire their communication skills from early infancy, with specialized speech perception abilities well before they produce their first word. These perceptual capacities manifest in an early preference for speech over other types of sound (Ecklund-Flores \& Turkewitz, 1996; Vouloumanos, Hauser, Werker, \& Martin, 2010; Vouloumanos \& Werker, 2007). Some studies show, at birth, a preference for speech over sine-wave speech {[}i.e., time-varying sinusoidals tracking the fundamental frequency and the first three formants; Vouloumanos and Werker (2007){]}. Studies find no preference between speech and monkey calls at birth (Shultz \& Vouloumanos, 2010; Vouloumanos et al., 2010), but a preference for speech over monkey calls at three month old (Vouloumanos et al., 2010). Results like these have led to the theoretical proposal that speech is a privileged signal for humans, whereby newborns have a preference for the vocalizations of humans and non-human primates, and by three months tune in to human speech specifically (Vouloumanos \& Waxman, 2014). These studies even found that three-month-olds favor human speech over other human vocal sounds, such as coughing (Shultz \& Vouloumanos, 2010). Because these results have been obtained both with the participants' native language (Vouloumanos et al., 2010; Vouloumanos \& Werker, 2007), and foreign language (Shultz \& Vouloumanos, 2010), it was claimed that infants tune to the speech signal itself, and not simply the familiar sounds of their native language (Vouloumanos \& Waxman, 2014). There have been variants of such views. For instance, Ecklund-Flores and Turkewitz (1996) documented behavioral responses that seemed specific to speech, and particularly information carried below 3500 Hz, which was different from other forms of filtered speech and natural sounds. The specificity of this behavioral response at a young age seems to suggest an early primacy of the speech bias.
 
-Here, to test these hypotheses, we synthesize the available empirical data on infants' preferences for speech over non-speech sounds from birth to the end of the first year of life, and use a meta-analytic approach to test if the factors cited above explain the variability found in the literature.
+After decades of theoretical and empirical work in this area, the field has converged in a series of questions about the mechanisms that support speech perception in infants, not all of which have answers already: Does the auditory system process all sounds similarly, or are there dedicated mechanisms for speech? Does the preference for speech emerge from a low-level bias, whereby the auditory system better encodes sounds with acoustic properties that match particularly well with the acoustics of speech (processing similarly well other natural and vocal sounds)? Or does the preference stem from high-level linguistic processing (i.e., recognition of properties like syllabic structure)? In addition to asking these questions regarding preference at birth, drawing a developmental curve is crucial to tackle these questions: If speech is processed in a specific way as compared to other sounds, then from birth, infants should show a preference for speech as compared to other sounds. If speech benefits from properties that also apply to other sounds, then infants should first have a general preference for acoustically close sounds that match these properties (among them speech), and then gradually tune to speech as they are exposed to speech. Finally, if speech processing relies on the same auditory-general mechanisms as any other sound, then speech preference should emerge during the first year of life with language acquisition and depend on the language learned. \textbf{ac2all I like the questions at the beginning of the paragraph, but not the hypotheses/predictions starting from the developmental curve part. We'll explain this a lot more clearly after we introduce the distinct hypotheses below. I'd prefer to add a question like ``And how does this change with infant development (including exposure to one or more languages)?'' and then I'd remove the para break and change the next sentence to start with ``To seek the state-of-the-art answers to these questions, we synthesize\ldots{}''}
+
+Here, to test these hypotheses, we synthesize the available empirical data on infants' preferences for speech over non-speech sounds from birth to the end of the first year of life using a meta-analytic approach. In order to do so, we clarify the conceptual separation between three factors that could in principle explain speech preference, but have not often been spelled out as alternative hypotheses in the past {[}but see XXX, p.~YY, and ZZ, p.~QQ, among other for pre-figurations of these ideas{]}.
+\textbf{ac2ci factors not yet introduced, so I changed the wording. Also, do you think it's strategically better to say that these ideas have not been spelled out \& cite some people? or can we just cite people who conceptually separated them? Also, could we cite people who have talked about each of the biases below, even if in a way that was more confused across factors?}
 
 \begin{figure}
 \includegraphics[width=5.31in]{figures_intro/tuning} \caption{Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}\label{fig:venn}
 \end{figure}
 
-A first possibility to explain infants' preference for speech is that the auditory system is tailored for the acoustic properties of speech, as well as sounds with close acoustical properties (e.g.~other natural or vocal sounds). This idea has been pervasive in the field of auditory neuroscience, relying on the hypothesis that the auditory system has been shaped by evolutionary pressure to efficiently encode ecologically important sounds, typically environmental sounds signalling a threat, or conspecific vocalizations, and more generally natural sounds such as wind, rain, or the sound of a river, as well as those produced by biological systems, such as heart beats, step sounds, or animal vocalizations, and speech. Following this hypothesis, numerous studies have shown that natural sounds are processed more efficiently by the auditory system, from the cochlea (Smith \& Lewicki, 2006) to the auditory cortex (see Mizrahi, Shalev, \& Nelken, 2014 for a review). If this mechanism (partially) explains infants' speech preference, then we should observe an initial preference at birth for speech over artificial competitors, but no preference at birth when contrasting speech against another natural sounds. Infants would then gradually tune to speech as they acquire language during the first year of life.
+\textbf{ac2ci in each of the following paragraphs there was an assumption of increases with exposure that is not necessary for each of the hypotheses. I removed it throughout! I also changed the order as Sho had suggested}
 
-A second possibility is that auditory coding is tailored to vocal sounds more specifically. Vocal sounds have acoustic signatures, since they are characterized by modulations introduced by the vocal tract, with harmonically related energy peaks. Animal vocalizations (among them speech) are characterized by low temporal and spectral modulations, therefore form a separate acoustic category within natural sounds (Singh \& Theunissen, 2003). As a result, it is possible that infants initially have a broad category of vocal sounds, including the vocalizations of other species that also use oral communication (e.g.~other primates and birds), and later tune to speech as they acquire their native language and build specialized linguistic abilities. This view is supported by studies that found that newborns showed no preference for speech compared to monkey calls, but three month-olds did (Vouloumanos, Hauser, Werker, \& Martin, 2010). If this mechanism explains at least partially speech preferences, then we should observe at birth a preference for speech over non-vocal competitors, but no preference when contrasting speech against other vocal sounds. This initial preference for vocal sounds would then tune to speech specifically during the first year of life as infants acquire language.
+A first possibility, which we will call a \textbf{naturalness bias}, to explain infants' preference for speech is that the auditory system is tailored for the acoustic properties of speech, as well as sounds with close acoustical properties (e.g., other natural or vocal sounds). This idea has been pervasive in the field of auditory neuroscience, relying on the hypothesis that the auditory system has been shaped by evolutionary pressure to efficiently encode ecologically important sounds, typically environmental sounds signalling a threat, or conspecific vocalizations, and more generally natural sounds such as wind, rain, or the sound of a river, as well as those produced by biological systems, such as heart beats, step sounds, or animal vocalizations, and speech. Following this hypothesis, numerous studies have shown that natural sounds are processed more efficiently by the auditory system, from the cochlea (Smith \& Lewicki, 2006) to the auditory cortex (see Mizrahi, Shalev, \& Nelken, 2014 for a review). If a naturalness bias (partially) explains infants' speech preference, then we should observe a stronger preference at birth for speech over artificial competitors than when contrasting speech against another natural sounds.
+\textbf{ac2ci the last sentence doesn't follow, right? this hypothesis doesn't speak of dev't. I removed it. I also changed the preceding sentence to the prediction I think we should make}
 
-A third possibility would be that the brain encodes all sounds equally well. In this case, speech would not be preferred to any other sound at birth, natural or artificial, vocal or not. Speech preference would solely reflect top-downs influences of language acquisition. Any preference would emerge during the first year of life, and speech preference would be restricted to the infant's native language. Previous results about language preference make this explanation plausible: Newborns prefer their native speech as compared to prosodically distinct foreign speech (e.g., Mehler et al., 1988; Moon, Cooper, \& Fifer, 1993). If this mechanism is at play in speech preference, infants should show no preference at all at birth, and after a few months a stronger preference for speech over other sounds when tested with their native language, and a weaker or no preference when tested with a foreign language.
+A second possibility, the \textbf{vocal bias}, is that auditory coding is tailored to vocal sounds more specifically, rather than to all natural sounds. Vocal sounds have acoustic signatures, since they are characterized by modulations introduced by the vocal tract, with harmonically related energy peaks. Animal vocalizations (among them speech) are characterized by low temporal and spectral modulations, therefore form a separate acoustic category within natural sounds (Singh \& Theunissen, 2003). This view is supported by studies that found that newborns showed no preference for speech compared to monkey calls, which are both vocal sounds (Vouloumanos et al., 2010). If a vocal bias explains at least partially speech preferences, then we should observe a stronger preference for speech over non-vocal competitors than when contrasting speech against other vocal sounds.
+\textbf{ac2ci a sentence in the middle \& end doesn't follow, because this hypothesis doesn't speak of dev't. I removed them. I also changed the Vouloumanos cite to fit the explanation}
 
-Finally, if there are dedicated perceptual mechanisms for speech, then speech should be preferred to any other sounds from birth, even to other vocal or natural sounds. Previous studies provided evidence for this hypothesis: newborns respond more to natural speech than to heartbeat, high-pass or band-ass filtered speech (Ecklund-Flores \& Turkewitz, 1996). Newborn and one-month-old infants even prefer natural to low-pass filtered speech, that mimics what's heard in the womb {[}Ecklund-Flores and Turkewitz (1996);cooper\_developmental\_1994{]}. If perceptual mechanisms specific to speech are at play, then we should observe a preference for speech to any other sound from birth, at the scale of the literature. This preference should strengthen with language acquisition, and become stronger during the first year of life when infants are tested with their native language.
+A third distinct conceptual hypothesis is that there are dedicated perceptual mechanisms that are specific to speech, and distinct from how other vocal or natural sounds are processed -- \textbf{a speech bias}. Previous studies provided evidence for this hypothesis: newborns respond more to natural speech than to heartbeat, high-pass or band-ass filtered speech (Ecklund-Flores \& Turkewitz, 1996). Newborn and one-month-old infants even prefer natural to low-pass filtered speech, which mimics what's heard in the womb (Cooper \& Aslin, 1994; Ecklund-Flores \& Turkewitz, 1996). If a speech bias explains speech preference at least partially, we should see preferences for speech over other sounds, including natural and vocal sounds.
+
+A final possibility would be that the fetus' brain initially encodes all sounds equally well, and the preference emerges due to exposure to speech -- an \textbf{exposure bias}. Previous results about language preference make this explanation plausible: Newborns prefer their native speech as compared to prosodically distinct foreign speech (e.g., Mehler et al., 1988; Moon, Cooper, \& Fifer, 1993). If one could test unborn children before exposure to much speech, speech would not be preferred to any other sound. Since that is impossible, given that newborns have been exposed to speech for three months by fullterm birth, one predicts from this hypothesis that preferences would get stronger during the first year of life, and that speech preference would be greater for the infant's native language than foreign languages.
+\textbf{ac2ci I made lots of changes in this paragraph, in part to clarify the explanation and avoid repetition of predictions}
+
+It should be noted that all four biases could be at play, and indeed several of them are sometimes integrated in one and the same theoretical framework {[}CITE CITE CITE CITE CITE CITE CITE{]}. However, from a conceptual standpoint, they reflect different hypotheses and assumptions about infants' perceptual system, and thus it is worthwhile to entertain them as separate accounts. In fact, with the right data, their predictions can be teased apart, and with enough power, the field would be able to attribute relative weights to each of the biases. A first step in this direction is to synthesize previous literature, to assess the extent to which these conceptually distinct factors have been independently manipulated in experimental designs. We can then measure the extent to which the literature supports their joint predictions (i.e., a preference for speech), and their individual predictions, as far as possible given the extent of currently confounded factors in past literature. This also allows us to identify empirical gaps (e.g., age groups that are under-represented but are crucial to tease apart two factors) and conceptual gaps (e.g., use of stimuli that systematically confounds two or more of those explanations).
 
 \hypertarget{a-meta-analytic-approach}{%
 \subsection{A meta-analytic approach}\label{a-meta-analytic-approach}}
@@ -326,10 +324,10 @@ Analyses use the R (R Core Team, 2018) package Robumeta (Hedges, Tipton, \& John
 \hypertarget{database-description}{%
 \subsection{Database description}\label{database-description}}
 
-We found a total of 19 publications (labeled with an asterisk in the reference list) reporting 39 experiments, for a total of 791 infants, and 55 (not mutually independent) effect sizes, see Figure \ref{fig:forest}. 16 papers have been submitted to or published in peer-reviewed journals (Colombo \& Bundy, 1981; Cooper \& Aslin, 1994; Curtin \& Vouloumanos, 2013; Ecklund-Flores \& Turkewitz, 1996; Santolin, Russo, Calignano, Saffran, \& Valenza, 2019; Segal \& Kishon-Rabin, 2011; Segal, Kligler, \& Kishon-Rabin, 2021; Shultz \& Vouloumanos, 2010; Sorcinelli, Ference, Curtin, \& Vouloumanos, 2019; Spence \& DeCasper, 1987; Vanden Bosch der Nederlanden \& Vouloumanos, 2020; Vouloumanos \& Curtin, 2014; Vouloumanos, Druhen, Hauser, \& Huizink, 2009; Vouloumanos, Hauser, Werker, \& Martin, 2010, 2010; Vouloumanos \& Werker, 2004; Vouloumanos \& Werker, 2007; \textbf{yamashiro\_does\_2019?}). The remaining 1 publication contributing 8 effect size was a thesis (Ference, 2018). 6 more effect sizes were contributed by authors of unpublished work (Santolin, Zettersten, \& Saffran, 2020).
+We found a total of 19 publications (labeled with an asterisk in the reference list) reporting 39 experiments, for a total of 791 infants, and 55 (not mutually independent) effect sizes, see Figure \ref{fig:forest}. 16 papers have been submitted to or published in peer-reviewed journals (Colombo \& Bundy, 1981; Cooper \& Aslin, 1994; Curtin \& Vouloumanos, 2013; Ecklund-Flores \& Turkewitz, 1996; Santolin, Russo, Calignano, Saffran, \& Valenza, 2019; Segal \& Kishon-Rabin, 2011; Segal, Kligler, \& Kishon-Rabin, 2021; Shultz \& Vouloumanos, 2010; Sorcinelli, Ference, Curtin, \& Vouloumanos, 2019; Spence \& DeCasper, 1987; Vanden Bosch der Nederlanden \& Vouloumanos, 2020; Vouloumanos \& Curtin, 2014; Vouloumanos, Druhen, Hauser, \& Huizink, 2009; Vouloumanos et al., 2010, 2010; Vouloumanos \& Werker, 2004; Vouloumanos \& Werker, 2007; \textbf{yamashiro\_does\_2019?}). The remaining 1 publication contributing 8 effect size was a thesis (Ference, 2018). 6 more effect sizes were contributed by authors of unpublished work (Santolin et al., 2020).
 
 Experiments tended to have small sample sizes, with a median N of 16 children (Range = {[}60, 4{]}, M = 19.76), which is close to the field standard (Bergmann et al., 2018), but much lower than current recommendations (Oakes, 2017). Infants ranged from 0 to 12 months (1.50 to 380.50 days), although the majority were under 6 months of age (61.54\% of the experiments). Individual samples comprised 46\% of female participants on average. Infants were native of 6 different languages across the whole database (English, French, Russian, Yiddish, Hebrew, Italian).
-Experiments were performed in 10 different laboratories from 4 different countries (United States, Canada, Israel, Italy). 3 experimental methods were used: 31 experiments used Central Fixation (CF) (also called sequential looking preference procedure) (Colombo \& Bundy, 1981; Cooper \& Aslin, 1994; Curtin \& Vouloumanos, 2013; Ference, 2018; Santolin, Russo, Calignano, Saffran, \& Valenza, 2019; Santolin, Zettersten, \& Saffran, 2020; Segal \& Kishon-Rabin, 2011; Segal, Kligler, \& Kishon-Rabin, 2021; Shultz \& Vouloumanos, 2010; Sorcinelli, Ference, Curtin, \& Vouloumanos, 2019; Vanden Bosch der Nederlanden \& Vouloumanos, 2020; Vouloumanos \& Curtin, 2014; Vouloumanos, Druhen, Hauser, \& Huizink, 2009; Vouloumanos, Hauser, Werker, \& Martin, 2010; Vouloumanos \& Werker, 2004; \textbf{yamashiro\_does\_2019?}); 3 used High-Amplitude Sucking (HAS) (Spence \& DeCasper, 1987; Vouloumanos, Hauser, Werker, \& Martin, 2010; Vouloumanos \& Werker, 2007); and 5 used Head-turn Preference Procedure (HPP) (Ecklund-Flores \& Turkewitz, 1996). Trial length was fixed in 8 experiments, and infant-controlled in 30 experiments.
+Experiments were performed in 10 different laboratories from 4 different countries (United States, Canada, Israel, Italy). 3 experimental methods were used: 31 experiments used Central Fixation (CF) (also called sequential looking preference procedure) (Colombo \& Bundy, 1981; Cooper \& Aslin, 1994; Curtin \& Vouloumanos, 2013; Ference, 2018; Santolin et al., 2019, 2020; Segal \& Kishon-Rabin, 2011; Segal et al., 2021; Shultz \& Vouloumanos, 2010; Sorcinelli et al., 2019; Vanden Bosch der Nederlanden \& Vouloumanos, 2020; Vouloumanos \& Curtin, 2014; Vouloumanos et al., 2009, 2010; Vouloumanos \& Werker, 2004; \textbf{yamashiro\_does\_2019?}); 3 used High-Amplitude Sucking (HAS) (Spence \& DeCasper, 1987; Vouloumanos et al., 2010; Vouloumanos \& Werker, 2007); and 5 used Head-turn Preference Procedure (HPP) (Ecklund-Flores \& Turkewitz, 1996). Trial length was fixed in 8 experiments, and infant-controlled in 30 experiments.
 
 Speech sounds were spoken by a female in 37 out of 39 experiments, with an infant-directed prosody in 22 out of the 39 experiments. Speech was presented in isolated segments (i.e.~words or syllables) in 5 experiments, and full sentences or passages in 20 experiments. Speech stimuli were recorded in the infant native language in 64.10\% of the experiments. Strikingly, experiments using the infants' native language tested infants from 0 to 12 months of age, whereas experiments using a foreign language only tested infants from 3 to 9 months of age (see Figure \ref{fig:lang}).
 The competitor sound was vocal in 46.15\% of the experiments. The competitor sound was natural 46.15\% of the experiments.
@@ -526,7 +524,7 @@ We also tested each of our three hypotheses by three separate models for each mo
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-Our meta-analysis synthesizes the available literature on infants' preference for speech sounds. When all experiments were considered together with no moderators, we found a sizable intercept (g=0.38, g=0.23 when taking the publication bias into account), which was still significant after correcting for the publication bias. Our meta-analysis shows that this preferential processing of speech sounds is observable from birth on. We had hypothesized age to play a major role, because it may correlate with a reshaping of the category definition for speech itself. Indeed, experiments comparing the preference for human speech against human non-speech as well as animal vocalizations more generally (McDonald et al., 2019; Vouloumanos, Hauser, Werker, \& Martin, 2010) often discuss age-related differences in categorization of these sounds. Surprisingly, age did not significantly moderate the overall preference for speech, as shown by the null estimate of this moderator (Table \ref{tab:Table2}), nor did it interacted with any other moderators (Table \ref{tab:TableLang}, \ref{tab:TableNatural}, and \ref{tab:TableVocal}). This result was replicated in a separate model for age only, which showed a significant intercept, similar to the intercept found in the meta-regression with no moderator (Supplementary results S1). Crucially, age was not centered. This intercept therefore provides an estimate of the effect size at age 0, i.e.~at birth. Moreover, the scatterplot of effect sizes as a function of age reveals clearly no change with age even when plotted without other moderators (Supplementary figure S2). This null effect of age, combined with the sizable intercept, confirms that infants reliably prefer speech over other types of sounds from birth.
+Our meta-analysis synthesizes the available literature on infants' preference for speech sounds. When all experiments were considered together with no moderators, we found a sizable intercept (g=0.38, g=0.23 when taking the publication bias into account), which was still significant after correcting for the publication bias. Our meta-analysis shows that this preferential processing of speech sounds is observable from birth on. We had hypothesized age to play a major role, because it may correlate with a reshaping of the category definition for speech itself. Indeed, experiments comparing the preference for human speech against human non-speech as well as animal vocalizations more generally (McDonald et al., 2019; Vouloumanos et al., 2010) often discuss age-related differences in categorization of these sounds. Surprisingly, age did not significantly moderate the overall preference for speech, as shown by the null estimate of this moderator (Table \ref{tab:Table2}), nor did it interacted with any other moderators (Table \ref{tab:TableLang}, \ref{tab:TableNatural}, and \ref{tab:TableVocal}). This result was replicated in a separate model for age only, which showed a significant intercept, similar to the intercept found in the meta-regression with no moderator (Supplementary results S1). Crucially, age was not centered. This intercept therefore provides an estimate of the effect size at age 0, i.e.~at birth. Moreover, the scatterplot of effect sizes as a function of age reveals clearly no change with age even when plotted without other moderators (Supplementary figure S2). This null effect of age, combined with the sizable intercept, confirms that infants reliably prefer speech over other types of sounds from birth.
 
 The significant heterogeneity we found among the literature suggests that underlying factors modulate this effect. We had predicted infants' speech preference to be larger when the competitor was an artificial sound than when it was a natural one; when the competitor was non-vocal; and when the speech was in the infants' native language. In fact, we were unable to disprove the null hypothesis of no difference for all three factors. Our meta-analysis revealed uneven distributions of experiments across age and stimulus dimensions, and that the distribution of effect sizes in the literature is consistent with publication bias. It is possible that the effect of our three moderators would emerge if the publication biased was solved. However, by aggregating the numerous individual studies of a literature, meta-analyses gain statistical power as compared to individual experiments. As such, meta-analytic results have more cumulative explanatory value than single studies. Moreover, distributions of effect sizes for experiments varying along the three dimensions widely overlap. Our findings therefore suggest that none of these parameters fully explain infants' preference for speech sounds. Our dataset can be community-augmented, and we invite researchers investigating this phenomenon to complement it with any data they would have (\url{https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8}), whatever the results and publication status, to solve the publication bias and confirm our findings.
 
@@ -537,9 +535,9 @@ Our results suggest that, from birth on, infants show a preference for speech, w
 A capacity to preferentially listen to speech sounds from birth suggests that infants are born with the capacity to recognize their conspecifics' communication signals. This parallels what has been proposed for faces: Infants are born with the capacity to orient their attention toward them, even without any prior exposure to faces (Morton \& Johnson, 1991; Turati, 2004). This would stem from basic perceptual abilities present at birth, namely that the visual system would be tuned to a spatial structure that correspond to those of faces (Morton \& Johnson, 1991; Turati, 2004). As newborns have never been exposed to such visual stimuli before, it would reflect general properties (i.e.~filters) of the visual system. Similarly, the auditory system could be tuned to a spectro-temporal structure that speech presents. The combination of this non-specific bias with the systematic variations of the auditory environment (i.e.~the fact that an acoustical structure characterizes speech but not other sounds of the environment) would result in preferential responses to speech from birth. However, contrary to faces, fetuses are exposed to speech as low-pass filtered by the womb throughout the last trimester of gestation (Lecanuet \& Granier-Deferre, 1993; Querleu, Renard, Versyp, Paris-Delrue, \& Crèpin, 1988). It is therefore possible that prenatal experience with low-pass filtered speech helps infants to form a representation of speech, by tuning the response properties of the auditory system to speech.
 The fact that familiarity with the language used in the experiment did not modulate infants' preference suggests that this effect is not triggered by familiarity with the sounds of the native language. Infants would therefore form a representation that is specific enough to discriminate speech from other natural or vocal sounds, but general enough to be independent of the language spoken.
 
-The human species is a gregarious one. Detecting speech signals allows to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics. Five-months old infants were capable to match human faces to speech, as well as monkey faces to monkey vocalizations (Vouloumanos, Druhen, Hauser, \& Huizink, 2009). This provides evidence that human infants make correspondences between faces and vocalizations, and that they distinguish their conspecifics from other species. This lays the groundwork for social cognition. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk (Sorcinelli, Ference, Curtin, \& Vouloumanos, 2019). Understanding this phenomenon is therefore crucial for both theoretical and clinical advances.
+The human species is a gregarious one. Detecting speech signals allows to integrate it with other sensory percepts, such as faces, to form multisensory representations of conspecifics. Five-months old infants were capable to match human faces to speech, as well as monkey faces to monkey vocalizations (Vouloumanos et al., 2009). This provides evidence that human infants make correspondences between faces and vocalizations, and that they distinguish their conspecifics from other species. This lays the groundwork for social cognition. Finally, the preference itself may also be a meaningful index of processing that can be used to identify children at risk (Sorcinelli et al., 2019). Understanding this phenomenon is therefore crucial for both theoretical and clinical advances.
 
-Ultimately, preferential processing of speech may support higher level cognitive tasks. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Consistently, infants could categorize visual stimuli (i.e., associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech (Ferry, Hespos, \& Waxman, 2010, 2013; Fulkerson \& Waxman, 2007). Interestingly, infants categorized visual stimuli when presented with speech, melodies, monkey (Fulkerson \& Haaf, 2003), or lemur vocalizations (Ferry, Hespos, \& Waxman, 2013). These results support the idea that infants' cognition is set up to respond to, and manipulate complex sounds (i.e.~modulated in time and frequency), especially those of critical ecological importance such as communicative vocalizations.
+Ultimately, preferential processing of speech may support higher level cognitive tasks. Identifying speech signals and paying attention to them would allow infants to form complex representations of the sensory world, that they can manipulate cognitively. Consistently, infants could categorize visual stimuli (i.e., associate a label to a category of objects) when they were associated to speech, but not pure tones or backward speech (Ferry, Hespos, \& Waxman, 2010, 2013; Fulkerson \& Waxman, 2007). Interestingly, infants categorized visual stimuli when presented with speech, melodies, monkey (Fulkerson \& Haaf, 2003), or lemur vocalizations (Ferry et al., 2013). These results support the idea that infants' cognition is set up to respond to, and manipulate complex sounds (i.e.~modulated in time and frequency), especially those of critical ecological importance such as communicative vocalizations.
 
 With a sample size of 791 infants, covering the wide age range of all individual experiments available, our meta-analysis provides evidence for a specialized processing of speech from birth. This parallels infants' attention to faces from birth (Morton \& Johnson, 1991; Turati, 2004), and suggests that human cognition is set up to pay attention to signals from conspecifics specifically. Such systems may be the precursors of humans' advanced social cognition skills.
 
@@ -556,154 +554,154 @@ References marked with an asterisk indicate studies included in the meta-analysi
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-bergmann_promoting_2018}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-bergmann_promoting_2018}{}}%
 Bergmann, C., Tsuji, S., Piccinini, P. E., Lewis, M. L., Braginsky, M., Frank, M. C., \& Cristia, A. (2018). Promoting {Replicability} in {Developmental} {Research} {Through} {Meta}-analyses: {Insights} {From} {Language} {Acquisition} {Research}. \emph{Child Development}, \emph{89}(6), 1996--2009. \url{https://doi.org/10.1111/cdev.13079}
 
-\leavevmode\hypertarget{ref-black_quantifying_2017}{}%
-Black, A., \& Bergmann, C. (2017). \emph{Quantifying infants' statistical word segmentation: {A} meta-analysis}. 124--129. Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
+\leavevmode\vadjust pre{\hypertarget{ref-black_quantifying_2017}{}}%
+Black, A., \& Bergmann, C. (2017). Quantifying infants' statistical word segmentation: {A} meta-analysis (pp. 124--129). Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
 
-\leavevmode\hypertarget{ref-borenstein_introduction_2011}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-borenstein_introduction_2011}{}}%
 Borenstein, M., Hedges, L. V., Higgins, J. P. T., \& Rothstein, H. R. (2011). \emph{Introduction to {Meta}-{Analysis}}. John Wiley \& Sons.
 
-\leavevmode\hypertarget{ref-colombo_method_1981}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-colombo_method_1981}{}}%
 Colombo, J., \& Bundy, R. S. (1981). A method for the measurement of infant auditory selectivity. \emph{Infant Behavior and Development}, \emph{4}, 219--223. \url{https://doi.org/10.1016/S0163-6383(81)80025-2}
 
-\leavevmode\hypertarget{ref-cooper_developmental_1994}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-cooper_developmental_1994}{}}%
 Cooper, R. P., \& Aslin, R. N. (1994). Developmental {Differences} in {Infant} {Attention} to the {Spectral} {Properties} of {Infant}-{Directed} {Speech}. \emph{Child Development}, \emph{65}(6), 1663--1677. \url{https://doi.org/10.2307/1131286}
 
-\leavevmode\hypertarget{ref-curtin_speech_2013}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-curtin_speech_2013}{}}%
 Curtin, S., \& Vouloumanos, A. (2013). Speech {Preference} is {Associated} with {Autistic}-{Like} {Behavior} in 18-{Months}-{Olds} at {Risk} for {Autism} {Spectrum} {Disorder}. \emph{Journal of Autism and Developmental Disorders}, \emph{43}(9), 2114--2120. \url{https://doi.org/10.1007/s10803-013-1759-1}
 
-\leavevmode\hypertarget{ref-dunlap_meta-analysis_1996}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-dunlap_meta-analysis_1996}{}}%
 Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analysis of experiments with matched groups or repeated measures designs. \emph{Psychological Methods}, \emph{1}(2), 170--177. \url{https://doi.org/10.1037/1082-989X.1.2.170}
 
-\leavevmode\hypertarget{ref-duval_trim_2000}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-duval_trim_2000}{}}%
 Duval, S., \& Tweedie, R. (2000). Trim and {Fill}: {A} {Simple} {Funnel}-{Plot}--{Based} {Method} of {Testing} and {Adjusting} for {Publication} {Bias} in {Meta}-{Analysis}. \emph{Biometrics}, \emph{56}(2), 455--463. \url{https://doi.org/10.1111/j.0006-341X.2000.00455.x}
 
-\leavevmode\hypertarget{ref-ecklund-flores_asymmetric_1996}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-ecklund-flores_asymmetric_1996}{}}%
 Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
 
-\leavevmode\hypertarget{ref-ference_role_2018}{}%
-Ference, J. D. (2018). \emph{The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
+\leavevmode\vadjust pre{\hypertarget{ref-ference_role_2018}{}}%
+Ference, J. D. (2018). The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
 
-\leavevmode\hypertarget{ref-ferry_categorization_2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-ferry_categorization_2010}{}}%
 Ferry, A. L., Hespos, S. J., \& Waxman, S. R. (2010). Categorization in 3- and 4-{Month}-{Old} {Infants}: {An} {Advantage} of {Words} {Over} {Tones}. \emph{Child Development}, \emph{81}(2), 472--479. \url{https://doi.org/10.1111/j.1467-8624.2009.01408.x}
 
-\leavevmode\hypertarget{ref-ferry_nonhuman_2013}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-ferry_nonhuman_2013}{}}%
 Ferry, A. L., Hespos, S. J., \& Waxman, S. R. (2013). Nonhuman primate vocalizations support categorization in very young human infants. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{110}(38), 15231--15235. \url{https://doi.org/10.1073/pnas.1221166110}
 
-\leavevmode\hypertarget{ref-foster_open_2017}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-foster_open_2017}{}}%
 Foster, E. D., \& Deardorff, A. (2017). Open {Science} {Framework} ({OSF}). \emph{Journal of the Medical Library Association : JMLA}, \emph{105}(2), 203--206. \url{https://doi.org/10.5195/jmla.2017.88}
 
-\leavevmode\hypertarget{ref-fulkerson_influence_2003}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-fulkerson_influence_2003}{}}%
 Fulkerson, A. L., \& Haaf, R. A. (2003). The {Influence} of {Labels}, {Non}-{Labeling} {Sounds}, and {Source} of {Auditory} {Input} on 9- and 15-{Month}-{Olds}' {Object} {Categorization}. \emph{Infancy}, \emph{4}(3), 349--369. \url{https://doi.org/10.1207/S15327078IN0403_03}
 
-\leavevmode\hypertarget{ref-fulkerson_words_2007}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-fulkerson_words_2007}{}}%
 Fulkerson, A. L., \& Waxman, S. R. (2007). Words (but not {Tones}) facilitate object categorization: {Evidence} from 6- and 12-month-olds. \emph{Cognition}, \emph{105}(1), 218--228. \url{https://doi.org/10.1016/j.cognition.2006.09.005}
 
-\leavevmode\hypertarget{ref-gelman_difference_2006}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-gelman_difference_2006}{}}%
 Gelman, A., \& Stern, H. (2006). The {Difference} {Between} {``{Significant}''} and {``{Not} {Significant}''} is not {Itself} {Statistically} {Significant}. \emph{The American Statistician}, \emph{60}(4), 328--331. \url{https://doi.org/10.1198/000313006X152649}
 
-\leavevmode\hypertarget{ref-hedges_robust_2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-hedges_robust_2010}{}}%
 Hedges, L. V., Tipton, E., \& Johnson, M. C. (2010). Robust variance estimation in meta-regression with dependent effect size estimates. \emph{Research Synthesis Methods}, \emph{1}(1), 39--65. \url{https://doi.org/10.1002/jrsm.5}
 
-\leavevmode\hypertarget{ref-hunter_multifactor_1988}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-hunter_multifactor_1988}{}}%
 Hunter, M. A., \& Ames, E. W. (1988). A multifactor model of infant preferences for novel and familiar stimuli. \emph{Advances in Infancy Research}, \emph{5}, 69--95.
 
-\leavevmode\hypertarget{ref-lecanuet_speech_1993}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-lecanuet_speech_1993}{}}%
 Lecanuet, J.-P., \& Granier-Deferre, C. (1993). Speech {Stimuli} in the {Fetal} {Environment}. In B. de Boysson-Bardies, S. de Schonen, P. Jusczyk, P. McNeilage, \& J. Morton (Eds.), \emph{Developmental {Neurocognition}: {Speech} and {Face} {Processing} in the {First} {Year} of {Life}} (pp. 237--248). Dordrecht: Springer Netherlands. \url{https://doi.org/10.1007/978-94-015-8234-6_20}
 
-\leavevmode\hypertarget{ref-lipsey_practical_2001}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-lipsey_practical_2001}{}}%
 Lipsey, M. W., \& Wilson, D. B. (2001). \emph{Practical meta-analysis}. Thousand Oaks, CA, US: Sage Publications, Inc.
 
-\leavevmode\hypertarget{ref-mcdonald_infant_2019}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-mcdonald_infant_2019}{}}%
 McDonald, N. M., Perdue, K. L., Eilbott, J., Loyal, J., Shic, F., \& Pelphrey, K. A. (2019). Infant brain responses to social sounds: {A} longitudinal functional near-infrared spectroscopy study. \emph{Developmental Cognitive Neuroscience}, \emph{36}, 100638. \url{https://doi.org/10.1016/j.dcn.2019.100638}
 
-\leavevmode\hypertarget{ref-mehler_precursor_1988}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-mehler_precursor_1988}{}}%
 Mehler, J., Jusczyk, P., Lambertz, G., Halsted, N., Bertoncini, J., \& Amiel-Tison, C. (1988). A precursor of language acquisition in young infants. \emph{Cognition}, \emph{29}(2), 143--178. \url{https://doi.org/10.1016/0010-0277(88)90035-2}
 
-\leavevmode\hypertarget{ref-minagawa-kawai_assessing_2011}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-minagawa-kawai_assessing_2011}{}}%
 Minagawa-Kawai, Y., Cristià, A., Vendelin, I., Cabrol, D., \& Dupoux, E. (2011). Assessing {Signal}-{Driven} {Mechanisms} in {Neonates}: {Brain} {Responses} to {Temporally} and {Spectrally} {Different} {Sounds}. \emph{Frontiers in Psychology}, \emph{2}. \url{https://doi.org/10.3389/fpsyg.2011.00135}
 
-\leavevmode\hypertarget{ref-mizrahi_single_2014}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-mizrahi_single_2014}{}}%
 Mizrahi, A., Shalev, A., \& Nelken, I. (2014). Single neuron and population coding of natural sounds in auditory cortex. \emph{Current Opinion in Neurobiology}, \emph{24}, 103--110. \url{https://doi.org/10.1016/j.conb.2013.09.007}
 
-\leavevmode\hypertarget{ref-moher_preferred_2009}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-moher_preferred_2009}{}}%
 Moher, D., Liberati, A., Tetzlaff, J., Altman, D. G., \& Group, T. P. (2009). Preferred {Reporting} {Items} for {Systematic} {Reviews} and {Meta}-{Analyses}: {The} {PRISMA} {Statement}. \emph{PLOS Medicine}, \emph{6}(7), e1000097. \url{https://doi.org/10.1371/journal.pmed.1000097}
 
-\leavevmode\hypertarget{ref-moon_two-day-olds_1993}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-moon_two-day-olds_1993}{}}%
 Moon, C., Cooper, R. P., \& Fifer, W. P. (1993). Two-day-olds prefer their native language. \emph{Infant Behavior and Development}, \emph{16}(4), 495--500. \url{https://doi.org/10.1016/0163-6383(93)80007-U}
 
-\leavevmode\hypertarget{ref-morton_conspec_1991}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-morton_conspec_1991}{}}%
 Morton, J., \& Johnson, M. H. (1991). {CONSPEC} and {CONLERN}: {A} {Two}-{Process} {Theory} of {Infant} {Face} {Recognition}. \emph{Psychological Review}, \emph{98}(2), 164--181.
 
-\leavevmode\hypertarget{ref-norman-haignere_neural_2018}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-norman-haignere_neural_2018}{}}%
 Norman-Haignere, S. V., \& McDermott, J. H. (2018). Neural responses to natural and model-matched stimuli reveal distinct computations in primary and nonprimary auditory cortex. \emph{PLOS Biology}, \emph{16}(12), e2005127. \url{https://doi.org/10.1371/journal.pbio.2005127}
 
-\leavevmode\hypertarget{ref-oakes_sample_2017}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-oakes_sample_2017}{}}%
 Oakes, L. M. (2017). Sample {Size}, {Statistical} {Power}, and {False} {Conclusions} in {Infant} {Looking}-{Time} {Research}. \emph{Infancy}, \emph{22}(4), 436--469. \url{https://doi.org/10.1111/infa.12186}
 
-\leavevmode\hypertarget{ref-oller_precursors_1999}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-oller_precursors_1999}{}}%
 Oller, D. K., Eilers, R. E., Neal, A. R., \& Schwartz, H. K. (1999). Precursors to speech in infancy: {The} prediction of speech and language disorders. \emph{Journal of Communication Disorders}, \emph{32}(4), 223--245. \url{https://doi.org/10.1016/S0021-9924(99)00013-1}
 
-\leavevmode\hypertarget{ref-querleu_fetal_1988}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-querleu_fetal_1988}{}}%
 Querleu, D., Renard, X., Versyp, F., Paris-Delrue, L., \& Crèpin, G. (1988). Fetal hearing. \emph{European Journal of Obstetrics \& Gynecology and Reproductive Biology}, \emph{28}(3), 191--212. \url{https://doi.org/10.1016/0028-2243(88)90030-5}
 
-\leavevmode\hypertarget{ref-r_core_team_r:_2018}{}%
-R Core Team. (2018). \emph{R: {A} {Language} and {Environment} for {Statistical} {Computing}}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
+\leavevmode\vadjust pre{\hypertarget{ref-r_core_team_r:_2018}{}}%
+R Core Team. (2018). R: {A} {Language} and {Environment} for {Statistical} {Computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
 
-\leavevmode\hypertarget{ref-rosen_constructing_2007}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-rosen_constructing_2007}{}}%
 Rosen, S., \& Iverson, P. (2007). Constructing adequate non-speech analogues: What is special about speech anyway? \emph{Developmental Science}, \emph{10}(2), 165--168. \url{https://doi.org/10.1111/j.1467-7687.2007.00550.x}
 
-\leavevmode\hypertarget{ref-santolin_role_2019}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-santolin_role_2019}{}}%
 Santolin, C., Russo, S., Calignano, G., Saffran, J. R., \& Valenza, E. (2019). The role of prosody in infants' preference for speech: {A} comparison between speech and birdsong. \emph{Infancy}, \emph{24}(5), 827--833. \url{https://doi.org/10.1111/infa.12295}
 
-\leavevmode\hypertarget{ref-santolin_infants_2020}{}%
-Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). \emph{Infants' preference for non-native speech versus birdsong. {Unpublished} data.} Retrieved from \url{https://github.com/mzettersten/birdsong}
+\leavevmode\vadjust pre{\hypertarget{ref-santolin_infants_2020}{}}%
+Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). Infants' preference for non-native speech versus birdsong. {Unpublished} data. Retrieved from \url{https://github.com/mzettersten/birdsong}
 
-\leavevmode\hypertarget{ref-segal_listening_2011}{}%
-Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {{}} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
+\leavevmode\vadjust pre{\hypertarget{ref-segal_listening_2011}{}}%
+Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {\textbar} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
 
-\leavevmode\hypertarget{ref-segal_infants_2021}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-segal_infants_2021}{}}%
 Segal, O., Kligler, N., \& Kishon-Rabin, L. (2021). Infants' {Preference} for {Child}-{Directed} {Speech} {Over} {Time}-{Reversed} {Speech} in {On}-{Channel} and {Off}-{Channel} {Masking}. \emph{Journal of Speech, Language \& Hearing Research}, \emph{64}(7), 2897--2908. \url{https://doi.org/10.1044/2021_JSLHR-20-00279}
 
-\leavevmode\hypertarget{ref-shultz_three-month-olds_2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-shultz_three-month-olds_2010}{}}%
 Shultz, S., \& Vouloumanos, A. (2010). Three-{Month}-{Olds} {Prefer} {Speech} to {Other} {Naturally} {Occurring} {Signals}. \emph{Language Learning and Development}, \emph{6}(4), 241--257. \url{https://doi.org/10.1080/15475440903507830}
 
-\leavevmode\hypertarget{ref-singh_modulation_2003}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-singh_modulation_2003}{}}%
 Singh, N. C., \& Theunissen, F. E. (2003). Modulation spectra of natural sounds and ethological theories of auditory processing. \emph{The Journal of the Acoustical Society of America}, \emph{114}(6), 3394. \url{https://doi.org/10.1121/1.1624067}
 
-\leavevmode\hypertarget{ref-smith_efficient_2006}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-smith_efficient_2006}{}}%
 Smith, E. C., \& Lewicki, M. S. (2006). Efficient auditory coding. \emph{Nature}, \emph{439}(7079), 978--982. \url{https://doi.org/10.1038/nature04485}
 
-\leavevmode\hypertarget{ref-sorcinelli_preference_2019}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-sorcinelli_preference_2019}{}}%
 Sorcinelli, A., Ference, J., Curtin, S., \& Vouloumanos, A. (2019). Preference for speech in infancy differentially predicts language skills and autism-like behaviors. \emph{Journal of Experimental Child Psychology}, \emph{178}, 295--316. \url{https://doi.org/10.1016/j.jecp.2018.09.011}
 
-\leavevmode\hypertarget{ref-spence_prenatal_1987}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-spence_prenatal_1987}{}}%
 Spence, M. J., \& DeCasper, A. J. (1987). Prenatal experience with low-frequency maternal-voice sounds influence neonatal perception of maternal voice samples. \emph{Infant Behavior and Development}, \emph{10}(2), 133--142. \url{https://doi.org/10.1016/0163-6383(87)90028-2}
 
-\leavevmode\hypertarget{ref-turati_why_2004}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-turati_why_2004}{}}%
 Turati, C. (2004). Why {Faces} {Are} {Not} {Special} to {Newborns}: {An} {Alternative} {Account} of the {Face} {Preference}. \emph{Current Directions in Psychological Science}, \emph{13}(1), 5--8. \url{https://doi.org/10.1111/j.0963-7214.2004.01301002.x}
 
-\leavevmode\hypertarget{ref-vanden_bosch_der_nederlanden_infant_2020}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vanden_bosch_der_nederlanden_infant_2020}{}}%
 Vanden Bosch der Nederlanden, C. M., \& Vouloumanos, A. (2020). Infant biases for detecting speech in complex scenes. \emph{Under Review}.
 
-\leavevmode\hypertarget{ref-vouloumanos_foundational_2014}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_foundational_2014}{}}%
 Vouloumanos, A., \& Curtin, S. (2014). Foundational {Tuning}: {How} {Infants}' {Attention} to {Speech} {Predicts} {Language} {Development}. \emph{Cognitive Science}, \emph{38}(8), 1675--1686. \url{https://doi.org/10.1111/cogs.12128}
 
-\leavevmode\hypertarget{ref-vouloumanos_five-month-old_2009}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_five-month-old_2009}{}}%
 Vouloumanos, A., Druhen, M. J., Hauser, M. D., \& Huizink, A. T. (2009). Five-month-old infants' identification of the sources of vocalizations. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{106}(44), 18867--18872. \url{https://doi.org/10.1073/pnas.0906049106}
 
-\leavevmode\hypertarget{ref-vouloumanos_tuning_2010}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_tuning_2010}{}}%
 Vouloumanos, A., Hauser, M. D., Werker, J. F., \& Martin, A. (2010). The tuning of human neonates' preference for speech. \emph{Child Development}, \emph{81}(2), 517--527. \url{https://doi.org/10.1111/j.1467-8624.2009.01412.x}
 
-\leavevmode\hypertarget{ref-vouloumanos_listen_2014}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_listen_2014}{}}%
 Vouloumanos, A., \& Waxman, S. R. (2014). Listen up! {Speech} is for thinking during infancy. \emph{Trends in Cognitive Sciences}, \emph{18}(12), 642--646. \url{https://doi.org/10.1016/j.tics.2014.10.001}
 
-\leavevmode\hypertarget{ref-vouloumanos_tuned_2004}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_tuned_2004}{}}%
 Vouloumanos, A., \& Werker, J. F. (2004). Tuned to the signal: The privileged status of speech for young infants. \emph{Developmental Science}, \emph{7}(3), 270--276. \url{https://doi.org/10.1111/j.1467-7687.2004.00345.x}
 
-\leavevmode\hypertarget{ref-vouloumanos_listening_2007}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_listening_2007}{}}%
 Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Evidence for a bias for speech in neonates. \emph{Developmental Science}, \emph{10}(2), 159--164. \url{https://doi.org/10.1111/j.1467-7687.2007.00549.x}
 
 \end{CSLReferences}

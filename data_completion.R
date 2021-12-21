@@ -1,4 +1,4 @@
-setwd("/Users/Cecile/Documents/MA_speech_pref")
+#setwd("/Users/Cecile/Documents/MA_speech_pref")
 
 # source("compute_es.R", chdir = TRUE)  #chdir stands for "change directory"
 
