@@ -55,15 +55,15 @@ age & 0.00 & 0.00 & 0.87 & 0 - 0\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:TableNatural}Statistical results of meta-regression with naturalness and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is natural, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is artificial (naturalness).}
+\caption{\label{tab:TableVocal}Statistical results of meta-regression with vocal quality and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is vocal, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is non-vocal (vocal quality).}
 
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.36 & 0.21 & 1.67 & -0.17 - 0.88\\
-naturalness & 0.00 & 0.24 & 0.00 & -0.53 - 0.52\\
-naturalness*age & 0.00 & 0.00 & 1.05 & 0 - 0.01\\
+intercept & 0.48 & 0.15 & 3.17 & 0.13 - 0.83\\
+vocal quality & -0.40 & 0.22 & -1.86 & -0.86 - 0.06\\
+vocal quality*age & 0.00 & 0.00 & 2.40 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 
@@ -80,15 +80,15 @@ naturalness*age & 0.00 & 0.00 & 1.05 & 0 - 0.01\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:TableVocal}Statistical results of meta-regression with vocal quality and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is vocal, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is non-vocal (vocal quality).}
+\caption{\label{tab:TableNatural}Statistical results of meta-regression with naturalness and its interaction with age as moderators. The intercept corresponds to the effect size when the competitor is natural, at age 0. The moderator estimates correspond to changes in the intercept when the competitor is artificial (naturalness).}
 
 \begin{tabular}{lcccc}
 \toprule
  & estimate & SE & t & confidence interval\\
 \midrule
-intercept & 0.48 & 0.15 & 3.17 & 0.13 - 0.83\\
-vocal quality & -0.40 & 0.22 & -1.86 & -0.86 - 0.06\\
-vocal quality*age & 0.00 & 0.00 & 2.40 & 0 - 0.01\\
+intercept & 0.36 & 0.21 & 1.67 & -0.17 - 0.88\\
+naturalness & 0.00 & 0.24 & 0.00 & -0.53 - 0.52\\
+naturalness*age & 0.00 & 0.00 & 1.05 & 0 - 0.01\\
 \bottomrule
 \end{tabular}
 

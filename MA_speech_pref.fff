@@ -1,14 +1,7 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
-\includegraphics[width=5.31in]{figures_intro/tuning} \caption{Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}\label{fig:venn}
-\end{figure*}
-\efloatseparator
- 
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-
-\includegraphics[width=6.63in]{figures_intro/hypotheses} \caption{Hypothesized pattern of preference: the x axis shows age, the y axis represents the effect size derived from the contrast between a speech condition and a competitor condition (preference for speech over the competitor is plotted up; the lower quadrants are empty because we do not predict a preference for the competitor over speech). A: Speech contrasted to natural (green) or artificial (purple) competitors. B: Speech contrasted to vocal (orange) or non-vocal (cyan) competitors. C: Collapsing across competitors, separating speech in a foreign language (red); speech in the native language (blue).}\label{fig:hyp}
+\includegraphics[width=5.31in]{figures_intro/tuning} \caption{Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}\label{fig:tuning}
 \end{figure*}
 \efloatseparator
  
@@ -59,8 +52,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
-\caption{\label{fig:natural}Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
+\includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
+\caption{\label{fig:vocal}Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
 \efloatseparator
  
@@ -68,8 +61,8 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
-\caption{\label{fig:vocal}Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
+\includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
+\caption{\label{fig:natural}Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
 \efloatseparator
  
