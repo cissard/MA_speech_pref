@@ -3,15 +3,11 @@
 
 \includegraphics[width=5.31in]{figures_intro/tuning} \caption{Developmental tuning for speech in the first year of life: infant would first discriminate artificial (purple) and natural (green) sounds, then vocal sounds (orange) within natural sounds, and ultimately speech as a separate category within natural and vocal sounds.}\label{fig:tuning}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
 \includegraphics[width=3.2in]{figures_intro/PRISMA} \caption{PRISMA flowchart summarizing the literature review and selection process.}\label{fig:prisma}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -19,8 +15,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/stimuli-1.pdf}
 \caption{\label{fig:stimuli}Histograms of the number of effect sizes for each language and moderator status.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -28,8 +22,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/competitors-1.pdf}
 \caption{\label{fig:competitors}Histogram of the number of effect sizes for each competitor.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -37,8 +29,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/forest-1.pdf}
 \caption{\label{fig:forest}Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -46,8 +36,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/bias-1.pdf}
 \caption{\label{fig:bias}Funnel plot of effect sizes and their respective standard errors. Black dots: effect sizes observed in the literature. White dots: missing effect sizes, suggestive of a publication bias\(^2\). Vertical line: average effect size after filling the missing effect sizes.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -55,8 +43,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/vocal-1.pdf}
 \caption{\label{fig:vocal}Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -64,8 +50,6 @@
 \includegraphics{MA_speech_pref_files/figure-latex/natural-1.pdf}
 \caption{\label{fig:natural}Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
-\efloatseparator
- 
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
 
@@ -73,5 +57,3 @@
 \includegraphics{MA_speech_pref_files/figure-latex/lang-1.pdf}
 \caption{\label{fig:lang}Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound.}
 \end{figure*}
-\efloatseparator
- 
