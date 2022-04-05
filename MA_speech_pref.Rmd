@@ -5,11 +5,11 @@ shorttitle        : "Preference for speech sounds in infancy"
 author: 
   - name          : "Cécile Issard"
     affiliation   : "1"
-    corresponding : yes    # Define only one corresponding author
-    email         : "cecile.issard@gmail.com"
   - name          : "Sho Tsuji"
     affiliation   : "2"
   - name          : "Alejandrina Cristia"
+    corresponding : yes    # Define only one corresponding author
+    email         : "alecristia@gmail.com"
     affiliation   : "1"
 
 affiliation:
@@ -27,7 +27,7 @@ abstract: |
 
   
 keywords          : "Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning"
-wordcount         : "~7000"
+wordcount         : "6930"
 
 bibliography      : ["bibliography.bib"]
 annotate_references: yes
@@ -37,7 +37,7 @@ figurelist        : no
 tablelist         : no
 footnotelist      : no
 linenumbers       : no
-mask              : no
+mask              : yes
 draft             : no
 
 documentclass     : "apa6"
