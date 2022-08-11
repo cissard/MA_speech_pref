@@ -126,7 +126,7 @@ Our study tests three potential factors, latent in the literature, that could ex
 When an experiment uses native speech as the target and pure tones as the competitor, the preference emerging could be due to at least four conceptually separable differences across the two stimuli types: the target is speech whereas the competitor isn't, the target is  produced with a mouth (vocal) whereas the competitor isn't, the target is a natural sound whereas the competitor isn't, and the target is potentially more familiar than the competitor. Can preferences observed in the previous body of work be explained by one of these factors? 
 
 
-If infants' (including newborns') preference is attributable to the fact that speech is a **vocal** sound, then effects when the competitor is another vocal sound will be smaller than when the competitor is not vocal. If it is driven by **naturalness**, then effects when the competitor is natural will be smaller than when it is not natural. Finally, if preferences are at least partly due to **familiarity**, then two predictions follow: effects should be larger when the target is the infant's native speech as opposed to foreign speech, and speech preference should increase with age. We aknowledge that any effect of age could also reveal neural maturation in regions involved in linguistic processing. In this study, we focus on the behavioral outcomes of this phenomenon and will not look at neural studies, which would require a different meta-analytic approach [but see @grossmann_developmental_2010 for an entry point to this literature]. Of course, it is also possible that the preference for speech cannot be reduced to any of the three aforementioned factors (i.e. vocal quality, naturalness, and familiarity), in which case effect sizes will not be modulated by such distinctions.  In addition, given that many previous empirical studies comment on changes with infant age, we pay special attention to the possibility that age modulates effect size in general, or specifically in conjunction with one of the aforementioned factors.
+If infants' (including newborns') preference is attributable to the fact that speech is a **vocal** sound, then effects when the competitor is another vocal sound will be smaller than when the competitor is not vocal. If it is driven by **naturalness**, then effects when the competitor is natural will be smaller than when it is not natural. Finally, if preferences are at least partly due to **familiarity**, then two predictions follow: effects should be larger when the target is the infant's native speech as opposed to foreign speech, and speech preference should increase with age. We acknowledge that any effect of age could also reveal neural maturation in regions involved in linguistic processing. In this study, we focus on the behavioral outcomes of this phenomenon and will not look at neural studies, which would require a different meta-analytic approach [but see @grossmann_developmental_2010 for an entry point to this literature]. Of course, it is also possible that the preference for speech cannot be reduced to any of the three aforementioned factors (i.e. vocal quality, naturalness, and familiarity), in which case effect sizes will not be modulated by such distinctions.  In addition, given that many previous empirical studies comment on changes with infant age, we pay special attention to the possibility that age modulates effect size in general, or specifically in conjunction with one of the aforementioned factors.
 
 
 # Methods
@@ -163,14 +163,22 @@ For **naturalness**, the competitor sound was coded as natural if it was produce
 [^1]: Some stimuli used as competitors in the literature are both vocal and natural, such as bird song. Others don’t overlap, such as heartbeat, that is natural but not vocal.
 [^2]: In the case of filtered speech, the modulations introduced by the vocal tract are still present at the retained frequencies, and formant transitions are consistent with vocal production constraints. For this reason, filtered speech can be considered as vocal but not natural. 
 
-For **familiarity**, we considered the language in which the speech sounds were recorded (native or foreign). Because younger infants respond similarly to their native language and foreign languages within the same rhythmic class [@bertoncini_morae_1995; @mehler_precursor_1988; @nazzi_language_1998], infants would be expected to respond to a non-native language from the same rhythm class as their native native language similarly to a native language. We therefore took a careful look at our database to see, in the studies that used a foreign language as target speech sounds, whether the language belonged to the same rhythmic class as the infants’ native language or not. We found that all these studies but one used Japanese with English-learning infants, and the remaining one used Mandarin Chinese. Since Japanese is mora-timed, Mandarin syllable-timed, and English  stress-timed language, it turns out that all of the literature using a non-native language as target speech used samples from a different rhythmic class from the infants' native language. Given that there is no variability in rhythmicity, we did not code for linguistic rhythm. Also, according to standard interpretation, we can assume that even newborns would have distinguished the non-native speech from their own native language [see @gasparini_quantifying_2021 for a meta-analysis of language discrimination].
+For **familiarity**, we considered the language in which the speech sounds were recorded (native or foreign). Because younger infants respond similarly to their native language and foreign languages within the same rhythmic class [@bertoncini_morae_1995; @mehler_precursor_1988; @nazzi_language_1998], infants would be expected to respond to a non-native language from the same rhythm class as their native native language similarly to a native language. We therefore took a careful look at our database to see, in the studies that used a foreign language as target speech sounds, whether the language belonged to the same rhythmic class as the infants’ native language or not. We found that all these studies but one used Japanese with English-learning infants, and the remaining one used Mandarin Chinese. Since Japanese is mora-timed, Mandarin syllable-timed, and English  stress-timed language, it turns out that all of the literature using a non-native language as target speech used samples from a different rhythmic class from the infants' native language. Given that there is no variability in rhythmicity, we did not code for linguistic rhythm. Also, according to standard interpretation, we can assume that even newborns would have distinguished the non-native speech from their own native language [@gasparini_quantifying_2021].
 
-|         | Competitor sound  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+```{r Table1, results="asis", include=T}
 
+table_stim=rbind(
+ cbind( "Animal calls", "Band-pass-filtered speech"),
+ cbind( "Heartbeat", "White noise")
+)
+
+row.names(table_stim)<-c("Vocal","Non-vocal")
+colnames(table_stim)<-c("Natural","Artificial")
+
+apa_table(table_stim,  align='cc',  caption = "Examples of stimuli classified into each competitor category.", escape= T)
+```
+
+-
 We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes were directly reported as a Cohen’s d or a Hedges' g, we also coded this. 
 
 ## Effect sizes
@@ -617,3 +625,8 @@ References marked with an asterisk indicate studies included in the meta-analysi
 
 <div id = "refs"></div>
 \endgroup
+
+```{r}
+writeLines(capture.output(sessionInfo()), "sessionInfo.txt")
+```
+

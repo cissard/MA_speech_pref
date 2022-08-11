@@ -33,6 +33,15 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
+  pdflang={en-EN},
+  pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -121,6 +130,20 @@
 % \setlength{\parindent}{0.5in}
 % \setlength{\parskip}{0pt plus 0pt minus 0pt}
 
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
 % \usepackage{etoolbox}
 \makeatletter
 \patchcmd{\HyOrg@maketitle}
@@ -132,37 +155,39 @@
   {\section*{\protect\normalfont{\@title}}}
   {}{\typeout{Failed to patch title.}}
 \makeatother
-\shorttitle{Preference for speech sounds in infancy}
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
 \keywords{Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning\newline\indent Word count: 6930}
 \usepackage{csquotes}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
-  pdfauthor={Cécile Issard1, Sho Tsuji2, \& Alejandrina Cristia1},
-  pdflang={en-EN},
-  pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
 
 \title{Infants' preference for speech is stable across the first year of life: Meta-analytic evidence}
 \author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
 \date{}
 
 
+\shorttitle{Preference for speech sounds in infancy}
+
 \authornote{
 
 This work was supported by a Fyssen Foundation Post-doctoral Fellowship to CI, Agence Nationale de la Recherche (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to AC. The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis. Our data is fully available in the corresponding OSF repository: \url{http://tidy.ws/bqjc4U}
+
+Correspondence concerning this article should be addressed to Alejandrina Cristia. E-mail: \href{mailto:alecristia@gmail.com}{\nolinkurl{alecristia@gmail.com}}
 
 }
 
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives\\\textsuperscript{2} International Research Center for Neurointelligence, The University of Tokyo}
 
-\abstract{
+\abstract{%
 Previous work suggested that humans' sophisticated speech perception abilities stem from an early capacity to pay attention to speech in the auditory environment. What are the roots of this early preference? We assess the extent to which it is due to it being a vocal sound, a natural sound, and a familiar sound, through a meta-analytic approach, classifying experiments as a function of whether they used native or foreign speech, and whether the competitor, against which preference is tested, was vocal or non-vocal, natural or artificial. We also tested for effect of age. Synthesizing data from 775 infants across 38 experiments, we found a medium effect size, confirming at the scale of the literature that infants reliably prefer speech over other sounds. This preference was not significantly moderated by the language used, vocal quality or naturalness of the competitor, nor by infant age. The current body of evidence appears most compatible with the hypothesis that speech is preferred consistently as such, and not just due to its vocal, natural, or familiar nature. We discuss limitations of the extant body of work on speech preference, including evidence consistent with a publication bias and low representation of certain stimuli types and ages.
 }
 
@@ -198,7 +223,7 @@ Our study tests three potential factors, latent in the literature, that could ex
 
 When an experiment uses native speech as the target and pure tones as the competitor, the preference emerging could be due to at least four conceptually separable differences across the two stimuli types: the target is speech whereas the competitor isn't, the target is produced with a mouth (vocal) whereas the competitor isn't, the target is a natural sound whereas the competitor isn't, and the target is potentially more familiar than the competitor. Can preferences observed in the previous body of work be explained by one of these factors?
 
-If infants' (including newborns') preference is attributable to the fact that speech is a \textbf{vocal} sound, then effects when the competitor is another vocal sound will be smaller than when the competitor is not vocal. If it is driven by \textbf{naturalness}, then effects when the competitor is natural will be smaller than when it is not natural. Finally, if preferences are at least partly due to \textbf{familiarity}, then two predictions follow: effects should be larger when the target is the infant's native speech as opposed to foreign speech, and speech preference should increase with age. We note that, in this study, we focus on the behavioral outcomes of this phenomenon and will not look at its neural basis, which would require a different meta-analytic approach (but see Grossmann, Oberecker, Koch, \& Friederici, 2010 for an entry point to this literature). Of course, it is also possible that the preference for speech cannot be reduced to any of the three aforementioned factors (i.e.~vocal quality, naturalness, and familiarity), in which case effect sizes will not be modulated by such distinctions. In addition, given that many previous empirical studies comment on changes with infant age, we pay special attention to the possibility that age modulates effect size in general, or specifically in conjunction with one of the aforementioned factors.
+If infants' (including newborns') preference is attributable to the fact that speech is a \textbf{vocal} sound, then effects when the competitor is another vocal sound will be smaller than when the competitor is not vocal. If it is driven by \textbf{naturalness}, then effects when the competitor is natural will be smaller than when it is not natural. Finally, if preferences are at least partly due to \textbf{familiarity}, then two predictions follow: effects should be larger when the target is the infant's native speech as opposed to foreign speech, and speech preference should increase with age. We acknowledge that any effect of age could also reveal neural maturation in regions involved in linguistic processing. In this study, we focus on the behavioral outcomes of this phenomenon and will not look at neural studies, which would require a different meta-analytic approach (but see Grossmann, Oberecker, Koch, \& Friederici, 2010 for an entry point to this literature). Of course, it is also possible that the preference for speech cannot be reduced to any of the three aforementioned factors (i.e.~vocal quality, naturalness, and familiarity), in which case effect sizes will not be modulated by such distinctions. In addition, given that many previous empirical studies comment on changes with infant age, we pay special attention to the possibility that age modulates effect size in general, or specifically in conjunction with one of the aforementioned factors.
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
@@ -232,11 +257,36 @@ The critical variables for our purpose are key stimuli characteristics, infant a
 
 For \textbf{vocal quality}, the competitor sound was considered as vocal if it was produced by an animal vocal tract (human or not), either original or modified. Vocal competitors included non-speech vocalizations, animal calls, bird song, and filtered speech. Non-vocal competitors included backward speech (that has abrupt closures that cannot be produced by a vocal tract), white-noise, environmental sounds, instrumental music, heartbeat, and sine-wave speech (that lacks the harmonic structure introduced by the natural resonance of the vocal tract).
 
-For \textbf{naturalness}, the competitor sound was coded as natural if it was produced by a biological organism without any further acoustic manipulation. Natural competitors included animal calls, environmental sounds (e.g.~wind or water sounds), heartbeat, bird song, non-speech vocalizations (e.g.~laughter or coughs). If the authors applied acoustic manipulations, the competitor was coded as artificial. Artificial competitors included sine-wave speech, filtered speech\footnote{In the case of filtered speech, the modulations introduced by the vocal tract are still present at the retained frequencies, and formant transitions are consistent with vocal production constraints. For this reason, filtered speech can be considered as vocal but not natural.}, white noise, instrumental music, and speech with altered rhythmic structure. The only exception was for newborn experiments presenting low-pass filtered speech mimicking the filtering applied by the womb. Given the recency of the intra-uterine environment to newborns (about 2 days), we coded these as natural.
+For \textbf{naturalness}, the competitor sound was coded as natural if it was produced by a biological organism without any further acoustic manipulation. Natural competitors included animal calls, environmental sounds (e.g.~wind or water sounds), heartbeat, bird song, non-speech vocalizations (e.g.~laughter or coughs)\footnote{Some stimuli used as competitors in the literature are both vocal and natural, such as bird song. Others don't overlap, such as heartbeat, that is natural but not vocal.}. If the authors applied acoustic manipulations, the competitor was coded as artificial. Artificial competitors included sine-wave speech, filtered speech\footnote{If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors.}, white noise, instrumental music, and speech with altered rhythmic structure. The only exception was for newborn experiments presenting low-pass filtered speech mimicking the filtering applied by the womb. Given the recency of the intra-uterine environment to newborns (about 2 days), we coded these as natural.
 
-For \textbf{familiarity}, we considered the language in which the speech sounds were recorded (native or foreign). Because younger infants respond similarly to their native language and foreign languages within the same rhythmic class (Bertoncini, Floccia, Nazzi, \& Mehler, 1995; Mehler et al., 1988; Nazzi, Bertoncini, \& Mehler, 1998), infants would be expected to respond to a non-native language from the same rhythm class as their native native language similarly to a native language. We therefore took a careful look at our database to see, in the studies that used a foreign language as target speech sounds, whether the language belonged to the same rhythmic class as the infants' native language or not. We found that all these studies but one used Japanese with English-learning infants, and the remaining one used Mandarin Chinese. Since Japanese is mora-timed, Mandarin syllable-timed, and English stress-timed language, it turns out that all of the literature using a non-native language as target speech used samples from a different rhythmic class from the infants' native language. Given that there is no variability in rhythmicity, we did not code for linguistic rhythm. Also, according to standard interpretation, we can assume that even newborns would have distinguished the non-native speech from their own native language (see Gasparini, Langus, Tsuji, \& Boll-Avetisyan, 2021 for a meta-analysis of language discrimination).
+For \textbf{familiarity}, we considered the language in which the speech sounds were recorded (native or foreign). Because younger infants respond similarly to their native language and foreign languages within the same rhythmic class (Bertoncini, Floccia, Nazzi, \& Mehler, 1995; Mehler et al., 1988; Nazzi, Bertoncini, \& Mehler, 1998), infants would be expected to respond to a non-native language from the same rhythm class as their native native language similarly to a native language. We therefore took a careful look at our database to see, in the studies that used a foreign language as target speech sounds, whether the language belonged to the same rhythmic class as the infants' native language or not. We found that all these studies but one used Japanese with English-learning infants, and the remaining one used Mandarin Chinese. Since Japanese is mora-timed, Mandarin syllable-timed, and English stress-timed language, it turns out that all of the literature using a non-native language as target speech used samples from a different rhythmic class from the infants' native language. Given that there is no variability in rhythmicity, we did not code for linguistic rhythm. Also, according to standard interpretation, we can assume that even newborns would have distinguished the non-native speech from their own native language (\textbf{gasparini\_quantifying\_2021?}).
 
-We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes were directly reported as a Cohen's d or a Hedges' g, we also coded this.
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:Table1}Examples of stimuli classified into each competitor category.}
+
+\begin{tabular}{ccc}
+\toprule
+ & \multicolumn{1}{c}{Natural} & \multicolumn{1}{c}{Artificial}\\
+\midrule
+Vocal & Animal calls & Band-pass-filtered speech\\
+Non-vocal & Heartbeat & White noise\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{itemize}
+\tightlist
+\item
+  We coded all the statistical information reported in the included papers. If reported, we coded the mean score and the standard deviation for speech, and the other sound separately. When infant-level data was provided, we recomputed the respective mean scores and standard deviations based on the reported individual scores. If reported, we also coded the t-statistic between the two sound conditions, or an F-statistic provided this was a two-way comparison. If effect sizes were directly reported as a Cohen's d or a Hedges' g, we also coded this.
+\end{itemize}
 
 \hypertarget{effect-sizes}{%
 \subsection{Effect sizes}\label{effect-sizes}}
@@ -289,7 +339,7 @@ Speech sounds were spoken by a female in 94.87\% of the experiments, with an inf
 \caption{\label{fig:forest}Forest plot of effect sizes available in the literature, along with their respective moderator status. The average effect size is plotted on the bottom line.}
 \end{figure}
 
-Following standard analytic practice, we removed 3 outliers that were more than 3 standard deviations away from the mean. We then integrated all effect sizes in a meta-analytic regression without any moderator, and found an average effect size g of 0.40 (SE = 0.07, CI = {[}0.26 , 0.55{]}) (see Figure \ref{fig:forest} for the forest plot), corresponding to a medium effect size for the literature as a whole, which was significantly different from zero (\(t\) = 5.59, \(p\) \textless{} .001).
+Following standard analytic practice, we removed 3 outliers that were more than 3 standard deviations away from the mean (See Supplementary Materials S1 for more details on these outliers). We then integrated all effect sizes in a meta-analytic regression without any moderator, and found an average effect size g of 0.40 (SE = 0.07, CI = {[}0.26 , 0.55{]}) (see Figure \ref{fig:forest} for the forest plot), corresponding to a medium effect size for the literature as a whole, which was significantly different from zero (\(t\) = 5.59, \(p\) \textless{} .001).
 Heterogeneity among effect sizes was estimated at \(\tau^2\) = 0.16 (I\textsuperscript{2} = 78.38\%), which was significant (Q = 206.59, p \textless{} 0.01) despite the removal of outliers before running the model. This strongly suggest differences across experiments, and invites analyses using moderators.
 
 \hypertarget{publication-bias}{%
@@ -491,25 +541,25 @@ Bergmann, C., Tsuji, S., Piccinini, P. E., Lewis, M. L., Braginsky, M., Frank, M
 Bertoncini, J., Floccia, C., Nazzi, T., \& Mehler, J. (1995). Morae and {Syllables}: {Rhythmical} {Basis} of {Speech} {Representations} in {Neonates}. \emph{Language and Speech}, \emph{38}(4), 311--329. \url{https://doi.org/10.1177/002383099503800401}
 
 \leavevmode\vadjust pre{\hypertarget{ref-black_quantifying_2017}{}}%
-Black, A., \& Bergmann, C. (2017). Quantifying infants' statistical word segmentation: {A} meta-analysis (pp. 124--129). Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
+Black, A., \& Bergmann, C. (2017). \emph{Quantifying infants' statistical word segmentation: {A} meta-analysis}. 124--129. Cognitive Science Society. Retrieved from \url{https://pure.mpg.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_2475527}
 
 \leavevmode\vadjust pre{\hypertarget{ref-borenstein_introduction_2011}{}}%
 Borenstein, M., Hedges, L. V., Higgins, J. P. T., \& Rothstein, H. R. (2011). \emph{Introduction to {Meta}-{Analysis}}. John Wiley \& Sons.
 
 \leavevmode\vadjust pre{\hypertarget{ref-colombo_method_1981}{}}%
-Colombo, J., \& Bundy, R. S. (1981). A method for the measurement of infant auditory selectivity. \emph{Infant Behavior and Development}, \emph{4}, 219--223. \url{https://doi.org/10.1016/S0163-6383(81)80025-2}
+\textsuperscript{*} Colombo, J., \& Bundy, R. S. (1981). A method for the measurement of infant auditory selectivity. \emph{Infant Behavior and Development}, \emph{4}, 219--223. \url{https://doi.org/10.1016/S0163-6383(81)80025-2}
 
 \leavevmode\vadjust pre{\hypertarget{ref-cooper_developmental_1994}{}}%
-Cooper, R. P., \& Aslin, R. N. (1994). Developmental {Differences} in {Infant} {Attention} to the {Spectral} {Properties} of {Infant}-{Directed} {Speech}. \emph{Child Development}, \emph{65}(6), 1663--1677. \url{https://doi.org/10.2307/1131286}
+\textsuperscript{*} Cooper, R. P., \& Aslin, R. N. (1994). Developmental {Differences} in {Infant} {Attention} to the {Spectral} {Properties} of {Infant}-{Directed} {Speech}. \emph{Child Development}, \emph{65}(6), 1663--1677. \url{https://doi.org/10.2307/1131286}
 
 \leavevmode\vadjust pre{\hypertarget{ref-cox2022bayesian}{}}%
 Cox, C. M. M., Keren-Portnoy, T., Roepstorff, A., \& Fusaroli, R. (2022). A bayesian meta-analysis of infants? Ability to perceive audio--visual congruence for speech. \emph{Infancy}, \emph{27}(1), 67--96.
 
 \leavevmode\vadjust pre{\hypertarget{ref-cristia_meta-analytic_2021}{}}%
-Cristia, A., Tsuji, S., \& Bergmann, C. (2021). \emph{A meta-analytic approach to evaluating the explanatory adequacy of theories}. \emph{MetaPsychology}. OSF Preprints. \url{https://doi.org/10.31219/osf.io/83kg2}
+Cristia, A., Tsuji, S., \& Bergmann, C. (2021). A meta-analytic approach to evaluating the explanatory adequacy of theories. In \emph{MetaPsychology}. OSF Preprints. \url{https://doi.org/10.31219/osf.io/83kg2}
 
 \leavevmode\vadjust pre{\hypertarget{ref-curtin_speech_2013}{}}%
-Curtin, S., \& Vouloumanos, A. (2013). Speech {Preference} is {Associated} with {Autistic}-{Like} {Behavior} in 18-{Months}-{Olds} at {Risk} for {Autism} {Spectrum} {Disorder}. \emph{Journal of Autism and Developmental Disorders}, \emph{43}(9), 2114--2120. \url{https://doi.org/10.1007/s10803-013-1759-1}
+\textsuperscript{*} Curtin, S., \& Vouloumanos, A. (2013). Speech {Preference} is {Associated} with {Autistic}-{Like} {Behavior} in 18-{Months}-{Olds} at {Risk} for {Autism} {Spectrum} {Disorder}. \emph{Journal of Autism and Developmental Disorders}, \emph{43}(9), 2114--2120. \url{https://doi.org/10.1007/s10803-013-1759-1}
 
 \leavevmode\vadjust pre{\hypertarget{ref-dunlap_meta-analysis_1996}{}}%
 Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analysis of experiments with matched groups or repeated measures designs. \emph{Psychological Methods}, \emph{1}(2), 170--177. \url{https://doi.org/10.1037/1082-989X.1.2.170}
@@ -518,10 +568,10 @@ Dunlap, W. P., Cortina, J. M., Vaslow, J. B., \& Burke, M. J. (1996). Meta-analy
 Duval, S., \& Tweedie, R. (2000). Trim and {Fill}: {A} {Simple} {Funnel}-{Plot}--{Based} {Method} of {Testing} and {Adjusting} for {Publication} {Bias} in {Meta}-{Analysis}. \emph{Biometrics}, \emph{56}(2), 455--463. \url{https://doi.org/10.1111/j.0006-341X.2000.00455.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ecklund-flores_asymmetric_1996}{}}%
-Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
+\textsuperscript{*} Ecklund-Flores, L., \& Turkewitz, G. (1996). Asymmetric headturning to speech and nonspeech in human newborns. \emph{Developmental Psychobiology}, \emph{29}(3), 205--217. \url{https://doi.org/10.1002/(SICI)1098-2302(199604)29:3\%3C205::AID-DEV2\%3E3.0.CO;2-V}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ference_role_2018}{}}%
-Ference, J. D. (2018). The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
+\textsuperscript{*} Ference, J. D. (2018). \emph{The {Role} of {Attentional} {Biases} for {Conspecific} {Vocalizations}}. https://doi.org/\url{http://dx.doi.org/10.11575/PRISM/31878}
 
 \leavevmode\vadjust pre{\hypertarget{ref-ferry_categorization_2010}{}}%
 Ferry, A. L., Hespos, S. J., \& Waxman, S. R. (2010). Categorization in 3- and 4-{Month}-{Old} {Infants}: {An} {Advantage} of {Words} {Over} {Tones}. \emph{Child Development}, \emph{81}(2), 472--479. \url{https://doi.org/10.1111/j.1467-8624.2009.01408.x}
@@ -537,9 +587,6 @@ Fulkerson, A. L., \& Haaf, R. A. (2003). The {Influence} of {Labels}, {Non}-{Lab
 
 \leavevmode\vadjust pre{\hypertarget{ref-fulkerson_words_2007}{}}%
 Fulkerson, A. L., \& Waxman, S. R. (2007). Words (but not {Tones}) facilitate object categorization: {Evidence} from 6- and 12-month-olds. \emph{Cognition}, \emph{105}(1), 218--228. \url{https://doi.org/10.1016/j.cognition.2006.09.005}
-
-\leavevmode\vadjust pre{\hypertarget{ref-gasparini2021quantifying}{}}%
-Gasparini, L., Langus, A., Tsuji, S., \& Boll-Avetisyan, N. (2021). Quantifying the role of rhythm in infants' language discrimination abilities: A meta-analysis. \emph{Cognition}, \emph{213}, 104757.
 
 \leavevmode\vadjust pre{\hypertarget{ref-gelman_difference_2006}{}}%
 Gelman, A., \& Stern, H. (2006). The {Difference} {Between} {``{Significant}''} and {``{Not} {Significant}''} is not {Itself} {Statistically} {Significant}. \emph{The American Statistician}, \emph{60}(4), 328--331. \url{https://doi.org/10.1198/000313006X152649}
@@ -581,7 +628,7 @@ Morton, J., \& Johnson, M. H. (1991). {CONSPEC} and {CONLERN}: {A} {Two}-{Proces
 Nazzi, T., Bertoncini, J., \& Mehler, J. (1998). Language discrimination by newborns: {Toward} an understanding of the role of rhythm. \emph{Journal of Experimental Psychology: Human Perception and Performance}, \emph{24}(3), 756--766. \url{https://doi.org/10.1037/0096-1523.24.3.756}
 
 \leavevmode\vadjust pre{\hypertarget{ref-nguyen2021systematic}{}}%
-Nguyen, V., Versyp, O., Cox, C. M. M., \& Fusaroli, R. (2021). A systematic review and bayesian meta-analysis of the development of turn taking in adult-child vocal interactions.
+Nguyen, V., Versyp, O., Cox, C. M. M., \& Fusaroli, R. (2021). \emph{A systematic review and bayesian meta-analysis of the development of turn taking in adult-child vocal interactions}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-norman-haignere_neural_2018}{}}%
 Norman-Haignere, S. V., \& McDermott, J. H. (2018). Neural responses to natural and model-matched stimuli reveal distinct computations in primary and nonprimary auditory cortex. \emph{PLOS Biology}, \emph{16}(12), e2005127. \url{https://doi.org/10.1371/journal.pbio.2005127}
@@ -596,31 +643,31 @@ Oller, D. K., Eilers, R. E., Neal, A. R., \& Schwartz, H. K. (1999). Precursors 
 Querleu, D., Renard, X., Versyp, F., Paris-Delrue, L., \& Crèpin, G. (1988). Fetal hearing. \emph{European Journal of Obstetrics \& Gynecology and Reproductive Biology}, \emph{28}(3), 191--212. \url{https://doi.org/10.1016/0028-2243(88)90030-5}
 
 \leavevmode\vadjust pre{\hypertarget{ref-r_core_team_r:_2018}{}}%
-R Core Team. (2018). R: {A} {Language} and {Environment} for {Statistical} {Computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
+R Core Team. (2018). \emph{R: {A} {Language} and {Environment} for {Statistical} {Computing}}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org}
 
 \leavevmode\vadjust pre{\hypertarget{ref-rosen_constructing_2007}{}}%
 Rosen, S., \& Iverson, P. (2007). Constructing adequate non-speech analogues: What is special about speech anyway? \emph{Developmental Science}, \emph{10}(2), 165--168. \url{https://doi.org/10.1111/j.1467-7687.2007.00550.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-santolin_role_2019}{}}%
-Santolin, C., Russo, S., Calignano, G., Saffran, J. R., \& Valenza, E. (2019). The role of prosody in infants' preference for speech: {A} comparison between speech and birdsong. \emph{Infancy}, \emph{24}(5), 827--833. \url{https://doi.org/10.1111/infa.12295}
+\textsuperscript{*} Santolin, C., Russo, S., Calignano, G., Saffran, J. R., \& Valenza, E. (2019). The role of prosody in infants' preference for speech: {A} comparison between speech and birdsong. \emph{Infancy}, \emph{24}(5), 827--833. \url{https://doi.org/10.1111/infa.12295}
 
 \leavevmode\vadjust pre{\hypertarget{ref-santolin_infants_2020}{}}%
-Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). Infants' preference for non-native speech versus birdsong. {Unpublished} data. Retrieved from \url{https://github.com/mzettersten/birdsong}
+\textsuperscript{*} Santolin, C., Zettersten, M., \& Saffran, J. R. (2020). \emph{Infants' preference for non-native speech versus birdsong. {Unpublished} data.} Retrieved from \url{https://github.com/mzettersten/birdsong}
 
 \leavevmode\vadjust pre{\hypertarget{ref-segal_listening_2011}{}}%
-Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {\textbar} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
+\textsuperscript{*} Segal, O., \& Kishon-Rabin, L. (2011). Listening {Preference} for {Child}-{Directed} {Speech} {Versus} {Nonspeech} {Stimuli} in {Normal}-{Hearing} and {Hearing}-{Impaired} {Infants} {After} {Cochlear} {Implantation} {\textbar} {Ovid}. \emph{Ear and Hearing}, \emph{32}(3), 358--372. \url{https://doi.org/10.1097/AUD.0b013e3182008afc}
 
 \leavevmode\vadjust pre{\hypertarget{ref-segal_infants_2021}{}}%
-Segal, O., Kligler, N., \& Kishon-Rabin, L. (2021). Infants' {Preference} for {Child}-{Directed} {Speech} {Over} {Time}-{Reversed} {Speech} in {On}-{Channel} and {Off}-{Channel} {Masking}. \emph{Journal of Speech, Language \& Hearing Research}, \emph{64}(7), 2897--2908. \url{https://doi.org/10.1044/2021_JSLHR-20-00279}
+\textsuperscript{*} Segal, O., Kligler, N., \& Kishon-Rabin, L. (2021). Infants' {Preference} for {Child}-{Directed} {Speech} {Over} {Time}-{Reversed} {Speech} in {On}-{Channel} and {Off}-{Channel} {Masking}. \emph{Journal of Speech, Language \& Hearing Research}, \emph{64}(7), 2897--2908. \url{https://doi.org/10.1044/2021_JSLHR-20-00279}
 
 \leavevmode\vadjust pre{\hypertarget{ref-shultz_three-month-olds_2010}{}}%
-Shultz, S., \& Vouloumanos, A. (2010). Three-{Month}-{Olds} {Prefer} {Speech} to {Other} {Naturally} {Occurring} {Signals}. \emph{Language Learning and Development}, \emph{6}(4), 241--257. \url{https://doi.org/10.1080/15475440903507830}
+\textsuperscript{*} Shultz, S., \& Vouloumanos, A. (2010). Three-{Month}-{Olds} {Prefer} {Speech} to {Other} {Naturally} {Occurring} {Signals}. \emph{Language Learning and Development}, \emph{6}(4), 241--257. \url{https://doi.org/10.1080/15475440903507830}
 
 \leavevmode\vadjust pre{\hypertarget{ref-singh_modulation_2003}{}}%
 Singh, N. C., \& Theunissen, F. E. (2003). Modulation spectra of natural sounds and ethological theories of auditory processing. \emph{The Journal of the Acoustical Society of America}, \emph{114}(6), 3394. \url{https://doi.org/10.1121/1.1624067}
 
 \leavevmode\vadjust pre{\hypertarget{ref-sorcinelli_preference_2019}{}}%
-Sorcinelli, A., Ference, J., Curtin, S., \& Vouloumanos, A. (2019). Preference for speech in infancy differentially predicts language skills and autism-like behaviors. \emph{Journal of Experimental Child Psychology}, \emph{178}, 295--316. \url{https://doi.org/10.1016/j.jecp.2018.09.011}
+\textsuperscript{*} Sorcinelli, A., Ference, J., Curtin, S., \& Vouloumanos, A. (2019). Preference for speech in infancy differentially predicts language skills and autism-like behaviors. \emph{Journal of Experimental Child Psychology}, \emph{178}, 295--316. \url{https://doi.org/10.1016/j.jecp.2018.09.011}
 
 \leavevmode\vadjust pre{\hypertarget{ref-spence_prenatal_1987}{}}%
 Spence, M. J., \& DeCasper, A. J. (1987). Prenatal experience with low-frequency maternal-voice sounds influence neonatal perception of maternal voice samples. \emph{Infant Behavior and Development}, \emph{10}(2), 133--142. \url{https://doi.org/10.1016/0163-6383(87)90028-2}
@@ -629,28 +676,28 @@ Spence, M. J., \& DeCasper, A. J. (1987). Prenatal experience with low-frequency
 Turati, C. (2004). Why {Faces} {Are} {Not} {Special} to {Newborns}: {An} {Alternative} {Account} of the {Face} {Preference}. \emph{Current Directions in Psychological Science}, \emph{13}(1), 5--8. \url{https://doi.org/10.1111/j.0963-7214.2004.01301002.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vanden_bosch_der_nederlanden_infant_2021}{}}%
-Vanden Bosch der Nederlanden, C. M., \& Vouloumanos, A. (2021). Infant biases for detecting speech in complex scenes. \emph{Developmental Psychology}, \emph{57}(9), 1411--1422. \url{https://doi.org/10.1037/dev0000974}
+\textsuperscript{*} Vanden Bosch der Nederlanden, C. M., \& Vouloumanos, A. (2021). Infant biases for detecting speech in complex scenes. \emph{Developmental Psychology}, \emph{57}(9), 1411--1422. \url{https://doi.org/10.1037/dev0000974}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_foundational_2014}{}}%
-Vouloumanos, A., \& Curtin, S. (2014). Foundational {Tuning}: {How} {Infants}' {Attention} to {Speech} {Predicts} {Language} {Development}. \emph{Cognitive Science}, \emph{38}(8), 1675--1686. \url{https://doi.org/10.1111/cogs.12128}
+\textsuperscript{*} Vouloumanos, A., \& Curtin, S. (2014). Foundational {Tuning}: {How} {Infants}' {Attention} to {Speech} {Predicts} {Language} {Development}. \emph{Cognitive Science}, \emph{38}(8), 1675--1686. \url{https://doi.org/10.1111/cogs.12128}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_five-month-old_2009}{}}%
-Vouloumanos, A., Druhen, M. J., Hauser, M. D., \& Huizink, A. T. (2009). Five-month-old infants' identification of the sources of vocalizations. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{106}(44), 18867--18872. \url{https://doi.org/10.1073/pnas.0906049106}
+\textsuperscript{*} Vouloumanos, A., Druhen, M. J., Hauser, M. D., \& Huizink, A. T. (2009). Five-month-old infants' identification of the sources of vocalizations. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{106}(44), 18867--18872. \url{https://doi.org/10.1073/pnas.0906049106}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_tuning_2010}{}}%
-Vouloumanos, A., Hauser, M. D., Werker, J. F., \& Martin, A. (2010). The tuning of human neonates' preference for speech. \emph{Child Development}, \emph{81}(2), 517--527. \url{https://doi.org/10.1111/j.1467-8624.2009.01412.x}
+\textsuperscript{*} Vouloumanos, A., Hauser, M. D., Werker, J. F., \& Martin, A. (2010). The tuning of human neonates' preference for speech. \emph{Child Development}, \emph{81}(2), 517--527. \url{https://doi.org/10.1111/j.1467-8624.2009.01412.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_listen_2014}{}}%
 Vouloumanos, A., \& Waxman, S. R. (2014). Listen up! {Speech} is for thinking during infancy. \emph{Trends in Cognitive Sciences}, \emph{18}(12), 642--646. \url{https://doi.org/10.1016/j.tics.2014.10.001}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_tuned_2004}{}}%
-Vouloumanos, A., \& Werker, J. F. (2004). Tuned to the signal: The privileged status of speech for young infants. \emph{Developmental Science}, \emph{7}(3), 270--276. \url{https://doi.org/10.1111/j.1467-7687.2004.00345.x}
+\textsuperscript{*} Vouloumanos, A., \& Werker, J. F. (2004). Tuned to the signal: The privileged status of speech for young infants. \emph{Developmental Science}, \emph{7}(3), 270--276. \url{https://doi.org/10.1111/j.1467-7687.2004.00345.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-vouloumanos_listening_2007}{}}%
-Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Evidence for a bias for speech in neonates. \emph{Developmental Science}, \emph{10}(2), 159--164. \url{https://doi.org/10.1111/j.1467-7687.2007.00549.x}
+\textsuperscript{*} Vouloumanos, A., \& Werker, J. F. (2007). Listening to language at birth: Evidence for a bias for speech in neonates. \emph{Developmental Science}, \emph{10}(2), 159--164. \url{https://doi.org/10.1111/j.1467-7687.2007.00549.x}
 
 \leavevmode\vadjust pre{\hypertarget{ref-yamashiro_does_2020}{}}%
-Yamashiro, A., Curtin, S., \& Vouloumanos, A. (2020). Does an {Early} {Speech} {Preference} {Predict} {Linguistic} and {Social}-{Pragmatic} {Attention} in {Infants} {Displaying} and {Not} {Displaying} {Later} {ASD} {Symptoms}? \emph{Journal of Autism and Developmental Disorders}, \emph{50}(7), 2475--2490. \url{https://doi.org/10.1007/s10803-019-03924-2}
+\textsuperscript{*} Yamashiro, A., Curtin, S., \& Vouloumanos, A. (2020). Does an {Early} {Speech} {Preference} {Predict} {Linguistic} and {Social}-{Pragmatic} {Attention} in {Infants} {Displaying} and {Not} {Displaying} {Later} {ASD} {Symptoms}? \emph{Journal of Autism and Developmental Disorders}, \emph{50}(7), 2475--2490. \url{https://doi.org/10.1007/s10803-019-03924-2}
 
 \end{CSLReferences}
 
