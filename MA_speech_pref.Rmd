@@ -14,7 +14,7 @@ author:
 
 affiliation:
   - id            : "1"
-    institution   : "Laboratoire de Sciences Cognitives et Psycholinguistique, Ecole Normale Supérieure, Département d'Études Cognitives"
+    institution   : "Laboratoire de Sciences Cognitives et Psycholinguistique, École Normale Superieure, Département d'Études Cognitives"
   - id            : "2"
     institution   : "International Research Center for Neurointelligence, The University of Tokyo"
 
@@ -22,7 +22,7 @@ authornote: |
   This work was supported by a Fyssen Foundation Post-doctoral Fellowship to CI, Agence Nationale de la Recherche (ANR-17-CE28-0007 LangAge, ANR-16-DATA-0004 ACLEW, ANR-14-CE30-0003 MechELex, ANR-17-EURE-0017); and the J. S. McDonnell Foundation Understanding Human Cognition Scholar Award to AC. The authors declare no conflict of interest. Funding sources did not take part in study design, data collection or analysis.  Our data is fully available in the corresponding OSF repository: http://tidy.ws/bqjc4U
   
 abstract: |
- Previous work suggested that humans' sophisticated speech perception abilities stem from an early capacity to pay attention to speech in the auditory environment. What are the roots of this early preference? We assess the extent to which it is due to it being a vocal sound, a natural sound, and a familiar sound, through a meta-analytic approach, classifying experiments as a function of whether they used native or foreign speech, and whether the competitor, against which preference is tested, was vocal or non-vocal, natural or artificial. We also tested for effect of age. Synthesizing data from 775 infants across 38 experiments, we found a medium effect size, confirming at the scale of the literature that infants reliably prefer speech over other sounds. This preference was not significantly moderated by the language used, vocal quality or naturalness of the competitor, nor by infant age. The current body of evidence appears most compatible with the hypothesis that speech is preferred consistently as such, and not just due to its vocal, natural, or familiar nature. We discuss limitations of the extant body of work on speech preference, including evidence consistent with a publication bias and low representation of certain stimuli types and ages.
+ Previous work suggested that humans' sophisticated speech perception abilities stem from an early capacity to pay attention to speech in the auditory environment. What are the roots of this early preference? We assess the extent to which it is due to it being a vocal sound, a natural sound, and a familiar sound, through a meta-analytic approach, classifying experiments as a function of whether they used native or foreign speech, and whether the competitor, against which preference is tested, was vocal or non-vocal, natural or artificial. We also tested for effect of age. Synthesizing data from 791 infants across 38 experiments, we found a medium effect size, confirming at the scale of the literature that infants reliably prefer speech over other sounds. This preference was not significantly moderated by the language used, vocal quality or naturalness of the competitor, nor by infant age. The current body of evidence appears most compatible with the hypothesis that speech is preferred consistently as such, and not just due to its vocal, natural, or familiar nature. We discuss limitations of the extant body of work on speech preference, including evidence consistent with a publication bias and low representation of certain stimuli types and ages.
  
 
   
@@ -32,7 +32,7 @@ wordcount         : "6930"
 bibliography      : ["bibliography.bib"]
 annotate_references: yes
 
-floatsintext      : yes
+floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -106,11 +106,11 @@ Studies opposing speech to monkey calls or environmental sounds found a preferen
 
 ## A meta-analytic approach
 
-Previous work has thus contributed both important hypotheses and tantalizing results, but the specificity of data collected in any one experiment makes it hard to obtain a bird's eye view. Moreover, some claims are based on juxtaposing a significant result in one condition or age against a non-significant one in another, a practice that is now known to be inappropriate since "the difference between 'significant' and 'not significant' is not itself statistically significant" [@gelman_difference_2006]. In this paper, we seek to directly test the theoretical predictions presented in the summarized work, namely that the preference for speech may be attributed to a general preference for vocalizations, to a preference for natural sounds, or to familiar sounds. To do so, we employ a meta-analytic approach, which is recommended over narrative reviews [@cristia_meta-analytic_2021].  A meta-analysis can integrate data from experiments that vary in their methodology, as well as test the effect of factors of theoretical importance, by redescribing the stimuli used as a function of those factors. For instance, a study measuring preference for native speech over white noise provides data on a natural versus artificial contrast, as well as a vocal versus non-vocal contrast, thus accounting for how the same stimuli can be both natural and vocal or artificial and non-vocal. 
+Previous work has thus contributed both important hypotheses and tantalizing results, but the specificity of data collected in any one experiment makes it hard to obtain a bird's eye view. Moreover, some claims are based on juxtaposing a significant result in one condition or age against a non-significant one in another, a practice that is now known to be inappropriate since "the difference between 'significant' and 'not significant' is not itself statistically significant" [@gelman_difference_2006]. In this paper, we seek to directly test the theoretical predictions presented in the summarized work, namely that the preference for speech may be attributed to a general preference for vocalizations, to a preference for natural sounds, or to familiar sounds. To do so, we employ a meta-analytic approach, which is recommended over narrative reviews [@cristia_meta-analytic_2022].  A meta-analysis can integrate data from experiments that vary in their methodology, as well as test the effect of factors of theoretical importance, by redescribing the stimuli used as a function of those factors. For instance, a study measuring preference for native speech over white noise provides data on a natural versus artificial contrast, as well as a vocal versus non-vocal contrast, thus accounting for how the same stimuli can be both natural and vocal or artificial and non-vocal. 
 
 Also, we can draw a developmental timeline across the age range covered by the literature, beyond age groups tested within papers. This is particularly useful in developmental psychology, which relies on age-related differences that need to be tested statistically [@gelman_difference_2006]. Meta-analyses offer a powerful statistical approach to directly test for interactions with age across the whole age-range covered by the literature. To give an example from a previous developmental meta-analysis, it had been proposed that infants’ preference for novel or familiar items related to infants' age such that, all things equal, younger infants showed familiarity preferences whereas older infants exhibited novelty preferences [@hunter_multifactor_1988]. However, stable familiarity preferences across the first two years have been found for word segmentation in natural speech [@bergmann_development_2016]; and a stable novelty effect ensues for artificial grammars implemented in synthesized speech, whereas those implemented in natural speech led to stable familiarity preferences [@black_quantifying_2017]. Meta-analyses are therefore important to statistically and systematically test the theoretical predictions proposed in qualitative reviews, and show subtle effects that are difficult to see when reading the literature with a human eye.
 
-Single experiments tell us about what a specific group of participants, presented with a specific set of stimuli, at a specific point in time has done. Meta-analyses are the following step because they provide a principled statistical approach to integrate those individual and specific results into a larger picture. By aggregating the numerous individual studies of a literature, meta-analyses gain statistical power. As a result, meta-analyses can reveal small effects that are difficult to show in individual experiments. By integrating data across different laboratories, they provide evidence for the generalizability of effects, and facilitate comparisons between experimental results. A systematic review also allows us to identify empirical gaps (e.g., age groups that are under-represented but are crucial to tease apart two factors) and conceptual gaps (e.g., use of stimuli that systematically confounds two or more of those explanations). As a result, meta-analyses are a moment of self-reflection for the field [@cox2022bayesian;@nguyen2021systematic].
+Single experiments tell us about what a specific group of participants, presented with a specific set of stimuli, at a specific point in time has done. Meta-analyses are the following step because they provide a principled statistical approach to integrate those individual and specific results into a larger picture. By aggregating the numerous individual studies of a literature, meta-analyses gain statistical power. As a result, meta-analyses can reveal small effects that are difficult to show in individual experiments. By integrating data across different laboratories, they provide evidence for the generalizability of effects, and facilitate comparisons between experimental results. A systematic review also allows us to identify empirical gaps (e.g., age groups that are under-represented but are crucial to tease apart two factors) and conceptual gaps (e.g., use of stimuli that systematically confounds two or more of those explanations). As a result, meta-analyses are a moment of self-reflection for the field [@cox_bayesian_2022;@nguyen_systematic_2022].
 
 
 
@@ -145,7 +145,7 @@ Given our key interest in the preference for speech over other sounds, we exclud
 
 A PRISMA flow chart summarizes the literature review and selection process (Figure \@ref(fig:prisma)). The full list of the papers that were inspected together with final inclusion decisions are available in a decision spreadsheet (see the online supplementary materials; https://osf.io/4stz9/?view_only=d0696591ebf34bfc8430f848cd945ca8).
 
-```{r prisma, include=T, fig.dim=c(15,15), fig.cap = "PRISMA flowchart summarizing the literature review and selection process."}
+```{r prisma, include=T, out.width = "75%", fig.cap = "PRISMA flowchart summarizing the literature review and selection process."}
 knitr::include_graphics("figures_intro/PRISMA.png")
 ```
 
@@ -168,8 +168,8 @@ For **familiarity**, we considered the language in which the speech sounds were 
 ```{r TableStim, results="asis", include=T}
 
 table_stim_vocal=rbind(
- cbind( "English-learning infants tested with English and animal calls", "English-learning infants tested with English and band-pass-filtered speech"),
- cbind( "English-learning infants tested with Mandarin and animal calls", "English-learning infants tested with Mandarin and band-pass-filtered speech")
+ cbind( "English-learning infants tested \\ with English and animal calls", "English-learning infants tested \\ with English and band-pass-filtered speech"),
+ cbind( "English-learning infants tested \\ with Mandarin and animal calls", "English-learning infants tested \\ with Mandarin and band-pass-filtered speech")
 )
 
 row.names(table_stim_vocal)<-c("Native","Foreign")
@@ -178,8 +178,8 @@ colnames(table_stim_vocal)<-c("Natural, Vocal","Artificial, Vocal")
 apa_table(table_stim_vocal,  align='cc',  caption = "Examples of contrasts classified into each target and competitor category.", escape= T)
 
 table_stim_nonvocal=rbind(
- cbind( "English-learning infants tested with English and heartbeat", "English-learning infants tested with English and white noise"),
- cbind( "English-learning infants tested with Mandarin and heartbeat", "English-learning infants tested with Mandarin and white noise")
+ cbind( "English-learning infants tested \\ with English and heartbeat", "English-learning infants tested \\ with English and white noise"),
+ cbind( "English-learning infants tested \\ with Mandarin and heartbeat", "English-learning infants tested \\ with Mandarin and white noise")
 )
 
 row.names(table_stim_nonvocal)<-c("Native","Foreign")
@@ -247,7 +247,7 @@ Experiments were performed in 10 different laboratories from 4 different countri
 Speech sounds were spoken by a female in `r length(unique(DB2$same_infant[DB2$talker_gender=='female']))/length(unique(DB2$same_infant))*100`% of the experiments, with an infant-directed prosody in `r length(unique(DB2$same_infant[DB2$prosody=='IDS']))/length(unique(DB2$same_infant))*100`% of the experiments. Speech was presented in isolated segments (i.e. words or syllables) in `r length(unique(DB2$same_infant[DB2$utterance_length=='words']))/length(unique(DB2$same_infant))*100`% of the experiments, and full sentences or passages in `r length(unique(DB2$same_infant[DB2$utterance_length=='passages']))/length(unique(DB2$same_infant))*100`% of the experiments (the remaining were unspecified).  The competitors covered a wide range of sounds, as represented in Figure \@ref(fig:competitors).
 
 
-```{r competitors, include=T, fig.show='asis', fig.cap = "Histogram of the number of effect sizes for each competitor."}
+```{r competitors, include=T, fig.cap = "Histogram of the number of effect sizes for each competitor."}
 ggplot(data = DB2)+
   geom_bar(stat = 'count', aes(x = contrast_stim))+
    scale_y_continuous(limits = c(0, 10), breaks = seq(0,10,1))+
@@ -307,10 +307,10 @@ missing_ES = setdiff(tf$yi[1:63],DB2$g_calc[DB2$outlier==F])
 
 ```
 
-Before proceeding with the moderator analysis, we checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure \@ref(fig:bias))[^2]. A regression test on these data was significant (z = `r SEg$zval`, p < 0.01), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = `r k$tau`, p < 0.01), consistent with a publication bias in the literature.
+Before proceeding with the moderator analysis, we checked for the presence of a potential publication bias in the body of literature by studying the relationship between standard errors of effect sizes as a function of Hedges’ g (see funnel plot in Figure \@ref(fig:bias))[^3]. A regression test on these data was significant (z = `r SEg$zval`, p < 0.01), as  was the Kendall's tau rank correlation test for funnel plot asymmetry (Kendall's tau = `r k$tau`, p < 0.01), consistent with a publication bias in the literature.
 
 
-[^2]: If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors. 
+[^3]: If the literature is not biased, effect sizes should be evenly distributed around the mean effect size, with increasing standard error as they go away from the mean effect size (both in the positive and negative directions, white triangle in the funnel plot). This is reflected by a symmetrical funnel plot, with no linear relationship between effect sizes and standard errors. 
 
 To check whether this bias fully explains speech preference in the extant body of literature, we  symmetrized the funnel plot with the “trim and fill” method [@duval_trim_2000]. To symmetrize the funnel plot, `r tf$k0` (SE = `r tf$se.k0`) missing experiments were needed on the left side of the plot. The corrected effect size was estimated at `r tf$beta[1,1]` (SE = `r tf$se`) after filling in the `r tf$k0` missing experiments, which is still significantly different from zero. Thus, even correcting for a potential publication bias, we still find statistical evidence for infants' preferring speech over competitors.
 
@@ -381,7 +381,7 @@ apa_table(table2, digits=2, align='lcccc', col.names=c("","estimate","SE","t","c
 
 
 
-```{r vocal, include=T, fig.show='asis', fig.cap="Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
+```{r vocal, include=T, fig.cap="Effect sizes as a function of age and vocal quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
 ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
   geom_point(aes(size=1/DB2[!is.na(DB2$vocal),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
@@ -398,7 +398,7 @@ ggplot(data=DB2[!is.na(DB2$vocal),],aes(x=age_months, y=g_calc, colour=vocal))+
 # grid.arrange(stim, scatter, ncol=2, nrow=1)
 ```
 
-```{r TableVocal, results="asis", include=T} 
+```{r TableVocal, resultsw='asis', include=T} 
 
 model_vocal <- robu(g_calc ~ vocal*mean_age_1, data=DB2[!DB2$outlier,], modelweights = "CORR", studynum = same_infant, var.eff.size = g_var_m, small = T)
 
@@ -413,7 +413,7 @@ apa_table(table_voc, digits=2, align='lcccc', col.names=c("","estimate","SE","t"
 
 
 
-```{r natural, include=T, fig.show='asis', fig.cap="Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
+```{r natural, include=T, fig.cap="Effect sizes as a function of age and natural quality of the competitor. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
 ggplot(data=DB2[!is.na(DB2$natural),], aes(x=age_months, y=g_calc, colour=natural))+
   geom_point(aes(size=1/DB2[!is.na(DB2$natural),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   stat_smooth(data=subset(DB2, outlier = F), method = "glm", na.rm = TRUE, alpha=0.3)+
@@ -443,7 +443,7 @@ apa_table(table_nat, digits=2, align='lcccc', col.names=c("","estimate","SE","t"
 ```
 
 
-```{r lang, include=T, fig.show='asis', fig.cap="Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
+```{r lang, include=T, fig.cap="Effect sizes as a function of age and familiarity with the speech sounds. The size of each dot is inversely proportional to the variance. Positive effect sizes reflect a preference for the speech sound, negative effect sizes reflect a preference for the competitor sound."}
 ggplot(data=DB2[!is.na(DB2$test_lang),], aes(x=age_months, y=g_calc, colour=test_lang))+
   geom_point(aes(size=1/DB2[!is.na(DB2$test_lang),]$g_var_calc), show.legend = F, na.rm = TRUE)+
   scale_size(range = c(1, 5))+
@@ -562,7 +562,7 @@ vio_contrast <- ggplot(data=DB2[!is.na(DB2$contrast_stim),],aes(x=contrast_stim,
 
 # Discussion
 
-Our meta-analysis synthesizes the available literature on infants’ preference for speech sounds. When all experiments were considered together with no moderators, we found a sizable intercept (g=`r base_model$reg_table$b.r`, g=`r tf$beta[1,1]` when taking the publication bias into account), which was still significant after correcting for the publication bias. Our meta-analysis shows that this preferential processing of speech sounds is observable from birth on. It is important to stress that this conclusion is not trivial because others have said similar things in the past: One key advantage of meta-analysis over conclusions drawn from individual studies or unsystematic narrative reviews is that we can actually measure the likely presence of publication bias (which *is* present in these data, as we discuss below), and furthermore compensate for this bias statistically, to see if an effect remains significant after doing so [@cristia_meta-analytic_2021; see also @ioannidis_why_2005].
+Our meta-analysis synthesizes the available literature on infants’ preference for speech sounds. When all experiments were considered together with no moderators, we found a sizable intercept (g=`r base_model$reg_table$b.r`, g=`r tf$beta[1,1]` when taking the publication bias into account), which was still significant after correcting for the publication bias. Our meta-analysis shows that this preferential processing of speech sounds is observable from birth on. It is important to stress that this conclusion is not trivial because others have said similar things in the past: One key advantage of meta-analysis over conclusions drawn from individual studies or unsystematic narrative reviews is that we can actually measure the likely presence of publication bias (which *is* present in these data, as we discuss below), and furthermore compensate for this bias statistically, to see if an effect remains significant after doing so [@cristia_meta-analytic_2022; see also @ioannidis_why_2005].
 
 The significant heterogeneity we found among the literature suggests that underlying factors modulate this effect. Based on previous theoretical claims, one would have predicted infants' speech preference to be larger when the competitor was non-vocal; when the competitor was an artificial sound than when it was a natural one; and when the speech was in the infants' native language. In fact, we were unable to disprove the null hypothesis of no difference for all three factors. Thus, although these explanations are conceptually appealing, it does not appear to be the case that we can reduce infants' speech preference to a bias for vocal, natural, or familiar sounds.
 
