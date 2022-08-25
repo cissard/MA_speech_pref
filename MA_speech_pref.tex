@@ -33,15 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
-  pdflang={en-EN},
-  pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -169,6 +160,15 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Infants' preference for speech is stable across the first year of life: Meta-analytic evidence},
+  pdflang={en-EN},
+  pdfkeywords={Meta-analysis, Infants, Speech preference, Conspecific detection, Developmental tuning},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Infants' preference for speech is stable across the first year of life: Meta-analytic evidence}
 \author{Cécile Issard\textsuperscript{1}, Sho Tsuji\textsuperscript{2}, \& Alejandrina Cristia\textsuperscript{1}}
@@ -266,14 +266,35 @@ For \textbf{familiarity}, we considered the language in which the speech sounds 
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:Table1}Examples of stimuli classified into each competitor category.}
+\caption{\label{tab:TableStim}Examples of contrasts classified into each target and competitor category.}
 
 \begin{tabular}{ccc}
 \toprule
- & \multicolumn{1}{c}{Natural} & \multicolumn{1}{c}{Artificial}\\
+ & \multicolumn{1}{c}{Natural, Vocal} & \multicolumn{1}{c}{Artificial, Vocal}\\
 \midrule
-Vocal & Animal calls & Band-pass-filtered speech\\
-Non-vocal & Heartbeat & White noise\\
+Native & English-learning infants tested with English and animal calls & English-learning infants tested with English and band-pass-filtered speech\\
+Foreign & English-learning infants tested with Mandarin and animal calls & English-learning infants tested with Mandarin and band-pass-filtered speech\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:TableStim}Examples of contrasts classified into each target and competitor category.}
+
+\begin{tabular}{ccc}
+\toprule
+ & \multicolumn{1}{c}{Natural, Non-vocal} & \multicolumn{1}{c}{Artificial, Non-vocal}\\
+\midrule
+Native & English-learning infants tested with English and heartbeat & English-learning infants tested with English and white noise\\
+Foreign & English-learning infants tested with Mandarin and heartbeat & English-learning infants tested with Mandarin and white noise\\
 \bottomrule
 \end{tabular}
 

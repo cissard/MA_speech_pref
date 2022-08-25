@@ -165,17 +165,29 @@ For **naturalness**, the competitor sound was coded as natural if it was produce
 
 For **familiarity**, we considered the language in which the speech sounds were recorded (native or foreign). Because younger infants respond similarly to their native language and foreign languages within the same rhythmic class [@bertoncini_morae_1995; @mehler_precursor_1988; @nazzi_language_1998], infants would be expected to respond to a non-native language from the same rhythm class as their native native language similarly to a native language. We therefore took a careful look at our database to see, in the studies that used a foreign language as target speech sounds, whether the language belonged to the same rhythmic class as the infants’ native language or not. We found that all these studies but one used Japanese with English-learning infants, and the remaining one used Mandarin Chinese. Since Japanese is mora-timed, Mandarin syllable-timed, and English  stress-timed language, it turns out that all of the literature using a non-native language as target speech used samples from a different rhythmic class from the infants' native language. Given that there is no variability in rhythmicity, we did not code for linguistic rhythm. Also, according to standard interpretation, we can assume that even newborns would have distinguished the non-native speech from their own native language [@gasparini_quantifying_2021].
 
-```{r Table1, results="asis", include=T}
+```{r TableStim, results="asis", include=T}
 
-table_stim=rbind(
- cbind( "Animal calls", "Band-pass-filtered speech"),
- cbind( "Heartbeat", "White noise")
+table_stim_vocal=rbind(
+ cbind( "English-learning infants tested with English and animal calls", "English-learning infants tested with English and band-pass-filtered speech"),
+ cbind( "English-learning infants tested with Mandarin and animal calls", "English-learning infants tested with Mandarin and band-pass-filtered speech")
 )
 
-row.names(table_stim)<-c("Vocal","Non-vocal")
-colnames(table_stim)<-c("Natural","Artificial")
+row.names(table_stim_vocal)<-c("Native","Foreign")
+colnames(table_stim_vocal)<-c("Natural, Vocal","Artificial, Vocal")
 
-apa_table(table_stim,  align='cc',  caption = "Examples of stimuli classified into each competitor category.", escape= T)
+apa_table(table_stim_vocal,  align='cc',  caption = "Examples of contrasts classified into each target and competitor category.", escape= T)
+
+table_stim_nonvocal=rbind(
+ cbind( "English-learning infants tested with English and heartbeat", "English-learning infants tested with English and white noise"),
+ cbind( "English-learning infants tested with Mandarin and heartbeat", "English-learning infants tested with Mandarin and white noise")
+)
+
+row.names(table_stim_nonvocal)<-c("Native","Foreign")
+colnames(table_stim_nonvocal)<-c("Natural, Non-vocal","Artificial, Non-vocal")
+
+apa_table(table_stim_nonvocal,  align='cc',  caption = "Examples of contrasts classified into each target and competitor category.", escape= T)
+
+# grid.arrange(table_stim_vocal, table_stim_nonvocal, ncol=1, nrow=2)
 ```
 
 -
